@@ -1,0 +1,104 @@
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background: #fff;
+    transition: var(--transition);
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.wishlistBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: white;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quickAdd {
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 12px;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card:hover .quickAdd {
+    bottom: 0;
+}
+
+.badgeNew {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #000;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.content {
+    padding: 15px 0;
+    text-align: center;
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.name {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    height: 2.4em;
+    overflow: hidden;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 1rem;
+}

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary: #000000;
+  --accent: #b22234;
+  --bg: #ffffff;
+  --text: #000000;
+  --text-muted: #555555;
+  --border: #eeeeee;
+  --red-maroon: #a51c30;
+  --header-height: 120px;
+}
+
+body {
+  font-family: 'Cairo', 'Inter', sans-serif;
+  @apply bg-white text-black leading-relaxed overflow-x-hidden;
+}
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+.container {
+  @apply max-w-[1440px] mx-auto px-4 md:px-8;
+}
+
+/* Custom Scrollbar for Luxury Feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+}
