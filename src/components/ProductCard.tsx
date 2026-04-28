@@ -15,7 +15,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
     return (
-        <div className="group relative flex flex-col bg-white p-3 transition-all hover:shadow-xl hover:shadow-gray-100 border border-gray-100">
+        <div className="group relative flex flex-col bg-white transition-all hover:shadow-xl hover:shadow-gray-100">
             {/* Image Area */}
             <div className="relative aspect-[4/5] overflow-hidden bg-white flex items-center justify-center mb-4">
                 {hasGift && (

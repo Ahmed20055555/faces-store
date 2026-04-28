@@ -88,7 +88,8 @@ export default function Home() {
                 prevEl: ".products-prev",
               }}
               breakpoints={{
-                320:  { slidesPerView: 2,   spaceBetween: 15 },
+                320:  { slidesPerView: 1.8, spaceBetween: 12 },
+                480:  { slidesPerView: 2.2, spaceBetween: 15 },
                 768:  { slidesPerView: 4,   spaceBetween: 20 },
                 1024: { slidesPerView: 6,   spaceBetween: 25 },
               }}
@@ -100,11 +101,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="products-prev absolute right-[-20px] top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.1)] hidden md:flex">
-              <ChevronRight className="w-6 h-6" />
+            <button className="products-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="products-next absolute left-[-20px] top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_10px_rgba(0,0,0,0.1)] hidden md:flex">
-              <ChevronLeft className="w-6 h-6" />
+            <button className="products-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
         </div>
@@ -113,11 +114,17 @@ export default function Home() {
       {/* Delivery Banner */}
       <section className="pb-4 pt-2 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+          {/* Desktop Image */}
           <img
             src="/DK-Hero-Loreal-EN-3.avif"
-            className="w-full rounded-[4px]"
+            className="hidden md:block w-full h-auto rounded-[8px]"
             alt="Delivery Banner"
           />
+          {/* Mobile HTML Banner */}
+          <div className="md:hidden w-full bg-[#aed2b4] text-[#0b412b] rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
+            <h3 className="font-black text-[17px] mb-1">توصيل مجاني خلال ساعتين في الرياض</h3>
+            <p className="font-bold text-[14px]">عند الطلب قبل 8 مساءً</p>
+          </div>
         </div>
       </section>
 
@@ -157,11 +164,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="spring-prev absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-              <ArrowRight className="w-6 h-6" />
+            <button className="spring-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ArrowRight className="w-4 h-4 md:w-6 md:h-6" />
             </button>
-            <button className="spring-next absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-              <ArrowLeft className="w-6 h-6" />
+            <button className="spring-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
             </button>
           </div>
         </div>
@@ -212,11 +219,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="gwp-prev absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-              <ArrowRight className="w-6 h-6" />
+            <button className="gwp-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ArrowRight className="w-4 h-4 md:w-6 md:h-6" />
             </button>
-            <button className="gwp-next absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-              <ArrowLeft className="w-6 h-6" />
+            <button className="gwp-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+              <ArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
             </button>
           </div>
         </div>
@@ -235,7 +242,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
           <img
             src="/DK-Promo-EN-1.avif"
-            className="w-full h-full object-cover"
+            className="w-full h-auto rounded-[8px]"
             alt="Gift Card"
           />
         </div>

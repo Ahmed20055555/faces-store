@@ -2,8 +2,11 @@
 
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import ProductCard from "@/components/ProductCard";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 interface Product {
   brand: string;
@@ -34,6 +37,9 @@ const ProductSection = ({
   bannerAlt,
   products,
 }: ProductSectionProps) => {
+  const nextClass = `ps-next-${title.replace(/\s+/g, "")}`;
+  const prevClass = `ps-prev-${title.replace(/\s+/g, "")}`;
+
   return (
     <section className="py-12 bg-white" dir="rtl">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12">
@@ -45,7 +51,7 @@ const ProductSection = ({
                 {title}
               </h2>
             </div>
-            <div className="relative w-full aspect-square md:aspect-auto md:h-full bg-gray-50 rounded-[4px] overflow-hidden">
+            <div className="relative w-full aspect-[4/3] md:aspect-auto md:h-full bg-gray-50 rounded-[8px] overflow-hidden">
               <img
                 src={bannerSrc}
                 className="w-full h-full object-cover"
@@ -57,10 +63,15 @@ const ProductSection = ({
           {/* Left Side: Product Grid (Desktop) / Slider (Mobile) */}
           <div className="flex flex-col h-full w-full pt-0 lg:pt-11 overflow-hidden">
             {/* Mobile Slider */}
-            <div className="md:hidden relative w-full pb-4">
+            <div className="md:hidden relative w-full pb-4 group">
               <Swiper
+                modules={[Navigation]}
+                navigation={{
+                  nextEl: `.${nextClass}`,
+                  prevEl: `.${prevClass}`,
+                }}
                 spaceBetween={12}
-                slidesPerView={1.5}
+                slidesPerView={1}
                 breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
                 className="!px-1"
               >
@@ -70,6 +81,12 @@ const ProductSection = ({
                   </SwiperSlide>
                 ))}
               </Swiper>
+              <button className={`${prevClass} absolute right-0 top-[40%] -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              <button className={`${nextClass} absolute left-0 top-[40%] -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
+                <ChevronLeft className="w-5 h-5" />
+              </button>
             </div>
 
             {/* Desktop Grid */}

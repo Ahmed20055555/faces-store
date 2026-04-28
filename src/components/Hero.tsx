@@ -67,11 +67,11 @@ const Hero = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                <button className="brands-prev absolute right-[-10px] top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#8c929d] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-                    <ChevronRight className="w-6 h-6" />
+                <button className="brands-prev absolute right-0 md:right-[-10px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#8c929d]/90 md:bg-[#8c929d] flex items-center justify-center text-white hover:bg-black transition-all shadow-md">
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
-                <button className="brands-next absolute left-[-10px] top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-[#8c929d] flex items-center justify-center text-white hover:bg-black transition-all shadow-md hidden md:flex">
-                    <ChevronLeft className="w-6 h-6" />
+                <button className="brands-next absolute left-0 md:left-[-10px] top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#8c929d]/90 md:bg-[#8c929d] flex items-center justify-center text-white hover:bg-black transition-all shadow-md">
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
             </div>
 
