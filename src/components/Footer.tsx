@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Instagram, Facebook, Twitter, Youtube, Share2, Globe, Send } from 'lucide-react';
+
 
 const Footer = () => {
     return (
