@@ -44,8 +44,9 @@ const ProductSection = ({
     <section className="py-12 bg-white" dir="rtl">
       <div className="max-w-[1400px] mx-auto px-4 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
           {/* Right Side: Banner */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-right">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-right h-full">
             <div className="flex justify-between items-center mb-4 w-full">
               <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
                 {title}
@@ -96,6 +97,7 @@ const ProductSection = ({
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </section>
