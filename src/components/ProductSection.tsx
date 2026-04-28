@@ -71,7 +71,7 @@ const ProductSection = ({
                   prevEl: `.${prevClass}`,
                 }}
                 spaceBetween={12}
-                slidesPerView={1}
+                slidesPerView={2}
                 breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
                 className="!px-1"
               >
@@ -81,11 +81,11 @@ const ProductSection = ({
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <button className={`${prevClass} absolute right-0 top-[40%] -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
-                <ChevronRight className="w-5 h-5" />
+              <button className={`${prevClass} absolute right-0 top-[40%] -translate-y-1/2 z-10 w-6 h-6 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
+                <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
               </button>
-              <button className={`${nextClass} absolute left-0 top-[40%] -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
-                <ChevronLeft className="w-5 h-5" />
+              <button className={`${nextClass} absolute left-0 top-[40%] -translate-y-1/2 z-10 w-6 h-6 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center text-gray-800 shadow-[0_2px_8px_rgba(0,0,0,0.15)]`}>
+                <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
 

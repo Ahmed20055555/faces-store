@@ -88,7 +88,7 @@ export default function Home() {
                 prevEl: ".products-prev",
               }}
               breakpoints={{
-                320:  { slidesPerView: 1.8, spaceBetween: 12 },
+                320:  { slidesPerView: 2, spaceBetween: 12 },
                 480:  { slidesPerView: 2.2, spaceBetween: 15 },
                 768:  { slidesPerView: 4,   spaceBetween: 20 },
                 1024: { slidesPerView: 6,   spaceBetween: 25 },
@@ -146,7 +146,7 @@ export default function Home() {
               }}
               loop={true}
               breakpoints={{
-                320:  { slidesPerView: 1.2, spaceBetween: 15 },
+                320:  { slidesPerView: 2, spaceBetween: 15 },
                 768:  { slidesPerView: 2.5, spaceBetween: 20 },
                 1024: { slidesPerView: 3,   spaceBetween: 25 },
               }}
@@ -199,7 +199,7 @@ export default function Home() {
                 prevEl: ".gwp-prev",
               }}
               spaceBetween={12}
-              slidesPerView={1.5}
+              slidesPerView={2}
               breakpoints={{
                 480:  { slidesPerView: 2.2, spaceBetween: 15 },
                 768:  { slidesPerView: 2.5, spaceBetween: 20 },
@@ -240,11 +240,22 @@ export default function Home() {
       {/* Gift Card Banner */}
       <section className="py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+          {/* Desktop Image */}
           <img
             src="/DK-Promo-EN-1.avif"
-            className="w-full h-auto rounded-[8px]"
+            className="hidden md:block w-full h-auto rounded-[8px]"
             alt="Gift Card"
           />
+          {/* Mobile HTML Banner */}
+          <div className="md:hidden w-full bg-[#e6e2df] text-[#0f4531] rounded-[8px] px-4 py-6 flex flex-col justify-center items-center text-center shadow-sm relative overflow-hidden">
+            <h3 className="font-black text-[18px] mb-2 z-10">جمال من اختيارهم</h3>
+            <p className="text-[12px] font-bold mb-4 z-10 opacity-80 leading-relaxed max-w-[280px]">
+              بطاقة هدايا حصرياً من وجوه تمنحهم اختيار ما يأملون الحصول عليه
+            </p>
+            <button className="text-[13px] font-black underline z-10 decoration-2 underline-offset-4">
+              تسوق الآن
+            </button>
+          </div>
         </div>
       </section>
 
