@@ -9,9 +9,9 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const brands = [
-    "ديور", "شانيل", "إيف سان لوران", "توم فورد", "غوتشي", "جيفنشي", "أرماني بيوتي", "جيرلان", "لانكوم", "جون بول غوتييه", "بنفت",
-    "ديور", "شانيل", "إيف سان لوران", "توم فورد", "غوتشي", "جيفنشي", "أرماني بيوتي", "جيرلان", "لانكوم", "جون بول غوتييه", "بنفت"
+const BRANDS = [
+    "ديور", "شانيل", "إيف سان لوران", "توم فورد", "غوتشي",
+    "جيفنشي", "أرماني بيوتي", "جيرلان", "لانكوم", "جون بول غوتييه", "بنفت",
 ];
 
 const Hero = () => {
@@ -59,7 +59,7 @@ const Hero = () => {
                     spaceBetween={15}
                     className="brands-swiper !px-4"
                 >
-                    {brands.map((brand, idx) => (
+                    {BRANDS.map((brand, idx) => (
                         <SwiperSlide key={idx} className="!w-auto">
                             <div className="px-6 py-2.5 rounded-full border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-md transition-all cursor-pointer whitespace-nowrap text-[13px] font-bold text-gray-800">
                                 {brand}

@@ -9,7 +9,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const промо_messages = [
+const PROMO_MESSAGES = [
     "توصيل مجاني خلال ساعتين في الرياض عند الطلب قبل 8 مساءً",
     "توصيل مجاني على جميع الطلبات ما فوق 299 ريال",
     "اكتشفوا خدمات الجمال المختارة بعناية"
@@ -45,7 +45,7 @@ const Navbar = () => {
                                 allowTouchMove={true}
                                 className="w-full h-full"
                             >
-                                {промо_messages.map((msg, idx) => (
+                                {PROMO_MESSAGES.map((msg, idx) => (
                                     <SwiperSlide key={idx} className="flex justify-center items-center h-full">
                                         <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full">
                                             {msg}
@@ -148,15 +148,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <style jsx global>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+
         </>
     );
 };
