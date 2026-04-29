@@ -41,17 +41,20 @@ const ProductSection = ({
   const prevClass = `ps-prev-${title.replace(/\s+/g, "")}`;
 
   return (
-    <section className="py-12 bg-white" dir="rtl">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+    <section className="py-2 bg-white" dir="rtl">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+        <div className="flex justify-between items-end mb-6 w-full">
+          <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
+            {title}
+          </h2>
+          <button className="text-sm font-bold shrink-0 whitespace-nowrap text-[#153428] hover:opacity-80 transition-all underline">
+            عرض الكل
+          </button>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
           {/* Right Side: Banner */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-right h-full">
-            <div className="flex justify-between items-center mb-4 w-full">
-              <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
-                {title}
-              </h2>
-            </div>
             <div className="relative w-full aspect-[4/3] md:aspect-auto md:h-full bg-gray-50 rounded-[8px] overflow-hidden">
               <img
                 src={bannerSrc}
@@ -62,7 +65,7 @@ const ProductSection = ({
           </div>
 
           {/* Left Side: Product Grid (Desktop) / Slider (Mobile) */}
-          <div className="flex flex-col h-full w-full pt-0 lg:pt-11 overflow-hidden">
+          <div className="flex flex-col h-full w-full overflow-hidden">
             {/* Mobile Slider */}
             <div className="md:hidden relative w-full pb-4 group">
               <Swiper

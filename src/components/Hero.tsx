@@ -17,12 +17,13 @@ const BRANDS = [
 const Hero = () => {
     return (
         <section className="max-w-[1400px] mx-auto px-4 md:px-12 font-cairo" dir="rtl">
-            {/* Top Promo Banner - Hidden on Mobile as requested */}
-            <div className="hidden md:block relative w-full h-[200px] rounded-lg overflow-hidden mb-6 group cursor-pointer">
-                <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 "
-                    style={{ backgroundImage: `url('/DK-Promo.avif')` }}
-                ></div>
+            {/* Top Promo Banner */}
+            <div className="relative w-full h-auto md:h-[200px] rounded-lg overflow-hidden mb-4 md:mb-6 group cursor-pointer flex items-center justify-center bg-[#a9c9b9]/20">
+                <img
+                    src="/DK-Promo.avif"
+                    alt="Promo Banner"
+                    className="w-full h-auto md:h-full md:object-cover transition-transform duration-700"
+                />
             </div>
 
             {/* Main Hero Banner - Optimized for Mobile */}
