@@ -40,11 +40,11 @@ const ProductCard = ({ brand, name, price, image, isNew, hasGift, hasFrom = true
             </div>
 
             {/* Content Area */}
-            <div className="mt-auto text-center px-1 md:px-2 pb-1 md:pb-2">
-                <h3 className="text-[13px] md:text-[15px] font-black text-[#111827] mb-1">
+            <div className="mt-auto text-center px-1 md:px-2 pb-1 md:pb-2 overflow-hidden w-full">
+                <h3 className="text-[13px] md:text-[15px] font-black text-[#111827] mb-1 truncate w-full">
                     {brand}
                 </h3>
-                <p className="text-[12px] md:text-[13px] text-[#4b5563] leading-snug mb-2 md:mb-4">
+                <p className="text-[12px] md:text-[13px] text-[#4b5563] leading-snug mb-2 md:mb-4 truncate w-full">
                     {name}
                 </p>
                 <div className="flex items-center justify-center gap-1.5">
