@@ -181,7 +181,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         <div className="mb-4 border-t border-gray-100 pt-6">
                             <h3 className="text-[16px] font-black text-gray-900 mb-4 text-right">هدايا مجانية مع هذا المنتج</h3>
                             
-                            <Accordion type="multiple" dir="rtl" className="flex flex-col gap-0 border border-gray-100 rounded-sm">
+                            <Accordion dir="rtl" className="flex flex-col gap-0 border border-gray-100 rounded-sm">
                                 {/* Promo 1 */}
                                 <AccordionItem value="promo-1" className="border-b border-gray-100">
                                     <AccordionTrigger className="hover:no-underline p-4 hover:bg-gray-50 group [&[data-state=open]>svg]:rotate-180">
@@ -234,7 +234,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         </div>
 
                         {/* Description Accordion using shadcn/ui */}
-                        <Accordion type="single" collapsible dir="rtl" className="w-full border-t border-gray-100">
+                        <Accordion dir="rtl" className="w-full border-t border-gray-100">
                             <AccordionItem value="description" className="border-b-0">
                                 <AccordionTrigger className="hover:no-underline py-4 group data-[state=open]:text-black [&[data-state=open]>svg]:rotate-180">
                                     <div className="flex items-center justify-start w-full">

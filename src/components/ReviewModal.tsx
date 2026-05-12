@@ -20,10 +20,8 @@ export default function ReviewModal() {
 
 
     <Dialog>
-      <DialogTrigger asChild>
-        <button className="border border-gray-900 text-gray-900 bg-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wide hover:bg-gray-50 transition-colors rounded-sm">
-          اكتب مراجعة
-        </button>
+      <DialogTrigger className="border border-gray-900 text-gray-900 bg-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wide hover:bg-gray-50 transition-colors rounded-sm shadow-sm hover:shadow-md h-12 w-full md:w-auto mt-4 md:mt-0">
+        اكتب مراجعة
       </DialogTrigger>
       <DialogContent className="w-[95vw]   sm:max-w-[700px] max-h-[85vh] flex flex-col  overflow-hidden rounded-xl" dir="rtl">
         {/* Header - Fixed at top of modal */}

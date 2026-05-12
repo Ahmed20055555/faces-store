@@ -96,7 +96,7 @@ const ProductSection = ({
             {/* Desktop Grid */}
             <div className="hidden md:grid md:grid-cols-3 gap-3 md:gap-4">
               {products.map((prod, idx) => (
-                <ProductCard key={idx} {...prod} />
+                <ProductCard key={idx} id={idx.toString()} {...prod} />
               ))}
             </div>
           </div>
