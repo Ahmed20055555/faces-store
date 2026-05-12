@@ -15,10 +15,10 @@ const PROMO_MESSAGES = [
     "اكتشفوا خدمات الجمال المختارة بعناية"
 ];
 
-const Navbar = () => {
+const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
     return (
         <>
-            <header className="w-full bg-white sticky top-0 z-[1000] font-cairo shadow-sm md:shadow-none mb-6" dir="rtl">
+            <header className={`w-full bg-white z-[1000] font-cairo shadow-sm md:shadow-none mb-6 ${isSticky ? 'sticky top-0' : 'relative'}`} dir="rtl">
                 {/* Top Bar Swiper */}
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">

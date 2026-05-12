@@ -1,9 +1,10 @@
 "use client";
 
 import React from 'react';
-import { Heart, ShoppingBag } from 'lucide-react';
+import Link from 'next/link';
 
 interface ProductCardProps {
+    id: string;
     brand: string;
     name: string;
     price: string;
@@ -13,50 +14,55 @@ interface ProductCardProps {
     hasFrom?: boolean;
 }
 
-const ProductCard = ({ brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
+const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
     return (
-        <div className="group relative flex flex-col bg-white p-3 md:p-4 border border-gray-100 transition-all hover:shadow-xl hover:shadow-gray-100 h-full">
+        <Link href={`/product/${id}`} className="group relative flex flex-col bg-white p-4 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full border border-gray-100/80 cursor-pointer block">
+            
             {/* Image Area */}
-            <div className="relative aspect-square md:aspect-[4/5] overflow-hidden bg-white flex items-center justify-center mb-2 md:mb-4">
-                {/* Badges */}
-                <div className="absolute top-0 right-0 z-10 flex flex-col gap-1 items-end">
-                    {hasGift && (
-                        <span className="bg-[#8c1d3b] text-white text-[10px] font-bold px-2 py-1">
-                            هدايا مجانية
+            <div className="relative aspect-[4/5] w-full flex items-center justify-center mb-4">
+                
+                {/* Badges (Top Right in RTL) */}
+                <div className="absolute top-0 right-0 z-10 flex flex-col gap-1 items-start">
+                    {isNew && (
+                        <span className="bg-[#dcf0fb] text-[#004777] text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
+                            جديد
                         </span>
                     )}
-                    {isNew && (
-                        <span className="bg-[#c2e6f5] text-[#0b412b] text-[10px] font-bold px-2 py-1">
-                            جديد
+                    {hasGift && (
+                        <span className="bg-[#fce7f3] text-[#be185d] text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
+                            هدايا
                         </span>
                     )}
                 </div>
 
+                {/* Product Image */}
                 <img
                     src={image}
                     alt={name}
-                    className="w-full h-full object-contain p-2 md:p-4 transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
                 />
             </div>
 
             {/* Content Area */}
-            <div className="mt-auto text-center px-1 md:px-2 pb-1 md:pb-2 overflow-hidden w-full">
-                <h3 className="text-[13px] md:text-[15px] font-black text-[#111827] mb-1 truncate w-full">
+            <div className="mt-auto text-right flex flex-col gap-1">
+                <h3 className="text-[14px] md:text-[15px] font-bold text-[#0f172a] uppercase tracking-wide truncate w-full">
                     {brand}
                 </h3>
-                <p className="text-[12px] md:text-[13px] text-[#4b5563] leading-snug mb-2 md:mb-4 truncate w-full">
+                <p className="text-[13px] text-[#475569] leading-snug truncate w-full mb-2">
                     {name}
                 </p>
-                <div className="flex items-center justify-center gap-1.5">
-                    {hasFrom && <span className="font-bold text-[11px] md:text-[13px] text-[#4b5563]">من</span>}
-                    <span className="font-bold text-[14px] md:text-[15px] text-[#111827]">{price}</span>
-                    <span className="font-bold text-[11px] md:text-[13px] text-[#111827]">ريال</span>
+                <div className="flex items-center justify-start gap-1 mt-auto">
+                    <span className="font-bold text-[14px] md:text-[16px] text-[#0f172a] tracking-tight">
+                        {price}
+                    </span>
+                    <span className="font-bold text-[13px] text-[#0f172a]">
+                        ريال
+                    </span>
                 </div>
             </div>
             
-        </div>
+        </Link>
     );
 };
-
 
 export default ProductCard;

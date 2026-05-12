@@ -118,12 +118,17 @@ export default function Home() {
               }}
               spaceBetween={12}
               slidesPerView={2}
-              breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
+              breakpoints={{
+                480:  { slidesPerView: 2.5, spaceBetween: 15 },
+                768:  { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 20 },
+                1280: { slidesPerView: 5, spaceBetween: 20 },
+              }}
               className="!px-1"  
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductCard {...product} />
+                  <ProductCard id={`prod_${index}`} {...product} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -310,12 +315,17 @@ export default function Home() {
               }}
               spaceBetween={12}
               slidesPerView={2}
-              breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
+              breakpoints={{
+                480:  { slidesPerView: 2.5, spaceBetween: 15 },
+                768:  { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 20 },
+                1280: { slidesPerView: 5, spaceBetween: 20 },
+              }}
               className="!px-1"  
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductCard {...product} />
+                  <ProductCard id={`prod_${index}`} {...product} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -403,7 +413,12 @@ export default function Home() {
               loop={true}
               spaceBetween={12}
               slidesPerView={2}
-              breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
+              breakpoints={{
+                480:  { slidesPerView: 2.5, spaceBetween: 15 },
+                768:  { slidesPerView: 4, spaceBetween: 20 },
+                1024: { slidesPerView: 5, spaceBetween: 20 },
+                1280: { slidesPerView: 6, spaceBetween: 20 },
+              }}
               className="!px-1"  
             >
               {AROUND_THE_WORLD_BRANDS.map((brand, index) => (
@@ -455,12 +470,17 @@ export default function Home() {
               }}
               spaceBetween={12}
               slidesPerView={2}
-              breakpoints={{ 480: { slidesPerView: 2.2, spaceBetween: 15 } }}
+              breakpoints={{
+                480:  { slidesPerView: 2.5, spaceBetween: 15 },
+                768:  { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 20 },
+                1280: { slidesPerView: 5, spaceBetween: 20 },
+              }}
               className="!px-1"  
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductCard {...product} />
+                  <ProductCard id={`prod_${index}`} {...product} />
                 </SwiperSlide>
               ))}
             </Swiper>

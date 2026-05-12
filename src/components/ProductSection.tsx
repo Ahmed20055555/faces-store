@@ -81,7 +81,7 @@ const ProductSection = ({
               >
                 {products.map((prod, idx) => (
                   <SwiperSlide key={idx}>
-                    <ProductCard {...prod} />
+                    <ProductCard id={`prod_${idx}`} {...prod} />
                   </SwiperSlide>
                 ))}
               </Swiper>

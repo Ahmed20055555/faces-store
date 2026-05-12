@@ -18,11 +18,11 @@ const Hero = () => {
     return (
         <section className="max-w-[1400px] mx-auto px-4 md:px-12 font-cairo" dir="rtl">
             {/* Top Promo Banner */}
-            <div className="relative w-full h-auto md:h-[200px] rounded-lg overflow-hidden mb-4 md:mb-6 group cursor-pointer flex items-center justify-center bg-[#a9c9b9]/20">
+            <div className="relative w-full min-h-[100px] h-[130px] sm:h-[160px] md:h-[200px] rounded-lg overflow-hidden mb-4 md:mb-6 group cursor-pointer flex items-center justify-center bg-[#a9c9b9]/20">
                 <img
                     src="/DK-Promo.avif"
                     alt="Promo Banner"
-                    className="w-full h-auto md:h-full md:object-cover transition-transform duration-700"
+                    className="w-full h-full object-cover object-center transition-transform duration-700"
                 />
             </div>
 
