@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ChevronRight, ChevronLeft, Share, Undo2, ChevronDown, Percent, Gift, Star } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Share, Undo2, ChevronDown, Percent, Gift, Star, Truck, MapPin, Heart } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '@/lib/features/cartSlice';
 import ProductCard from "@/components/ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -25,6 +27,18 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        dispatch(addItem({
+            id: id as string,
+            name: "ماسك غرينات إنتينس",
+            brand: "نارسيسو رودريغيز",
+            price: "1064",
+            image: mainImage
+        }));
+    };
 
     const thumbnails = [
         "/001717728336_1.jpg",
@@ -75,7 +89,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 onClose={() => setIsGalleryOpen(false)}
             />
 
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 md:py-8 font-cairo">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 md:py-8 font-sans">
 
                 {/* Breadcrumbs */}
                 <nav className="flex items-center gap-2 text-[13px] text-gray-500 mb-6 md:mb-8">
@@ -156,10 +170,51 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                             <span className="text-[16px] font-bold text-gray-900">ريال</span>
                         </div>
 
-                        {/* Add to Bag Button */}
-                        <button className="w-full bg-[#071424] text-white font-bold text-[14px] md:text-[16px] py-4 rounded-sm hover:bg-black transition-colors mb-6">
-                            إضافة للسلة
-                        </button>
+                        {/* Delivery & Pickup Options */}
+                        <div className="flex flex-col gap-6 mb-8 mt-2">
+                            {/* Delivery Section */}
+                            <div className="flex items-start justify-between gap-4">
+                                <div className="flex flex-col items-start">
+                                    <h4 className="text-[16px] font-bold text-gray-900 underline underline-offset-4 decoration-1">التوصيل للمنازل الرياض</h4>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="text-[14px] text-gray-600">التوصيل خلال 2 ساعة</span>
+                                        <span className="w-2 h-2 rounded-full bg-[#32a852]"></span>
+                                    </div>
+                                </div>
+                                <Truck className="w-8 h-8 text-black shrink-0" strokeWidth={1} />
+                            </div>
+
+                            {/* Pickup Section */}
+                            <div className="flex items-start justify-between gap-4">
+                                <div className="flex flex-col items-start">
+                                    <h4 className="text-[16px] font-bold text-gray-900 underline underline-offset-4 decoration-1 text-right">الاستلام من FACES - GRANADA MALL - RIYADH</h4>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <span className="text-[14px] text-gray-600">متوفر للاستلام غداً</span>
+                                        <span className="w-2 h-2 rounded-full bg-[#32a852]"></span>
+                                    </div>
+                                </div>
+                                <MapPin className="w-8 h-8 text-black shrink-0" strokeWidth={1} />
+                            </div>
+                        </div>
+
+                        {/* Add to Bag & Favorite */}
+                        <div className="flex gap-3 mb-6">
+                            <button 
+                                onClick={handleAddToCart}
+                                className="flex-1 bg-[#071424] text-white font-bold text-[14px] md:text-[16px] py-4 rounded-sm hover:bg-black transition-colors"
+                            >
+                                إضافة للسلة
+                            </button>
+                            <button
+                                onClick={() => setIsFavorite(!isFavorite)}
+                                className="w-14 shrink-0 border border-gray-200 flex items-center justify-center rounded-sm hover:bg-gray-50 transition-colors group"
+                            >
+                                <Heart
+                                    className={`w-6 h-6 transition-colors ${isFavorite ? 'fill-[#8c1d3b] text-[#8c1d3b]' : 'text-gray-400 group-hover:text-black'}`}
+                                    strokeWidth={1.5}
+                                />
+                            </button>
+                        </div>
 
                         {/* Split Payments Widget */}
                         <div className="bg-[#f5f5f5] p-4 rounded-sm mb-6 flex flex-col gap-3">
@@ -271,7 +326,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Ratings & Reviews Section */}
             <div className="w-full bg-[#faf9f8] py-12 border-t border-gray-100 z-1000">
-                <div className="max-w-[1400px] mx-auto px-4 md:px-6 font-cairo flex flex-col items-start">
+                <div className="max-w-[1400px] mx-auto px-4 md:px-6 font-sans flex flex-col items-start">
                     <h3 className="text-[20px] font-black text-gray-900 mb-4">التقييمات والمراجعات</h3>
 
                     <div className="flex items-center gap-2 mb-6">
@@ -291,7 +346,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             </div>
 
             {/* Similar Products Section */}
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-12 md:py-16 border-t border-gray-100 font-cairo">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-12 md:py-16 border-t border-gray-100 font-sans">
                 {/* Tabs */}
                 {/* Mobile: vertical list  |  Desktop: horizontal row */}
                 <div className="flex flex-col md:flex-row md:gap-10 border-b border-gray-200 mb-8">

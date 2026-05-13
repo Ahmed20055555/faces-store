@@ -16,7 +16,7 @@ const BRANDS = [
 
 const Hero = () => {
     return (
-        <section className="max-w-[1400px] mx-auto px-4 md:px-12 font-cairo" dir="rtl">
+        <section className="max-w-[1400px] mx-auto px-4 md:px-12 font-sans" dir="rtl">
             {/* Top Promo Banner */}
             <div className="relative w-full min-h-[100px] h-[130px] sm:h-[160px] md:h-[200px] rounded-lg overflow-hidden mb-4 md:mb-6 group cursor-pointer flex items-center justify-center bg-[#a9c9b9]/20">
                 <img

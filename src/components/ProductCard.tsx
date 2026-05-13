@@ -2,6 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { ShoppingBag } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '@/lib/features/cartSlice';
 
 interface ProductCardProps {
     id: string;
@@ -15,8 +18,17 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(addItem({ id, brand, name, price, image }));
+    };
+
     return (
-        <Link href={`/product/${id}`} className="group relative flex flex-col bg-white p-4 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] h-full border border-gray-100/80 cursor-pointer block">
+        <div className="group relative flex flex-col bg-white p-4 transition-all duration-300 hover:shadow-[0_4px_25px_rgba(0,0,0,0.07)] h-full border border-gray-100/80 cursor-pointer font-sans">
+            <Link href={`/product/${id}`} className="block">
             
             {/* Image Area */}
             <div className="relative aspect-[4/5] w-full flex items-center justify-center mb-4">
@@ -60,8 +72,17 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                     </span>
                 </div>
             </div>
+            </Link>
             
-        </Link>
+            {/* Add to Bag Hover Button */}
+            <button 
+                onClick={handleAddToCart}
+                className="absolute bottom-4 left-4 right-4 bg-[#071424] text-white py-3 rounded-sm font-black text-[12px] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 z-20"
+            >
+                <ShoppingBag className="w-4 h-4" />
+                إضافة للسلة
+            </button>
+        </div>
     );
 };
 

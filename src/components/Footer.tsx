@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
          </section>
         
-        <footer className="bg-black text-white pt-12 pb-6 font-cairo" dir="rtl">
+        <footer className="bg-black text-white pt-12 pb-6 font-sans" dir="rtl">
             <div className="max-w-[1400px] mx-auto px-4 md:px-6">
                 
                 {/* Main Grid */}

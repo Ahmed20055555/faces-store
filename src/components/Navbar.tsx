@@ -4,6 +4,10 @@ import React from 'react';
 import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, Menu, MapPin, Home } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
+import { toggleCart } from '@/lib/features/cartSlice';
+import { useRouter } from 'next/navigation';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -16,9 +20,14 @@ const PROMO_MESSAGES = [
 ];
 
 const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { items } = useSelector((state: RootState) => state.cart);
+    const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
     return (
         <>
-            <header className={`w-full bg-white z-[1000] font-cairo shadow-sm md:shadow-none mb-6 ${isSticky ? 'sticky top-0' : 'relative'}`} dir="rtl">
+            <header className={`w-full bg-white z-[1000] font-sans shadow-sm md:shadow-none mb-6 ${isSticky ? 'sticky top-0' : 'relative'}`} dir="rtl">
                 {/* Top Bar Swiper */}
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
@@ -96,8 +105,13 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 <Search size={22} strokeWidth={1.5} />
                             </button>
                         </div>
-                        <button className="p-1">
+                        <button onClick={() => router.push('/cart')} className="p-1 relative">
                             <ShoppingBag className="w-6 h-6 md:w-[26px] md:h-[26px]" strokeWidth={1.5} />
+                            {itemCount > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-[#8c1d3b] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
+                                    {itemCount}
+                                </span>
+                            )}
                         </button>
                         <button className="hidden md:block">
                             <User className="w-7 h-7 md:w-8 md:h-8" strokeWidth={1} />
