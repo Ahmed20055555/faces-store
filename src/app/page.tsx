@@ -18,18 +18,18 @@ import FloatingSupport from "@/components/FloatingSupport";
 // ---------------------------------------------------------------------------
 
 const NEW_ARRIVALS = [
-  { brand: "أطياب المرشود", name: "حصرياً خصلة بينك",      price: "460",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "إيسي مياكي",   name: "لوميير ديسي",            price: "537",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميو ميو",      name: "عطر ميوتين",              price: "572",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميمو باريس",   name: "عطر أوشن ليذر",          price: "1365", image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "جورجو أرماني", name: "عطر باور أوف يو أو",     price: "488",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميو ميو",      name: "عطر لو دو موغيه",        price: "572",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "أطياب المرشود", name: "حصرياً خصلة بينك",      price: "460",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "إيسي مياكي",   name: "لوميير ديسي",            price: "537",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميو ميو",      name: "عطر ميوتين",              price: "572",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميمو باريس",   name: "عطر أوشن ليذر",          price: "1365", image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "جورجو أرماني", name: "عطر باور أوف يو أو",     price: "488",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
-  { brand: "ميو ميو",      name: "عطر لو دو موغيه",        price: "572",  image: "/001717728336_1.jpg", isNew: false, hasGift: true  },
+  { brand: "أطياب المرشود", name: "حصرياً خصلة بينك", price: "460", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "إيسي مياكي", name: "لوميير ديسي", price: "537", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميو ميو", name: "عطر ميوتين", price: "572", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميمو باريس", name: "عطر أوشن ليذر", price: "1365", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "جورجو أرماني", name: "عطر باور أوف يو أو", price: "488", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميو ميو", name: "عطر لو دو موغيه", price: "572", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "أطياب المرشود", name: "حصرياً خصلة بينك", price: "460", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "إيسي مياكي", name: "لوميير ديسي", price: "537", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميو ميو", name: "عطر ميوتين", price: "572", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميمو باريس", name: "عطر أوشن ليذر", price: "1365", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "جورجو أرماني", name: "عطر باور أوف يو أو", price: "488", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
+  { brand: "ميو ميو", name: "عطر لو دو موغيه", price: "572", image: "/001717728336_1.jpg", isNew: false, hasGift: true },
 ];
 
 const SPRING_IMAGES = [
@@ -55,20 +55,20 @@ const GWP_IMAGES = [
 ];
 
 const FREE_GIFT_PRODUCTS = [
-  { brand: "لانكوم",        name: "آيدول ناو",                    price: "531", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true  },
-  { brand: "إيف سان لوران", name: "ليبر لو بارفان",              price: "489", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true  },
-  { brand: "جورجو أرماني",  name: "عطر ماي واي إنتنس...",       price: "621", image: "/001717728336_1.jpg", hasGift: false, hasFrom: false },
-  { brand: "جورجو أرماني",  name: "سترونغر ويز يو...",          price: "477", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true  },
-  { brand: "إيف سان لوران", name: "عطر بلاك أوبيوم أو د...",   price: "587", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true  },
-  { brand: "إيف سان لوران", name: "عطر واي أو دو برفان",       price: "518", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true  },
+  { brand: "لانكوم", name: "آيدول ناو", price: "531", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "إيف سان لوران", name: "ليبر لو بارفان", price: "489", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "جورجو أرماني", name: "عطر ماي واي إنتنس...", price: "621", image: "/001717728336_1.jpg", hasGift: false, hasFrom: false },
+  { brand: "جورجو أرماني", name: "سترونغر ويز يو...", price: "477", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "إيف سان لوران", name: "عطر بلاك أوبيوم أو د...", price: "587", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "إيف سان لوران", name: "عطر واي أو دو برفان", price: "518", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
 ];
 
 const ISSEY_PRODUCTS = [
-  { brand: "ايسي مياكي", name: "لو ديسي انتنس",       price: "444", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
-  { brand: "ايسي مياكي", name: "لو سيل ديسي",         price: "460", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
-  { brand: "ايسي مياكي", name: "لوميير ديسي",         price: "537", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
-  { brand: "ايسي مياكي", name: "عطر بيفوان بيني",     price: "514", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
-  { brand: "ايسي مياكي", name: "لو ديسي انتنس",       price: "551", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "ايسي مياكي", name: "لو ديسي انتنس", price: "444", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "ايسي مياكي", name: "لو سيل ديسي", price: "460", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "ايسي مياكي", name: "لوميير ديسي", price: "537", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "ايسي مياكي", name: "عطر بيفوان بيني", price: "514", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
+  { brand: "ايسي مياكي", name: "لو ديسي انتنس", price: "551", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
   { brand: "ايسي مياكي", name: "عطر لو سيل دي إيسي", price: "419", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
 ];
 
@@ -83,13 +83,16 @@ const AROUND_THE_WORLD_BRANDS = [
 ];
 
 const CATEGORIES = [
-    { name: "العطور", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-    { name: "المكياج", image: "/DK-SUB.avif" },
-    { name: "البشرة", image: "/DK-SUB-Skincare_UAE-1.avif" },
-    { name: "الشعر", image: "/DK-SUB.avif" },
-    { name: "الرجال", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-    { name: "الهدايا", image: "/DK-SUB-Skincare_UAE-1.avif" },
-    { name: "الماركات", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "عطور نسائية", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "عطور رجالية", image: "/DK-SUB.avif" },
+  { name: "عطور النيش", image: "/DK-SUB-Skincare_UAE-1.avif" },
+  { name: "عطور الشعر", image: "/DK-SUB.avif" },
+  { name: "أطقم هدايا", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "عطور العود", image: "/DK-SUB-Skincare_UAE-1.avif" },
+  { name: "الأكثر مبيعاً", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "جديدنا", image: "/DK-SUB.avif" },
+  { name: "الماركات", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "عطور زيتية", image: "/DK-SUB-Skincare_UAE-1.avif" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -99,30 +102,58 @@ const CATEGORIES = [
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
+
       <Navbar />
       <NewsletterModal />
       <FloatingSupport />
 
-      {/* Category Stories (Instagram Style) */}
-      <section className="bg-white py-6 border-b border-gray-50 overflow-hidden" dir="rtl">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-              <div className="flex items-center gap-6 md:gap-10 overflow-x-auto no-scrollbar pb-2">
-                  {CATEGORIES.map((cat, i) => (
-                      <div key={i} className="flex flex-col items-center gap-2 group cursor-pointer shrink-0">
-                          <div className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] rounded-full p-[3px] bg-gradient-to-tr from-[#8c1d3b] via-rose-300 to-[#8c1d3b] group-hover:rotate-180 transition-all duration-700">
-                              <div className="w-full h-full rounded-full border-2 border-white overflow-hidden bg-gray-50">
-                                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                              </div>
-                          </div>
-                          <span className="text-[12px] md:text-[13px] font-black text-gray-900 group-hover:text-[#8c1d3b] transition-colors">{cat.name}</span>
-                      </div>
-                  ))}
-              </div>
-          </div>
-      </section>
-
       {/* Hero Section */}
       <Hero />
+
+      {/* Category Stories Slider (Instagram Style) */}
+      <section className="bg-white py-10" dir="rtl">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-12 relative group">
+              <Swiper
+                  modules={[Navigation]}
+                  navigation={{
+                      nextEl: '.cat-prev-btn',
+                      prevEl: '.cat-next-btn',
+                  }}
+                  slidesPerView="auto"
+                  spaceBetween={25}
+                  className="category-swiper !overflow-visible pt-4"
+                  breakpoints={{
+                    320: { spaceBetween: 15 },
+                    768: { spaceBetween: 25 }
+                  }}
+              >
+                  {CATEGORIES.map((cat, i) => (
+                      <SwiperSlide key={i} className="!w-auto">
+                          <div className="flex flex-col items-center gap-3 cursor-pointer pb-2 group/cat">
+                              <div className="relative transition-transform duration-500 ease-out group-hover/cat:scale-110">
+                                  <div className="w-[85px] h-[85px] md:w-[105px] md:h-[105px] rounded-full p-[3px] bg-gradient-to-tr from-[#8c1d3b] via-rose-300 to-[#8c1d3b] shadow-sm">
+                                      <div className="w-full h-full rounded-full border-[3px] border-white overflow-hidden bg-white">
+                                          <img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover/cat:scale-110" />
+                                      </div>
+                                  </div>
+                              </div>
+                              <span className="text-[13px] md:text-[14px] font-black text-gray-900 group-hover/cat:text-[#8c1d3b] transition-colors tracking-tight text-center">
+                                  {cat.name}
+                              </span>
+                          </div>
+                      </SwiperSlide>
+                  ))}
+              </Swiper>
+
+              {/* Navigation Arrows */}
+              <button className="cat-next-btn absolute -right-2 md:-right-5 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all border border-gray-100 hover:bg-black hover:text-white hover:scale-110">
+                  <ChevronRight className="w-6 h-6" />
+              </button>
+              <button className="cat-prev-btn absolute -left-2 md:-left-5 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all border border-gray-100 hover:bg-black hover:text-white hover:scale-110">
+                  <ChevronLeft className="w-6 h-6" />
+              </button>
+          </div>
+      </section>
 
       {/* New Arrivals Section */}
       <section className="py-4 bg-white">
@@ -146,12 +177,12 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2.5, spaceBetween: 15 },
-                768:  { slidesPerView: 3, spaceBetween: 20 },
+                480: { slidesPerView: 2.5, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 20 },
                 1280: { slidesPerView: 5, spaceBetween: 20 },
               }}
-              className="!px-1"  
+              className="!px-1"
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
@@ -207,9 +238,9 @@ export default function Home() {
               }}
               loop={true}
               breakpoints={{
-                320:  { slidesPerView: 2, spaceBetween: 15 },
-                768:  { slidesPerView: 2.5, spaceBetween: 20 },
-                1024: { slidesPerView: 3,   spaceBetween: 25 },
+                320: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 2.5, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 25 },
               }}
               className="!px-2"
             >
@@ -248,7 +279,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
-             اصدارات جديدة
+              اصدارات جديدة
             </h2>
           </div>
 
@@ -262,9 +293,9 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2, spaceBetween: 15 },
-                768:  { slidesPerView: 2.5, spaceBetween: 20 },
-                1024: { slidesPerView: 3,   spaceBetween: 20 },
+                480: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 2.5, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 20 },
               }}
               className="!px-1"
             >
@@ -342,12 +373,12 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2.5, spaceBetween: 15 },
-                768:  { slidesPerView: 3, spaceBetween: 20 },
+                480: { slidesPerView: 2.5, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 20 },
                 1280: { slidesPerView: 5, spaceBetween: 20 },
               }}
-              className="!px-1"  
+              className="!px-1"
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
@@ -371,7 +402,7 @@ export default function Home() {
 
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
-             اكتشفوا عالمًا من الخدمه
+              اكتشفوا عالمًا من الخدمه
             </h2>
             <p className="text-sm md:text-base font-black shrink-0 whitespace-nowrap text-black hover:text-accent transition-all">
               عرض جميع الخدمات
@@ -388,9 +419,9 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2, spaceBetween: 15 },
-                768:  { slidesPerView: 2.5, spaceBetween: 20 },
-                1024: { slidesPerView: 3,   spaceBetween: 20 },
+                480: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 2.5, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 20 },
               }}
               className="!px-1"
             >
@@ -440,12 +471,12 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2.5, spaceBetween: 15 },
-                768:  { slidesPerView: 4, spaceBetween: 20 },
+                480: { slidesPerView: 2.5, spaceBetween: 15 },
+                768: { slidesPerView: 4, spaceBetween: 20 },
                 1024: { slidesPerView: 5, spaceBetween: 20 },
                 1280: { slidesPerView: 6, spaceBetween: 20 },
               }}
-              className="!px-1"  
+              className="!px-1"
             >
               {AROUND_THE_WORLD_BRANDS.map((brand, index) => (
                 <SwiperSlide key={index}>
@@ -474,12 +505,12 @@ export default function Home() {
         </div>
       </section>
 
-       {/* New Arrivals Section */}
+      {/* New Arrivals Section */}
       <section className="py-4 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-end mb-6">
             <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
-             مختارات عالمية
+              مختارات عالمية
             </h2>
             <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black hover:opacity-80 transition-all underline">
               عرض الكل
@@ -496,12 +527,12 @@ export default function Home() {
               spaceBetween={12}
               slidesPerView={2}
               breakpoints={{
-                480:  { slidesPerView: 2.5, spaceBetween: 15 },
-                768:  { slidesPerView: 3, spaceBetween: 20 },
+                480: { slidesPerView: 2.5, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
                 1024: { slidesPerView: 4, spaceBetween: 20 },
                 1280: { slidesPerView: 5, spaceBetween: 20 },
               }}
-              className="!px-1"  
+              className="!px-1"
             >
               {NEW_ARRIVALS.map((product, index) => (
                 <SwiperSlide key={index}>
