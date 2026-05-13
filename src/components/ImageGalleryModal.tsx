@@ -113,7 +113,7 @@ export default function ImageGalleryModal({
             doubleClick={{ step: 1.8 }}
             wheel={{ step: 0.08 }}
             panning={{ velocityDisabled: false }}
-            onTransformed={(_, state) => setIsZoomed(state.scale > 1.05)}
+            onTransform={(_, state) => setIsZoomed(state.scale > 1.05)}
             onInit={(ref) => { resetRef.current = () => ref.resetTransform(); }}
           >
             {() => (
