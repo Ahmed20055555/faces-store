@@ -137,7 +137,7 @@ export default function CartPage() {
                     {/* Left Column: Sidebar Summary */}
                     <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-4">
                         <div className="bg-white rounded-sm border border-gray-100 shadow-sm overflow-hidden">
-                            <Accordion type="single" collapsible className="w-full">
+                            <Accordion className="w-full">
                                 <AccordionItem value="promo" className="border-b">
                                     <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-gray-900">
                                         <div className="flex items-center gap-3">
