@@ -17,6 +17,7 @@
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-inner-image-zoom": "^4.0.1",
     "react-zoom-pan-pinch": "^4.0.3",
     "shadcn": "^4.7.0",
     "swiper": "^12.1.3",

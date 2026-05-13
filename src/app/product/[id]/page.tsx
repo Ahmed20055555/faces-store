@@ -293,22 +293,32 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             {/* Similar Products Section */}
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-12 md:py-16 border-t border-gray-100 font-cairo">
                 {/* Tabs */}
-                <div className="flex gap-6 border-b border-gray-200 mb-8">
-                    <button 
+                {/* Mobile: vertical list  |  Desktop: horizontal row */}
+                <div className="flex flex-col md:flex-row md:gap-10 border-b border-gray-200 mb-8">
+                    <button
                         onClick={() => setActiveTab('may-like')}
-                        className={`pb-3 transition-colors ${activeTab === 'may-like' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
+                        className={`py-3 md:pb-3 md:pt-0 text-right transition-colors leading-snug
+                            ${activeTab === 'may-like'
+                                ? 'border-r-4 md:border-r-0 md:border-b-2 border-black pr-3 md:pr-0 font-black text-[15px] md:text-[16px] text-gray-900'
+                                : 'border-r-4 md:border-r-0 border-transparent pr-3 md:pr-0 font-bold text-[15px] md:text-[16px] text-gray-400 hover:text-gray-900'}`}
                     >
                         من الممكن أن يعجبك أيضاً
                     </button>
-                    <button 
+                    <button
                         onClick={() => setActiveTab('similar')}
-                        className={`pb-3 transition-colors ${activeTab === 'similar' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
+                        className={`py-3 md:pb-3 md:pt-0 text-right transition-colors leading-snug
+                            ${activeTab === 'similar'
+                                ? 'border-r-4 md:border-r-0 md:border-b-2 border-black pr-3 md:pr-0 font-black text-[15px] md:text-[16px] text-gray-900'
+                                : 'border-r-4 md:border-r-0 border-transparent pr-3 md:pr-0 font-bold text-[15px] md:text-[16px] text-gray-400 hover:text-gray-900'}`}
                     >
                         منتجات مشابهة
                     </button>
-                    <button 
+                    <button
                         onClick={() => setActiveTab('recently-viewed')}
-                        className={`pb-3 transition-colors ${activeTab === 'recently-viewed' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
+                        className={`py-3 md:pb-3 md:pt-0 text-right transition-colors leading-snug
+                            ${activeTab === 'recently-viewed'
+                                ? 'border-r-4 md:border-r-0 md:border-b-2 border-black pr-3 md:pr-0 font-black text-[15px] md:text-[16px] text-gray-900'
+                                : 'border-r-4 md:border-r-0 border-transparent pr-3 md:pr-0 font-bold text-[15px] md:text-[16px] text-gray-400 hover:text-gray-900'}`}
                     >
                         شاهدتها مؤخراً
                     </button>

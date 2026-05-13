@@ -222,7 +222,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
-              هدايا عند التسوق
+             اصدارات جديدة
             </h2>
           </div>
 
