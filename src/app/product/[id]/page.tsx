@@ -22,7 +22,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const resolvedParams = React.use(params);
     const id = resolvedParams.id;
     
-    const [activeTab, setActiveTab] = useState<'may-like' | 'similar'>('may-like');
+    const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
@@ -50,7 +50,18 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         { brand: "هيوغو بوس", name: "عطر بوتلد بيوند", price: "520", image: "/001717728336_1.jpg", isNew: true, hasGift: false }
     ];
 
-    const currentProducts = activeTab === 'may-like' ? MAY_LIKE_PRODUCTS : SIMILAR_PRODUCTS;
+    const RECENTLY_VIEWED_PRODUCTS = [
+        { brand: "شانيل", name: "نو 5 أو دو بارفان", price: "980", image: "/001717728336_1.jpg", isNew: false, hasGift: false },
+        { brand: "ديور", name: "جادور إنفيني أو بارفان", price: "750", image: "/001717728336_1.jpg", isNew: true, hasGift: true },
+        { brand: "إيف سان لوران", name: "مون باريس", price: "620", image: "/001717728336_1.jpg", isNew: false, hasGift: false },
+        { brand: "بيرفيومز دو مارلي", name: "ديلينا", price: "1250", image: "/001717728336_1.jpg", isNew: true, hasGift: false },
+        { brand: "تيفاني آند كو", name: "روز غولد", price: "560", image: "/001717728336_1.jpg", isNew: false, hasGift: true }
+    ];
+
+    const currentProducts =
+        activeTab === 'may-like' ? MAY_LIKE_PRODUCTS :
+        activeTab === 'similar' ? SIMILAR_PRODUCTS :
+        RECENTLY_VIEWED_PRODUCTS;
 
     return (
         <main className="min-h-screen bg-white" dir="rtl">
@@ -95,7 +106,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         {/* Main Image */}
                         <button 
                             onClick={() => setIsGalleryOpen(true)}
-                            className="flex-1 border border-gray-100 rounded-sm p-4 flex items-center justify-center min-h-[400px] md:min-h-[500px] cursor-zoom-in group"
+                            className="flex-1 border border-gray-100 rounded-sm p-4 flex items-center justify-center min-h-[320px] md:min-h-[420px] max-h-[420px] cursor-zoom-in group"
                         >
                             <img 
                                 src={mainImage} 
@@ -287,13 +298,19 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         onClick={() => setActiveTab('may-like')}
                         className={`pb-3 transition-colors ${activeTab === 'may-like' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
                     >
-                        قد يعجبك أيضاً
+                        من الممكن أن يعجبك أيضاً
                     </button>
                     <button 
                         onClick={() => setActiveTab('similar')}
                         className={`pb-3 transition-colors ${activeTab === 'similar' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
                     >
                         منتجات مشابهة
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('recently-viewed')}
+                        className={`pb-3 transition-colors ${activeTab === 'recently-viewed' ? 'border-b-2 border-black font-black text-[16px] text-gray-900' : 'font-bold text-[16px] text-gray-500 hover:text-gray-900'}`}
+                    >
+                        شاهدتها مؤخراً
                     </button>
                 </div>
 

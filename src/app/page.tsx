@@ -85,6 +85,7 @@ const AROUND_THE_WORLD_BRANDS = [
   { name: "ريف العطور", image: "/001717728336_1.jpg" },
   { name: "دايسون", image: "/001717728336_1.jpg" },
 ];
+
 // ---------------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------------
@@ -293,7 +294,6 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Most Popular Products Section */}
       <section className="py-4 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
@@ -339,7 +339,7 @@ export default function Home() {
         </div>
       </section>
 
-            {/* Gifts With Purchase Section */}
+      {/* Gifts With Purchase Section */}
       <section className="py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
 
@@ -390,7 +390,7 @@ export default function Home() {
         </div>
       </section>
 
-{/* Around the World Section */}
+      { /* Around the World Section */}
       <section className="py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-end mb-6 w-full">
@@ -448,8 +448,7 @@ export default function Home() {
         </div>
       </section>
 
-
-            {/* New Arrivals Section */}
+       {/* New Arrivals Section */}
       <section className="py-4 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-end mb-6">
@@ -522,40 +521,6 @@ export default function Home() {
           <a href="#" className="text-[14px] font-black underline text-[#153428] hover:opacity-80 transition-opacity">
             اكتشفوا عالم الجمال
           </a>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-8 bg-[#efded8]" dir="rtl">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            
-            {/* Right Side - Text */}
-            <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-right">
-              <Mail className="w-10 h-10 md:w-8 md:h-8 text-[#153428] shrink-0 mb-2 md:mb-0" />
-              <div>
-                <h3 className="text-xl font-black text-[#153428] mb-2 md:mb-1">اشترك في نشرتنا الإخبارية</h3>
-                <p className="text-sm text-gray-700 font-bold">كن أول من يعلم بمنتجاتنا الجديدة، العروض، و فعاليات المتاجر</p>
-              </div>
-            </div>
-
-            {/* Left Side - Form */}
-            <div className="w-full md:w-auto flex-1 max-w-lg mt-4 md:mt-0">
-              <form className="flex w-full h-12" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="عنوان البريد الإلكتروني"
-                  className="flex-1 min-w-0 h-full px-4 border border-black/20 bg-transparent text-right placeholder-gray-600 focus:outline-none focus:border-black rounded-r-[4px]"
-                />
-                <button
-                  type="submit"
-                  className="h-full px-6 md:px-8 bg-black text-white font-bold text-sm hover:bg-gray-800 transition-colors rounded-l-[4px] shrink-0"
-                >
-                  اشترك
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
       </section>
 

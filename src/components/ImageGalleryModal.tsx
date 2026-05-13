@@ -42,7 +42,7 @@ export default function ImageGalleryModal({
       {/* showCloseButton={false} prevents the default Shadcn close button so we can use our custom circle one */}
       <DialogContent 
         showCloseButton={false}
-        className="w-[95vw] sm:max-w-[700px] md:max-w-[850px] h-[85vh] p-0 gap-0 overflow-hidden rounded-md bg-white flex flex-col border-0 shadow-2xl" 
+        className=" z-1000 w-[95vw] sm:max-w-[700px] md:max-w-[850px] h-[85vh] p-0 gap-0 overflow-hidden rounded-md bg-white flex flex-col border-0 shadow-2xl" 
         dir="rtl"
       >
         <DialogTitle className="sr-only">Product Image Gallery</DialogTitle>
