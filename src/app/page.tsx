@@ -142,8 +142,8 @@ export default function Home() {
             >
               {CATEGORIES.map((cat, i) => (
                 <SwiperSlide key={i}>
-                  <div className="flex flex-col items-center gap-2 cursor-pointer ">
-                    <div className="transition-transform duration-500 ease-out group-hover/cat:scale-105">
+                  <div className="flex flex-col items-center gap-2 cursor-pointer group/cat">
+                    <div className="transition-transform duration-300 ease-out group-hover/cat:scale-110">
                       <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden bg-white shadow-md border border-gray-100 relative">
                         <img
                           src={cat.image}
