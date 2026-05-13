@@ -1,12 +1,11 @@
 "use client";
 
 import React from 'react';
-import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, Menu, MapPin, Home, Heart } from 'lucide-react';
+import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { toggleCart } from '@/lib/features/cartSlice';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
@@ -45,7 +44,6 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 {/* Top Bar Swiper */}
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
-
                         {/* Right: Country/Lang */}
                         <div className="hidden lg:flex items-center gap-2 cursor-pointer z-10 shrink-0">
                             <span className="flex items-center gap-1 text-[11px] font-medium">
@@ -58,14 +56,13 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         <div className="flex-grow max-w-full md:max-w-2xl px-12 relative h-full flex items-center overflow-hidden">
                             <Swiper
                                 modules={[Autoplay, Navigation]}
-                                autoplay={{ delay: 2000, disableOnInteraction: false }}
+                                autoplay={{ delay: 3500, disableOnInteraction: false }}
                                 navigation={{
                                     nextEl: '.swiper-button-next-custom',
                                     prevEl: '.swiper-button-prev-custom',
                                 }}
                                 loop={true}
                                 slidesPerView={1}
-                                allowTouchMove={true}
                                 className="w-full h-full"
                             >
                                 {PROMO_MESSAGES.map((msg, idx) => (
@@ -76,13 +73,6 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
-
-                            <button className="swiper-button-prev-custom absolute right-2 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 hidden md:block">
-                                <ChevronRight size={14} />
-                            </button>
-                            <button className="swiper-button-next-custom absolute left-2 top-1/2 -translate-y-1/2 z-20 opacity-70 hover:opacity-100 hidden md:block">
-                                <ChevronLeft size={14} />
-                            </button>
                         </div>
 
                         {/* Left: Contact */}
@@ -93,10 +83,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 </div>
 
                 {/* Main Navigation */}
-                <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex justify-between items-center h-14 md:h-18 gap-2">
-
+                <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex justify-between items-center h-14 md:h-20 gap-4">
                     {/* Logo Section */}
-                    <div className="flex-shrink-0 h-8 md:h-10 flex items-center justify-start min-w-[80px]">
+                    <div className="flex-shrink-0 h-8 md:h-12 flex items-center justify-start min-w-[80px]">
                         <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
                     </div>
 
@@ -106,31 +95,31 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             <input
                                 type="text"
                                 placeholder="ابحث عن الجمال والعلامات التجارية والمزيد"
-                                className="w-full bg-white border border-gray-200 rounded-full py-2 pr-12 pl-6 text-[13px] focus:outline-none focus:border-gray-400 transition-all placeholder:text-gray-400"
+                                className="w-full bg-white border border-gray-200 rounded-full py-2.5 pr-12 pl-6 text-[13px] focus:outline-none focus:border-gray-400 transition-all placeholder:text-gray-400"
                             />
                             <Search size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-800" />
                         </div>
                     </div>
 
                     {/* Icons Group */}
-                    <div className="flex items-center gap-3 md:gap-6 flex-shrink-0">
+                    <div className="flex items-center gap-3 md:gap-8 flex-shrink-0">
                         <div className="flex items-center gap-3 md:hidden">
                             <button className="p-1">
                                 <Search size={22} strokeWidth={1.5} />
                             </button>
                         </div>
                         <button onClick={() => router.push('/cart')} className="p-1 relative">
-                            <ShoppingBag className="w-6 h-6 md:w-[26px] md:h-[26px]" strokeWidth={1.5} />
+                            <ShoppingBag className="w-6 h-6 md:w-[28px] md:h-[28px]" strokeWidth={1.2} />
                             {itemCount > 0 && (
                                 <span className="absolute -top-1 -right-1 bg-[#8c1d3b] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
                                     {itemCount}
                                 </span>
                             )}
                         </button>
-                        <button onClick={() => router.push('/favorites')} className={cn("p-1 relative transition-transform duration-300", animateHeart && "scale-125")}>
-                            <Heart className={cn("w-6 h-6 md:w-[26px] md:h-[26px] transition-colors", favorites.length > 0 && "fill-[#8c1d3b] text-[#8c1d3b]")} strokeWidth={1.5} />
+                        <button onClick={() => router.push('/favorites')} className={cn("p-1 relative transition-transform duration-300", animateHeart && "scale-110")}>
+                            <Heart className={cn("w-6 h-6 md:w-[28px] md:h-[28px] transition-colors", favorites.length > 0 && "fill-[#8c1d3b] text-[#8c1d3b]")} strokeWidth={1.2} />
                             {favorites.length > 0 && (
-                                <span className="absolute top-0 right-0 bg-black w-2.5 h-2.5 rounded-full border-2 border-white"></span>
+                                <span className="absolute top-0.5 right-0.5 bg-black w-2.5 h-2.5 rounded-full border-2 border-white"></span>
                             )}
                         </button>
                         <button className="hidden md:block">
@@ -140,36 +129,26 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 </div>
 
                 {/* Categories Bar */}
-                <nav className="border-b border-gray-100 py-3 block whitespace-nowrap overflow-x-auto no-scrollbar scroll-smooth bg-white">
+                <nav className="border-t border-gray-100 py-3.5 block whitespace-nowrap overflow-x-auto no-scrollbar scroll-smooth bg-white">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-                        <ul className="flex justify-start md:justify-between items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-4">
+                        <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-12">
                             <li className="text-[#a51c30] cursor-pointer shrink-0">الفرصة الأخيرة</li>
-                            <li className="cursor-pointer shrink-0">العطور</li>
-                            <li className="cursor-pointer shrink-0">الجمال الكوري</li>
-                            <li className="cursor-pointer shrink-0">الأكثر مبيعاً</li>
-                            <li className="cursor-pointer shrink-0">وصل حديثاً</li>
-                            <li className="cursor-pointer shrink-0">الماركات</li>
-                            <li className="cursor-pointer shrink-0">البشرة</li>
-                            <li className="cursor-pointer shrink-0">المكياج</li>
-                            <li className="cursor-pointer shrink-0">الشعر</li>
-                            <li className="cursor-pointer shrink-0">الجسم</li>
-                            <li className="cursor-pointer shrink-0">مجموعات الهدايا</li>
-                            <li className="cursor-pointer shrink-0">للرجال</li>
-                            <li className="cursor-pointer shrink-0">عروض الجمال</li>
-                            <li className="cursor-pointer shrink-0">حصرياً</li>
+                            {["العطور", "الجمال الكوري", "الأكثر مبيعاً", "وصل حديثاً", "الماركات", "البشرة", "المكياج"].map((cat) => (
+                                <li key={cat} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">{cat}</li>
+                            ))}
                         </ul>
                     </div>
                 </nav>
             </header>
 
             {/* Mobile Bottom Navigation Bar */}
-            <div className="md:hidden fixed bottom-1 left-0 right-0 bg-white border-t border-gray-100 z-[1000] px-4 py-2 flex justify-between items-center shadow-[0_-2px_10px_rgba(0,0,0,0.05)] mx-2 rounded-full mb-2">
-                <div className="flex flex-col items-center gap-1 cursor-pointer text-accent">
-                    <Home size={20} strokeWidth={2} />
+            <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100 z-[1000] px-6 py-3 flex justify-between items-center shadow-lg rounded-3xl">
+                <div className="flex flex-col items-center gap-1 cursor-pointer text-[#8c1d3b]">
+                    <Home size={22} strokeWidth={2.5} />
                     <span className="text-[10px] font-bold">الرئيسية</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
-                    <MapPin size={20} strokeWidth={1.5} />
+                    <MapPin size={22} strokeWidth={1.5} />
                     <span className="text-[10px] font-bold">المتاجر</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
@@ -177,12 +156,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     <span className="text-[10px] font-bold">ابحث</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
-                    <User size={20} strokeWidth={1.5} />
+                    <User size={22} strokeWidth={1.5} />
                     <span className="text-[10px] font-bold">حسابي</span>
                 </div>
             </div>
-
-
         </>
     );
 };

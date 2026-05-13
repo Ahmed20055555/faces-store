@@ -38,12 +38,12 @@ export default function NewsletterModal() {
     return (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500" dir="rtl">
             <div className="relative bg-white max-w-[850px] w-full rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in-95 duration-500">
-                
+
                 {/* Left Side: Image */}
                 <div className="hidden md:block w-1/2 relative">
-                    <img 
-                        src="/DK-SUB-Skincare_UAE-1.avif" 
-                        alt="Newsletter" 
+                    <img
+                        src="/DK-SUB-Skincare_UAE-1.avif"
+                        alt="Newsletter"
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -55,7 +55,7 @@ export default function NewsletterModal() {
 
                 {/* Right Side: Form */}
                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center text-center">
-                    <button 
+                    <button
                         onClick={handleClose}
                         className="absolute top-4 right-4 p-2 text-gray-400 hover:text-black transition-colors"
                     >
@@ -80,15 +80,15 @@ export default function NewsletterModal() {
                             </p>
 
                             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     required
                                     placeholder="بريدك الإلكتروني"
                                     className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-xl outline-none focus:border-[#8c1d3b] focus:bg-white transition-all text-center md:text-right"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
-                                <button 
+                                <button
                                     disabled={status === 'submitting'}
                                     className="w-full bg-black text-white py-4 rounded-xl font-black text-[15px] hover:bg-[#8c1d3b] transition-all duration-300 disabled:opacity-50"
                                 >

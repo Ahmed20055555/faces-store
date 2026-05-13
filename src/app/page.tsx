@@ -72,7 +72,6 @@ const ISSEY_PRODUCTS = [
   { brand: "ايسي مياكي", name: "عطر لو سيل دي إيسي", price: "419", image: "/001717728336_1.jpg", hasGift: false, hasFrom: true },
 ];
 
-
 const AROUND_THE_WORLD_BRANDS = [
   { name: "اروما دي لاموري", image: "/001717728336_1.jpg" },
   { name: "ماوس اوف 1984", image: "/001717728336_1.jpg" },
