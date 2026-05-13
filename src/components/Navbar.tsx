@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { toggleCart } from '@/lib/features/cartSlice';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -24,6 +25,18 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
     const router = useRouter();
     const { items } = useSelector((state: RootState) => state.cart);
     const favorites = useSelector((state: RootState) => state.favorites.items);
+    const [animateHeart, setAnimateHeart] = React.useState(false);
+    const prevFavCount = React.useRef(favorites.length);
+
+    React.useEffect(() => {
+        if (favorites.length > prevFavCount.current) {
+            setAnimateHeart(true);
+            const timer = setTimeout(() => setAnimateHeart(false), 300);
+            return () => clearTimeout(timer);
+        }
+        prevFavCount.current = favorites.length;
+    }, [favorites.length]);
+
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
@@ -114,10 +127,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 </span>
                             )}
                         </button>
-                        <button onClick={() => router.push('/favorites')} className="p-1 relative">
-                            <Heart className="w-6 h-6 md:w-[26px] md:h-[26px]" strokeWidth={1.5} />
+                        <button onClick={() => router.push('/favorites')} className={cn("p-1 relative transition-transform duration-300", animateHeart && "scale-125")}>
+                            <Heart className={cn("w-6 h-6 md:w-[26px] md:h-[26px] transition-colors", favorites.length > 0 && "fill-[#8c1d3b] text-[#8c1d3b]")} strokeWidth={1.5} />
                             {favorites.length > 0 && (
-                                <span className="absolute top-0 right-0 bg-[#8c1d3b] w-2.5 h-2.5 rounded-full border-2 border-white"></span>
+                                <span className="absolute top-0 right-0 bg-black w-2.5 h-2.5 rounded-full border-2 border-white"></span>
                             )}
                         </button>
                         <button className="hidden md:block">

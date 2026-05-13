@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Providers from "@/components/Providers";
 import CartDrawer from "@/components/CartDrawer";
 import Toast from "@/components/Toast";
+import FavoritesToast from "@/components/FavoritesToast";
 
 const readex = Readex_Pro({ subsets: ['arabic', 'latin'], variable: '--font-readex' });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
           <CartDrawer />
           <Toast />
+          <FavoritesToast />
         </Providers>
       </body>
     </html>

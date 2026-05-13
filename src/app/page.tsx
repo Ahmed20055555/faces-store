@@ -10,6 +10,8 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail } from "lucide-react";
+import NewsletterModal from "@/components/NewsletterModal";
+import FloatingSupport from "@/components/FloatingSupport";
 
 // ---------------------------------------------------------------------------
 // Data constants
@@ -78,12 +80,16 @@ const AROUND_THE_WORLD_BRANDS = [
   { name: "أس كي 2", image: "/001717728336_1.jpg" },
   { name: "ريف العطور", image: "/001717728336_1.jpg" },
   { name: "دايسون", image: "/001717728336_1.jpg" },
-  { name: "اروما دي لاموري", image: "/001717728336_1.jpg" },
-  { name: "ماوس اوف 1984", image: "/001717728336_1.jpg" },
-  { name: "العربية للعود", image: "/001717728336_1.jpg" },
-  { name: "أس كي 2", image: "/001717728336_1.jpg" },
-  { name: "ريف العطور", image: "/001717728336_1.jpg" },
-  { name: "دايسون", image: "/001717728336_1.jpg" },
+];
+
+const CATEGORIES = [
+    { name: "العطور", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+    { name: "المكياج", image: "/DK-SUB.avif" },
+    { name: "البشرة", image: "/DK-SUB-Skincare_UAE-1.avif" },
+    { name: "الشعر", image: "/DK-SUB.avif" },
+    { name: "الرجال", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+    { name: "الهدايا", image: "/DK-SUB-Skincare_UAE-1.avif" },
+    { name: "الماركات", image: "/DK-SUB-Fragrance_KSA-1.avif" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -92,8 +98,28 @@ const AROUND_THE_WORLD_BRANDS = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Navbar />
+      <NewsletterModal />
+      <FloatingSupport />
+
+      {/* Category Stories (Instagram Style) */}
+      <section className="bg-white py-6 border-b border-gray-50 overflow-hidden" dir="rtl">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+              <div className="flex items-center gap-6 md:gap-10 overflow-x-auto no-scrollbar pb-2">
+                  {CATEGORIES.map((cat, i) => (
+                      <div key={i} className="flex flex-col items-center gap-2 group cursor-pointer shrink-0">
+                          <div className="w-[70px] h-[70px] md:w-[90px] md:h-[90px] rounded-full p-[3px] bg-gradient-to-tr from-[#8c1d3b] via-rose-300 to-[#8c1d3b] group-hover:rotate-180 transition-all duration-700">
+                              <div className="w-full h-full rounded-full border-2 border-white overflow-hidden bg-gray-50">
+                                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                              </div>
+                          </div>
+                          <span className="text-[12px] md:text-[13px] font-black text-gray-900 group-hover:text-[#8c1d3b] transition-colors">{cat.name}</span>
+                      </div>
+                  ))}
+              </div>
+          </div>
+      </section>
 
       {/* Hero Section */}
       <Hero />

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ShoppingBag, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '@/lib/features/cartSlice';
 import { toggleFavorite } from '@/lib/features/favoritesSlice';
@@ -25,11 +25,7 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some(item => item.id === id);
 
-    const handleAddToCart = (e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dispatch(addItem({ id, brand, name, price, image }));
-    };
+
 
     const handleToggleFavorite = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -92,15 +88,6 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                 </div>
             </div>
             </Link>
-            
-            {/* Add to Bag Hover Button */}
-            <button 
-                onClick={handleAddToCart}
-                className="absolute bottom-4 left-4 right-4 bg-[#071424] text-white py-3 rounded-sm font-black text-[12px] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2 z-20"
-            >
-                <ShoppingBag className="w-4 h-4" />
-                إضافة للسلة
-            </button>
         </div>
     );
 };
