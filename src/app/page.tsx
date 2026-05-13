@@ -132,10 +132,8 @@ export default function Home() {
               slidesPerView={2}
               spaceBetween={10}
               className="pt-2 pb-3"
-              breakpointsBase="container"
               breakpoints={{
-                300: { slidesPerView: 2, spaceBetween: 10 },
-                360: { slidesPerView: 3, spaceBetween: 10 },
+                305: { slidesPerView: 3, spaceBetween: 10 },
                 460: { slidesPerView: 4, spaceBetween: 12 },
                 720: { slidesPerView: 5, spaceBetween: 18 },
                 980: { slidesPerView: 7, spaceBetween: 22 },
