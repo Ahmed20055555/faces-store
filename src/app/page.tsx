@@ -111,48 +111,58 @@ export default function Home() {
       <Hero />
 
       {/* Category Stories Slider (Instagram Style) */}
-      <section className="bg-white py-10" dir="rtl">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-12 relative group">
-              <Swiper
-                  modules={[Navigation]}
-                  navigation={{
-                      nextEl: '.cat-prev-btn',
-                      prevEl: '.cat-next-btn',
-                  }}
-                  slidesPerView="auto"
-                  spaceBetween={25}
-                  className="category-swiper !overflow-visible pt-4"
-                  breakpoints={{
-                    320: { spaceBetween: 15 },
-                    768: { spaceBetween: 25 }
-                  }}
-              >
-                  {CATEGORIES.map((cat, i) => (
-                      <SwiperSlide key={i} className="!w-auto">
-                          <div className="flex flex-col items-center gap-3 cursor-pointer pb-2 group/cat">
-                              <div className="relative transition-transform duration-500 ease-out group-hover/cat:scale-110">
-                                  <div className="w-[85px] h-[85px] md:w-[105px] md:h-[105px] rounded-full p-[3px] bg-gradient-to-tr from-[#8c1d3b] via-rose-300 to-[#8c1d3b] shadow-sm">
-                                      <div className="w-full h-full rounded-full border-[3px] border-white overflow-hidden bg-white">
-                                          <img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 group-hover/cat:scale-110" />
-                                      </div>
-                                  </div>
-                              </div>
-                              <span className="text-[13px] md:text-[14px] font-black text-gray-900 group-hover/cat:text-[#8c1d3b] transition-colors tracking-tight text-center">
-                                  {cat.name}
-                              </span>
-                          </div>
-                      </SwiperSlide>
-                  ))}
-              </Swiper>
+      <section className="bg-white py-6 md:py-10 overflow-hidden" dir="rtl">
+        <div className="max-w-[1400px] mx-auto relative">
+          {/* Arrows — sit in fixed left/right gutters */}
+          <button className="cat-next-btn absolute right-0 md:-right-1 top-[42%] -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.18)] flex items-center justify-center text-black transition-all border border-gray-100 hover:bg-black hover:text-white">
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+          <button className="cat-prev-btn absolute left-0 md:-left-1 top-[42%] -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.18)] flex items-center justify-center text-black transition-all border border-gray-100 hover:bg-black hover:text-white">
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
 
-              {/* Navigation Arrows */}
-              <button className="cat-next-btn absolute -right-2 md:-right-5 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all border border-gray-100 hover:bg-black hover:text-white hover:scale-110">
-                  <ChevronRight className="w-6 h-6" />
-              </button>
-              <button className="cat-prev-btn absolute -left-2 md:-left-5 top-[40%] -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white shadow-[0_4px_15px_rgba(0,0,0,0.1)] flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-all border border-gray-100 hover:bg-black hover:text-white hover:scale-110">
-                  <ChevronLeft className="w-6 h-6" />
-              </button>
+          {/* Slider — padded to not hide behind arrows */}
+          <div className="px-10 md:px-14">
+            <Swiper
+              modules={[Navigation]}
+              navigation={{
+                nextEl: '.cat-next-btn',
+                prevEl: '.cat-prev-btn',
+              }}
+              slidesPerView={2}
+              spaceBetween={10}
+              className="pt-2 pb-3"
+              breakpointsBase="container"
+              breakpoints={{
+                300: { slidesPerView: 2, spaceBetween: 10 },
+                360: { slidesPerView: 3, spaceBetween: 10 },
+                460: { slidesPerView: 4, spaceBetween: 12 },
+                720: { slidesPerView: 5, spaceBetween: 18 },
+                980: { slidesPerView: 7, spaceBetween: 22 },
+                1240: { slidesPerView: 8, spaceBetween: 25 },
+              }}
+            >
+              {CATEGORIES.map((cat, i) => (
+                <SwiperSlide key={i}>
+                  <div className="flex flex-col items-center gap-2 cursor-pointer ">
+                    <div className="transition-transform duration-500 ease-out group-hover/cat:scale-105">
+                      <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden bg-white shadow-md border border-gray-100 relative">
+                        <img
+                          src={cat.image}
+                          alt={cat.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover/cat:scale-110"
+                        />
+                      </div>
+                    </div>
+                    <span className="text-[11px] md:text-[13px] font-black text-gray-900 group-hover/cat:text-[#8c1d3b] transition-colors text-center leading-tight w-full">
+                      {cat.name}
+                    </span>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
+        </div>
       </section>
 
       {/* New Arrivals Section */}
@@ -171,8 +181,8 @@ export default function Home() {
             <Swiper
               modules={[Navigation]}
               navigation={{
-                nextEl: ".products-next",
-                prevEl: ".products-prev",
+                nextEl: ".arrivals-next",
+                prevEl: ".arrivals-prev",
               }}
               spaceBetween={12}
               slidesPerView={2}
@@ -190,10 +200,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="products-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="arrivals-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="products-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="arrivals-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
@@ -287,8 +297,8 @@ export default function Home() {
             <Swiper
               modules={[Navigation]}
               navigation={{
-                nextEl: ".gwp-next",
-                prevEl: ".gwp-prev",
+                nextEl: ".new-releases-next",
+                prevEl: ".new-releases-prev",
               }}
               spaceBetween={12}
               slidesPerView={2}
@@ -311,11 +321,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="gwp-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
-              <ArrowRight className="w-4 h-4 md:w-6 md:h-6" />
+            <button className="new-releases-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button className="gwp-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
-              <ArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
+            <button className="new-releases-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
         </div>
@@ -367,8 +377,8 @@ export default function Home() {
             <Swiper
               modules={[Navigation]}
               navigation={{
-                nextEl: ".products-next",
-                prevEl: ".products-prev",
+                nextEl: ".bestseller-next",
+                prevEl: ".bestseller-prev",
               }}
               spaceBetween={12}
               slidesPerView={2}
@@ -386,10 +396,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="products-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="bestseller-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="products-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="bestseller-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
@@ -413,8 +423,8 @@ export default function Home() {
             <Swiper
               modules={[Navigation]}
               navigation={{
-                nextEl: ".gwp-next",
-                prevEl: ".gwp-prev",
+                nextEl: ".services-next",
+                prevEl: ".services-prev",
               }}
               spaceBetween={12}
               slidesPerView={2}
@@ -437,11 +447,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="gwp-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
-              <ArrowRight className="w-4 h-4 md:w-6 md:h-6" />
+            <button className="services-prev absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
-            <button className="gwp-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
-              <ArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
+            <button className="services-next absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#656e77]/90 md:bg-[#656e77] flex items-center justify-center text-white hover:bg-black transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
         </div>
@@ -521,8 +531,8 @@ export default function Home() {
             <Swiper
               modules={[Navigation]}
               navigation={{
-                nextEl: ".products-next",
-                prevEl: ".products-prev",
+                nextEl: ".global-next",
+                prevEl: ".global-prev",
               }}
               spaceBetween={12}
               slidesPerView={2}
@@ -540,10 +550,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="products-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="global-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="products-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="global-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
