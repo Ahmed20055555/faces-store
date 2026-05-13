@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ChevronRight, ChevronLeft, Share, Undo2, ChevronDown, Percent, Gift, Star, Truck, MapPin, Heart } from 'lucide-react';
-import { useDispatch } from 'react-redux';
 import { addItem } from '@/lib/features/cartSlice';
+import { toggleFavorite } from '@/lib/features/favoritesSlice';
+import { RootState } from '@/lib/store';
 import ProductCard from "@/components/ProductCard";
+import { useSelector, useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -27,8 +29,20 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    
     const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.items);
+    const isFavorite = favorites.some(item => item.id === id);
+
+    const handleToggleFavorite = () => {
+        dispatch(toggleFavorite({
+            id: id as string,
+            name: "ماسك غرينات إنتينس",
+            brand: "نارسيسو رودريغيز",
+            price: "1064",
+            image: mainImage
+        }));
+    };
 
     const handleAddToCart = () => {
         dispatch(addItem({
@@ -206,7 +220,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                 إضافة للسلة
                             </button>
                             <button
-                                onClick={() => setIsFavorite(!isFavorite)}
+                                onClick={handleToggleFavorite}
                                 className="w-14 shrink-0 border border-gray-200 flex items-center justify-center rounded-sm hover:bg-gray-50 transition-colors group"
                             >
                                 <Heart

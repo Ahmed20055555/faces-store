@@ -2,9 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
-import { useDispatch } from 'react-redux';
+import { cn } from '@/lib/utils';
+import { ShoppingBag, Heart } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '@/lib/features/cartSlice';
+import { toggleFavorite } from '@/lib/features/favoritesSlice';
+import { RootState } from '@/lib/store';
 
 interface ProductCardProps {
     id: string;
@@ -19,11 +22,19 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
     const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.items);
+    const isFavorite = favorites.some(item => item.id === id);
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(addItem({ id, brand, name, price, image }));
+    };
+
+    const handleToggleFavorite = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(toggleFavorite({ id, brand, name, price, image }));
     };
 
     return (
@@ -33,6 +44,14 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
             {/* Image Area */}
             <div className="relative aspect-[4/5] w-full flex items-center justify-center mb-4">
                 
+                {/* Favorite Button */}
+                <button 
+                    onClick={handleToggleFavorite}
+                    className="absolute top-0 left-0 z-20 p-2 text-gray-400 hover:text-[#8c1d3b] transition-colors"
+                >
+                    <Heart className={cn("w-6 h-6", isFavorite && "fill-[#8c1d3b] text-[#8c1d3b]")} />
+                </button>
+
                 {/* Badges (Top Right in RTL) */}
                 <div className="absolute top-0 right-0 z-10 flex flex-col gap-1 items-start">
                     {isNew && (

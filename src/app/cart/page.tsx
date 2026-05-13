@@ -6,7 +6,8 @@ import Footer from "@/components/Footer";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { removeItem, updateQuantity } from '@/lib/features/cartSlice';
-import { ShoppingBag, Trash2, Minus, Plus, Gift, Tag, ChevronDown, CheckCircle2, ShieldCheck, HelpCircle } from 'lucide-react';
+import { ShoppingBag, Trash2, Minus, Plus, Gift, Tag, ChevronDown, CheckCircle2, ShieldCheck, HelpCircle, ChevronRight, ChevronLeft, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import {
     Accordion,
     AccordionContent,
@@ -14,6 +15,10 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from '@/lib/utils';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 export default function CartPage() {
     const dispatch = useDispatch();
@@ -25,13 +30,19 @@ export default function CartPage() {
         <main className="min-h-screen bg-[#faf9f8]" dir="rtl">
             <Navbar isSticky={true} />
 
-            <div className="max-w-[1400px] mx-auto px-4 md:px-12 py-8 font-sans">
-                <h1 className="text-[28px] md:text-[32px] font-black text-gray-900 mb-8">عربتك ({totalItems})</h1>
+            <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 font-sans">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <h1 className="text-[32px] md:text-[40px] font-black text-gray-900">عربتك ({totalItems})</h1>
+                    <Link href="/" className="flex items-center gap-2 text-[15px] font-bold text-[#8c1d3b] hover:underline transition-all">
+                        <ChevronRight className="w-4 h-4" />
+                        <span>مواصلة التسوق</span>
+                    </Link>
+                </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                     
-                    {/* Right Column: Items */}
-                    <div className="flex-1 w-full flex flex-col gap-4">
+                    {/* Right Column: Items (Main Content - Right in RTL) */}
+                    <div className="flex-1 w-full flex flex-col gap-6 order-1">
                         {items.length === 0 ? (
                             <div className="bg-white p-20 rounded-sm border border-gray-100 flex flex-col items-center gap-6 shadow-sm">
                                 <ShoppingBag className="w-24 h-24 text-gray-100" strokeWidth={1} />
@@ -44,18 +55,21 @@ export default function CartPage() {
                                 <div className="flex flex-col gap-4">
                                     {items.map((item) => (
                                         <div key={item.id} className="bg-white p-6 rounded-sm border border-gray-100 shadow-sm relative flex flex-col md:flex-row gap-6">
-                                            <div className="w-full md:w-40 h-48 bg-gray-50 rounded-sm p-4 shrink-0">
+                                            <Link href={`/product/${item.id}`} className="w-full md:w-40 h-48 bg-gray-50 rounded-sm p-4 shrink-0 block">
                                                 <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
-                                            </div>
+                                            </Link>
                                             
                                             <div className="flex-1 flex flex-col justify-between">
                                                 <div className="flex justify-between items-start">
-                                                    <div className="text-right">
-                                                        <span className="text-[14px] font-black text-gray-900 block mb-1">{item.brand}</span>
-                                                        <h3 className="text-[16px] font-bold text-gray-600 mb-2 leading-tight">{item.name}</h3>
+                                                    <Link href={`/product/${item.id}`} className="text-right hover:opacity-80 transition-opacity flex-1">
+                                                        <span className="text-[15px] font-black text-gray-900 block mb-1">{item.brand}</span>
+                                                        <h3 className="text-[17px] font-bold text-gray-600 mb-2 leading-tight">{item.name}</h3>
                                                         <p className="text-[13px] text-gray-400">الحجم: 100ml</p>
+                                                    </Link>
+                                                    <div className="text-left flex flex-col items-end">
+                                                        <span className="text-[20px] font-black text-gray-900 whitespace-nowrap">{item.price} ريال</span>
+                                                        <span className="text-[11px] text-gray-400 font-bold mt-1">تم بيعها من قبل فيسز</span>
                                                     </div>
-                                                    <span className="text-[18px] font-black text-gray-900">{item.price} ريال</span>
                                                 </div>
 
                                                 <div className="flex flex-wrap items-center justify-between mt-6 gap-4">
@@ -86,7 +100,6 @@ export default function CartPage() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="absolute top-4 left-4 text-[11px] text-gray-400 font-bold">تم بيعها من قبل فيسز</div>
                                         </div>
                                     ))}
                                 </div>
@@ -111,7 +124,7 @@ export default function CartPage() {
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                                         {[
                                             { brand: "جيرلان", name: "مجاناً جيرلان أبسولو", image: "/001717728336_1.jpg" },
                                             { brand: "إيسي مياكي", name: "مجاناً ايسي مياكي عطر", image: "/001717728336_1.jpg" },
@@ -121,11 +134,11 @@ export default function CartPage() {
                                             { brand: "فالنتينو", name: "مجاناً عطر دونا بورن ريوايت", image: "/001717728336_1.jpg" },
                                         ].map((gift, idx) => (
                                             <div key={idx} className="flex flex-col items-center gap-3 text-center group">
-                                                <div className="aspect-[3/4] w-full bg-gray-50 rounded-sm p-4 overflow-hidden relative">
+                                                <div className="aspect-square w-full bg-gray-50 rounded-sm p-4 overflow-hidden relative">
                                                     <img src={gift.image} alt={gift.name} className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform" />
                                                 </div>
                                                 <p className="text-[11px] font-bold text-gray-600 line-clamp-2 min-h-[32px] leading-tight">{gift.name}</p>
-                                                <button className="w-full border border-black py-2 text-[14px] font-black rounded-sm hover:bg-gray-50 transition-colors">أضف</button>
+                                                <button className="w-full border border-black py-2 text-[13px] font-black rounded-sm hover:bg-black hover:text-white transition-all">أضف</button>
                                             </div>
                                         ))}
                                     </div>
@@ -134,9 +147,9 @@ export default function CartPage() {
                         )}
                     </div>
 
-                    {/* Left Column: Sidebar Summary */}
-                    <div className="w-full lg:w-[400px] shrink-0 flex flex-col gap-4">
-                        <div className="bg-white rounded-sm border border-gray-100 shadow-sm overflow-hidden">
+                    {/* Left Column: Sidebar Summary (Secondary Content - Left in RTL) */}
+                    <div className="w-full lg:w-[380px] shrink-0 flex flex-col gap-6 order-2">
+                        <div className="bg-white rounded-sm border border-gray-200 overflow-hidden shadow-sm">
                             <Accordion className="w-full">
                                 <AccordionItem value="promo" className="border-b">
                                     <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-gray-900">
@@ -156,7 +169,7 @@ export default function CartPage() {
                                 <AccordionItem value="qitaf" className="border-b">
                                     <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-gray-900">
                                          <div className="flex items-center gap-3">
-                                            <img src="/qitaf-logo.png" alt="Qitaf" className="h-6 w-auto grayscale" />
+                                            <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[8px] font-bold text-[#8c1d3b]">FACES</div>
                                             <span>قطاف</span>
                                         </div>
                                     </AccordionTrigger>

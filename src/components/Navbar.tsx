@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, Menu, MapPin, Home } from 'lucide-react';
+import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, Menu, MapPin, Home, Heart } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const { items } = useSelector((state: RootState) => state.cart);
+    const favorites = useSelector((state: RootState) => state.favorites.items);
     const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
@@ -111,6 +112,12 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 <span className="absolute -top-1 -right-1 bg-[#8c1d3b] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
                                     {itemCount}
                                 </span>
+                            )}
+                        </button>
+                        <button onClick={() => router.push('/favorites')} className="p-1 relative">
+                            <Heart className="w-6 h-6 md:w-[26px] md:h-[26px]" strokeWidth={1.5} />
+                            {favorites.length > 0 && (
+                                <span className="absolute top-0 right-0 bg-[#8c1d3b] w-2.5 h-2.5 rounded-full border-2 border-white"></span>
                             )}
                         </button>
                         <button className="hidden md:block">
