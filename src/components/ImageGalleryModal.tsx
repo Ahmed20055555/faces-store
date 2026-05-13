@@ -57,7 +57,7 @@ export default function ImageGalleryModal({
   onClose,
 }: ImageGalleryModalProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const [isZoomed, setIsZoomed]         = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
   const resetRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
@@ -167,11 +167,10 @@ export default function ImageGalleryModal({
                   setIsZoomed(false);
                   setCurrentIndex(idx);
                 }}
-                className={`w-16 h-20 shrink-0 rounded-sm overflow-hidden transition-all bg-white flex items-center justify-center p-1 ${
-                  currentIndex === idx
+                className={`w-16 h-20 shrink-0 rounded-sm overflow-hidden transition-all bg-white flex items-center justify-center p-1 ${currentIndex === idx
                     ? "border border-black shadow-sm"
                     : "border border-transparent opacity-60 hover:opacity-100"
-                }`}
+                  }`}
               >
                 <img
                   src={img}

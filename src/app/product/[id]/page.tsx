@@ -10,10 +10,10 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from "@/components/ui/accordion";
 import ReviewModal from "@/components/ReviewModal";
 import ImageGalleryModal from "@/components/ImageGalleryModal";
@@ -21,7 +21,7 @@ import ImageGalleryModal from "@/components/ImageGalleryModal";
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = React.use(params);
     const id = resolvedParams.id;
-    
+
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -60,23 +60,23 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
     const currentProducts =
         activeTab === 'may-like' ? MAY_LIKE_PRODUCTS :
-        activeTab === 'similar' ? SIMILAR_PRODUCTS :
-        RECENTLY_VIEWED_PRODUCTS;
+            activeTab === 'similar' ? SIMILAR_PRODUCTS :
+                RECENTLY_VIEWED_PRODUCTS;
 
     return (
         <main className="min-h-screen bg-white" dir="rtl">
             <Navbar isSticky={false} />
 
             {/* Image Gallery Modal */}
-            <ImageGalleryModal 
-                images={thumbnails} 
-                initialIndex={currentImageIndex} 
-                isOpen={isGalleryOpen} 
-                onClose={() => setIsGalleryOpen(false)} 
+            <ImageGalleryModal
+                images={thumbnails}
+                initialIndex={currentImageIndex}
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
             />
 
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-4 md:py-8 font-cairo">
-                
+
                 {/* Breadcrumbs */}
                 <nav className="flex items-center gap-2 text-[13px] text-gray-500 mb-6 md:mb-8">
                     <a href="/" className="hover:text-black">الرئيسية وجوه</a>
@@ -87,13 +87,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </nav>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
-                    
+
                     {/* Left Side: Images */}
                     <div className="flex flex-col-reverse md:flex-row gap-4">
                         {/* Thumbnails */}
                         <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
                             {thumbnails.map((img, idx) => (
-                                <button 
+                                <button
                                     key={idx}
                                     onClick={() => setMainImage(img)}
                                     className={`w-20 h-24 shrink-0 border ${mainImage === img ? 'border-black' : 'border-gray-200'} rounded-sm overflow-hidden flex items-center justify-center p-1`}
@@ -104,21 +104,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         </div>
 
                         {/* Main Image */}
-                        <button 
+                        <button
                             onClick={() => setIsGalleryOpen(true)}
                             className="flex-1 border border-gray-100 rounded-sm p-4 flex items-center justify-center min-h-[320px] md:min-h-[420px] max-h-[420px] cursor-zoom-in group"
                         >
-                            <img 
-                                src={mainImage} 
-                                alt="Main Product" 
-                                className="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]" 
+                            <img
+                                src={mainImage}
+                                alt="Main Product"
+                                className="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
                             />
                         </button>
                     </div>
 
                     {/* Right Side: Product Details */}
                     <div className="flex flex-col">
-                        
+
                         {/* Header: Badges & Share */}
                         <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         {/* Free Gifts Accordion */}
                         <div className="mb-4 border-t border-gray-100 pt-6">
                             <h3 className="text-[16px] font-black text-gray-900 mb-4 text-right">هدايا مجانية مع هذا المنتج</h3>
-                            
+
                             <Accordion dir="rtl" className="flex flex-col gap-0 border border-gray-100 rounded-sm">
                                 {/* Promo 1 */}
                                 <AccordionItem value="promo-1" className="border-b border-gray-100">
@@ -208,7 +208,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                         الحد الأدنى للإنفاق 200 ريال. يسري العرض على المنتجات غير المخفضة فقط. تطبق الشروط والأحكام.
                                     </AccordionContent>
                                 </AccordionItem>
-                                
+
                                 {/* Promo 2 */}
                                 <AccordionItem value="promo-2" className="border-b border-gray-100">
                                     <AccordionTrigger className="hover:no-underline p-4 hover:bg-gray-50 group [&[data-state=open]>svg]:rotate-180">
@@ -273,7 +273,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             <div className="w-full bg-[#faf9f8] py-12 border-t border-gray-100 z-1000">
                 <div className="max-w-[1400px] mx-auto px-4 md:px-6 font-cairo flex flex-col items-start">
                     <h3 className="text-[20px] font-black text-gray-900 mb-4">التقييمات والمراجعات</h3>
-                    
+
                     <div className="flex items-center gap-2 mb-6">
                         <div className="flex gap-1 text-gray-300">
                             <Star className="w-4 h-4 fill-current" />
@@ -284,7 +284,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         </div>
                         <span className="text-[13px] text-gray-500">كن أول من يقيّم هذا المنتج</span>
                     </div>
-                        
+
                     <ReviewModal />
 
                 </div>
@@ -336,12 +336,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         spaceBetween={12}
                         slidesPerView={2}
                         breakpoints={{
-                            480:  { slidesPerView: 2.5, spaceBetween: 15 },
-                            768:  { slidesPerView: 3, spaceBetween: 20 },
+                            480: { slidesPerView: 2.5, spaceBetween: 15 },
+                            768: { slidesPerView: 3, spaceBetween: 20 },
                             1024: { slidesPerView: 4, spaceBetween: 20 },
                             1280: { slidesPerView: 5, spaceBetween: 20 },
                         }}
-                        className="!px-1"  
+                        className="!px-1"
                     >
                         {currentProducts.map((product, index) => (
                             <SwiperSlide key={`${activeTab}-${index}`}>
