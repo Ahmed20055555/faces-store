@@ -11,6 +11,6 @@ const MapComponent = dynamic(() => import('./MapComponent'), {
   )
 });
 
-export default function MapWrapper() {
-  return <MapComponent />;
+export default function MapWrapper({ hideSidebar = false }: { hideSidebar?: boolean }) {
+  return <MapComponent hideSidebar={hideSidebar} />;
 }

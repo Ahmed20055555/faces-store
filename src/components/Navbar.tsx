@@ -141,6 +141,8 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             <li onClick={() => router.push('/about')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">من نحن</li>
                             <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الأكثر مبيعاً</li>
                             <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">وصل حديثاً</li>
+                            <li onClick={() => router.push('/dark-room')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الغرفة المظلمة</li>
+                            <li onClick={() => router.push('/offers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">العروض</li>
                             <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">اكتشف عطرك </li>
                             <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">باقات الهدايا</li>
                             <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">هدية لمن؟ </li>

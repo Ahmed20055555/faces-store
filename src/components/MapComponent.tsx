@@ -63,7 +63,13 @@ function MapController({ center, zoom }: { center: [number, number] | null, zoom
   return null;
 }
 
-export default function MapComponent({ branches = defaultBranches }: { branches?: Branch[] }) {
+export default function MapComponent({ 
+  branches = defaultBranches, 
+  hideSidebar = false 
+}: { 
+  branches?: Branch[], 
+  hideSidebar?: boolean 
+}) {
   const [activeBranch, setActiveBranch] = useState<[number, number] | null>(null);
   const markerRefs = useRef<{ [key: number]: any }>({});
 
@@ -78,36 +84,38 @@ export default function MapComponent({ branches = defaultBranches }: { branches?
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-full w-full bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100" style={{ minHeight: '600px' }}>
+    <div className="flex flex-col md:flex-row h-full w-full bg-white overflow-hidden shadow-sm border border-gray-100" style={{ minHeight: hideSidebar ? '450px' : '600px' }}>
       {/* Sidebar List */}
-      <div className="w-full md:w-1/3 bg-gray-50 flex flex-col h-[300px] md:h-[600px] border-l border-gray-200">
-        <div className="p-4 bg-white border-b border-gray-200">
-          <h2 className="text-xl font-bold text-[#2B3440] font-tajawal text-right">قائمة الفروع ({branches.length})</h2>
-        </div>
-        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-          <div className="flex flex-col gap-3">
-            {branches.map((branch) => (
-              <div 
-                key={branch.id} 
-                onClick={() => {
-                  setActiveBranch([branch.lat, branch.lng]);
-                  const marker = markerRefs.current[branch.id];
-                  if (marker) {
-                    marker.openPopup();
-                  }
-                }}
-                className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-[#8c1d3b] hover:shadow-md transition-all text-right group"
-              >
-                <h3 className="font-bold text-[#2B3440] font-tajawal group-hover:text-[#8c1d3b] transition-colors">{branch.name}</h3>
-                {branch.address && <p className="text-xs text-gray-500 mt-2 font-tajawal leading-relaxed">{branch.address}</p>}
-              </div>
-            ))}
+      {!hideSidebar && (
+        <div className="w-full md:w-1/3 bg-gray-50 flex flex-col h-[300px] md:h-[600px] border-l border-gray-200">
+          <div className="p-4 bg-white border-b border-gray-200">
+            <h2 className="text-xl font-bold text-[#2B3440] font-tajawal text-right">قائمة الفروع ({branches.length})</h2>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+            <div className="flex flex-col gap-3">
+              {branches.map((branch) => (
+                <div 
+                  key={branch.id} 
+                  onClick={() => {
+                    setActiveBranch([branch.lat, branch.lng]);
+                    const marker = markerRefs.current[branch.id];
+                    if (marker) {
+                      marker.openPopup();
+                    }
+                  }}
+                  className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm cursor-pointer hover:border-[#8c1d3b] hover:shadow-md transition-all text-right group"
+                >
+                  <h3 className="font-bold text-[#2B3440] font-tajawal group-hover:text-[#8c1d3b] transition-colors">{branch.name}</h3>
+                  {branch.address && <p className="text-xs text-gray-500 mt-2 font-tajawal leading-relaxed">{branch.address}</p>}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Map Area */}
-      <div className="w-full md:w-2/3 h-[400px] md:h-[600px] relative z-10">
+      <div className={`w-full ${hideSidebar ? 'md:w-full' : 'md:w-2/3'} h-full relative z-10`}>
         <MapContainer 
           center={[24.7136, 46.6753]} 
           zoom={5} 

@@ -19,8 +19,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function CartPage() {
+    const router = useRouter();
     const dispatch = useDispatch();
     const { items } = useSelector((state: RootState) => state.cart);
     const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -213,7 +215,10 @@ export default function CartPage() {
                                     </div>
                                 </div>
 
-                                <button className="w-full bg-[#8c1d3b] text-white py-4 mt-8 rounded-sm font-black text-[18px] flex items-center justify-center gap-3 hover:bg-[#7a1934] transition-all shadow-lg shadow-[#8c1d3b]/10">
+                                <button 
+                                    onClick={() => router.push('/checkout/info')}
+                                    className="w-full bg-[#8c1d3b] text-white py-4 mt-8 rounded-sm font-black text-[18px] flex items-center justify-center gap-3 hover:bg-[#7a1934] transition-all shadow-lg shadow-[#8c1d3b]/10"
+                                >
                                     <ShieldCheck className="w-6 h-6" />
                                     الدفع الآمن
                                 </button>

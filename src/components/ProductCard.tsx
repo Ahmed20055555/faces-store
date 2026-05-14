@@ -18,9 +18,11 @@ interface ProductCardProps {
     isNew?: boolean;
     hasGift?: boolean;
     hasFrom?: boolean;
+    oldPrice?: string;
+    discountBadge?: string;
 }
 
-const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true }: ProductCardProps) => {
+const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true, oldPrice, discountBadge }: ProductCardProps) => {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some(item => item.id === id);
@@ -56,6 +58,11 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                                 هدايا
                             </span>
                         )}
+                        {discountBadge && (
+                            <span className="bg-[#8c1d3b] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
+                                {discountBadge}
+                            </span>
+                        )}
                     </div>
 
                     {/* Product Image */}
@@ -75,12 +82,17 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                         {name}
                     </p>
                     <div className="flex items-center justify-start gap-1 mt-auto">
-                        <span className="font-bold text-[14px] md:text-[16px] text-[#0f172a] tracking-tight">
+                        <span className={cn("font-bold text-[14px] md:text-[16px] tracking-tight", oldPrice ? "text-[#8c1d3b]" : "text-[#0f172a]")}>
                             {price}
                         </span>
-                        <span className="font-bold text-[13px] text-[#0f172a]">
+                        <span className={cn("font-bold text-[13px]", oldPrice ? "text-[#8c1d3b]" : "text-[#0f172a]")}>
                             ريال
                         </span>
+                        {oldPrice && (
+                            <span className="text-[12px] md:text-[13px] text-gray-400 line-through mr-2">
+                                {oldPrice} ريال
+                            </span>
+                        )}
                     </div>
                 </div>
             </Link>
