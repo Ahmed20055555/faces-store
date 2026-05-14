@@ -96,7 +96,7 @@ export default function ScentQuizPage() {
     <main className="min-h-screen bg-white" dir="rtl">
       <Navbar />
       
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-8 pb-8 px-4">
         <div className="max-w-2xl mx-auto">
           {!showResult ? (
             <div className="text-center">
@@ -149,23 +149,23 @@ export default function ScentQuizPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center space-y-12"
+              className="text-center space-y-8 md:space-y-12"
             >
-              <div className="bg-[#8c1d3b] text-white p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                   <Sparkles className="w-32 h-32" />
+              <div className="bg-[#8c1d3b] text-white p-6 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 md:p-8 opacity-10">
+                   <Sparkles className="w-16 h-16 md:w-32 md:h-32" />
                 </div>
-                <h4 className="text-sm font-black uppercase tracking-widest mb-4 opacity-80">شخصيتك العطرية هي:</h4>
-                <h2 className="text-5xl md:text-6xl font-black mb-8">{RESULTS[getWinnerType()].title}</h2>
-                <p className="text-lg leading-relaxed opacity-90 font-medium">
+                <h4 className="text-[10px] md:text-sm font-black uppercase tracking-widest mb-3 md:mb-4 opacity-80">شخصيتك العطرية هي:</h4>
+                <h2 className="text-3xl md:text-6xl font-black mb-4 md:mb-8 leading-tight">{RESULTS[getWinnerType()].title}</h2>
+                <p className="text-sm md:text-lg leading-relaxed opacity-95 font-medium px-2 md:px-0">
                   {RESULTS[getWinnerType()].desc}
                 </p>
                 
-                <div className="mt-12 flex flex-wrap justify-center gap-4">
-                   <button className="flex items-center gap-2 bg-white text-[#8c1d3b] px-6 py-3 rounded-full font-black text-sm hover:bg-gray-100 transition-all">
+                <div className="mt-8 md:mt-12 flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+                   <button className="flex items-center justify-center gap-2 bg-white text-[#8c1d3b] px-6 py-3.5 rounded-full font-black text-xs md:text-sm hover:bg-gray-100 transition-all shadow-lg">
                       <Share2 className="w-4 h-4" /> شارك النتيجة
                    </button>
-                   <button onClick={restart} className="flex items-center gap-2 bg-black/20 text-white px-6 py-3 rounded-full font-black text-sm hover:bg-black/30 transition-all">
+                   <button onClick={restart} className="flex items-center justify-center gap-2 bg-black/20 text-white px-6 py-3.5 rounded-full font-black text-xs md:text-sm hover:bg-black/30 transition-all border border-white/10">
                       <RefreshCw className="w-4 h-4" /> إعادة الاختبار
                    </button>
                 </div>

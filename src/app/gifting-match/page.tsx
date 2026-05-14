@@ -55,7 +55,7 @@ export default function GiftingMatchPage() {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(selected.message);
+    navigator.clipboard.writeText(selected.message || "");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -76,20 +76,20 @@ export default function GiftingMatchPage() {
             <p className="text-gray-500 text-lg font-medium">اختر الشخص، وسنتكفل نحن باختيار العطر والكلمات.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-12 md:mb-20">
             {RECIPIENTS.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setSelected(item)}
-                className={`p-8 rounded-[2.5rem] border-2 transition-all duration-300 text-center space-y-4 ${selected.id === item.id
+                className={`p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-2 transition-all duration-300 text-center space-y-2 md:space-y-4 ${selected.id === item.id
                     ? "bg-[#8c1d3b] border-[#8c1d3b] text-white shadow-2xl scale-105"
                     : "bg-white border-gray-50 text-gray-400 hover:border-[#8c1d3b]/20 hover:text-gray-900"
                   }`}
               >
-                <item.icon className={`w-10 h-10 mx-auto ${selected.id === item.id ? "animate-pulse" : ""}`} />
+                <item.icon className={`w-6 h-6 md:w-10 md:h-10 mx-auto ${selected.id === item.id ? "animate-pulse" : ""}`} />
                 <div>
-                  <h3 className="text-lg font-black">{item.label}</h3>
-                  <p className={`text-[10px] font-bold ${selected.id === item.id ? "text-white/70" : "text-gray-400"}`}>{item.desc}</p>
+                  <h3 className="text-sm md:text-lg font-black">{item.label}</h3>
+                  <p className={`text-[8px] md:text-[10px] font-bold ${selected.id === item.id ? "text-white/70" : "text-gray-400"}`}>{item.desc}</p>
                 </div>
               </button>
             ))}
@@ -101,16 +101,14 @@ export default function GiftingMatchPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start"
             >
-
-
-              <div className="lg:col-span-8 space-y-8">
-                <div className="flex justify-between items-center px-4">
-                  <h3 className="text-2xl font-black text-gray-900">أفضل الترشيحات لـ {selected.label}</h3>
-                  <span className="text-[#8c1d3b] font-black text-xs uppercase tracking-tighter">Verified Gift Choice</span>
+              <div className="lg:col-span-12 space-y-6 md:space-y-8">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-2">
+                  <h3 className="text-xl md:text-2xl font-black text-gray-900 text-center md:text-right">أفضل الترشيحات لـ {selected.label}</h3>
+                  <span className="text-[#8c1d3b] font-black text-[10px] md:text-xs uppercase tracking-tighter bg-[#8c1d3b]/5 px-3 py-1 rounded-full">Verified Gift Choice</span>
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                   {selected.products.map((p) => (
                     <ProductCard key={p.id} {...p} />
                   ))}

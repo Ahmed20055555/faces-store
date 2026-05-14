@@ -98,13 +98,13 @@ export default function WardrobePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8"
             >
               {WARDROBE_PRODUCTS[activeStyle].map((product: any) => (
-                <div key={product.id} className="relative group">
-                    <div className="absolute bottom-4 right-4 z-10 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-gray-100 min-w-[90px] flex items-center justify-between gap-3">
-                       <span className="text-[10px] font-black text-gray-900 uppercase tracking-tighter">Perfect Match</span>
-                       {React.createElement(STYLES.find(s => s.id === activeStyle)!.icon, { className: "w-3.5 h-3.5 text-[#8c1d3b]" })}
+                <div key={product.id} className="relative group flex flex-col h-full">
+                    <div className="absolute top-2 right-2 z-30 bg-white/95 backdrop-blur-md px-2 py-1 rounded-lg shadow-sm border border-[#8c1d3b]/10 flex items-center gap-1.5 md:top-4 md:right-4 md:px-3 md:py-1.5 md:rounded-full">
+                       <span className="text-[8px] md:text-[10px] font-black text-[#8c1d3b] uppercase tracking-tighter">Perfect Match</span>
+                       {React.createElement(STYLES.find(s => s.id === activeStyle)!.icon, { className: "w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-[#8c1d3b]" })}
                     </div>
                    <ProductCard {...product} />
                 </div>

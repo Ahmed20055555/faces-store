@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Sparkles, Droplets, MapPin, Star, History, ChevronDown } from "lucide-react";
+import { Sparkles, Droplets, MapPin, Star, History, ChevronDown, Navigation } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -46,47 +46,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ─── Our Essence (Philosophy) ─── */}
-      <section className="py-8 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
-            <div className="text-right space-y-8">
-              <div className="space-y-4">
-                <span className="text-[#8c1d3b] font-black tracking-widest text-sm uppercase">جوهرنا</span>
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">حيث يلتقي الفن <br/> بالعطر</h2>
-              </div>
-              <p className="text-gray-500 text-lg leading-loose font-medium">
-                تأسست محلاتنا على يد خبراء يمتلكون "الأنف" القادر على تمييز أندر المكونات. نحن نختار شركاءنا من حقول اللافندر في فرنسا إلى غابات العود في كمبوديا، لنضمن لك تجربة عطرية لا تُنسى.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-10 pt-8 border-t border-gray-100">
-                <div>
-                  <h4 className="text-4xl font-black text-[#8c1d3b] mb-2">+150</h4>
-                  <p className="text-sm font-black text-gray-400 uppercase tracking-tighter">علامة تجارية حصرية</p>
-                </div>
-                <div>
-                  <h4 className="text-4xl font-black text-[#8c1d3b] mb-2">+25</h4>
-                  <p className="text-sm font-black text-gray-400 uppercase tracking-tighter">عاماً من الخبرة</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] relative z-10">
-                <img 
-                  src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=800" 
-                  alt="Perfume Craft" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                />
-              </div>
-              <div className="absolute -top-10 -right-10 w-full h-full bg-[#8c1d3b]/5 rounded-[4rem] -z-10 translate-x-12 translate-y-12"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── The Values (Minimalist Cards) ─── */}
-      <section className="py-8 bg-gray-50 rounded-[5rem] mx-4 md:mx-12">
+      {/* <section className="py-8 bg-gray-50 rounded-[5rem] mx-4 md:mx-12">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
           <div className="text-center mb-24 space-y-4">
              <h2 className="text-3xl md:text-5xl font-black text-gray-900">قيمنا الراسخة</h2>
@@ -109,27 +70,62 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* ─── Physical Stores (Visual Experience) ─── */}
-      <section className="py-8 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12 text-center mb-20">
-           <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6">تفضل بزيارة عالمنا</h2>
-           <p className="text-gray-500 max-w-2xl mx-auto font-medium text-lg">محلاتنا ليست مجرد نقاط بيع، بل هي معارض فنية صُممت لتمنحك رحلة حسية فريدة من نوعها.</p>
-        </div>
-        
-        <div className="flex gap-8 px-4 overflow-x-auto no-scrollbar pb-10">
-          {[
-            "/IMLDI_BANNER_750x714.avif",
-            "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=800",
-            "https://images.unsplash.com/photo-1615526675159-e248c3021d3f?auto=format&fit=crop&q=80&w=800"
-          ].map((img, i) => (
-            <div key={i} className="min-w-[350px] md:min-w-[500px] h-[400px] rounded-[3rem] overflow-hidden relative group">
-              <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all"></div>
+      {/* ─── Luxury Showrooms Section (Branches) ─── */}
+      <section className="py-16 md:py-24 bg-white" id="branches">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+          <div className="text-center mb-12 md:mb-20 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8c1d3b]/5 text-[#8c1d3b] text-[10px] md:text-xs font-black uppercase tracking-widest border border-[#8c1d3b]/10">
+              <MapPin className="w-3.5 h-3.5" /> فروعنا حول المملكة
             </div>
-          ))}
+            <h2 className="text-3xl md:text-6xl font-black text-gray-900 leading-tight">تفضل بزيارة عالمنا</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm md:text-lg font-medium leading-relaxed">
+              محلاتنا ليست مجرد نقاط بيع، بل هي معارض فنية صُممت لتمنحك رحلة حسية فريدة من نوعها.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+            {STORES.map((store) => (
+              <div 
+                key={store.id} 
+                className="group relative bg-gray-50 rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-10 border border-transparent hover:border-[#8c1d3b]/20 hover:bg-white hover:shadow-2xl transition-all duration-500 overflow-hidden"
+              >
+                <div className="absolute -top-10 -right-10 w-24 h-24 md:w-32 md:h-32 bg-[#8c1d3b]/5 rounded-full blur-2xl md:blur-3xl group-hover:bg-[#8c1d3b]/10 transition-all"></div>
+                
+                <div className="relative z-10 space-y-3 md:space-y-6">
+                  <div className="flex justify-between items-start">
+                    <div className="w-8 h-8 md:w-14 md:h-14 bg-white rounded-xl md:rounded-2xl flex items-center justify-center shadow-sm text-[#8c1d3b] group-hover:bg-[#8c1d3b] group-hover:text-white transition-all duration-500">
+                      <MapPin className="w-4 h-4 md:w-6 md:h-6" />
+                    </div>
+                    <span className="text-[8px] md:text-[10px] font-black text-gray-300 tracking-widest uppercase">#{store.id}</span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm md:text-2xl font-black text-gray-900 mb-1 group-hover:text-[#8c1d3b] transition-colors leading-tight">{store.name}</h3>
+                    <p className="text-[10px] md:text-sm text-gray-500 font-bold leading-relaxed min-h-[30px] md:min-h-[48px] line-clamp-2 md:line-clamp-none">
+                      {store.address}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 md:pt-6 border-t border-gray-100 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+                    <div className="text-right hidden md:block">
+                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">المشرف</p>
+                       <p className="text-sm font-black text-gray-700">{store.supervisor}</p>
+                    </div>
+                    <a 
+                      href={store.mapLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-white border border-gray-200 px-3 md:px-5 py-2 md:py-2.5 rounded-full text-[9px] md:text-xs font-black text-gray-900 hover:bg-black hover:text-white transition-all shadow-sm"
+                    >
+                      الموقع <Navigation className="w-3 md:w-3.5 h-3 md:h-3.5" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -152,3 +148,25 @@ export default function AboutPage() {
     </main>
   );
 }
+
+const STORES = [
+  { id: "101", name: "حفر الباطن", supervisor: "رمزي الصادق", address: "حفر الباطن، حي البلدية، طريق الملك فيصل", mapLink: "https://maps.app.goo.gl/VuwReHUBDeJUfMS59" },
+  { id: "102", name: "تبوك الموسى", supervisor: "ماجد المجاهد", address: "تبوك، حي العليا", mapLink: "https://maps.app.goo.gl/3jw5Zjk11caTP2fM8" },
+  { id: "103", name: "تبوك ميلاغرو", supervisor: "نادر جسار", address: "تبوك، حي المطار، العليا الجديدة", mapLink: "https://maps.app.goo.gl/aLU1jdBFuYGRnjsi9" },
+  { id: "105", name: "تبوك بارك", supervisor: "محمد دهمش", address: "تبوك، مول بارك", mapLink: "https://maps.app.goo.gl/vDpEnRMvK67JaeDCA" },
+  { id: "106", name: "حائل الأمير سلطان", supervisor: "وسيم", address: "حائل، حي الوسيطاء، طريق الأمير سلطان", mapLink: "https://maps.app.goo.gl/Td7zfySRDwzbmin77" },
+  { id: "107", name: "حائل سكوير", supervisor: "وهيب", address: "حائل، حي الوسيطاء، مجمع اسكوير", mapLink: "https://maps.app.goo.gl/gQgHfW3P8hAV4dfX9" },
+  { id: "109", name: "الرياض أطياف مول", supervisor: "وليد محمد", address: "الرياض، حي اليرموك، اليرموك أطياف مول", mapLink: "https://maps.app.goo.gl/aeDDYczaFm6cZUHY7" },
+  { id: "110", name: "نجران رويال سنتر", supervisor: "الجود الهمامي", address: "نجران، رويال سنتر، طريق الملك عبد العزيز", mapLink: "https://maps.app.goo.gl/bD2932B1Fm7i8ALy8" },
+  { id: "111", name: "جيزان كادي مول", supervisor: "فارس", address: "جازان، حي الشاطئ، كادي مول", mapLink: "https://maps.app.goo.gl/F5DubFCuwVkrcyi9" },
+  { id: "112", name: "خميس مشيط", supervisor: "محمد طربوش", address: "خميس مشيط، حي أم سرار، طريق المطار", mapLink: "https://maps.app.goo.gl/NEgfpaa9JGTXAajt5" },
+  { id: "113", name: "نجران الخالدية", supervisor: "بندر جسار", address: "نجران، حي الخالدية، طريق الملك عبد العزيز", mapLink: "https://maps.app.goo.gl/kfc1bfCQPaWfwhFy5" },
+  { id: "114", name: "نجران الفيصلية", supervisor: "بندر منتصر", address: "نجران، حي الفيصلية، طريق الملك عبد العزيز", mapLink: "https://maps.app.goo.gl/fbFiQANPeika1z77" },
+  { id: "115", name: "نجران العزام مول", supervisor: "فراس", address: "نجران، حي الفيصلية، طريق الملك عبد العزيز", mapLink: "https://maps.app.goo.gl/uJLmpBs47ha9cLir9" },
+  { id: "119", name: "حائل النقرة", supervisor: "محمد وليد", address: "حائل، حي النقرة، طريق فهد العلي", mapLink: "https://maps.app.goo.gl/4Y24m5u1CpaMHKV76" },
+  { id: "121", name: "نجران بارك", supervisor: "محمد المساواة", address: "نجران، حي الأثيبة، طريق الملك عبد العزيز", mapLink: "https://maps.app.goo.gl/CwC4MjfvussAHHAl9" },
+  { id: "122", name: "حفر الباطن (2)", supervisor: "وضحي البديري", address: "حفر الباطن، حي البلدية، طريق الملك فيصل", mapLink: "https://maps.app.goo.gl/JUWPi3wiQJwqXAh9" },
+  { id: "123", name: "حائل زون", supervisor: "محمد سيف", address: "حائل، حي النقرة، مجمع حائل زون", mapLink: "https://maps.app.goo.gl/VafzoX3zULox183u8" },
+  { id: "124", name: "الباحة", supervisor: "وضاح", address: "الباحة، حي الشفاء، الغنيم مول مقابل البوليفارد", mapLink: "https://maps.app.goo.gl/Cr5ck22CGL3KaAFVA" },
+];
+

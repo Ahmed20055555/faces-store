@@ -131,12 +131,11 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 </div>
 
                 {/* Categories Bar */}
-                <nav className="border-t border-gray-100 py-3.5 block whitespace-nowrap overflow-x-auto no-scrollbar scroll-smooth bg-white">
+                <nav className="border-t border-gray-100 py-3.5 block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12">
                         <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-12">
                             <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الرئيسية</li>
                             <li onClick={() => router.push('/about')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">من نحن</li>
-                            <li onClick={() => router.push('/services')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خدماتنا</li>
                             <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الأكثر مبيعاً</li>
                             <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">وصل حديثاً</li>
                             <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">اكتشف عطرك </li>
