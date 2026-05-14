@@ -1,0 +1,190 @@
+"use client";
+
+import React, { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Sun, Moon, TreePine, Coffee, Heart, Share2, RefreshCw } from "lucide-react";
+
+const QUESTIONS = [
+  {
+    id: 1,
+    text: "ما هو وقتك المفضل في اليوم؟",
+    options: [
+      { id: "fresh", label: "الصباح الباكر", icon: Sun },
+      { id: "oriental", label: "المساء الهادئ", icon: Coffee },
+      { id: "woody", label: "منتصف الليل", icon: Moon },
+    ]
+  },
+  {
+    id: 2,
+    text: "أين تقضي عطلتك المثالية؟",
+    options: [
+      { id: "fresh", label: "على الشاطئ", icon: Sparkles },
+      { id: "woody", label: "في الغابة", icon: TreePine },
+      { id: "oriental", label: "في مدينة صاخبة", icon: Heart },
+    ]
+  },
+  {
+    id: 3,
+    text: "كيف تصف شخصيتك بكلمة واحدة؟",
+    options: [
+      { id: "fresh", label: "مفعم بالحيوية", icon: Sparkles },
+      { id: "woody", label: "غامض وهادئ", icon: TreePine },
+      { id: "oriental", label: "جريء وقوي", icon: Heart },
+    ]
+  }
+];
+
+const RESULTS: any = {
+  fresh: {
+    title: "Fresh & Citrus",
+    desc: "أنت شخصية حيوية تحب الحرية والانطلاق. الروائح المنعشة من الحمضيات ونسيم البحر هي التي تعبر عن روحك.",
+    products: [
+      { id: "q1", name: "أكوا دي جيو", price: 380, image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 4.7 },
+      { id: "q2", name: "دولتشي آند غابانا لايت بلو", price: 360, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "D&G", rating: 4.8 },
+    ]
+  },
+  woody: {
+    title: "Mysterious Woody",
+    desc: "أنت شخصية عميقة، رصينة وتحب الطبيعة. روائح الخشب والعود والجلود تمنحك الثقة والحضور الطاغي.",
+    products: [
+      { id: "q3", name: "توم فورد بلاك أوركيد", price: 680, image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
+      { id: "q4", name: "عطر ديور سوفاج", price: 450, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
+    ]
+  },
+  oriental: {
+    title: "Bold Oriental",
+    desc: "أنت شخصية جريئة، دافئة وتحب لفت الأنظار. العطور الشرقية المليئة بالعنبر والتوابل والمسك هي رفيقك المثالي.",
+    products: [
+      { id: "q5", name: "لانكوم لا في إي بيل", price: 430, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme", rating: 4.9 },
+      { id: "q6", name: "واي ايف سان لوران", price: 510, image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.8 },
+    ]
+  }
+};
+
+export default function ScentQuizPage() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [showResult, setShowResult] = useState(false);
+
+  const handleAnswer = (type: string) => {
+    const newAnswers = [...answers, type];
+    setAnswers(newAnswers);
+    
+    if (step < QUESTIONS.length - 1) {
+      setStep(step + 1);
+    } else {
+      setShowResult(true);
+    }
+  };
+
+  const getWinnerType = () => {
+    const counts: any = {};
+    answers.forEach(a => counts[a] = (counts[a] || 0) + 1);
+    return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+  };
+
+  const restart = () => {
+    setStep(0);
+    setAnswers([]);
+    setShowResult(false);
+  };
+
+  return (
+    <main className="min-h-screen bg-white" dir="rtl">
+      <Navbar />
+      
+      <section className="pt-32 pb-20 px-4">
+        <div className="max-w-2xl mx-auto">
+          {!showResult ? (
+            <div className="text-center">
+              <div className="mb-12">
+                 <div className="w-full bg-gray-100 h-1 rounded-full mb-8">
+                    <motion.div 
+                      className="bg-[#8c1d3b] h-full rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${((step + 1) / QUESTIONS.length) * 100}%` }}
+                    />
+                 </div>
+                 <span className="text-xs font-black text-[#8c1d3b] uppercase tracking-widest">السؤال {step + 1} من {QUESTIONS.length}</span>
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={step}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="space-y-12"
+                >
+                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                    {QUESTIONS[step].text}
+                  </h2>
+
+                  <div className="grid grid-cols-1 gap-4">
+                    {QUESTIONS[step].options.map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => handleAnswer(opt.id)}
+                        className="group flex items-center justify-between p-6 rounded-3xl border-2 border-gray-50 hover:border-[#8c1d3b] hover:bg-gray-50 transition-all duration-300 text-right"
+                      >
+                        <div className="flex items-center gap-4">
+                           <div className="p-3 rounded-2xl bg-gray-50 group-hover:bg-[#8c1d3b] group-hover:text-white transition-colors">
+                              <opt.icon className="w-6 h-6" />
+                           </div>
+                           <span className="text-lg font-bold text-gray-800">{opt.label}</span>
+                        </div>
+                        <div className="w-6 h-6 rounded-full border-2 border-gray-200 group-hover:border-[#8c1d3b] group-hover:bg-[#8c1d3b] flex items-center justify-center transition-all">
+                           <div className="w-2 h-2 rounded-full bg-white opacity-0 group-hover:opacity-100" />
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          ) : (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center space-y-12"
+            >
+              <div className="bg-[#8c1d3b] text-white p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                   <Sparkles className="w-32 h-32" />
+                </div>
+                <h4 className="text-sm font-black uppercase tracking-widest mb-4 opacity-80">شخصيتك العطرية هي:</h4>
+                <h2 className="text-5xl md:text-6xl font-black mb-8">{RESULTS[getWinnerType()].title}</h2>
+                <p className="text-lg leading-relaxed opacity-90 font-medium">
+                  {RESULTS[getWinnerType()].desc}
+                </p>
+                
+                <div className="mt-12 flex flex-wrap justify-center gap-4">
+                   <button className="flex items-center gap-2 bg-white text-[#8c1d3b] px-6 py-3 rounded-full font-black text-sm hover:bg-gray-100 transition-all">
+                      <Share2 className="w-4 h-4" /> شارك النتيجة
+                   </button>
+                   <button onClick={restart} className="flex items-center gap-2 bg-black/20 text-white px-6 py-3 rounded-full font-black text-sm hover:bg-black/30 transition-all">
+                      <RefreshCw className="w-4 h-4" /> إعادة الاختبار
+                   </button>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                 <h3 className="text-2xl font-black text-gray-900">عطورنا المقترحة لك:</h3>
+                 <div className="grid grid-cols-2 gap-6">
+                    {RESULTS[getWinnerType()].products.map((p: any) => (
+                      <ProductCard key={p.id} {...p} />
+                    ))}
+                 </div>
+              </div>
+            </motion.div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}

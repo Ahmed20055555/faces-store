@@ -75,9 +75,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </Swiper>
                         </div>
 
-                        {/* Left: Contact */}
-                        <div className="hidden lg:block z-10 shrink-0 text-[11px] font-medium hover:opacity-80 transition-opacity cursor-pointer">
-                            اتصل بنا
+                        {/* Left: Contact, Reviews & Thank You */}
+                        <div className="hidden lg:flex items-center gap-6 z-10 shrink-0 text-[11px] font-medium transition-opacity cursor-pointer">
+                            <span onClick={() => router.push('/testimonials')} className="hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
+                            <span className="hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
                         </div>
                     </div>
                 </div>
@@ -85,7 +86,8 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 {/* Main Navigation */}
                 <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex justify-between items-center h-14 md:h-20 gap-4">
                     {/* Logo Section */}
-                    <div className="flex-shrink-0 h-8 md:h-12 flex items-center justify-start min-w-[80px]">
+                    {/* Logo Section */}
+                    <div onClick={() => router.push('/')} className="flex-shrink-0 h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
                         <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
                     </div>
 
@@ -132,10 +134,17 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 <nav className="border-t border-gray-100 py-3.5 block whitespace-nowrap overflow-x-auto no-scrollbar scroll-smooth bg-white">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12">
                         <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-12">
-                            <li className="text-[#a51c30] cursor-pointer shrink-0">الفرصة الأخيرة</li>
-                            {["العطور", "الجمال الكوري", "الأكثر مبيعاً", "وصل حديثاً", "الماركات", "البشرة", "المكياج"].map((cat) => (
-                                <li key={cat} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">{cat}</li>
-                            ))}
+                            <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الرئيسية</li>
+                            <li onClick={() => router.push('/about')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">من نحن</li>
+                            <li onClick={() => router.push('/services')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خدماتنا</li>
+                            <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الأكثر مبيعاً</li>
+                            <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">وصل حديثاً</li>
+                            <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">اكتشف عطرك </li>
+                            <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">باقات الهدايا</li>
+                            <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خزانة العطور</li>
+                            <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الماركات</li>
+                            <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">آراء العملاء</li>
+                            <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">تواصل معنا</li>
                         </ul>
                     </div>
                 </nav>

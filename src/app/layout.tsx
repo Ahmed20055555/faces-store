@@ -6,6 +6,7 @@ import Providers from "@/components/Providers";
 import CartDrawer from "@/components/CartDrawer";
 import Toast from "@/components/Toast";
 import FavoritesToast from "@/components/FavoritesToast";
+import LiveChat from "@/components/LiveChat";
 
 const readex = Readex_Pro({ subsets: ['arabic', 'latin'], variable: '--font-readex' });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <CartDrawer />
           <Toast />
           <FavoritesToast />
+          <LiveChat />
         </Providers>
       </body>
     </html>

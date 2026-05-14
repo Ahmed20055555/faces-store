@@ -12,6 +12,8 @@ import "swiper/css/navigation";
 import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail } from "lucide-react";
 import NewsletterModal from "@/components/NewsletterModal";
 import FloatingSupport from "@/components/FloatingSupport";
+import FeaturesBar from "@/components/FeaturesBar";
+import FAQ from "@/components/FAQ";
 
 // ---------------------------------------------------------------------------
 // Data constants
@@ -108,6 +110,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero />
+
+      {/* Features / Trust Badges */}
+      <FeaturesBar />
 
       {/* Category Stories Slider (Instagram Style) */}
       <section className="bg-white py-6 md:py-10 overflow-hidden" dir="rtl">
@@ -570,8 +575,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ />
+
       {/* SEO Text Block */}
-      <section className="py-12 bg-[#f9f9f9]" dir="rtl">
+      {/* <section className="py-12 bg-[#f9f9f9]" dir="rtl">
         <div className="max-w-[1000px] mx-auto px-4 md:px-6 text-center">
           <h2 className="text-xl md:text-2xl font-black mb-4 text-[#153428]">
             تسوق من المعرض المثالي لمستحضرات الجمال و العناية في السعودية
@@ -586,7 +594,7 @@ export default function Home() {
             اكتشفوا عالم الجمال
           </a>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </main>

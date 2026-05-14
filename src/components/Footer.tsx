@@ -185,15 +185,24 @@ const Footer = () => {
                         </svg>
                     </div>
 
-                    {/* Payment Icons */}
-                    <div className="flex items-center gap-3 flex-wrap justify-center order-1 md:order-2 opacity-60">
-                        <div className="bg-white rounded-sm px-1 py-0.5"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-3" /></div>
-                        <div className="bg-white rounded-sm px-1 py-0.5"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Mada_Logo.svg" alt="Mada" className="h-3" /></div>
-                        <div className="bg-white rounded-sm px-1 py-0.5"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-3" /></div>
-                        <div className="bg-white rounded-sm px-1 py-0.5"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3" /></div>
-                        <div className="bg-white rounded-sm px-1 py-0.5"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" className="h-3" /></div>
-                        <div className="bg-[#12b76a] text-white text-[10px] font-bold px-1 py-0.5 rounded-sm">tamara</div>
-                        <div className="bg-[#00FFAA] text-black text-[10px] font-bold px-1 py-0.5 rounded-sm">tabby</div>
+                    {/* Payment & Shipping Icons */}
+                    <div className="flex items-center gap-6 flex-wrap justify-center order-1 md:order-2 bg-white/5 px-8 py-4 rounded-[2rem] border border-white/5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-5 md:h-6 invert opacity-80 hover:opacity-100 transition-opacity" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Mada_Logo.svg" alt="Mada" className="h-4 md:h-5 opacity-80 hover:opacity-100 transition-opacity" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 md:h-8 opacity-80 hover:opacity-100 transition-opacity" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4 md:h-5 opacity-80 hover:opacity-100 transition-opacity" />
+                        
+                        <div className="h-6 w-[1px] bg-white/10 hidden md:block mx-2"></div>
+                        
+                        <div className="flex items-center gap-4">
+                            <div className="bg-white px-2 py-1 rounded-md">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Aramex_logo.svg" alt="Aramex" className="h-3 md:h-4" />
+                            </div>
+                            <div className="bg-[#00FFAA] px-3 py-1 rounded-md text-black font-black text-[10px] md:text-[11px] uppercase tracking-tighter">tabby</div>
+                            <div className="bg-white px-2 py-1 rounded-md">
+                                <img src="https://cdn.worldvectorlogo.com/logos/tamara-1.svg" alt="Tamara" className="h-3 md:h-4" />
+                            </div>
+                        </div>
                     </div>
                     
                 </div>

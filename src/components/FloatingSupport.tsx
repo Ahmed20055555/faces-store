@@ -9,7 +9,7 @@ export default function FloatingSupport() {
             href="https://wa.me/yournumber" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="fixed bottom-8 left-8 z-[9000] group flex items-center gap-3"
+            className="fixed bottom-24 md:bottom-8 left-8 z-[9000] group flex items-center gap-3"
             dir="rtl"
         >
             <div className="bg-white px-4 py-2 rounded-full shadow-xl opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 font-bold text-[13px] border border-gray-100">
