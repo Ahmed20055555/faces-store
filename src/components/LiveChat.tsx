@@ -63,7 +63,7 @@ export default function LiveChat() {
   };
 
   return (
-    <div className="fixed bottom-24 md:bottom-6 right-6 z-[2000]" dir="rtl">
+    <div className="fixed bottom-24 md:bottom-6 left-6 md:left-auto md:right-6 z-[2000]" dir="rtl">
       {/* Floating Action Button */}
       <motion.button
         whileHover={{ scale: 1.05 }}

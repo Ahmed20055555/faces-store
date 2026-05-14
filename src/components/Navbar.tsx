@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart } from 'lucide-react';
+import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart, Menu, X } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +25,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
     const { items } = useSelector((state: RootState) => state.cart);
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const [animateHeart, setAnimateHeart] = React.useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
     const prevFavCount = React.useRef(favorites.length);
 
     React.useEffect(() => {
@@ -85,10 +86,17 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                 {/* Main Navigation */}
                 <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex justify-between items-center h-14 md:h-20 gap-4">
-                    {/* Logo Section */}
-                    {/* Logo Section */}
-                    <div onClick={() => router.push('/')} className="flex-shrink-0 h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
-                        <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
+                    {/* Logo & Mobile Menu Section */}
+                    <div className="flex items-center gap-3 md:gap-4 shrink-0">
+                        <button 
+                            className="md:hidden p-1 text-gray-800"
+                            onClick={() => setIsMobileMenuOpen(true)}
+                        >
+                            <Menu size={26} strokeWidth={1.5} />
+                        </button>
+                        <div onClick={() => router.push('/')} className="h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
+                            <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
+                        </div>
                     </div>
 
                     {/* Desktop Search Bar */}
@@ -130,8 +138,8 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     </div>
                 </div>
 
-                {/* Categories Bar */}
-                <nav className="border-t border-gray-100 py-3.5 block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar">
+                {/* Categories Bar - Hidden on Mobile */}
+                <nav className="border-t border-gray-100 py-3.5 hidden md:block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12">
                         <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-12">
                             <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الرئيسية</li>
@@ -148,6 +156,62 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         </ul>
                     </div>
                 </nav>
+
+                {/* Mobile Sidebar Menu */}
+                {isMobileMenuOpen && (
+                    <div className="fixed inset-0 z-[2000] md:hidden">
+                        {/* Backdrop */}
+                        <div 
+                            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        ></div>
+                        
+                        {/* Drawer */}
+                        <div className="absolute top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+                            {/* Drawer Header */}
+                            <div className="flex items-center justify-between p-5 border-b border-gray-100">
+                                <img src="/logo.svg" alt="FACES" className="h-8 w-auto object-contain" />
+                                <button 
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="p-2 text-gray-500 hover:text-[#8c1d3b] bg-gray-50 rounded-full transition-colors"
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
+
+                            {/* Drawer Links */}
+                            <div className="flex-1 overflow-y-auto py-4 px-5">
+                                <ul className="flex flex-col gap-4 text-[14px] font-bold text-gray-800">
+                                    {[
+                                        { label: 'الرئيسية', path: '/' },
+                                        { label: 'من نحن', path: '/about' },
+                                        { label: 'الأكثر مبيعاً', path: '/best-sellers' },
+                                        { label: 'وصل حديثاً', path: '/new-arrivals' },
+                                        { label: 'اكتشف عطرك', path: '/scent-quiz' },
+                                        { label: 'باقات الهدايا', path: '/sets-gifts' },
+                                        { label: 'هدية لمن؟', path: '/gifting-match' },
+                                        { label: 'خزانة العطور', path: '/wardrobe' },
+                                        { label: 'الماركات', path: '/brands' },
+                                        { label: 'آراء العملاء', path: '/testimonials' },
+                                        { label: 'تواصل معنا', path: '/contact' }
+                                    ].map((item, index) => (
+                                        <li 
+                                            key={index}
+                                            onClick={() => {
+                                                router.push(item.path);
+                                                setIsMobileMenuOpen(false);
+                                            }}
+                                            className="pb-3 border-b border-gray-50 flex items-center justify-between group cursor-pointer"
+                                        >
+                                            <span className="group-hover:text-[#8c1d3b] transition-colors">{item.label}</span>
+                                            <ChevronLeft size={16} className="text-gray-300 group-hover:text-[#8c1d3b] transition-colors" />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </header>
 
             {/* Mobile Bottom Navigation Bar */}
