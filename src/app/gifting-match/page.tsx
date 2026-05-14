@@ -52,13 +52,6 @@ const RECIPIENTS = [
 
 export default function GiftingMatchPage() {
   const [selected, setSelected] = useState(RECIPIENTS[0]);
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(selected.message || "");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <main className="min-h-screen bg-white" dir="rtl">
