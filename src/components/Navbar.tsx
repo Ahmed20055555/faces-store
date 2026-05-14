@@ -151,6 +151,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">هدية لمن؟ </li>
                             <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خزانة العطور</li>
                             <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الماركات</li>
+                            <li onClick={() => router.push('/branches')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">فروعنا</li>
                             <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">آراء العملاء</li>
                             <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">تواصل معنا</li>
                         </ul>
@@ -192,6 +193,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                         { label: 'هدية لمن؟', path: '/gifting-match' },
                                         { label: 'خزانة العطور', path: '/wardrobe' },
                                         { label: 'الماركات', path: '/brands' },
+                                        { label: 'فروعنا', path: '/branches' },
                                         { label: 'آراء العملاء', path: '/testimonials' },
                                         { label: 'تواصل معنا', path: '/contact' }
                                     ].map((item, index) => (
@@ -220,7 +222,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     <Home size={22} strokeWidth={2.5} />
                     <span className="text-[10px] font-bold">الرئيسية</span>
                 </div>
-                <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
+                <div onClick={() => router.push('/branches')} className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
                     <MapPin size={22} strokeWidth={1.5} />
                     <span className="text-[10px] font-bold">المتاجر</span>
                 </div>
