@@ -16,20 +16,20 @@ const STYLES = [
 
 const WARDROBE_PRODUCTS: any = {
   casual: [
-    { id: "w1", name: "عطر ديور سوفاج", price: 450, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
-    { id: "w2", name: "شانيل بلو", price: 520, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Chanel", rating: 4.8 },
+    { id: "w1", name: "عطر ديور سوفاج", price: "450", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
+    { id: "w2", name: "شانيل بلو", price: "520", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Chanel", rating: 4.8 },
   ],
   formal: [
-    { id: "w3", name: "توم فورد بلاك أوركيد", price: 680, image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
-    { id: "w4", name: "أرماني بريفيه", price: 890, image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 5 },
+    { id: "w3", name: "توم فورد بلاك أوركيد", price: "680", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
+    { id: "w4", name: "أرماني بريفيه", price: "890", image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 5 },
   ],
   night: [
-    { id: "w5", name: "لانكوم لا في إي بيل", price: 430, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme", rating: 4.9 },
-    { id: "w6", name: "واي ايف سان لوران", price: 510, image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.8 },
+    { id: "w5", name: "لانكوم لا في إي بيل", price: "430", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme", rating: 4.9 },
+    { id: "w6", name: "واي ايف سان لوران", price: "510", image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.8 },
   ],
   summer: [
-    { id: "w7", name: "أكوا دي جيو", price: 380, image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 4.7 },
-    { id: "w8", name: "دولتشي آند غابانا لايت بلو", price: 360, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "D&G", rating: 4.8 },
+    { id: "w7", name: "أكوا دي جيو", price: "380", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 4.7 },
+    { id: "w8", name: "دولتشي آند غابانا لايت بلو", price: "360", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "D&G", rating: 4.8 },
   ],
 };
 

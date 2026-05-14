@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 
 const NEW_ARRIVALS = [
-  { id: "5", name: "أرماني كود الجديد", price: 410, image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 5 },
-  { id: "6", name: "عطر ايف سان لوران", price: 480, image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.9 },
+  { id: "5", name: "أرماني كود الجديد", price: "410", image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 5 },
+  { id: "6", name: "عطر ايف سان لوران", price: "480", image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.9 },
 ];
 
 export default function NewArrivalsPage() {

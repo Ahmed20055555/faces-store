@@ -141,7 +141,8 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">وصل حديثاً</li>
                             <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">اكتشف عطرك </li>
                             <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">باقات الهدايا</li>
-                            <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خزانة العطور</li>
+                            <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 text-[#8c1d3b] hover:scale-105 transition-transform flex items-center gap-1.5 font-black border-r border-gray-100 pr-8">هدية لمن؟ 🎁</li>
+                            <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors pr-8">خزانة العطور</li>
                             <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الماركات</li>
                             <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">آراء العملاء</li>
                             <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">تواصل معنا</li>

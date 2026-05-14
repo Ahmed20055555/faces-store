@@ -42,24 +42,24 @@ const RESULTS: any = {
     title: "Fresh & Citrus",
     desc: "أنت شخصية حيوية تحب الحرية والانطلاق. الروائح المنعشة من الحمضيات ونسيم البحر هي التي تعبر عن روحك.",
     products: [
-      { id: "q1", name: "أكوا دي جيو", price: 380, image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 4.7 },
-      { id: "q2", name: "دولتشي آند غابانا لايت بلو", price: 360, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "D&G", rating: 4.8 },
+      { id: "q1", name: "أكوا دي جيو", price: "380", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 4.7 },
+      { id: "q2", name: "دولتشي آند غابانا لايت بلو", price: "360", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "D&G", rating: 4.8 },
     ]
   },
   woody: {
     title: "Mysterious Woody",
     desc: "أنت شخصية عميقة، رصينة وتحب الطبيعة. روائح الخشب والعود والجلود تمنحك الثقة والحضور الطاغي.",
     products: [
-      { id: "q3", name: "توم فورد بلاك أوركيد", price: 680, image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
-      { id: "q4", name: "عطر ديور سوفاج", price: 450, image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
+      { id: "q3", name: "توم فورد بلاك أوركيد", price: "680", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
+      { id: "q4", name: "عطر ديور سوفاج", price: "450", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
     ]
   },
   oriental: {
     title: "Bold Oriental",
     desc: "أنت شخصية جريئة، دافئة وتحب لفت الأنظار. العطور الشرقية المليئة بالعنبر والتوابل والمسك هي رفيقك المثالي.",
     products: [
-      { id: "q5", name: "لانكوم لا في إي بيل", price: 430, image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme", rating: 4.9 },
-      { id: "q6", name: "واي ايف سان لوران", price: 510, image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.8 },
+      { id: "q5", name: "لانكوم لا في إي بيل", price: "430", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme", rating: 4.9 },
+      { id: "q6", name: "واي ايف سان لوران", price: "510", image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.8 },
     ]
   }
 };

@@ -4,10 +4,10 @@ import ProductCard from "@/components/ProductCard";
 import { Gift } from "lucide-react";
 
 const GIFT_SETS = [
-  { id: "g1", name: "صندوق الورد والعطر الملكي", price: 850, image: "https://images.unsplash.com/photo-1549465220-1d8c9d4c4469?auto=format&fit=crop&q=80&w=400", brand: "FACES Exclusive", rating: 5 },
-  { id: "g2", name: "مجموعة العناية الفاخرة", price: 420, image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "Luxury Care", rating: 4.8 },
-  { id: "g3", name: "باقة العود والمبخرة الذهبية", price: 1200, image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Arabic Heritage", rating: 5 },
-  { id: "g4", name: "طقم السفر الرجالي المتكامل", price: 350, image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Classic Men", rating: 4.7 },
+  { id: "g1", name: "صندوق الورد والعطر الملكي", price: "850", image: "https://images.unsplash.com/photo-1549465220-1d8c9d4c4469?auto=format&fit=crop&q=80&w=400", brand: "FACES Exclusive", rating: 5 },
+  { id: "g2", name: "مجموعة العناية الفاخرة", price: "420", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=400", brand: "Luxury Care", rating: 4.8 },
+  { id: "g3", name: "باقة العود والمبخرة الذهبية", price: "1200", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Arabic Heritage", rating: 5 },
+  { id: "g4", name: "طقم السفر الرجالي المتكامل", price: "350", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Classic Men", rating: 4.7 },
 ];
 
 export default function GiftSetsPage() {
