@@ -68,7 +68,7 @@ export default function GiftingMatchPage() {
     <main className="min-h-screen bg-white" dir="rtl">
       <Navbar />
       
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-8 pb-8 px-4">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8c1d3b]/5 text-[#8c1d3b] text-xs font-black uppercase tracking-widest border border-[#8c1d3b]/10">
