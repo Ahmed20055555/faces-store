@@ -88,12 +88,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 <div className="max-w-[1400px] mx-auto px-4 md:px-12 flex justify-between items-center h-14 md:h-20 gap-4">
                     {/* Logo & Mobile Menu Section */}
                     <div className="flex items-center gap-3 md:gap-4 shrink-0">
-                        <button 
-                            className="md:hidden p-1 text-gray-800"
-                            onClick={() => setIsMobileMenuOpen(true)}
-                        >
-                            <Menu size={26} strokeWidth={1.5} />
-                        </button>
+                        {/* Removed mobile hamburger menu to match desktop */}
                         <div onClick={() => router.push('/')} className="h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
                             <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
                         </div>
@@ -138,10 +133,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     </div>
                 </div>
 
-                {/* Categories Bar - Hidden on Mobile */}
-                <nav className="border-t border-gray-100 py-3.5 hidden md:block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar">
+                {/* Categories Bar - Visible on Mobile as Slider */}
+                <nav className="border-t border-gray-100 py-3 block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar" dir="rtl">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-                        <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-8 md:gap-12">
+                        <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-6 md:gap-12">
                             <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الرئيسية</li>
                             <li onClick={() => router.push('/about')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">من نحن</li>
                             <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الأكثر مبيعاً</li>

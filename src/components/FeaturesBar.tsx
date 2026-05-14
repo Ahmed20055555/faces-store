@@ -1,21 +1,23 @@
+import { Truck, ShieldCheck, RotateCcw, Headset } from 'lucide-react';
+
 const FEATURES = [
   {
-    icon: "🚚",
+    icon: Truck,
     title: "شحن سريع",
     subtitle: "توصيل خلال 24-48 ساعة",
   },
   {
-    icon: "🔒",
+    icon: ShieldCheck,
     title: "دفع آمن",
     subtitle: "جميع طرق الدفع مؤمّنة",
   },
   {
-    icon: "↩️",
+    icon: RotateCcw,
     title: "إرجاع سهل",
     subtitle: "إرجاع مجاني خلال 14 يوم",
   },
   {
-    icon: "📞",
+    icon: Headset,
     title: "دعم 24/7",
     subtitle: "فريقنا دائماً في خدمتكم",
   },
@@ -30,8 +32,8 @@ export default function FeaturesBar() {
             key={i} 
             className="flex items-center gap-3 md:gap-4 bg-gray-50 border border-gray-100 rounded-xl p-3 md:p-4 hover:bg-white hover:shadow-xl hover:shadow-black/[0.05] hover:-translate-y-0.5 transition-all duration-300 cursor-default"
           >
-            <span className="text-2xl md:text-3xl leading-none shrink-0 drop-shadow-sm">
-              {feat.icon}
+            <span className="text-[#2B3440] ">
+              <feat.icon size={32}  />
             </span>
             <div className="flex flex-col gap-0.5 overflow-hidden">
               <p className="text-xs md:text-[14px] font-black text-gray-900 truncate">
