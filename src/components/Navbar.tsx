@@ -77,18 +77,17 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </Swiper>
                         </div>
 
-                        {/* Left: Contact, Reviews & Thank You */}
-                        <div className="hidden lg:flex items-center gap-6 z-10 shrink-0 text-[11px] font-medium transition-opacity cursor-pointer">
+                        {/* Left: Contact, Reviews & Download (Download visible on all, others hidden on mobile) */}
+                        <div className="flex items-center gap-4 md:gap-6 z-10 shrink-0 text-[11px] font-medium transition-opacity cursor-pointer">
                             <span onClick={() => {
-                                // Trigger PWA install by clicking the floating button's logic
                                 const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
                                 if (btn) btn.click();
-                            }} className="hover:text-gray-300 border-r border-white/20 pr-6 flex items-center gap-1.5">
-                                <Download size={12} className="text-[#8c1d3b]" />
-                                تحميل التطبيق
+                            }} className="hover:text-gray-300 flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full border border-white/5 md:bg-transparent md:p-0 md:border-0 md:border-r md:border-white/20 md:pr-6">
+                                <Download size={14} className="text-[#8c1d3b] animate-bounce md:animate-none" />
+                                <span className="whitespace-nowrap">تحميل التطبيق</span>
                             </span>
-                            <span onClick={() => router.push('/testimonials')} className="hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
-                            <span className="hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
+                            <span onClick={() => router.push('/testimonials')} className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
+                            <span className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
                         </div>
                     </div>
                 </div>
@@ -216,6 +215,22 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                         </li>
                                     ))}
                                 </ul>
+
+                                {/* Mobile Sidebar Download Button */}
+                                <div className="mt-8 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                                    <p className="text-[12px] text-gray-500 mb-3 text-center">استمتع بتجربة تسوق أفضل</p>
+                                    <button 
+                                        onClick={() => {
+                                            const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
+                                            if (btn) btn.click();
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="w-full py-3 bg-black text-white rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
+                                    >
+                                        <Download size={18} />
+                                        تحميل التطبيق
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,7 +239,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
             {/* Mobile Bottom Navigation Bar */}
             <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100 z-[1000] px-6 py-3 flex justify-between items-center shadow-lg rounded-3xl">
-                <div className="flex flex-col items-center gap-1 cursor-pointer text-[#8c1d3b]">
+                <div onClick={() => router.push('/')} className="flex flex-col items-center gap-1 cursor-pointer text-[#8c1d3b]">
                     <Home size={22} strokeWidth={2.5} />
                     <span className="text-[10px] font-bold">الرئيسية</span>
                 </div>
