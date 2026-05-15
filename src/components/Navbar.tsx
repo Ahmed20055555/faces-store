@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart, Menu, X } from 'lucide-react';
+import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart, Menu, X, Download } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,6 +79,14 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                         {/* Left: Contact, Reviews & Thank You */}
                         <div className="hidden lg:flex items-center gap-6 z-10 shrink-0 text-[11px] font-medium transition-opacity cursor-pointer">
+                            <span onClick={() => {
+                                // Trigger PWA install by clicking the floating button's logic
+                                const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
+                                if (btn) btn.click();
+                            }} className="hover:text-gray-300 border-r border-white/20 pr-6 flex items-center gap-1.5">
+                                <Download size={12} className="text-[#8c1d3b]" />
+                                تحميل التطبيق
+                            </span>
                             <span onClick={() => router.push('/testimonials')} className="hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
                             <span className="hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
                         </div>
@@ -227,6 +235,13 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
                     <Search size={22} strokeWidth={1.5} />
                     <span className="text-[10px] font-bold">ابحث</span>
+                </div>
+                <div onClick={() => {
+                    const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
+                    if (btn) btn.click();
+                }} className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
+                    <Download size={22} strokeWidth={1.5} />
+                    <span className="text-[10px] font-bold">تثبيت</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
                     <User size={22} strokeWidth={1.5} />
