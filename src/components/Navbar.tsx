@@ -141,23 +141,27 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                 {/* Categories Bar - Visible on Mobile as Slider */}
                 <nav className="border-t border-gray-100 py-3 bg-white relative group" dir="rtl">
+                    {/* Subtle shadows to indicate more items when scrolling (Mobile only) */}
+                    <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none md:hidden" />
+                    <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none md:hidden" />
+                    
                     <div className="max-w-[1400px] mx-auto relative px-4 md:px-12">
-                        {/* Navigation Arrows for Categories */}
+                        {/* Navigation Arrows for Categories (Desktop Only) */}
                         <button 
                             onClick={() => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: 200, behavior: 'smooth' });
                             }}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all flex items-center justify-center"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm p-1.5 shadow-sm rounded-full border border-gray-100 text-gray-400 hover:text-[#8c1d3b] transition-all hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100"
                         >
-                            <ChevronRight size={18} />
+                            <ChevronRight size={16} />
                         </button>
 
                         <div 
                             id="category-scroll"
                             className="overflow-x-auto whitespace-nowrap scroll-smooth py-2 no-scrollbar"
                         >
-                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14 px-12 md:px-4">
+                            <ul className="flex justify-start md:justify-center items-center text-[11px] md:text-[13.5px] font-bold gap-6 md:gap-14 px-8 md:px-4">
                                 <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الرئيسية</li>
                                 <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الأكثر مبيعاً</li>
                                 <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">وصل حديثاً</li>
@@ -179,9 +183,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: -200, behavior: 'smooth' });
                             }}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all  items-center justify-center"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm p-1.5 shadow-sm rounded-full border border-gray-100 text-gray-400 hover:text-[#8c1d3b] transition-all hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100"
                         >
-                            <ChevronLeft size={18} />
+                            <ChevronLeft size={16} />
                         </button>
                     </div>
                 </nav>
