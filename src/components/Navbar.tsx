@@ -209,20 +209,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                     ))}
                                 </ul>
 
-                                {/* Mobile Sidebar Download Button */}
-                                <div className="mt-8 p-4 bg-gray-50 rounded-2xl border border-gray-100">
-                                    <p className="text-[12px] text-gray-500 mb-3 text-center">استمتع بتجربة تسوق أفضل</p>
-                                    <button
-                                        onClick={() => {
-                                            const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
-                                            if (btn) btn.click();
-                                            setIsMobileMenuOpen(false);
-                                        }}
-                                        className="w-full py-3 bg-black text-white rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
-                                    >
-                                        <Download size={18} />
-                                        تحميل التطبيق
-                                    </button>
+                                {/* Mobile Sidebar Footer */}
+                                <div className="mt-8 p-4 text-center">
+                                    <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Balmy Luxury Experience</p>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +220,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
             </header>
 
             {/* Mobile Bottom Navigation Bar */}
-            <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100 z-[1000] px-6 py-3 flex justify-between items-center shadow-lg rounded-3xl">
+            <div className="md:hidden fixed bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100 z-[1000] px-8 py-3 flex justify-between items-center shadow-lg rounded-3xl">
                 <div onClick={() => router.push('/')} className="flex flex-col items-center gap-1 cursor-pointer text-[#8c1d3b]">
                     <Home size={22} strokeWidth={2.5} />
                     <span className="text-[10px] font-bold">الرئيسية</span>
@@ -243,13 +232,6 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
                     <Search size={22} strokeWidth={1.5} />
                     <span className="text-[10px] font-bold">ابحث</span>
-                </div>
-                <div onClick={() => {
-                    const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
-                    if (btn) btn.click();
-                }} className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
-                    <Download size={22} strokeWidth={1.5} />
-                    <span className="text-[10px] font-bold">تثبيت</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 cursor-pointer text-gray-400">
                     <User size={22} strokeWidth={1.5} />
