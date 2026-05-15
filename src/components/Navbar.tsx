@@ -148,16 +148,16 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: 200, behavior: 'smooth' });
                             }}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-gray-400 hover:text-[#8c1d3b] transition-all hidden md:group-hover:flex items-center justify-center"
+                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all flex items-center justify-center"
                         >
                             <ChevronRight size={18} />
                         </button>
 
                         <div 
                             id="category-scroll"
-                            className="overflow-x-auto whitespace-nowrap scroll-smooth py-2 px-4 no-scrollbar"
+                            className="overflow-x-auto whitespace-nowrap scroll-smooth py-2 no-scrollbar"
                         >
-                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14">
+                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14 px-12 md:px-4">
                                 <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الرئيسية</li>
                                 <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الأكثر مبيعاً</li>
                                 <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">وصل حديثاً</li>
@@ -179,7 +179,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: -200, behavior: 'smooth' });
                             }}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-gray-400 hover:text-[#8c1d3b] transition-all hidden md:group-hover:flex items-center justify-center"
+                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all  items-center justify-center"
                         >
                             <ChevronLeft size={18} />
                         </button>
