@@ -19,10 +19,14 @@ const InstallPWA = () => {
       });
     }
 
+    // Expose install function globally for direct access
+    (window as any).installBalmyApp = handleInstallClick;
+
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
       setShowButton(true);
+      console.log('✅ PWA Install Prompt Ready');
 
       // Auto-trigger if user already expressed intent
       if (window.sessionStorage.getItem('pwa-install-requested') === 'true') {
