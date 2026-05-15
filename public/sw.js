@@ -7,9 +7,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    fetch(event.request).catch(() => {
-      return new Response('Offline');
-    })
-  );
+  // Empty fetch handler is enough for PWA installability
+  event.respondWith(fetch(event.request));
 });

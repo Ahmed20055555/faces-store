@@ -79,6 +79,9 @@ const InstallPWA = () => {
   }, [deferredPrompt]);
 
   const handleInstallClick = async () => {
+    // Immediate visual feedback
+    console.log('Install clicked, deferredPrompt status:', !!deferredPrompt);
+    
     if (deferredPrompt) {
       try {
         deferredPrompt.prompt();
@@ -89,20 +92,19 @@ const InstallPWA = () => {
         }
       } catch (err) {
         console.error('Install prompt error:', err);
+        setShowManualModal(true);
       }
-    } else if (isIOS) {
-      setShowIOSInstructions(true);
     } else {
+      // If prompt is missing, don't wait too long, show the manual guide
       setIsPreparing(true);
       setTimeout(() => {
+        setIsPreparing(false);
         if (!deferredPrompt) {
-          setIsPreparing(false);
           setShowManualModal(true);
         } else {
-          setIsPreparing(false);
           deferredPrompt.prompt();
         }
-      }, 1500);
+      }, 800); // Shorter delay for faster feel
     }
   };
 
