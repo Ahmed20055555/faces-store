@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart, Menu, X, Download } from 'lucide-react';
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,8 +80,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                         {/* Left: Extra Links */}
                         <div className="flex items-center gap-4 z-20">
-                            <span onClick={() => router.push('/testimonials')} className="hidden lg:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-white/20">آراء العملاء</span>
-                            <span className="hidden lg:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4">اتصل بنا</span>
+                            <Link href="/contact" className=" text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4" >اتصل بنا </Link>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         {/* Removed mobile hamburger menu to match desktop */}
                         <div onClick={() => router.push('/')} className="h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
                             <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
-                        </div>
+                        </div>  
                     </div>
 
                     {/* Desktop Search Bar */}
