@@ -11,6 +11,7 @@ interface OrderConfirmationProps {
     productName: string;
     productImage?: string | null;
     collection?: "black" | "white";
+    onClose?: () => void;
 }
 
 const OrderConfirmation = ({ 
@@ -18,7 +19,8 @@ const OrderConfirmation = ({
     orderId, 
     productName, 
     productImage, 
-    collection = "black" 
+    collection = "black",
+    onClose
 }: OrderConfirmationProps) => {
     const router = useRouter();
     const [step, setStep] = useState(0); 
@@ -256,13 +258,13 @@ const OrderConfirmation = ({
                     {/* Final Action Grid of 2 */}
                     <div className="w-full grid grid-cols-2 gap-4 mt-auto pb-12">
                         <button 
-                            onClick={() => router.push('/track')}
+                            onClick={() => onClose ? onClose() : router.push('/track')}
                             className="bg-black text-white py-5 rounded-2xl font-black text-[13px] shadow-2xl shadow-black/20 hover:scale-[1.02] active:scale-95 transition-all"
                         >
                             تتبع الطلب
                         </button>
                         <button 
-                            onClick={() => router.push('/')}
+                            onClick={() => onClose ? onClose() : router.push('/')}
                             className="bg-white text-black py-5 rounded-2xl font-black text-[13px] border-2 border-black/5 hover:bg-gray-50 active:scale-95 transition-all"
                         >
                             تسوق مجدداً

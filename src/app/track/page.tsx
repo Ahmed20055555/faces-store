@@ -40,7 +40,7 @@ const TRACKING_STEPS = [
 
 export default function TrackOrderPage() {
     const [currentStep, setCurrentStep] = useState(1);
-    const [showCinematic, setShowCinematic] = useState(true);
+    const [showCinematic, setShowCinematic] = useState(false);
     const orderNumber = "BALMY-51732";
 
     useEffect(() => {
@@ -60,16 +60,26 @@ export default function TrackOrderPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col font-tajawal dir-rtl bg-gray-50">
-            {/* Cinematic Hero (Shows first) */}
+        <div className="min-h-screen flex flex-col font-tajawal dir-rtl bg-gray-50 overflow-x-hidden">
+            {/* Cinematic Hero - Fixed and covering everything when active */}
             {showCinematic && (
-                <OrderConfirmation 
-                    customerName={orderData.customerName}
-                    orderId={orderData.orderId}
-                    productName={orderData.productName}
-                    productImage={orderData.productImage}
-                    collection={orderData.collection}
-                />
+                <div className="fixed inset-0 z-[9999] animate-in fade-in duration-700">
+                    <OrderConfirmation 
+                        customerName={orderData.customerName}
+                        orderId={orderData.orderId}
+                        productName={orderData.productName}
+                        productImage={orderData.productImage}
+                        collection={orderData.collection}
+                        onClose={() => setShowCinematic(false)}
+                    />
+                    {/* Absolute Close for safety */}
+                    <button 
+                        onClick={() => setShowCinematic(false)}
+                        className="absolute top-8 left-8 z-[10001] bg-white/10 hover:bg-white/20 text-white w-12 h-12 flex items-center justify-center rounded-full backdrop-blur-xl border border-white/10 transition-all active:scale-90"
+                    >
+                        <Search size={20} className="rotate-45" />
+                    </button>
+                </div>
             )}
 
             <Navbar />
@@ -78,22 +88,30 @@ export default function TrackOrderPage() {
 
                 {/* Header */}
                 <div className="text-center mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <div className="w-20 h-20 bg-[#12b76a]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle2 className="w-10 h-10 text-[#12b76a]" strokeWidth={2.5} />
+                    <div className="w-16 h-16 bg-[#12b76a]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <CheckCircle2 className="w-8 h-8 text-[#12b76a]" strokeWidth={2.5} />
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-black text-[#2B3440] mb-3">تم تأكيد طلبك بنجاح! 🎉</h1>
-                    <p className="text-gray-500 text-lg max-w-lg mx-auto mb-4">
+                    <h1 className="text-3xl md:text-4xl font-black text-[#2B3440] mb-3">تم تأكيد طلبك بنجاح!</h1>
+                    <p className="text-gray-500 text-lg max-w-lg mx-auto mb-6">
                         طلبك في الطريق ليك... تابع حالة طلبك هنا.
                     </p>
-                    <div className="flex flex-col items-center gap-4">
-                        <span className="inline-block px-5 py-2 bg-gray-100 text-gray-600 rounded-full text-sm font-bold tracking-widest uppercase dir-ltr">
-                            {orderNumber}
-                        </span>
+                    
+                    <div className="flex flex-col items-center gap-6 bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 max-w-sm mx-auto">
+                        <div className="flex flex-col items-center">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">رقم الطلب</span>
+                            <span className="text-xl font-black tracking-widest text-black dir-ltr">
+                                {orderNumber}
+                            </span>
+                        </div>
+                        
                         <button 
                             onClick={() => setShowCinematic(true)}
-                            className="text-[12px] font-black text-[#8c1d3b] underline underline-offset-4 decoration-2 hover:opacity-80 transition-all"
+                            className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-2xl font-black text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-black/10 group"
                         >
-                            إعادة مشاهدة العرض السينمائي للزجاجة 🎥
+                            <span>شاهد العرض السينمائي لزجاجتك</span>
+                            <div className="w-6 h-6 bg-white/20 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+                                <Search size={14} className="text-white" />
+                            </div>
                         </button>
                     </div>
                 </div>
