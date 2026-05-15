@@ -156,8 +156,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         <div 
                             id="category-scroll"
                             className="overflow-x-auto whitespace-nowrap scroll-smooth py-2 no-scrollbar"
+                            dir="rtl"
                         >
-                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14 px-12 md:px-8">
+                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14 px-16 md:px-10">
                                 <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الرئيسية</li>
                                 <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الأكثر مبيعاً</li>
                                 <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">وصل حديثاً</li>
