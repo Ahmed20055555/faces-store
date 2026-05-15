@@ -134,24 +134,36 @@ const InstallPWA = () => {
       {showButton && (
         <AnimatePresence>
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-20 md:bottom-8 left-6 z-[9999]"
+            initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className="fixed bottom-24 md:bottom-10 left-6 z-[9999]"
             dir="rtl"
           >
             <button
               onClick={handleInstallClick}
-              className="flex items-center gap-3 bg-black text-white px-5 py-3 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20 group"
+              className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-black text-white rounded-full shadow-[0_0_30px_rgba(140,29,59,0.3)] hover:shadow-[0_0_40px_rgba(140,29,59,0.5)] transition-all duration-500 border border-white/10 overflow-hidden"
             >
-              <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-[#8c1d3b] transition-colors">
-                <Download className="w-4 h-4 text-white" />
+              {/* Background Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#8c1d3b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative flex flex-col items-center justify-center leading-none">
+                <Download size={22} className="text-[#8c1d3b] group-hover:text-white group-hover:scale-110 transition-all duration-300 mb-0.5" />
+                <span className="text-[8px] md:text-[9px] font-black tracking-tighter uppercase">App</span>
               </div>
-              <div className="flex flex-col items-start leading-tight">
-                <span className="text-[10px] opacity-70 font-medium">تطبيق Balmy</span>
-                <span className="text-[13px] font-black tracking-wide">تثبيت الآن</span>
-              </div>
+
+              {/* Animated Ring */}
+              <span className="absolute inset-0 rounded-full border-2 border-[#8c1d3b]/30 animate-ping"></span>
             </button>
+            
+            {/* Tooltip Label */}
+            <motion.div 
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute left-20 top-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-md text-white text-[10px] font-black py-2 px-4 rounded-xl border border-white/10 whitespace-nowrap hidden md:block shadow-xl"
+            >
+              تحميل تطبيق Balmy
+            </motion.div>
           </motion.div>
         </AnimatePresence>
       )}
