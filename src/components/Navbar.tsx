@@ -4,7 +4,7 @@ import React from 'react';
 import { Search, User, ShoppingBag, ChevronRight, ChevronLeft, MapPin, Home, Heart, Menu, X, Download } from 'lucide-react';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay, Navigation, FreeMode } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { useRouter } from 'next/navigation';
@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/free-mode';
 
 const PROMO_MESSAGES = [
     "توصيل مجاني خلال ساعتين في الرياض عند الطلب قبل 8 مساءً",
