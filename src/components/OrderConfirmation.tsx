@@ -43,9 +43,9 @@ const OrderConfirmation = ({
             {/* Ultra-Luxury Ambient Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none" />
 
-            {/* TOP SECTION: Cinematic Hero Transition (65vh to allow more space) */}
-            <div className="relative min-h-[65vh] flex flex-col items-center justify-center pt-12 pb-20">
-                <div className="relative w-[320px] h-[450px] flex items-center justify-center">
+            {/* TOP SECTION: Cinematic Hero Transition (70vh for ample space) */}
+            <div className="relative min-h-[70vh] flex flex-col items-center justify-center pt-32 pb-24">
+                <div className="relative w-[320px] h-[480px] flex items-center justify-center">
                     
                     {/* Source Beaker - Elegant Exit */}
                     <div className={cn(
