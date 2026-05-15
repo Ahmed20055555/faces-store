@@ -77,22 +77,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </Swiper>
                         </div>
 
-                        {/* Left: Download App */}
-                        <div className="flex items-center gap-3 z-20">
-                            <button
-                                onClick={() => {
-                                    if (typeof window !== 'undefined' && (window as any).installBalmyApp) {
-                                        (window as any).installBalmyApp();
-                                    } else {
-                                        window.dispatchEvent(new CustomEvent('trigger-pwa-install'));
-                                    }
-                                }}
-                                className="group relative flex items-center gap-1.5 bg-white/10 hover:bg-[#8c1d3b] px-3 py-1.5 rounded-full border border-white/10 transition-all duration-500"
-                            >
-                                <Download size={13} className="text-[#8c1d3b] group-hover:text-white animate-bounce md:animate-none" />
-                                <span className="text-[10px] md:text-[11px] font-black text-white whitespace-nowrap">تحميل التطبيق</span>
-                            </button>
-                            <span onClick={() => router.push('/testimonials')} className="hidden xl:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4 ml-4">آراء العملاء</span>
+                        {/* Left: Extra Links */}
+                        <div className="flex items-center gap-4 z-20">
+                            <span onClick={() => router.push('/testimonials')} className="hidden lg:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-white/20">آراء العملاء</span>
+                            <span className="hidden lg:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4">اتصل بنا</span>
                         </div>
                     </div>
                 </div>
