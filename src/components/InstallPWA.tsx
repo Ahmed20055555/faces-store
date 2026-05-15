@@ -6,54 +6,33 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const InstallPWA = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [showButton, setShowButton] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [showIOSInstructions, setShowIOSInstructions] = useState(false);
   const [showManualModal, setShowManualModal] = useState(false);
-  const [isPreparing, setIsPreparing] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     // Register Service Worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js', { scope: '/' })
-        .then(reg => {
-          reg.update();
-        })
+        .then(reg => reg.update())
         .catch(err => console.log('SW registration failed:', err));
     }
 
-    // Expose install function globally for direct access
+    // Expose install function globally
     (window as any).installBalmyApp = handleInstallClick;
 
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setShowButton(true);
-      
-      // Auto-trigger if user already expressed intent
-      if (window.sessionStorage.getItem('pwa-install-requested') === 'true') {
-        e.prompt();
-        window.sessionStorage.removeItem('pwa-install-requested');
-      }
-    };
-
-    const handleTriggerInstall = () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-      } else {
-        window.sessionStorage.setItem('pwa-install-requested', 'true');
-        handleInstallClick();
-      }
+      console.log('✅ PWA Install Prompt Captured');
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('trigger-pwa-install', handleTriggerInstall);
-
-    // Check if already installed
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setShowButton(false);
-    }
+    window.addEventListener('trigger-pwa-install', handleInstallClick);
 
     // Detect iOS
     const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
@@ -63,18 +42,13 @@ const InstallPWA = () => {
     setIsStandalone(!!isPWA);
 
     window.addEventListener('appinstalled', () => {
-      setShowButton(false);
       setDeferredPrompt(null);
       setIsStandalone(true);
     });
 
-    if (isIOSDevice && !isPWA) {
-      setShowButton(true);
-    }
-
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('trigger-pwa-install', handleTriggerInstall);
+      window.removeEventListener('trigger-pwa-install', handleInstallClick);
     };
   }, [deferredPrompt]);
 
@@ -84,20 +58,21 @@ const InstallPWA = () => {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
-          setShowButton(false);
           setDeferredPrompt(null);
         }
       } catch (err) {
         console.error('Install prompt error:', err);
         setShowManualModal(true);
       }
+    } else if (isIOS) {
+      setShowIOSInstructions(true);
     } else {
-      // Direct manual guide if prompt is missing, no waiting
+      // Prompt not ready, show manual guide instantly
       setShowManualModal(true);
     }
   };
 
-  if (isStandalone) return null;
+  if (isStandalone || !mounted) return null;
 
   return (
     <>
@@ -106,58 +81,37 @@ const InstallPWA = () => {
         onClick={handleInstallClick}
       />
 
-      {/* Loading state when preparing installation */}
+      {/* Persistent Floating Action Button */}
       <AnimatePresence>
-        {isPreparing && (
-          <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/40 backdrop-blur-sm">
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-zinc-900 border border-white/10 p-6 rounded-3xl flex flex-col items-center gap-4 shadow-2xl"
-            >
-              <div className="w-12 h-12 border-4 border-white/10 border-t-[#8c1d3b] rounded-full animate-spin"></div>
-              <p className="text-white font-black text-sm">جاري التجهيز...</p>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {showButton && (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            className="fixed bottom-24 md:bottom-10 left-6 z-[9999]"
-            dir="rtl"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          className="fixed bottom-24 md:bottom-10 left-6 z-[9999]"
+          dir="rtl"
+        >
+          <button
+            onClick={handleInstallClick}
+            className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-black text-white rounded-full shadow-[0_0_30px_rgba(140,29,59,0.3)] hover:shadow-[0_0_40px_rgba(140,29,59,0.5)] transition-all duration-500 border border-white/10 overflow-hidden"
           >
-            <button
-              onClick={handleInstallClick}
-              className="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-black text-white rounded-full shadow-[0_0_30px_rgba(140,29,59,0.3)] hover:shadow-[0_0_40px_rgba(140,29,59,0.5)] transition-all duration-500 border border-white/10 overflow-hidden"
-            >
-              {/* Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#8c1d3b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="relative flex flex-col items-center justify-center leading-none">
-                <Download size={22} className="text-[#8c1d3b] group-hover:text-white group-hover:scale-110 transition-all duration-300 mb-0.5" />
-                <span className="text-[8px] md:text-[9px] font-black tracking-tighter uppercase">App</span>
-              </div>
-
-              {/* Animated Ring */}
-              <span className="absolute inset-0 rounded-full border-2 border-[#8c1d3b]/30 animate-ping"></span>
-            </button>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#8c1d3b]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
-            {/* Tooltip Label */}
-            <motion.div 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="absolute left-20 top-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-md text-white text-[10px] font-black py-2 px-4 rounded-xl border border-white/10 whitespace-nowrap hidden md:block shadow-xl"
-            >
-              تحميل تطبيق Balmy
-            </motion.div>
+            <div className="relative flex flex-col items-center justify-center leading-none">
+              <Download size={22} className="text-[#8c1d3b] group-hover:text-white group-hover:scale-110 transition-all duration-300 mb-0.5" />
+              <span className="text-[8px] md:text-[9px] font-black tracking-tighter uppercase">App</span>
+            </div>
+
+            <span className="absolute inset-0 rounded-full border-2 border-[#8c1d3b]/30 animate-ping opacity-75"></span>
+          </button>
+          
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="absolute left-20 top-1/2 -translate-y-1/2 bg-black/80 backdrop-blur-md text-white text-[10px] font-black py-2 px-4 rounded-xl border border-white/10 whitespace-nowrap hidden md:block shadow-xl"
+          >
+            تحميل تطبيق Balmy
           </motion.div>
-        </AnimatePresence>
-      )}
+        </motion.div>
+      </AnimatePresence>
 
       {/* iOS Instructions Modal */}
       <AnimatePresence>
