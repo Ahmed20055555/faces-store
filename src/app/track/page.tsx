@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Package, Truck, CheckCircle2, Droplets, MapPin, Search, Clock, Phone } from 'lucide-react';
+import { Package, Truck, CheckCircle2, Droplets, MapPin, Search, Clock, Phone, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import OrderConfirmation from '@/components/OrderConfirmation';
 
