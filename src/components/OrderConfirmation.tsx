@@ -66,61 +66,94 @@ const OrderConfirmation = ({
                 ))}
             </div>
 
-            {/* TOP SECTION: Cinematic Hero */}
-            <div className="relative h-[45vh] flex flex-col items-center justify-center pt-8">
-                <div className={cn(
-                    "relative transition-all duration-[2s] cubic-bezier(0.2, 1, 0.2, 1) transform",
-                    step >= 1 ? "translate-y-0 opacity-100 scale-100" : "translate-y-[80px] opacity-0 scale-95",
-                    step >= 6 && "animate-float-gentle"
-                )}>
-                    <div className="relative w-[170px] h-[280px] flex items-center justify-center">
+            {/* TOP SECTION: The Masterpiece Pouring (55vh) */}
+            <div className="relative h-[55vh] flex flex-col items-center justify-center pt-4">
+                <div className="relative w-[300px] h-[400px]">
+                    {/* Source Bottle (The Alchemist Bottle) - Appears and Tilts */}
+                    <div className={cn(
+                        "absolute top-0 right-0 w-[100px] h-[140px] transition-all duration-[2.5s] ease-in-out",
+                        step >= 1 ? "opacity-100 translate-x-0 rotate-[-45deg]" : "opacity-0 translate-x-20 rotate-0"
+                    )}>
+                        <svg width="100" height="140" viewBox="0 0 100 140" fill="none">
+                            <rect x="30" y="10" width="40" height="110" rx="4" stroke="white" strokeOpacity="0.2" />
+                            <rect x="35" y="15" width="30" height="100" rx="2" fill="white" fillOpacity="0.05" />
+                            {/* Liquid inside source */}
+                            <rect x="35" y="15" width="30" height="70" rx="2" fill="#D4AF37" fillOpacity="0.3" className="animate-pulse" />
+                        </svg>
+                    </div>
+
+                    {/* The Golden Liquid Stream */}
+                    {step >= 2 && (
+                        <svg className="absolute inset-0 pointer-events-none z-20" width="300" height="400" viewBox="0 0 300 400">
+                            <path 
+                                d="M 235 60 Q 200 120 150 150" 
+                                stroke="#D4AF37" 
+                                strokeWidth="3" 
+                                strokeLinecap="round"
+                                fill="none"
+                                className="animate-liquid-pour"
+                                style={{ filter: 'drop-shadow(0 0 5px #D4AF37)' }}
+                            />
+                        </svg>
+                    )}
+
+                    {/* Target Bottle (The Crystal Personalized Bottle) */}
+                    <div className={cn(
+                        "absolute bottom-0 left-1/2 -translate-x-1/2 w-[160px] h-[260px] transition-all duration-[1.5s]",
+                        step >= 0 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+                    )}>
+                        {/* Glow behind target */}
                         <div className={cn(
-                            "absolute inset-0 bg-white/5 rounded-full blur-[100px] transition-all duration-[2.5s]",
-                            step >= 1 ? "scale-125 opacity-20" : "scale-50 opacity-0"
+                            "absolute inset-0 bg-[#D4AF37]/5 rounded-full blur-[80px] transition-all duration-[3s]",
+                            step >= 3 ? "scale-150 opacity-40" : "scale-50 opacity-0"
                         )} />
 
-                        <svg width="170" height="280" viewBox="0 0 160 300" fill="none" className="relative z-10">
-                            <rect x="10" y="270" width="140" height="15" rx="2" fill="white" fillOpacity="0.05" />
-                            <rect x="11.5" y="41.5" width="137" height="237" rx="3" stroke="white" strokeWidth="1" strokeOpacity="0.6" />
-                            <path d="M 18 50 L 18 265" stroke="url(#reflectGrad)" strokeWidth="1" strokeOpacity="0.3" />
-                            <rect x="58" y="8" width="44" height="22" rx="2" fill="white" />
+                        <svg width="160" height="260" viewBox="0 0 160 300" fill="none" className="relative z-10">
+                            {/* Bottle Glass Body */}
+                            <rect x="10" y="40" width="140" height="240" rx="4" stroke="white" strokeWidth="1.2" strokeOpacity="0.5" />
                             
-                            {step >= 2 && (
-                                <g>
+                            {/* Filling Liquid Animation */}
+                            <clipPath id="fillClip">
+                                <rect 
+                                    x="10" 
+                                    y={step >= 3 ? "40" : "280"} 
+                                    width="140" 
+                                    height="240" 
+                                    className="transition-all duration-[4s] ease-out" 
+                                />
+                            </clipPath>
+                            
+                            <rect 
+                                x="12" y="42" width="136" height="236" 
+                                fill="url(#liquidGrad)" 
+                                clipPath="url(#fillClip)"
+                                className="opacity-40"
+                            />
+
+                            {/* Name Engraving - Highlighted */}
+                            {step >= 3 && (
+                                <g className="animate-in fade-in duration-1000 delay-1000">
                                     <text
                                         x="50%"
                                         y="148"
                                         textAnchor="middle"
                                         fill="#D4AF37"
-                                        className="font-serif italic tracking-[0.5em] uppercase"
-                                        style={{ fontSize: '11px' }}
+                                        className="font-serif italic tracking-[0.4em] uppercase font-bold"
+                                        style={{ 
+                                            fontSize: '12px',
+                                            filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.8))'
+                                        }}
                                     >
-                                        {customerName.split('').map((char, i) => (
-                                            <tspan key={i} className="animate-engrave" style={{ animationDelay: `${i * 0.1}s` }}>{char}</tspan>
-                                        ))}
+                                        {customerName}
                                     </text>
-                                    {step >= 3 && (
-                                        <path d="M 55 174 H 105" stroke="#D4AF37" strokeWidth="0.5" strokeOpacity="0.6" className="animate-draw-line" />
-                                    )}
+                                    <path d="M 50 165 H 110" stroke="#D4AF37" strokeWidth="1" className="animate-draw-line" />
                                 </g>
                             )}
 
-                            {step >= 4 && (
-                                <g clipPath="url(#bottleClip)">
-                                    <rect x="-180" y="-50" width="100" height="400" fill="url(#goldShineGrad)" className="animate-shine-sweep" style={{ transform: 'rotate(25deg)' }} />
-                                </g>
-                            )}
                             <defs>
-                                <clipPath id="bottleClip"><rect x="11.5" y="41.5" width="137" height="237" rx="3" /></clipPath>
-                                <linearGradient id="reflectGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="white" stopOpacity="0" />
-                                    <stop offset="50%" stopColor="white" stopOpacity="1" />
-                                    <stop offset="100%" stopColor="white" stopOpacity="0" />
-                                </linearGradient>
-                                <linearGradient id="goldShineGrad" x1="0" y1="0" x2="1" y2="0">
-                                    <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
-                                    <stop offset="50%" stopColor="#D4AF37" stopOpacity="0.4" />
-                                    <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+                                <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.6" />
+                                    <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.1" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -128,32 +161,45 @@ const OrderConfirmation = ({
                 </div>
             </div>
 
-            {/* BOTTOM SECTION: Dark Editorial Info */}
+            {/* BOTTOM SECTION: Detailed Status (45vh) */}
             <div className={cn(
-                "flex-1 flex flex-col items-center px-8 transition-all duration-[1.5s] delay-500",
-                step >= 6 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+                "flex-1 flex flex-col items-center px-8 transition-all duration-[1.5s] delay-700",
+                step >= 5 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             )}>
-                <div className="mb-8 flex flex-col items-center">
-                    <span className="text-[14px] font-light tracking-[1em] uppercase text-white/90">Balmy</span>
-                    <div className="w-12 h-[1px] bg-[#D4AF37]/40 mt-2" />
-                </div>
-
-                <div className="text-center space-y-2 mb-10">
-                    <h1 className="text-[28px] font-serif italic text-white tracking-wide">الطلب تحت رعاية الفخامة</h1>
-                    <p className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37]/60 font-bold">Your scent is being prepared</p>
-                </div>
-
-                <div className="w-full grid grid-cols-2 gap-4 mb-8 max-w-[500px]">
-                    <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.05] rounded-[2px] p-6 flex flex-col items-center text-center">
-                        <span className="text-[8px] uppercase tracking-[0.3em] text-white/30 mb-3">Order Status</span>
-                        <div className="flex items-center gap-3 text-white mb-1">
-                            <Droplets size={14} className="text-[#D4AF37]" />
-                            <span className="text-xs font-black tracking-tighter">جاري التعتيق</span>
-                        </div>
+                <div className="text-center space-y-3 mb-8">
+                    <h1 className="text-[24px] font-serif italic text-white tracking-wide">طقوس تحضير عطرك الخاص</h1>
+                    <div className="flex items-center justify-center gap-4">
+                        <div className="h-[1px] w-8 bg-white/10" />
+                        <p className="text-[9px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold">Infusing Royal Essence</p>
+                        <div className="h-[1px] w-8 bg-white/10" />
                     </div>
-                    <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.05] rounded-[2px] p-6 flex flex-col items-center text-center cursor-pointer active:scale-95 transition-all" onClick={copyToClipboard}>
-                        <span className="text-[8px] uppercase tracking-[0.3em] text-white/30 mb-3">Reference No.</span>
-                        <span className="text-xs font-mono font-bold text-white tracking-widest">{copied ? "Copied!" : orderId}</span>
+                </div>
+
+                {/* Status Timeline */}
+                <div className="w-full max-w-[500px] space-y-4 mb-10">
+                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse shadow-[0_0_8px_#D4AF37]" />
+                            <span className="text-[11px] text-white/90 font-bold uppercase tracking-widest">تجهيز الزيوت العطرية</span>
+                        </div>
+                        <span className="text-[9px] text-white/30 font-mono">Completed</span>
+                    </div>
+                    <div className={cn(
+                        "bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm flex items-center justify-between transition-opacity",
+                        step >= 3 ? "opacity-100" : "opacity-30"
+                    )}>
+                        <div className="flex items-center gap-4">
+                            <div className={cn("w-2 h-2 rounded-full", step >= 3 ? "bg-[#D4AF37] animate-pulse shadow-[0_0_8px_#D4AF37]" : "bg-white/20")} />
+                            <span className="text-[11px] text-white/90 font-bold uppercase tracking-widest">حفر الاسم بالذهب</span>
+                        </div>
+                        <span className="text-[9px] text-white/30 font-mono">{step >= 3 ? "In Progress" : "Pending"}</span>
+                    </div>
+                    <div className="bg-white/[0.02] border border-white/[0.05] p-5 rounded-sm flex items-center justify-between opacity-20">
+                        <div className="flex items-center gap-4">
+                            <div className="w-2 h-2 rounded-full bg-white/20" />
+                            <span className="text-[11px] text-white/90 font-bold uppercase tracking-widest">التغليف الملكي</span>
+                        </div>
+                        <span className="text-[9px] text-white/30 font-mono">Scheduled</span>
                     </div>
                 </div>
 
@@ -213,13 +259,16 @@ const OrderConfirmation = ({
                 .animate-float-gentle {
                     animation: float-gentle 6s ease-in-out infinite;
                 }
-                @keyframes float-up {
-                    0% { transform: translateY(0) scale(0); opacity: 0; }
-                    20% { opacity: 0.3; transform: scale(1); }
-                    100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+                @keyframes liquid-pour {
+                    0% { stroke-dasharray: 0 500; opacity: 0; }
+                    20% { opacity: 1; }
+                    80% { stroke-dasharray: 500 0; opacity: 1; }
+                    100% { stroke-dasharray: 500 0; opacity: 0; }
                 }
-                .animate-float-up {
-                    animation: float-up linear infinite;
+                .animate-liquid-pour {
+                    stroke-dasharray: 500;
+                    stroke-dashoffset: 0;
+                    animation: liquid-pour 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
                 }
             `}</style>
         </div>
