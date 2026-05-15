@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Package, Truck, CheckCircle2, Droplets, MapPin, Search, Clock, Phone, Check } from 'lucide-react';
+import { Package, Truck, CheckCircle2, Droplets, MapPin, Search, Clock, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import OrderConfirmation from '@/components/OrderConfirmation';
 
@@ -64,7 +64,7 @@ export default function TrackOrderPage() {
             {/* Cinematic Hero - Fixed and covering everything when active */}
             {showCinematic && (
                 <div className="fixed inset-0 z-[9999] animate-in fade-in duration-700">
-                    <OrderConfirmation 
+                    <OrderConfirmation
                         customerName={orderData.customerName}
                         orderId={orderData.orderId}
                         productName={orderData.productName}
@@ -73,7 +73,7 @@ export default function TrackOrderPage() {
                         onClose={() => setShowCinematic(false)}
                     />
                     {/* Absolute Close for safety */}
-                    <button 
+                    <button
                         onClick={() => setShowCinematic(false)}
                         className="absolute top-8 left-8 z-[10001] bg-white/10 hover:bg-white/20 text-white w-12 h-12 flex items-center justify-center rounded-full backdrop-blur-xl border border-white/10 transition-all active:scale-90"
                     >
@@ -84,33 +84,36 @@ export default function TrackOrderPage() {
 
             <Navbar />
 
-            <main className="flex-1 max-w-lg mx-auto w-full px-6 pt-12 pb-24">
-                {/* Status Header - More Minimalist */}
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-50 mb-6">
-                        <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
-                            <Check className="text-white" size={18} />
-                        </div>
-                    </div>
-                    <h1 className="text-2xl font-bold text-slate-900 mb-2">تم تأكيد طلبك بنجاح!</h1>
-                    <p className="text-slate-500 text-sm">طلبك في الطريق ليك... تابع حالة طلبك هنا.</p>
-                </div>
+            <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-4 md:py-8 flex flex-col items-center">
 
-                {/* Cinematic Trigger Card - Sleeker */}
-                <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 mb-8 text-center">
-                    <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-2 font-bold">رقم الطلب</p>
-                    <div className="text-xl font-black text-slate-900 mb-6 tracking-tighter">BALMY-51732</div>
-                    
-                    <button 
-                        onClick={() => setShowCinematic(true)}
-                        className="group relative w-full h-10 bg-black rounded-full overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/5"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                        <div className="relative flex items-center justify-center gap-2 text-white">
-                            <Search size={10} className="text-white/60" />
-                            <span className="text-[10px] font-bold tracking-widest">شاهد العرض السينمائي لزجاجتك</span>
+                {/* Header */}
+                <div className="text-center mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <div className="w-16 h-16 bg-[#12b76a]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <CheckCircle2 className="w-8 h-8 text-[#12b76a]" strokeWidth={2.5} />
+                    </div>
+                    <h1 className="text-3xl md:text-4xl font-black text-[#2B3440] mb-3">تم تأكيد طلبك بنجاح!</h1>
+                    <p className="text-gray-500 text-lg max-w-lg mx-auto mb-6">
+                        طلبك في الطريق ليك... تابع حالة طلبك هنا.
+                    </p>
+
+                    <div className="flex flex-col items-center gap-6 bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 max-w-sm mx-auto">
+                        <div className="flex flex-col items-center">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">رقم الطلب</span>
+                            <span className="text-xl font-black tracking-widest text-black dir-ltr">
+                                {orderNumber}
+                            </span>
                         </div>
-                    </button>
+
+                        <button
+                            onClick={() => setShowCinematic(true)}
+                            className="w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-4 rounded-2xl font-black text-sm hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-black/10 group"
+                        >
+                            <span>شاهد العرض السينمائي لزجاجتك</span>
+                            <div className="w-6 h-6 bg-white/20 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+                                <Search size={14} className="text-white" />
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
                 {/* Tracking Card */}

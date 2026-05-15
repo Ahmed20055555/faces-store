@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Check, Copy, Package, Droplets, Truck } from 'lucide-react';
+import { Check, Copy, Package, Droplets, Truck, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 interface OrderConfirmationProps {
@@ -29,10 +29,10 @@ const OrderConfirmation = ({
         const timers = [
             setTimeout(() => setStep(1), 300),   // Source appears
             setTimeout(() => setStep(2), 1500),  // Start pouring
-            setTimeout(() => setStep(3), 2000),  // Target starts filling
+            setTimeout(() => setStep(3), 2000),  // Target starts filling (Image fades in)
             setTimeout(() => setStep(4), 3000),  // Name engraving starts
             setTimeout(() => setStep(5), 5000),  // Finish pouring
-            setTimeout(() => setStep(6), 6000),  // Transition to Hero (Source fades)
+            setTimeout(() => setStep(6), 6000),  // Transition to Hero (Source fades & Cap lands)
             setTimeout(() => setStep(7), 8000),  // Status ritual reveals
         ];
         return () => timers.forEach(clearTimeout);
@@ -88,6 +88,13 @@ const OrderConfirmation = ({
                             )}>
                                 <svg width="50" height="40" viewBox="0 0 50 40">
                                     <rect width="50" height="35" rx="2" fill="#D4AF37" />
+                                    <defs>
+                                        <linearGradient id="capShine" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stopColor="#FFD700" />
+                                            <stop offset="50%" stopColor="#D4AF37" />
+                                            <stop offset="100%" stopColor="#B08D26" />
+                                        </linearGradient>
+                                    </defs>
                                     <rect x="3" y="3" width="44" height="29" rx="1" fill="url(#capShine)" />
                                 </svg>
                             </div>
@@ -125,7 +132,7 @@ const OrderConfirmation = ({
                                                 step >= 6 ? "text-[12px]" : "text-[10px]"
                                             )}
                                             style={{ 
-                                                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8)) drop-shadow(0 0 5px rgba(212,175,55,0.8))',
+                                                filter: 'drop-shadow(0 0-10px rgba(0,0,0,0.8)) drop-shadow(0 0 5px rgba(212,175,55,0.8))',
                                                 lineHeight: '1.2'
                                             }}
                                         >
@@ -238,13 +245,6 @@ const OrderConfirmation = ({
                 }
                 .animate-bubble {
                     animation: bubble 4s linear infinite;
-                }
-                @keyframes splash {
-                    0% { transform: scale(0); opacity: 1; }
-                    100% { transform: scale(2.5); opacity: 0; }
-                }
-                .animate-splash {
-                    animation: splash 1s ease-out infinite;
                 }
                 @keyframes float-gentle {
                     0%, 100% { transform: translateY(0) rotate(0deg); }
