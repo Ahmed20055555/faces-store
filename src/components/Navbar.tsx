@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import InstallPWA from './InstallPWA';
 
 // Import Swiper styles
 import 'swiper/css';

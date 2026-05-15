@@ -10,8 +10,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail } from "lucide-react";
-import NewsletterModal from "@/components/NewsletterModal";
-import FloatingSupport from "@/components/FloatingSupport";
 import FeaturesBar from "@/components/FeaturesBar";
 import FAQ from "@/components/FAQ";
 
@@ -105,8 +103,6 @@ export default function Home() {
     <main className="min-h-screen bg-white">
 
       <Navbar />
-      <NewsletterModal />
-      <FloatingSupport />
 
 
       {/* Hero Section */}
