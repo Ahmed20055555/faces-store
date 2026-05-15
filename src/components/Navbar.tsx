@@ -46,35 +46,38 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 {/* Top Bar Swiper */}
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
-                        {/* Right: Country/Lang (Visible on all) */}
-                        <div className="flex items-center gap-2 cursor-pointer z-10 shrink-0">
-                            <span className="flex items-center gap-1 text-[10px] md:text-[11px] font-medium">
-                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-5 md:w-[27px] h-3 md:h-2 object-cover rounded-[1px]" />
-                                <span className="hidden md:inline">السعودية</span> English
+                        {/* Right: Country/Lang */}
+                        <div className="hidden lg:flex items-center gap-2 cursor-pointer z-10 shrink-0">
+                            <span className="flex items-center gap-2 text-[11px] font-bold tracking-tight hover:opacity-70 transition-opacity">
+                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-6 h-3.5 object-cover rounded-[2px] shadow-sm" />
+                                <span className="text-white/60">KSA</span>
+                                <span className="text-white border-l border-white/20 pl-2">English</span>
                             </span>
                         </div>
 
-                        {/* Center: Swiper Slider (Desktop Only) */}
-                        <div className="hidden lg:flex flex-grow max-w-full md:max-w-2xl px-12 relative h-full items-center overflow-hidden">
-                            <Swiper
-                                modules={[Autoplay, Navigation]}
-                                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                                navigation={{
-                                    nextEl: '.swiper-button-next-custom',
-                                    prevEl: '.swiper-button-prev-custom',
-                                }}
-                                loop={true}
-                                slidesPerView={1}
-                                className="w-full h-full"
-                            >
-                                {PROMO_MESSAGES.map((msg, idx) => (
-                                    <SwiperSlide key={idx} className="flex justify-center items-center h-full">
-                                        <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full text-white/90">
-                                            {msg}
-                                        </span>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
+                        {/* Center: Swiper Slider (Flexible Width) */}
+                        <div className="flex-1 flex justify-center items-center overflow-hidden px-4 md:px-8">
+                            <div className="w-full max-w-4xl">
+                                <Swiper
+                                    modules={[Autoplay]}
+                                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                                    loop={true}
+                                    slidesPerView={1}
+                                    className="w-full h-9"
+                                >
+                                    {PROMO_MESSAGES.map((msg, idx) => (
+                                        <SwiperSlide key={idx} className="flex justify-center items-center h-full">
+                                            <div className="flex items-center justify-center gap-2 w-full">
+                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full shrink-0"></span>
+                                                <span className="text-[10px] md:text-[12px] font-black leading-none whitespace-nowrap md:whitespace-normal text-center text-white tracking-wide uppercase">
+                                                    {msg}
+                                                </span>
+                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full shrink-0"></span>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
                         </div>
 
                         {/* Left: Download App (Visible on all) */}
