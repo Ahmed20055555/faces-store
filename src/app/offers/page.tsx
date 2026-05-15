@@ -1,11 +1,17 @@
+"use client";
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
-export const metadata = {
-  title: 'العروض الخاصة | Palmi',
-  description: 'اكتشف أحدث العروض والخصومات على العطور ومستحضرات التجميل'
-};
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 const OFFERS = [
   { id: "off1", brand: "لانكوم", name: "عطر لا في إي بيل", price: "399", oldPrice: "520", discountBadge: "خصم 23%", image: "/001717728336_1.jpg", hasGift: true },
@@ -35,8 +41,8 @@ export default function OffersPage() {
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-black/10 rounded-full translate-y-1/3 -translate-x-1/3 blur-3xl"></div>
           
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-black mb-4">العروض الحصرية</h1>
-            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+            <h1 className="text-2xl md:text-5xl font-black mb-4">العروض الحصرية</h1>
+            <p className="text-sm md:text-xl text-white/80 max-w-2xl mx-auto">
               اكتشف أقوى الخصومات على تشكيلة واسعة من أرقى العطور. عروض لفترة محدودة!
             </p>
           </div>
@@ -45,7 +51,7 @@ export default function OffersPage() {
         {/* Filters and Grid */}
         <div className="container mx-auto px-4 max-w-[1400px]">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-            <h2 className="text-xl font-bold text-[#2B3440] mb-4 md:mb-0">
+            <h2 className="text-lg md:text-xl font-bold text-[#2B3440] mb-4 md:mb-0">
               جميع العروض ({OFFERS.length} منتج)
             </h2>
             
@@ -56,10 +62,44 @@ export default function OffersPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
-            {OFFERS.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+          <div className="w-full mt-4 relative pb-20">
+            <Swiper
+              modules={[Navigation, Pagination]}
+              spaceBetween={12}
+              slidesPerView={2}
+              navigation={{
+                nextEl: '.offers-next',
+                prevEl: '.offers-prev',
+              }}
+              pagination={{ 
+                clickable: true,
+                el: '.offers-pagination'
+              }}
+              breakpoints={{
+                480: { slidesPerView: 2, spaceBetween: 15 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 25 },
+                1280: { slidesPerView: 5, spaceBetween: 25 },
+              }}
+              className="w-full offers-swiper"
+            >
+              {OFFERS.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <ProductCard {...product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            
+            {/* Custom Navigation Arrows */}
+            <button className="offers-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_4px_12px_rgba(0,0,0,0.12)] border border-gray-100 disabled:opacity-0">
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+            <button className="offers-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_4px_12px_rgba(0,0,0,0.12)] border border-gray-100 disabled:opacity-0">
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+
+            {/* Custom Pagination Dots Container - Pushed down */}
+            <div className="offers-pagination flex justify-center gap-1.5 mt-12 !static"></div>
           </div>
         </div>
       </div>

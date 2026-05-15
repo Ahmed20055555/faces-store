@@ -119,7 +119,7 @@ export default function ScentQuizPage() {
                   exit={{ opacity: 0, x: -20 }}
                   className="space-y-12"
                 >
-                  <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                  <h2 className="text-2xl md:text-4xl font-black text-gray-900 leading-tight">
                     {QUESTIONS[step].text}
                   </h2>
 
@@ -156,7 +156,7 @@ export default function ScentQuizPage() {
                    <Sparkles className="w-16 h-16 md:w-32 md:h-32" />
                 </div>
                 <h4 className="text-[10px] md:text-sm font-black uppercase tracking-widest mb-3 md:mb-4 opacity-80">شخصيتك العطرية هي:</h4>
-                <h2 className="text-3xl md:text-6xl font-black mb-4 md:mb-8 leading-tight">{RESULTS[getWinnerType()].title}</h2>
+                <h2 className="text-2xl md:text-6xl font-black mb-4 md:mb-8 leading-tight">{RESULTS[getWinnerType()].title}</h2>
                 <p className="text-sm md:text-lg leading-relaxed opacity-95 font-medium px-2 md:px-0">
                   {RESULTS[getWinnerType()].desc}
                 </p>
@@ -172,7 +172,7 @@ export default function ScentQuizPage() {
               </div>
 
               <div className="space-y-8">
-                 <h3 className="text-2xl font-black text-gray-900">عطورنا المقترحة لك:</h3>
+                 <h3 className="text-xl md:text-2xl font-black text-gray-900">عطورنا المقترحة لك:</h3>
                  <div className="grid grid-cols-2 gap-6">
                     {RESULTS[getWinnerType()].products.map((p: any) => (
                       <ProductCard key={p.id} {...p} />

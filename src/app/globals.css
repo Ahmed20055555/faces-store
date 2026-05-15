@@ -60,7 +60,7 @@ body {
 
 /* Custom Scrollbar for Luxury Feel */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,16 +72,16 @@ body {
 }
 
 /* Hide scrollbar while keeping scroll functionality */
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar, .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
+.no-scrollbar, .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  height: 6px;
+  height: 3px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #f8f9fa;
@@ -182,4 +182,19 @@ body {
   html {
     @apply font-sans;
   }
+}
+/* Global Swiper Pagination Styling */
+.swiper-pagination-bullet {
+  background: #d1d5db !important;
+  opacity: 1 !important;
+  width: 6px !important;
+  height: 6px !important;
+  transition: all 0.3s ease !important;
+  margin: 0 4px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #8c1d3b !important;
+  width: 18px !important;
+  border-radius: 4px !important;
 }

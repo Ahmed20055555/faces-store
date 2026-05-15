@@ -39,7 +39,7 @@ export default function WardrobePage() {
   return (
     <main className="min-h-screen bg-white" dir="rtl">
       <Navbar />
-      
+
       {/* Hero Header */}
       <section className="pt-8 pb-8 bg-gray-50 overflow-hidden relative">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12 relative z-10">
@@ -47,10 +47,10 @@ export default function WardrobePage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#8c1d3b]/5 border border-[#8c1d3b]/10 text-[#8c1d3b] text-xs font-black mb-6">
               <Sparkles className="w-3.5 h-3.5" /> ميزة حصرية لمساعدتك في الاختيار
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
               خزانة عطورك <span className="text-[#8c1d3b] font-serif italic">(The Wardrobe)</span>
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed font-medium mb-12">
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium mb-12">
               العطر هو اللمسة الأخيرة لأناقتك. اختر "الستايل" الذي تلبسه اليوم، وسنخبرك بالعطور المثالية التي تكتمل بها إطلالتك.
             </p>
           </div>
@@ -58,21 +58,21 @@ export default function WardrobePage() {
       </section>
 
       {/* Style Selector */}
-      <section className="py-4 border-b border-gray-100 sticky top-20 bg-white z-40 shadow-sm">
+      <section className="py-3 md:py-4 border-b border-gray-100 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-2 md:gap-6">
             {STYLES.map((style) => (
               <button
                 key={style.id}
                 onClick={() => setActiveStyle(style.id)}
-                className={`flex flex-col items-center gap-3 p-4 md:p-6 rounded-[2rem] transition-all duration-300 min-w-[120px] md:min-w-[180px] border-2 ${
+                className={`flex flex-col items-center gap-1.5 md:gap-3 p-3 md:p-6 rounded-[1.2rem] md:rounded-[2rem] transition-all duration-300 border-2 ${
                   activeStyle === style.id 
-                  ? "bg-[#8c1d3b] border-[#8c1d3b] text-white shadow-xl scale-105" 
-                  : "bg-white border-gray-50 text-gray-400 hover:border-[#8c1d3b]/20 hover:text-gray-900"
+                  ? "bg-[#8c1d3b] border-[#8c1d3b] text-white shadow-md scale-[1.02]" 
+                  : "bg-white border-gray-50 text-gray-400 hover:border-[#8c1d3b]/20 hover:text-gray-900 shadow-sm"
                 }`}
               >
-                <style.icon className={`w-8 h-8 ${activeStyle === style.id ? "animate-pulse" : ""}`} />
-                <span className="font-black text-sm md:text-base">{style.label}</span>
+                <style.icon className={`w-5 h-5 md:w-8 md:h-8 ${activeStyle === style.id ? "animate-pulse" : ""}`} />
+                <span className="font-black text-xs md:text-base whitespace-nowrap">{style.label}</span>
               </button>
             ))}
           </div>
@@ -82,11 +82,11 @@ export default function WardrobePage() {
       {/* Results Section */}
       <section className="py-8 min-h-[600px]">
         <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-          <div className="text-center mb-8 max-w-xl mx-auto">
-            <h3 className="text-2xl font-black text-gray-900 mb-4">
+          <div className="text-center mb-8 max-w-xl mx-auto px-4">
+            <h3 className="text-xl md:text-2xl font-black text-gray-900 mb-2 md:mb-4">
               إليك ما نقترحه لستايل <span className="text-[#8c1d3b]">{STYLES.find(s => s.id === activeStyle)?.label}</span>
             </h3>
-            <p className="text-gray-500 font-medium">
+            <p className="text-sm md:text-base text-gray-500 font-medium leading-relaxed">
               {STYLES.find(s => s.id === activeStyle)?.desc}
             </p>
           </div>
@@ -102,11 +102,11 @@ export default function WardrobePage() {
             >
               {WARDROBE_PRODUCTS[activeStyle].map((product: any) => (
                 <div key={product.id} className="relative group flex flex-col h-full">
-                    <div className="absolute top-2 right-2 z-30 bg-white/95 backdrop-blur-md px-2 py-1 rounded-lg shadow-sm border border-[#8c1d3b]/10 flex items-center gap-1.5 md:top-4 md:right-4 md:px-3 md:py-1.5 md:rounded-full">
-                       <span className="text-[8px] md:text-[10px] font-black text-[#8c1d3b] uppercase tracking-tighter">Perfect Match</span>
-                       {React.createElement(STYLES.find(s => s.id === activeStyle)!.icon, { className: "w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-[#8c1d3b]" })}
-                    </div>
-                   <ProductCard {...product} />
+                  <div className="absolute top-2 right-2 z-30 bg-white/95 backdrop-blur-md px-2 py-1 rounded-lg shadow-sm border border-[#8c1d3b]/10 flex items-center gap-1.5 md:top-4 md:right-4 md:px-3 md:py-1.5 md:rounded-full">
+                    <span className="text-[8px] md:text-[10px] font-black text-[#8c1d3b] uppercase tracking-tighter">Perfect Match</span>
+                    {React.createElement(STYLES.find(s => s.id === activeStyle)!.icon, { className: "w-2.5 h-2.5 md:w-3.5 md:h-3.5 text-[#8c1d3b]" })}
+                  </div>
+                  <ProductCard {...product} />
                 </div>
               ))}
             </motion.div>

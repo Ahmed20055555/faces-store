@@ -159,17 +159,17 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 {isMobileMenuOpen && (
                     <div className="fixed inset-0 z-[2000] md:hidden">
                         {/* Backdrop */}
-                        <div 
+                        <div
                             className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
                             onClick={() => setIsMobileMenuOpen(false)}
                         ></div>
-                        
+
                         {/* Drawer */}
                         <div className="absolute top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
                             {/* Drawer Header */}
                             <div className="flex items-center justify-between p-5 border-b border-gray-100">
                                 <img src="/logo.svg" alt="FACES" className="h-8 w-auto object-contain" />
-                                <button 
+                                <button
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="p-2 text-gray-500 hover:text-[#8c1d3b] bg-gray-50 rounded-full transition-colors"
                                 >
@@ -194,7 +194,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                         { label: 'آراء العملاء', path: '/testimonials' },
                                         { label: 'تواصل معنا', path: '/contact' }
                                     ].map((item, index) => (
-                                        <li 
+                                        <li
                                             key={index}
                                             onClick={() => {
                                                 router.push(item.path);

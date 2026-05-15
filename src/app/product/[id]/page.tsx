@@ -29,7 +29,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    
+
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some(item => item.id === id);
@@ -213,7 +213,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                         {/* Add to Bag & Favorite */}
                         <div className="flex gap-3 mb-6">
-                            <button 
+                            <button
                                 onClick={handleAddToCart}
                                 className="flex-1 bg-[#071424] text-white font-bold text-[14px] md:text-[16px] py-4 rounded-sm hover:bg-black transition-colors"
                             >

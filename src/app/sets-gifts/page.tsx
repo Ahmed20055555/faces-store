@@ -21,8 +21,8 @@ export default function GiftSetsPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-50 border border-pink-100 text-pink-600 text-xs font-black mb-6">
             <Gift className="w-3.5 h-3.5" /> باقات هدايا جاهزة للمناسبات
           </div>
-          <h1 className="text-4xl font-black text-gray-900 mb-4">مجموعات الهدايا</h1>
-          <p className="text-gray-500 max-w-2xl font-medium leading-relaxed">
+          <h1 className="text-2xl md:text-4xl font-black text-gray-900 mb-4">مجموعات الهدايا</h1>
+          <p className="text-sm md:text-base text-gray-500 max-w-2xl font-medium leading-relaxed">
             اجعل لحظاتهم لا تُنسى مع مجموعاتنا المختارة بعناية. هدايا جاهزة بتغليف فاخر لتناسب جميع مناسباتكم السعيدة.
           </p>
         </div>

@@ -63,10 +63,10 @@ export default function GiftingMatchPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8c1d3b]/5 text-[#8c1d3b] text-xs font-black uppercase tracking-widest border border-[#8c1d3b]/10">
               <Gift className="w-4 h-4" /> مساعد الهدايا الذكي
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+            <h1 className="text-3xl md:text-6xl font-black text-gray-900 leading-tight">
               لمن هذه الهدية؟
             </h1>
-            <p className="text-gray-500 text-lg font-medium">اختر الشخص، وسنتكفل نحن باختيار العطر والكلمات.</p>
+            <p className="text-base md:text-lg text-gray-500 font-medium">اختر الشخص، وسنتكفل نحن باختيار العطر والكلمات.</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-12 md:mb-20">
@@ -98,7 +98,7 @@ export default function GiftingMatchPage() {
             >
               <div className="lg:col-span-12 space-y-6 md:space-y-8">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-2">
-                  <h3 className="text-xl md:text-2xl font-black text-gray-900 text-center md:text-right">أفضل الترشيحات لـ {selected.label}</h3>
+                  <h3 className="text-lg md:text-2xl font-black text-gray-900 text-center md:text-right">أفضل الترشيحات لـ {selected.label}</h3>
                   <span className="text-[#8c1d3b] font-black text-[10px] md:text-xs uppercase tracking-tighter bg-[#8c1d3b]/5 px-3 py-1 rounded-full">Verified Gift Choice</span>
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">

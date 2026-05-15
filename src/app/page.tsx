@@ -108,6 +108,7 @@ export default function Home() {
       <NewsletterModal />
       <FloatingSupport />
 
+
       {/* Hero Section */}
       <Hero />
 
@@ -202,10 +203,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="arrivals-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="arrivals-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="arrivals-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="arrivals-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
@@ -398,10 +399,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="bestseller-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="bestseller-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="bestseller-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="bestseller-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
@@ -507,10 +508,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="around-prev absolute right-2 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="around-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="around-next absolute left-2 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="around-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
@@ -552,10 +553,10 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <button className="global-prev absolute right-0 md:right-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="global-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </button>
-            <button className="global-next absolute left-0 md:left-[-20px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white flex items-center justify-center text-gray-800 hover:bg-black hover:text-white transition-all shadow-[0_2px_8px_rgba(0,0,0,0.15)] disabled:hidden">
+            <button className="global-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
               <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
             </button>
           </div>
