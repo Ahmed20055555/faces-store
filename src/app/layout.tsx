@@ -29,7 +29,7 @@ export default function RootLayout({
           <CartDrawer />
           <Toast />
           <FavoritesToast />
-          <LiveChat />
+          {/* <LiveChat /> */}
         </Providers>
       </body>
     </html>
