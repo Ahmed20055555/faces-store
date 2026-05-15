@@ -57,6 +57,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                         {/* Center: Swiper Slider (Desktop Only) */}
                         <div className="hidden lg:flex flex-grow max-w-full md:max-w-2xl px-12 relative h-full items-center overflow-hidden">
+                            <button className="swiper-button-prev-custom absolute right-4 z-20 text-white/50 hover:text-white transition-colors">
+                                <ChevronRight size={14} />
+                            </button>
                             <Swiper
                                 modules={[Autoplay, Navigation]}
                                 autoplay={{ delay: 3500, disableOnInteraction: false }}
@@ -70,12 +73,15 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             >
                                 {PROMO_MESSAGES.map((msg, idx) => (
                                     <SwiperSlide key={idx} className="flex justify-center items-center h-full">
-                                        <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full text-white/90">
+                                        <span className="text-[11px] md:text-[12px] font-bold block text-center w-full text-white/90">
                                             {msg}
                                         </span>
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+                            <button className="swiper-button-next-custom absolute left-4 z-20 text-white/50 hover:text-white transition-colors">
+                                <ChevronLeft size={14} />
+                            </button>
                         </div>
 
                         {/* Left: Extra Links */}
@@ -108,7 +114,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     </div>
 
                     {/* Icons Group */}
-                    <div className="flex items-center gap-3 md:gap-8 flex-shrink-0">
+                    <div className="flex items-center gap-2 md:gap-5 flex-shrink-0">
                         <div className="flex items-center gap-3 md:hidden">
                             <button className="p-1">
                                 <Search size={22} strokeWidth={1.5} />
