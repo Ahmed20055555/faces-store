@@ -11,11 +11,18 @@ import LiveChat from "@/components/LiveChat";
 
 const readex = Readex_Pro({ subsets: ['arabic', 'latin'], variable: '--font-readex' });
 
+export const viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   title: "Balmy | Luxury Perfume",
   description: "High-end luxury perfume brand.",
   manifest: "/manifest.json",
-  themeColor: "#000000",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
