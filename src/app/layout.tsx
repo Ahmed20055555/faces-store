@@ -7,6 +7,7 @@ import CartDrawer from "@/components/CartDrawer";
 import Toast from "@/components/Toast";
 import FavoritesToast from "@/components/FavoritesToast";
 import LiveChat from "@/components/LiveChat";
+import InstallPWA from "@/components/InstallPWA";
 
 
 const readex = Readex_Pro({ subsets: ['arabic', 'latin'], variable: '--font-readex' });
@@ -55,6 +56,7 @@ export default function RootLayout({
           <Toast />
           <FavoritesToast />
           <LiveChat />
+          <InstallPWA />
         </Providers>
       </body>
     </html>
