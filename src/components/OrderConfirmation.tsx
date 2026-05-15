@@ -137,11 +137,7 @@ const OrderConfirmation = ({
                             </div>
 
                             {/* Outer Crystal Frame (Still keep a subtle glass border) */}
-                            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[146px] h-[246px] border border-white/20 rounded-md pointer-events-none z-10" />
                         </div>
-                    </div>
-                </div>
-            </div>
                     </div>
                 </div>
             </div>
