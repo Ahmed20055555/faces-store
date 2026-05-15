@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import OrderConfirmation from '@/components/OrderConfirmation';
 
 export default function TrackOrderPage() {
@@ -27,7 +27,6 @@ export default function TrackOrderPage() {
                 />
             ) : (
                 <div className="flex items-center justify-center h-screen text-white">
-                    {/* Placeholder for regular tracking view if needed */}
                     <button onClick={() => setShowConfirmation(true)} className="border border-white/20 px-6 py-3 rounded-full">
                         عرض تأكيد الطلب السينمائي
                     </button>
