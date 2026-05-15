@@ -80,7 +80,15 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         {/* Left: Download App */}
                         <div className="flex items-center gap-3 z-20">
                             <button
-                                onClick={() => {
+                                onClick={(e) => {
+                                    const btn = e.currentTarget;
+                                    btn.style.opacity = '0.5';
+                                    btn.innerText = 'جاري...';
+                                    setTimeout(() => {
+                                        btn.style.opacity = '1';
+                                        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download text-[#8c1d3b] group-hover:text-white animate-bounce md:animate-none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg><span class="text-[10px] md:text-[11px] font-black text-white whitespace-nowrap">تحميل التطبيق</span>';
+                                    }, 1000);
+
                                     if (typeof window !== 'undefined' && (window as any).installBalmyApp) {
                                         (window as any).installBalmyApp();
                                     } else {
