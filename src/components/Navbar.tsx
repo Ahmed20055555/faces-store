@@ -78,7 +78,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
-                            <button className="swiper-button-next-custom absolute left-4 z-20 text-white/50 hover:text-white transition-colors hidden md:block">
+                            <button className="swiper-button-next-custom absolute left-4 z-20 text-white/50 hover:text-white transition-colors">
                                 <ChevronLeft size={14} />
                             </button>
                         </div>
@@ -148,7 +148,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: 200, behavior: 'smooth' });
                             }}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all flex items-center justify-center"
+                            className="absolute hidden md:block right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all flex items-center justify-center"
                         >
                             <ChevronRight size={18} />
                         </button>
@@ -179,7 +179,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 const container = document.getElementById('category-scroll');
                                 if (container) container.scrollBy({ left: -200, behavior: 'smooth' });
                             }}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all  items-center justify-center"
+                            className="absolute hidden md:block left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all  items-center justify-center"
                         >
                             <ChevronLeft size={18} />
                         </button>
