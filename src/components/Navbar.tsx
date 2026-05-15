@@ -139,51 +139,61 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     </div>
                 </div>
 
-                {/* Categories Bar - Visible on Mobile as Slider */}
-                <nav className="border-t border-gray-100 py-3 bg-white relative group" dir="rtl">
-                    <div className="max-w-[1400px] mx-auto relative px-4 md:px-12">
-                        {/* Navigation Arrows for Categories */}
-                        <button
-                            onClick={() => {
-                                const container = document.getElementById('category-scroll');
-                                if (container) container.scrollBy({ left: 200, behavior: 'smooth' });
+                {/* Categories Bar - Premium Swiper Slider */}
+                <nav className="border-t border-gray-100 py-2 bg-white relative group categories-slider" dir="rtl">
+                    <div className="max-w-[1400px] mx-auto relative px-4 md:px-10">
+                        <Swiper
+                            modules={[Navigation, FreeMode]}
+                            navigation={{
+                                prevEl: '.cat-prev',
+                                nextEl: '.cat-next',
                             }}
-                            className="absolute hidden md:block right-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all flex items-center justify-center"
+                            freeMode={true}
+                            slidesPerView="auto"
+                            spaceBetween={20}
+                            className="w-full !static"
+                            breakpoints={{
+                                768: {
+                                    spaceBetween: 40,
+                                }
+                            }}
                         >
+                            {[
+                                { name: 'الرئيسية', path: '/' },
+                                { name: 'الأكثر مبيعاً', path: '/best-sellers' },
+                                { name: 'وصل حديثاً', path: '/new-arrivals' },
+                                { name: 'الغرفة المظلمة', path: '/dark-room' },
+                                { name: 'العروض', path: '/offers' },
+                                { name: 'اكتشف عطرك', path: '/scent-quiz' },
+                                { name: 'باقات الهدايا', path: '/sets-gifts' },
+                                { name: 'هدية لمن؟', path: '/gifting-match' },
+                                { name: 'خزانة العطور', path: '/wardrobe' },
+                                { name: 'الماركات', path: '/brands' },
+                                { name: 'فروعنا', path: '/branches' },
+                                { name: 'آراء العملاء', path: '/testimonials' },
+                                { name: 'تواصل معنا', path: '/contact' },
+                            ].map((cat, index) => (
+                                <SwiperSlide key={index} className="!w-auto py-2">
+                                    <span 
+                                        onClick={() => router.push(cat.path)}
+                                        className="cursor-pointer whitespace-nowrap text-[12px] md:text-[13.5px] font-bold text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all block"
+                                    >
+                                        {cat.name}
+                                    </span>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+
+                        {/* Custom Navigation Arrows */}
+                        <button className="cat-prev absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm p-1.5 shadow-md rounded-full border border-gray-100 text-black hover:text-[#8c1d3b] transition-all hidden md:flex items-center justify-center">
                             <ChevronRight size={18} />
                         </button>
-
-                        <div 
-                            id="category-scroll"
-                            className="overflow-x-auto whitespace-nowrap scroll-smooth py-2 no-scrollbar"
-                            dir="rtl"
-                        >
-                            <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13.5px] font-bold gap-8 md:gap-14 px-16 md:px-10">
-                                <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الرئيسية</li>
-                                <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الأكثر مبيعاً</li>
-                                <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">وصل حديثاً</li>
-                                <li onClick={() => router.push('/dark-room')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الغرفة المظلمة</li>
-                                <li onClick={() => router.push('/offers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">العروض</li>
-                                <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">اكتشف عطرك </li>
-                                <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">باقات الهدايا</li>
-                                <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">هدية لمن؟ </li>
-                                <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">خزانة العطور</li>
-                                <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الماركات</li>
-                                <li onClick={() => router.push('/branches')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">فروعنا</li>
-                                <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">آراء العملاء</li>
-                                <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">تواصل معنا</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            onClick={() => {
-                                const container = document.getElementById('category-scroll');
-                                if (container) container.scrollBy({ left: -200, behavior: 'smooth' });
-                            }}
-                            className="absolute hidden md:block left-0 top-1/2 -translate-y-1/2 z-20 bg-white/80 backdrop-blur-sm p-1 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all  items-center justify-center"
-                        >
+                        <button className="cat-next absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm p-1.5 shadow-md rounded-full border border-gray-100 text-black hover:text-black/70 transition-all hidden md:flex items-center justify-center">
                             <ChevronLeft size={18} />
                         </button>
+                    </div>
+                </nav>
+
                     </div>
                 </nav>
 
