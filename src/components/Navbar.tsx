@@ -46,16 +46,16 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 {/* Top Bar Swiper */}
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
-                        {/* Right: Country/Lang */}
-                        <div className="hidden lg:flex items-center gap-2 cursor-pointer z-10 shrink-0">
-                            <span className="flex items-center gap-1 text-[11px] font-medium">
-                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-[27px] h-2 object-cover rounded-[1px]" />
-                                السعودية English
+                        {/* Right: Country/Lang (Visible on all) */}
+                        <div className="flex items-center gap-2 cursor-pointer z-10 shrink-0">
+                            <span className="flex items-center gap-1 text-[10px] md:text-[11px] font-medium">
+                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-5 md:w-[27px] h-3 md:h-2 object-cover rounded-[1px]" />
+                                <span className="hidden md:inline">السعودية</span> English
                             </span>
                         </div>
 
-                        {/* Center: Swiper Slider */}
-                        <div className="flex-grow max-w-full md:max-w-2xl px-12 relative h-full flex items-center overflow-hidden">
+                        {/* Center: Swiper Slider (Desktop Only) */}
+                        <div className="hidden lg:flex flex-grow max-w-full md:max-w-2xl px-12 relative h-full items-center overflow-hidden">
                             <Swiper
                                 modules={[Autoplay, Navigation]}
                                 autoplay={{ delay: 3500, disableOnInteraction: false }}
@@ -69,7 +69,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             >
                                 {PROMO_MESSAGES.map((msg, idx) => (
                                     <SwiperSlide key={idx} className="flex justify-center items-center h-full">
-                                        <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full">
+                                        <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full text-white/90">
                                             {msg}
                                         </span>
                                     </SwiperSlide>
@@ -77,13 +77,13 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </Swiper>
                         </div>
 
-                        {/* Left: Contact, Reviews & Download (Download visible on all, others hidden on mobile) */}
-                        <div className="flex items-center gap-4 md:gap-6 z-10 shrink-0 text-[11px] font-medium transition-opacity cursor-pointer">
+                        {/* Left: Download App (Visible on all) */}
+                        <div className="flex items-center gap-2 md:gap-6 z-10 shrink-0 text-[10px] md:text-[11px] font-medium transition-opacity cursor-pointer">
                             <span onClick={() => {
                                 const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
                                 if (btn) btn.click();
-                            }} className="hover:text-gray-300 flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full border border-white/5 md:bg-transparent md:p-0 md:border-0 md:border-r md:border-white/20 md:pr-6">
-                                <Download size={14} className="text-[#8c1d3b] animate-bounce md:animate-none" />
+                            }} className="hover:text-gray-300 flex items-center gap-1 bg-white/10 px-2 md:px-3 py-1 rounded-full border border-white/5 md:bg-transparent md:p-0 md:border-0 md:border-r md:border-white/20 md:pr-6">
+                                <Download size={12} className="text-[#8c1d3b] animate-bounce md:animate-none" />
                                 <span className="whitespace-nowrap">تحميل التطبيق</span>
                             </span>
                             <span onClick={() => router.push('/testimonials')} className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
