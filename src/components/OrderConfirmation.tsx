@@ -24,47 +24,24 @@ const OrderConfirmation = ({
 }: OrderConfirmationProps) => {
     const router = useRouter();
     const [step, setStep] = useState(0); 
-    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         const timers = [
-            setTimeout(() => setStep(1), 300),  
-            setTimeout(() => setStep(2), 1200), 
-            setTimeout(() => setStep(3), 2500), 
-            setTimeout(() => setStep(4), 3100), 
-            setTimeout(() => setStep(5), 4100), 
-            setTimeout(() => setStep(6), 4800), 
+            setTimeout(() => setStep(1), 300),   // Source appears
+            setTimeout(() => setStep(2), 1500),  // Start pouring
+            setTimeout(() => setStep(3), 2000),  // Target starts filling
+            setTimeout(() => setStep(4), 3000),  // Name engraving starts
+            setTimeout(() => setStep(5), 5000),  // Finish pouring
+            setTimeout(() => setStep(6), 6000),  // Transition to Hero (Source fades)
+            setTimeout(() => setStep(7), 8000),  // Status ritual reveals
         ];
         return () => timers.forEach(clearTimeout);
     }, []);
-
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(orderId);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-    };
 
     return (
         <div className="fixed inset-0 z-[1000] bg-[#050505] overflow-hidden flex flex-col font-tajawal dir-rtl selection:bg-[#D4AF37] selection:text-black">
             {/* Ultra-Luxury Ambient Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_60%)] pointer-events-none" />
-
-            {/* Premium Gold Sparkles */}
-            <div className="absolute inset-0 pointer-events-none">
-                {[...Array(12)].map((_, i) => (
-                    <div 
-                        key={i}
-                        className="absolute w-[1px] h-[1px] bg-[#D4AF37] rounded-full opacity-30 animate-float-up"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            bottom: '-10px',
-                            animationDelay: `${i * 1.2}s`,
-                            animationDuration: `${10 + Math.random() * 10}s`
-                        }}
-                    />
-                ))}
-            </div>
 
             {/* TOP SECTION: Cinematic Hero Transition (55vh) */}
             <div className="relative h-[55vh] flex flex-col items-center justify-center pt-4">
@@ -86,7 +63,7 @@ const OrderConfirmation = ({
 
                     {/* Realistic Liquid Stream - Fades out with source */}
                     {step >= 2 && step < 6 && (
-                        <svg className="absolute inset-0 pointer-events-none z-20 animate-out fade-out duration-1000" width="320" height="420" viewBox="0 0 300 400">
+                        <svg className="absolute inset-0 pointer-events-none z-20" width="320" height="420" viewBox="0 0 300 400">
                             <path d="M 238 65 Q 210 130 150 145" stroke="#D4AF37" strokeWidth="4" strokeLinecap="round" fill="none" className="animate-liquid-pour" style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.6))' }} />
                         </svg>
                     )}
@@ -97,7 +74,7 @@ const OrderConfirmation = ({
                         step >= 6 ? "scale-125 translate-y-8" : "scale-100 translate-y-16",
                         step >= 7 && "animate-float-gentle"
                     )}>
-                        {/* Dramatic Environment Glow - Intensifies on Hero phase */}
+                        {/* Dramatic Environment Glow */}
                         <div className={cn(
                             "absolute inset-0 bg-[#D4AF37]/15 rounded-full blur-[120px] transition-all duration-[3s]",
                             step >= 6 ? "scale-150 opacity-60" : "scale-50 opacity-0"
@@ -181,7 +158,7 @@ const OrderConfirmation = ({
                     </div>
                 </div>
 
-                {/* Refined Status Timeline */}
+                {/* Status Timeline */}
                 <div className="w-full max-w-[500px] space-y-4 mb-10">
                     <div className="bg-white/[0.02] border border-white/[0.05] p-6 rounded-sm flex items-center justify-between group hover:bg-white/[0.04] transition-all">
                         <div className="flex items-center gap-5">
@@ -205,7 +182,7 @@ const OrderConfirmation = ({
                                 <span className="text-[8px] text-white/30 uppercase tracking-tighter">Liquid Gold Infusion</span>
                             </div>
                         </div>
-                        {step >= 6 ? <Check size={14} className="text-[#D4AF37]" /> : <Droplets size={14} className="text-[#D4AF37] animate-bounce" />}
+                        {step >= 7 ? <Check size={14} className="text-[#D4AF37]" /> : <Droplets size={14} className="text-[#D4AF37] animate-bounce" />}
                     </div>
 
                     <div className="bg-white/[0.02] border border-white/[0.05] p-6 rounded-sm flex items-center justify-between opacity-10">
@@ -237,14 +214,6 @@ const OrderConfirmation = ({
             </div>
 
             <style jsx global>{`
-                @keyframes engrave {
-                    0% { opacity: 0; transform: translateY(6px) scale(0.8); filter: blur(6px); }
-                    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-                }
-                .animate-engrave {
-                    display: inline-block;
-                    animation: engrave 0.8s cubic-bezier(0.2, 1, 0.2, 1) forwards;
-                }
                 @keyframes draw-line {
                     from { stroke-dasharray: 0 100; stroke-dashoffset: 0; opacity: 0; }
                     to { stroke-dasharray: 100 0; stroke-dashoffset: 0; opacity: 1; }
@@ -278,13 +247,6 @@ const OrderConfirmation = ({
                 .animate-splash {
                     animation: splash 1s ease-out infinite;
                 }
-                @keyframes droplet {
-                    0% { transform: translate(0, 0); opacity: 1; }
-                    100% { transform: translate(var(--dx, 10px), var(--dy, -20px)); opacity: 0; }
-                }
-                .animate-droplet {
-                    animation: droplet 0.6s ease-out infinite;
-                }
                 @keyframes float-gentle {
                     0%, 100% { transform: translateY(0) rotate(0deg); }
                     50% { transform: translateY(-10px) rotate(0.5deg); }
@@ -292,11 +254,6 @@ const OrderConfirmation = ({
                 .animate-float-gentle {
                     animation: float-gentle 6s ease-in-out infinite;
                 }
-            `}</style>
-        </div>
-    );
-};
-
             `}</style>
         </div>
     );
