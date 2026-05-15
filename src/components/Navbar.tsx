@@ -140,23 +140,26 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 </div>
 
                 {/* Categories Bar - Visible on Mobile as Slider */}
-                <nav className="border-t border-gray-100 py-3 block whitespace-nowrap overflow-x-auto scroll-smooth bg-white custom-scrollbar" dir="rtl">
-                    <div className="max-w-[1400px] mx-auto px-4 md:px-12">
-                        <ul className="flex justify-start md:justify-center items-center text-[12.5px] md:text-[13px] font-bold gap-6 md:gap-12">
-                            <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الرئيسية</li>
-                            <li onClick={() => router.push('/about')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">من نحن</li>
-                            <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الأكثر مبيعاً</li>
-                            <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">وصل حديثاً</li>
-                            <li onClick={() => router.push('/dark-room')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الغرفة المظلمة</li>
-                            <li onClick={() => router.push('/offers')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">العروض</li>
-                            <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">اكتشف عطرك </li>
-                            <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">باقات الهدايا</li>
-                            <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">هدية لمن؟ </li>
-                            <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">خزانة العطور</li>
-                            <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">الماركات</li>
-                            <li onClick={() => router.push('/branches')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">فروعنا</li>
-                            <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">آراء العملاء</li>
-                            <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 hover:text-[#8c1d3b] transition-colors">تواصل معنا</li>
+                <nav className="border-t border-gray-100 py-4 bg-white relative group" dir="rtl">
+                    {/* Subtle shadows to indicate more items when scrolling */}
+                    <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden" />
+                    <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none md:hidden" />
+                    
+                    <div className="max-w-[1400px] mx-auto px-6 md:px-12 overflow-x-auto no-scrollbar scroll-smooth">
+                        <ul className="flex justify-start md:justify-center items-center text-[12px] md:text-[13px] font-bold gap-8 md:gap-14 pb-1">
+                            <li onClick={() => router.push('/')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الرئيسية</li>
+                            <li onClick={() => router.push('/best-sellers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الأكثر مبيعاً</li>
+                            <li onClick={() => router.push('/new-arrivals')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">وصل حديثاً</li>
+                            <li onClick={() => router.push('/dark-room')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الغرفة المظلمة</li>
+                            <li onClick={() => router.push('/offers')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">العروض</li>
+                            <li onClick={() => router.push('/scent-quiz')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">اكتشف عطرك </li>
+                            <li onClick={() => router.push('/sets-gifts')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">باقات الهدايا</li>
+                            <li onClick={() => router.push('/gifting-match')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">هدية لمن؟ </li>
+                            <li onClick={() => router.push('/wardrobe')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">خزانة العطور</li>
+                            <li onClick={() => router.push('/brands')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">الماركات</li>
+                            <li onClick={() => router.push('/branches')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">فروعنا</li>
+                            <li onClick={() => router.push('/testimonials')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">آراء العملاء</li>
+                            <li onClick={() => router.push('/contact')} className="cursor-pointer shrink-0 text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b] hover:after:w-full after:transition-all">تواصل معنا</li>
                         </ul>
                     </div>
                 </nav>
