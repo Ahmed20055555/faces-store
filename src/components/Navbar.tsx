@@ -44,10 +44,10 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
         <>
             <header className={`w-full bg-white z-[1000] font-sans shadow-sm md:shadow-none mb-6 ${isSticky ? 'sticky top-0' : 'relative'}`} dir="rtl">
                 {/* Top Bar Swiper */}
-                <div className="bg-black text-white h-9 flex items-center overflow-hidden">
-                    <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
+                <div className="bg-black text-white h-9 flex items-center overflow-hidden relative">
+                    <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative h-full">
                         {/* Right: Country/Lang */}
-                        <div className="hidden lg:flex items-center gap-2 cursor-pointer z-10 shrink-0">
+                        <div className="hidden lg:flex items-center gap-2 cursor-pointer z-20">
                             <span className="flex items-center gap-2 text-[11px] font-bold tracking-tight hover:opacity-70 transition-opacity">
                                 <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-6 h-3.5 object-cover rounded-[2px] shadow-sm" />
                                 <span className="text-white/60">KSA</span>
@@ -55,9 +55,9 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </span>
                         </div>
 
-                        {/* Center: Swiper Slider (Flexible Width) */}
-                        <div className="flex-1 flex justify-center items-center overflow-hidden px-4 md:px-8">
-                            <div className="w-full max-w-4xl">
+                        {/* Center: Swiper Slider (Absolute Centering) */}
+                        <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-10">
+                            <div className="w-full max-w-[280px] md:max-w-2xl pointer-events-auto">
                                 <Swiper
                                     modules={[Autoplay]}
                                     autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -67,12 +67,12 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 >
                                     {PROMO_MESSAGES.map((msg, idx) => (
                                         <SwiperSlide key={idx} className="flex justify-center items-center h-full">
-                                            <div className="flex items-center justify-center gap-2 w-full">
-                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full shrink-0"></span>
-                                                <span className="text-[10px] md:text-[12px] font-black leading-none whitespace-nowrap md:whitespace-normal text-center text-white tracking-wide uppercase">
+                                            <div className="flex items-center justify-center gap-2 w-full px-4">
+                                                <span className="w-1.5 h-1.5 bg-[#8c1d3b] rounded-full shrink-0 animate-pulse"></span>
+                                                <span className="text-[10px] md:text-[12px] font-black leading-none text-center text-white tracking-wide uppercase truncate">
                                                     {msg}
                                                 </span>
-                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full shrink-0"></span>
+                                                <span className="w-1.5 h-1.5 bg-[#8c1d3b] rounded-full shrink-0 animate-pulse"></span>
                                             </div>
                                         </SwiperSlide>
                                     ))}
@@ -80,17 +80,18 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                             </div>
                         </div>
 
-                        {/* Left: Download App (Visible on all) */}
-                        <div className="flex items-center gap-2 md:gap-6 z-10 shrink-0 text-[10px] md:text-[11px] font-medium transition-opacity cursor-pointer">
-                            <span onClick={() => {
-                                const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
-                                if (btn) btn.click();
-                            }} className="hover:text-gray-300 flex items-center gap-1 bg-white/10 px-2 md:px-3 py-1 rounded-full border border-white/5 md:bg-transparent md:p-0 md:border-0 md:border-r md:border-white/20 md:pr-6">
-                                <Download size={12} className="text-[#8c1d3b] animate-bounce md:animate-none" />
-                                <span className="whitespace-nowrap">تحميل التطبيق</span>
-                            </span>
-                            <span onClick={() => router.push('/testimonials')} className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
-                            <span className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
+                        {/* Left: Download App */}
+                        <div className="flex items-center gap-3 z-20">
+                            <button
+                                onClick={() => {
+                                    window.dispatchEvent(new CustomEvent('trigger-pwa-install'));
+                                }}
+                                className="group relative flex items-center gap-1.5 bg-white/10 hover:bg-[#8c1d3b] px-3 py-1.5 rounded-full border border-white/10 transition-all duration-500"
+                            >
+                                <Download size={13} className="text-[#8c1d3b] group-hover:text-white animate-bounce md:animate-none" />
+                                <span className="text-[10px] md:text-[11px] font-black text-white whitespace-nowrap">تحميل التطبيق</span>
+                            </button>
+                            <span onClick={() => router.push('/testimonials')} className="hidden xl:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4 ml-4">آراء العملاء</span>
                         </div>
                     </div>
                 </div>
