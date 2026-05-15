@@ -92,8 +92,8 @@ const OrderConfirmation = ({
                                 </svg>
                             </div>
 
-                            {/* Actual Product Image with Luxury Frame */}
-                            <div className="relative mt-10 w-[140px] h-[240px] rounded-sm overflow-hidden group">
+                            {/* Actual Product Image with Luxury Frame (Shrunken for elegance) */}
+                            <div className="relative mt-10 w-[110px] h-[190px] rounded-sm overflow-hidden group">
                                 {productImage ? (
                                     <img 
                                         src={productImage} 
@@ -108,7 +108,7 @@ const OrderConfirmation = ({
                                     <div className="w-full h-full bg-white/5 animate-pulse" />
                                 )}
 
-                                {/* Liquid Fill Overlay on top of Image */}
+                                {/* Liquid Fill Overlay */}
                                 <div 
                                     className="absolute inset-0 bg-[#D4AF37]/20 transition-all duration-[5s] ease-out pointer-events-none"
                                     style={{ 
@@ -116,13 +116,13 @@ const OrderConfirmation = ({
                                     }}
                                 />
 
-                                {/* Name Engraving Overlaid on Image */}
+                                {/* Name Engraving Overlaid */}
                                 {step >= 4 && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                                         <span 
                                             className={cn(
-                                                "font-serif italic text-[#D4AF37] font-black tracking-widest transition-all duration-1000 text-center px-2",
-                                                step >= 6 ? "text-[14px]" : "text-[12px]"
+                                                "font-serif italic text-[#D4AF37] font-black tracking-widest transition-all duration-1000 text-center px-1",
+                                                step >= 6 ? "text-[12px]" : "text-[10px]"
                                             )}
                                             style={{ 
                                                 filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8)) drop-shadow(0 0 5px rgba(212,175,55,0.8))',
@@ -131,12 +131,13 @@ const OrderConfirmation = ({
                                         >
                                             {customerName}
                                         </span>
-                                        <div className="w-12 h-[1px] bg-[#D4AF37] mt-1 shadow-[0_0_5px_#D4AF37] animate-draw-line" />
+                                        <div className="w-10 h-[1px] bg-[#D4AF37] mt-1 shadow-[0_0_5px_#D4AF37] animate-draw-line" />
                                     </div>
                                 ) }
                             </div>
 
-                            {/* Outer Crystal Frame (Still keep a subtle glass border) */}
+                            {/* Outer Crystal Frame (Shrunken) */}
+                            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[116px] h-[196px] border border-white/20 rounded-md pointer-events-none z-10" />
                         </div>
                     </div>
                 </div>
