@@ -80,74 +80,68 @@ const OrderConfirmation = ({
                             step >= 6 ? "scale-150 opacity-60" : "scale-50 opacity-0"
                         )} />
 
-                        <svg width="200" height="340" viewBox="0 0 160 340" fill="none" className="relative z-10">
+                        <div className="relative w-[200px] height-[340px] flex items-center justify-center">
                             {/* The Gold Cap (الغظاء الملكي) */}
-                            <g className={cn(
-                                "transition-all duration-[1.5s] cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                            <div className={cn(
+                                "absolute top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-[1.5s] cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                 step >= 6 ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0"
                             )}>
-                                <rect x="55" y="5" width="50" height="35" rx="2" fill="#D4AF37" />
-                                <rect x="58" y="8" width="44" height="29" rx="1" fill="url(#capShine)" />
-                                <rect x="55" y="38" width="50" height="4" fill="#B08D26" />
-                            </g>
+                                <svg width="50" height="40" viewBox="0 0 50 40">
+                                    <rect width="50" height="35" rx="2" fill="#D4AF37" />
+                                    <rect x="3" y="3" width="44" height="29" rx="1" fill="url(#capShine)" />
+                                </svg>
+                            </div>
 
-                            {/* Thick Crystal Glass */}
-                            <rect x="10" y="42" width="140" height="240" rx="6" stroke="white" strokeWidth="1.5" strokeOpacity="0.6" />
-                            
-                            {/* Filling Liquid Level */}
-                            <clipPath id="heroFillClip">
-                                <rect 
-                                    x="10" 
-                                    y={step >= 3 ? "42" : "282"} 
-                                    width="140" 
-                                    height="240" 
-                                    className="transition-all duration-[5s] cubic-bezier(0.4, 0, 0.2, 1)" 
-                                />
-                            </clipPath>
-                            
-                            <g clipPath="url(#heroFillClip)">
-                                <rect x="12" y="44" width="136" height="236" fill="url(#luxuryLiquidGrad)" className="opacity-60" />
-                                {[...Array(step >= 6 ? 12 : 6)].map((_, i) => (
-                                    <circle key={i} cx={30 + Math.random() * 100} cy={260} r={0.8 + Math.random() * 1.5} fill="white" fillOpacity="0.4" className="animate-bubble" style={{ animationDelay: `${i * 0.4}s` }} />
-                                ))}
-                            </g>
-
-                            {/* Name Engraving */}
-                            {step >= 4 && (
-                                <g>
-                                    <text
-                                        x="50%"
-                                        y="150"
-                                        textAnchor="middle"
-                                        fill="#D4AF37"
+                            {/* Actual Product Image with Luxury Frame */}
+                            <div className="relative mt-10 w-[140px] h-[240px] rounded-sm overflow-hidden group">
+                                {productImage ? (
+                                    <img 
+                                        src={productImage} 
+                                        alt={productName} 
                                         className={cn(
-                                            "font-serif italic tracking-[0.5em] uppercase font-black transition-all duration-1000",
-                                            step >= 6 ? "text-[14px]" : "text-[12px]"
+                                            "w-full h-full object-contain transition-all duration-[3s] ease-in-out",
+                                            step >= 3 ? "opacity-100 scale-100" : "opacity-0 scale-90"
                                         )}
-                                        style={{ 
-                                            filter: step >= 6 ? 'drop-shadow(0 0 20px rgba(212,175,55,1))' : 'drop-shadow(0 0 10px rgba(212,175,55,0.8))'
-                                        }}
-                                    >
-                                        {customerName}
-                                    </text>
-                                    <path d="M 45 170 H 115" stroke="#D4AF37" strokeWidth="1.5" className="animate-draw-line" style={{ filter: 'drop-shadow(0 0 5px #D4AF37)' }} />
-                                </g>
-                            )}
+                                        style={{ filter: 'brightness(1.1) contrast(1.1)' }}
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-white/5 animate-pulse" />
+                                )}
 
-                            <defs>
-                                <linearGradient id="luxuryLiquidGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8">
-                                        <animate attributeName="stopColor" values="#D4AF37;#FFD700;#D4AF37" dur="3s" repeatCount="indefinite" />
-                                    </stop>
-                                    <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.2" />
-                                </linearGradient>
-                                <linearGradient id="capShine" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stopColor="#FFD700" />
-                                    <stop offset="50%" stopColor="#D4AF37" />
-                                    <stop offset="100%" stopColor="#B08D26" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
+                                {/* Liquid Fill Overlay on top of Image */}
+                                <div 
+                                    className="absolute inset-0 bg-[#D4AF37]/20 transition-all duration-[5s] ease-out pointer-events-none"
+                                    style={{ 
+                                        clipPath: step >= 3 ? 'inset(0 0 0 0)' : 'inset(100% 0 0 0)' 
+                                    }}
+                                />
+
+                                {/* Name Engraving Overlaid on Image */}
+                                {step >= 4 && (
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                        <span 
+                                            className={cn(
+                                                "font-serif italic text-[#D4AF37] font-black tracking-widest transition-all duration-1000 text-center px-2",
+                                                step >= 6 ? "text-[14px]" : "text-[12px]"
+                                            )}
+                                            style={{ 
+                                                filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.8)) drop-shadow(0 0 5px rgba(212,175,55,0.8))',
+                                                lineHeight: '1.2'
+                                            }}
+                                        >
+                                            {customerName}
+                                        </span>
+                                        <div className="w-12 h-[1px] bg-[#D4AF37] mt-1 shadow-[0_0_5px_#D4AF37] animate-draw-line" />
+                                    </div>
+                                ) }
+                            </div>
+
+                            {/* Outer Crystal Frame (Still keep a subtle glass border) */}
+                            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[146px] h-[246px] border border-white/20 rounded-md pointer-events-none z-10" />
+                        </div>
+                    </div>
+                </div>
+            </div>
                     </div>
                 </div>
             </div>
