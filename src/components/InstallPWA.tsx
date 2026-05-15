@@ -82,6 +82,7 @@ const InstallPWA = () => {
   }, []);
 
   const [showManualModal, setShowManualModal] = useState(false);
+  const [isPreparing, setIsPreparing] = useState(false);
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
@@ -96,8 +97,19 @@ const InstallPWA = () => {
         console.error('Install prompt error:', err);
       }
     } else {
-      // Fallback: show the manual installation guide modal
-      setShowManualModal(true);
+      // Show loading state and wait a bit for the prompt to potentially fire
+      setIsPreparing(true);
+      
+      // Give the browser 1.5 seconds to fire the event if it's lagging
+      setTimeout(() => {
+        if (!deferredPrompt) {
+          setIsPreparing(false);
+          setShowManualModal(true);
+        } else {
+          setIsPreparing(false);
+          deferredPrompt.prompt();
+        }
+      }, 1500);
     }
   };
 
@@ -109,6 +121,22 @@ const InstallPWA = () => {
         className="install-pwa-trigger hidden"
         onClick={handleInstallClick}
       />
+
+      {/* Loading state when preparing installation */}
+      <AnimatePresence>
+        {isPreparing && (
+          <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-zinc-900 border border-white/10 p-6 rounded-3xl flex flex-col items-center gap-4 shadow-2xl"
+            >
+              <div className="w-12 h-12 border-4 border-white/10 border-t-[#8c1d3b] rounded-full animate-spin"></div>
+              <p className="text-white font-black text-sm">جاري التجهيز...</p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {showButton && (
         <AnimatePresence>
