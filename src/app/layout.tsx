@@ -7,23 +7,15 @@ import CartDrawer from "@/components/CartDrawer";
 import Toast from "@/components/Toast";
 import FavoritesToast from "@/components/FavoritesToast";
 import LiveChat from "@/components/LiveChat";
-import InstallPWA from "@/components/InstallPWA";
 
 
 const readex = Readex_Pro({ subsets: ['arabic', 'latin'], variable: '--font-readex' });
-
-export const viewport = {
-  themeColor: "#000000",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
 
 export const metadata: Metadata = {
   title: "Balmy | Luxury Perfume",
   description: "High-end luxury perfume brand.",
   manifest: "/manifest.json",
+  themeColor: "#000000",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -56,7 +48,6 @@ export default function RootLayout({
           <Toast />
           <FavoritesToast />
           <LiveChat />
-          <InstallPWA />
         </Providers>
       </body>
     </html>
