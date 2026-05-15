@@ -194,9 +194,6 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     </div>
                 </nav>
 
-                    </div>
-                </nav>
-
                 {/* Mobile Sidebar Menu */}
                 {isMobileMenuOpen && (
                     <div className="fixed inset-0 z-[2000] md:hidden">
