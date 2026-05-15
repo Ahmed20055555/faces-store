@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail, Download } from "lucide-react";
+import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail } from "lucide-react";
 import FeaturesBar from "@/components/FeaturesBar";
 import FAQ from "@/components/FAQ";
 
@@ -559,56 +559,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* App Download Section */}
-      <section className="py-12 bg-black text-white overflow-hidden relative" dir="rtl">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#8c1d3b]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="flex-1 text-center md:text-right">
-              <span className="inline-block px-4 py-1 bg-white/10 rounded-full text-[12px] font-black tracking-widest uppercase mb-6 border border-white/10">التطبيق الحصري</span>
-              <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">تسوقوا بلمسة واحدة<br />مع تطبيق Balmy</h2>
-              <p className="text-gray-400 text-lg mb-10 max-w-xl">
-                احصلوا على تجربة تسوق استثنائية، عروض حصرية للمشتركين، وتنبيهات بأحدث المجموعات قبل الجميع.
-              </p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                <button 
-                  onClick={() => {
-                    const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
-                    if (btn) btn.click();
-                  }}
-                  className="bg-white text-black px-8 py-4 rounded-2xl font-black text-sm hover:bg-[#8c1d3b] hover:text-white transition-all duration-500 shadow-xl flex items-center gap-3"
-                >
-                  <Download className="w-5 h-5" />
-                  تحميل التطبيق الآن
-                </button>
-                <div className="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                   <div className="text-right">
-                      <p className="text-[10px] text-gray-500 font-bold">تقييم التطبيق</p>
-                      <p className="text-sm font-black">4.9 / 5.0</p>
-                   </div>
-                   <div className="flex gap-0.5 text-yellow-500">
-                      {"★★★★★".split("").map((s, i) => <span key={i}>{s}</span>)}
-                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 relative">
-               <div className="relative w-full max-w-[300px] mx-auto md:max-w-none md:w-[400px]">
-                  {/* Mockup Frame Effect */}
-                  <div className="absolute inset-0 bg-[#8c1d3b]/20 rounded-[3rem] blur-2xl animate-pulse"></div>
-                  <img 
-                    src="/icons/icon-512x512.png" 
-                    alt="App Preview" 
-                    className="relative z-10 w-48 h-48 md:w-64 md:h-64 rounded-[2.5rem] shadow-2xl mx-auto border-4 border-white/10"
-                  />
-                  <div className="mt-8 text-center">
-                     <p className="text-[11px] font-black tracking-widest text-white/40 uppercase">المس للتحميل</p>
-                  </div>
-               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Laila AI Advisor Banner */}
       <section className="py-2 md:py-6 bg-white" dir="rtl">
