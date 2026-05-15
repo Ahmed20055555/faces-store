@@ -97,7 +97,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     <div className="flex items-center gap-3 md:gap-4 shrink-0">
                         {/* Removed mobile hamburger menu to match desktop */}
                         <div onClick={() => router.push('/')} className="h-8 md:h-12 flex items-center justify-start min-w-[80px] cursor-pointer">
-                            <img src="/logo.svg" alt="FACES" className="h-full w-auto object-contain" />
+                            <img src="/logo.svg?v=2" alt="Balmy Logo" className="h-full w-auto object-contain" />
                         </div>
                     </div>
 
@@ -208,7 +208,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                         <div className="absolute top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
                             {/* Drawer Header */}
                             <div className="flex items-center justify-between p-5 border-b border-gray-100">
-                                <img src="/logo.svg" alt="FACES" className="h-8 w-auto object-contain" />
+                                <img src="/logo.svg?v=2" alt="Balmy Logo" className="h-8 w-auto object-contain" />
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="p-2 text-gray-500 hover:text-[#8c1d3b] bg-gray-50 rounded-full transition-colors"
