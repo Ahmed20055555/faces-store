@@ -81,21 +81,23 @@ const InstallPWA = () => {
     };
   }, []);
 
+  const [showManualModal, setShowManualModal] = useState(false);
+
   const handleInstallClick = async () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setShowButton(false);
-        setDeferredPrompt(null);
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          setShowButton(false);
+          setDeferredPrompt(null);
+        }
+      } catch (err) {
+        console.error('Install prompt error:', err);
       }
     } else {
-      // Fallback for other browsers if event didn't fire
-      if (isIOS) {
-        setShowIOSInstructions(true);
-      } else {
-        alert('جاري تجهيز التحميل... يرجى الانتظار ثانية أو تحديث الصفحة إذا لم يظهر خيار التثبيت من المتصفح.');
-      }
+      // Fallback: show the manual installation guide modal
+      setShowManualModal(true);
     }
   };
 
@@ -194,6 +196,70 @@ const InstallPWA = () => {
               >
                 فهمت ذلك
               </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Manual Installation Guide Modal */}
+      <AnimatePresence>
+        {showManualModal && (
+          <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowManualModal(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-sm bg-zinc-900 border border-white/10 rounded-[40px] p-8 shadow-2xl overflow-hidden text-center"
+              dir="rtl"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#8c1d3b] to-transparent"></div>
+              
+              <button
+                onClick={() => setShowManualModal(false)}
+                className="absolute top-6 left-6 text-white/40 hover:text-white transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="mb-8 mt-4">
+                <div className="w-24 h-24 bg-gradient-to-br from-zinc-800 to-black rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-inner border border-white/5 relative group">
+                  <div className="absolute inset-0 bg-[#8c1d3b]/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <img src="/icons/icon-192x192.png" alt="Balmy" className="w-16 h-16 rounded-2xl relative z-10" />
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2">تثبيت Balmy</h3>
+                <p className="text-zinc-400 text-sm">استمتع بتجربة تسوق فاخرة ومباشرة</p>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-right">
+                  <p className="text-white text-sm font-bold flex items-center gap-2">
+                    <span className="w-5 h-5 bg-[#8c1d3b] rounded-full flex items-center justify-center text-[10px]">1</span>
+                    {isIOS ? 'اضغط على زر المشاركة' : 'اضغط على النقاط الثلاث في المتصفح'}
+                  </p>
+                </div>
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/5 text-right">
+                  <p className="text-white text-sm font-bold flex items-center gap-2">
+                    <span className="w-5 h-5 bg-[#8c1d3b] rounded-full flex items-center justify-center text-[10px]">2</span>
+                    اختر "إضافة إلى الشاشة الرئيسية"
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowManualModal(false)}
+                className="w-full py-4 bg-white text-black rounded-2xl font-black text-sm hover:bg-zinc-200 transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              >
+                حسناً، سأفعل ذلك
+              </button>
+              
+              <p className="mt-6 text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Balmy Luxury Experience</p>
             </motion.div>
           </div>
         )}
