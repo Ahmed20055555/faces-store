@@ -19,21 +19,51 @@ const InstallPWA = () => {
       });
     }
 
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowButton(true);
+      
+      // Auto-trigger if user already expressed intent
+      if (window.sessionStorage.getItem('pwa-install-requested') === 'true') {
+        e.prompt();
+        window.sessionStorage.removeItem('pwa-install-requested');
+      }
+    };
+
+    const handleTriggerInstall = () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+      } else {
+        // Remember intent for when the prompt is ready
+        window.sessionStorage.setItem('pwa-install-requested', 'true');
+        handleInstallClick();
+      }
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('trigger-pwa-install', handleTriggerInstall);
+
     // Check if already installed
-    const isPWA = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
-    setIsStandalone(!!isPWA);
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setShowButton(false);
+    }
+
+    // Register SW immediately
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        .then(reg => {
+          reg.update(); // Force update check
+        })
+        .catch(err => console.log('SW registration failed:', err));
+    }
 
     // Detect iOS
     const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
     setIsIOS(isIOSDevice);
 
-    const handleBeforeInstallPrompt = (e: any) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
-      setShowButton(true);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    const isPWA = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
+    setIsStandalone(!!isPWA);
 
     window.addEventListener('appinstalled', () => {
       setShowButton(false);
@@ -53,26 +83,18 @@ const InstallPWA = () => {
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
-      try {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          setShowButton(false);
-          setDeferredPrompt(null);
-        }
-      } catch (err) {
-        console.error('Install prompt error:', err);
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setShowButton(false);
+        setDeferredPrompt(null);
       }
-    } else if (isIOS) {
-      setShowIOSInstructions(true);
     } else {
-      // If prompt not available yet, maybe it's already installed or browser doesn't support it
-      // But we will try to guide the user better
-      const isInstalled = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
-      if (isInstalled) {
-        alert('التطبيق مثبت بالفعل على جهازك!');
+      // Fallback for other browsers if event didn't fire
+      if (isIOS) {
+        setShowIOSInstructions(true);
       } else {
-        alert('جاري تجهيز التحميل... يرجى الانتظار ثوانٍ قليلة ثم المحاولة مرة أخرى، أو استخدم خيار "التثبيت" من قائمة المتصفح مباشرة.');
+        alert('جاري تجهيز التحميل... يرجى الانتظار ثانية أو تحديث الصفحة إذا لم يظهر خيار التثبيت من المتصفح.');
       }
     }
   };
@@ -81,11 +103,11 @@ const InstallPWA = () => {
 
   return (
     <>
-      <button 
-        className="install-pwa-trigger hidden" 
+      <button
+        className="install-pwa-trigger hidden"
         onClick={handleInstallClick}
       />
-      
+
       {showButton && (
         <AnimatePresence>
           <motion.div
@@ -129,7 +151,7 @@ const InstallPWA = () => {
               className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl overflow-hidden"
               dir="rtl"
             >
-              <button 
+              <button
                 onClick={() => setShowIOSInstructions(false)}
                 className="absolute top-4 left-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
               >

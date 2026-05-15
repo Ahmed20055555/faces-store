@@ -6,17 +6,6 @@
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
-  "id": "/",
-  "categories": ["shopping", "lifestyle"],
-  "screenshots": [
-    {
-      "src": "/DK-Hero-Loreal-EN-3.avif",
-      "sizes": "1280x720",
-      "type": "image/avif",
-      "form_factor": "wide",
-      "label": "Balmy Store Home"
-    }
-  ],
   "icons": [
     {
       "src": "/icons/icon-72x72.png",

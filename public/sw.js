@@ -7,6 +7,9 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Minimal fetch handler to satisfy PWA requirements
-  event.respondWith(fetch(event.request));
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return new Response('Offline');
+    })
+  );
 });
