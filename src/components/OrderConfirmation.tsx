@@ -39,13 +39,13 @@ const OrderConfirmation = ({
     }, []);
 
     return (
-        <div className="fixed inset-0 z-[1000] bg-[#050505] overflow-hidden flex flex-col font-tajawal dir-rtl selection:bg-[#D4AF37] selection:text-black">
+        <div className="fixed inset-0 z-[1000] bg-[#050505] overflow-y-auto overflow-x-hidden flex flex-col font-tajawal dir-rtl selection:bg-[#D4AF37] selection:text-black">
             {/* Ultra-Luxury Ambient Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none" />
 
-            {/* TOP SECTION: Cinematic Hero Transition (55vh) */}
-            <div className="relative h-[55vh] flex flex-col items-center justify-center pt-4">
-                <div className="relative w-[320px] h-[420px] flex items-center justify-center">
+            {/* TOP SECTION: Cinematic Hero Transition (65vh to allow more space) */}
+            <div className="relative min-h-[65vh] flex flex-col items-center justify-center pt-12 pb-20">
+                <div className="relative w-[320px] h-[450px] flex items-center justify-center">
                     
                     {/* Source Beaker - Elegant Exit */}
                     <div className={cn(
@@ -63,7 +63,7 @@ const OrderConfirmation = ({
 
                     {/* Realistic Liquid Stream - Fades out with source */}
                     {step >= 2 && step < 6 && (
-                        <svg className="absolute inset-0 pointer-events-none z-20" width="320" height="420" viewBox="0 0 300 400">
+                        <svg className="absolute inset-0 pointer-events-none z-20 animate-out fade-out duration-1000" width="320" height="420" viewBox="0 0 300 400">
                             <path d="M 238 65 Q 210 130 150 145" stroke="#D4AF37" strokeWidth="4" strokeLinecap="round" fill="none" className="animate-liquid-pour" style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.6))' }} />
                         </svg>
                     )}
@@ -71,7 +71,7 @@ const OrderConfirmation = ({
                     {/* Target Bottle - The Hero Evolution */}
                     <div className={cn(
                         "relative transition-all duration-[2s] cubic-bezier(0.2, 1, 0.2, 1) transform z-40",
-                        step >= 6 ? "scale-125 translate-y-8" : "scale-100 translate-y-16",
+                        step >= 6 ? "scale-125 translate-y-4" : "scale-100 translate-y-12",
                         step >= 7 && "animate-float-gentle"
                     )}>
                         {/* Dramatic Environment Glow */}
@@ -80,15 +80,25 @@ const OrderConfirmation = ({
                             step >= 6 ? "scale-150 opacity-60" : "scale-50 opacity-0"
                         )} />
 
-                        <svg width="200" height="300" viewBox="0 0 160 300" fill="none" className="relative z-10">
+                        <svg width="200" height="340" viewBox="0 0 160 340" fill="none" className="relative z-10">
+                            {/* The Gold Cap (الغظاء الملكي) */}
+                            <g className={cn(
+                                "transition-all duration-[1.5s] cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                                step >= 6 ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0"
+                            )}>
+                                <rect x="55" y="5" width="50" height="35" rx="2" fill="#D4AF37" />
+                                <rect x="58" y="8" width="44" height="29" rx="1" fill="url(#capShine)" />
+                                <rect x="55" y="38" width="50" height="4" fill="#B08D26" />
+                            </g>
+
                             {/* Thick Crystal Glass */}
-                            <rect x="10" y="40" width="140" height="240" rx="6" stroke="white" strokeWidth="1.5" strokeOpacity="0.6" />
+                            <rect x="10" y="42" width="140" height="240" rx="6" stroke="white" strokeWidth="1.5" strokeOpacity="0.6" />
                             
                             {/* Filling Liquid Level */}
                             <clipPath id="heroFillClip">
                                 <rect 
                                     x="10" 
-                                    y={step >= 3 ? "40" : "280"} 
+                                    y={step >= 3 ? "42" : "282"} 
                                     width="140" 
                                     height="240" 
                                     className="transition-all duration-[5s] cubic-bezier(0.4, 0, 0.2, 1)" 
@@ -96,25 +106,18 @@ const OrderConfirmation = ({
                             </clipPath>
                             
                             <g clipPath="url(#heroFillClip)">
-                                <rect x="12" y="42" width="136" height="236" fill="url(#luxuryLiquidGrad)" className="opacity-60" />
+                                <rect x="12" y="44" width="136" height="236" fill="url(#luxuryLiquidGrad)" className="opacity-60" />
                                 {[...Array(step >= 6 ? 12 : 6)].map((_, i) => (
                                     <circle key={i} cx={30 + Math.random() * 100} cy={260} r={0.8 + Math.random() * 1.5} fill="white" fillOpacity="0.4" className="animate-bubble" style={{ animationDelay: `${i * 0.4}s` }} />
                                 ))}
                             </g>
 
-                            {/* Impact Splash - Only during pouring */}
-                            {step >= 3 && step < 6 && (
-                                <g className="animate-splash" style={{ transform: 'translate(150px, 145px)' }}>
-                                    <circle r="2" fill="#D4AF37" className="animate-ping" />
-                                </g>
-                            )}
-
-                            {/* Name Engraving - The Soul of the Bottle */}
+                            {/* Name Engraving */}
                             {step >= 4 && (
                                 <g>
                                     <text
                                         x="50%"
-                                        y="148"
+                                        y="150"
                                         textAnchor="middle"
                                         fill="#D4AF37"
                                         className={cn(
@@ -127,7 +130,7 @@ const OrderConfirmation = ({
                                     >
                                         {customerName}
                                     </text>
-                                    <path d="M 45 168 H 115" stroke="#D4AF37" strokeWidth="1.5" className="animate-draw-line" style={{ filter: 'drop-shadow(0 0 5px #D4AF37)' }} />
+                                    <path d="M 45 170 H 115" stroke="#D4AF37" strokeWidth="1.5" className="animate-draw-line" style={{ filter: 'drop-shadow(0 0 5px #D4AF37)' }} />
                                 </g>
                             )}
 
@@ -138,15 +141,20 @@ const OrderConfirmation = ({
                                     </stop>
                                     <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.2" />
                                 </linearGradient>
+                                <linearGradient id="capShine" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stopColor="#FFD700" />
+                                    <stop offset="50%" stopColor="#D4AF37" />
+                                    <stop offset="100%" stopColor="#B08D26" />
+                                </linearGradient>
                             </defs>
                         </svg>
                     </div>
                 </div>
             </div>
 
-            {/* BOTTOM SECTION: Detailed Status Ritual */}
+            {/* BOTTOM SECTION: Detailed Status Ritual (Added Padding Top for spacing) */}
             <div className={cn(
-                "flex-1 flex flex-col items-center px-8 transition-all duration-[1.5s] delay-700",
+                "flex-1 flex flex-col items-center px-8 pt-20 transition-all duration-[1.5s] delay-700 pb-20",
                 step >= 7 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
             )}>
                 <div className="text-center space-y-4 mb-8">
