@@ -53,18 +53,26 @@ const InstallPWA = () => {
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setShowButton(false);
-        setDeferredPrompt(null);
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          setShowButton(false);
+          setDeferredPrompt(null);
+        }
+      } catch (err) {
+        console.error('Install prompt error:', err);
       }
+    } else if (isIOS) {
+      setShowIOSInstructions(true);
     } else {
-      // Fallback for other browsers if event didn't fire
-      if (isIOS) {
-        setShowIOSInstructions(true);
+      // If prompt not available yet, maybe it's already installed or browser doesn't support it
+      // But we will try to guide the user better
+      const isInstalled = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
+      if (isInstalled) {
+        alert('التطبيق مثبت بالفعل على جهازك!');
       } else {
-        alert('جاري تجهيز التحميل... يرجى الانتظار ثانية أو تحديث الصفحة إذا لم يظهر خيار التثبيت من المتصفح.');
+        alert('جاري تجهيز التحميل... يرجى الانتظار ثوانٍ قليلة ثم المحاولة مرة أخرى، أو استخدم خيار "التثبيت" من قائمة المتصفح مباشرة.');
       }
     }
   };
