@@ -47,47 +47,56 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                 <div className="bg-black text-white h-9 flex items-center overflow-hidden">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-12 w-full flex justify-between items-center relative">
                         {/* Right: Country/Lang (Visible on all) */}
-                        <div className="flex items-center gap-2 cursor-pointer z-10 shrink-0">
-                            <span className="flex items-center gap-1 text-[10px] md:text-[11px] font-medium">
-                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-5 md:w-[27px] h-3 md:h-2 object-cover rounded-[1px]" />
-                                <span className="hidden md:inline">السعودية</span> English
+                        <div className="hidden lg:flex items-center gap-2 cursor-pointer z-10">
+                            <span className="flex items-center gap-2 text-[10px] md:text-[11px] font-bold tracking-tight hover:opacity-70 transition-opacity">
+                                <img src="https://flagcdn.com/w20/sa.png" alt="KSA" className="w-5 md:w-6 h-3.5 object-cover rounded-[2px] shadow-sm" />
+                                <span className="text-white/60">KSA</span>
+                                <span className="text-white border-l border-white/20 pl-2">English</span>
                             </span>
                         </div>
 
-                        {/* Center: Swiper Slider (Desktop Only) */}
-                        <div className="hidden lg:flex flex-grow max-w-full md:max-w-2xl px-12 relative h-full items-center overflow-hidden">
-                            <Swiper
-                                modules={[Autoplay, Navigation]}
-                                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                                navigation={{
-                                    nextEl: '.swiper-button-next-custom',
-                                    prevEl: '.swiper-button-prev-custom',
+                        {/* Center: Swiper Slider (Perfectly Centered) */}
+                        <div className="flex-grow flex justify-center items-center overflow-hidden">
+                            <div className="w-full max-w-[320px] md:max-w-2xl">
+                                <Swiper
+                                    modules={[Autoplay, Navigation]}
+                                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                                    loop={true}
+                                    slidesPerView={1}
+                                    className="w-full h-9"
+                                >
+                                    {PROMO_MESSAGES.map((msg, idx) => (
+                                        <SwiperSlide key={idx} className="flex justify-center items-center h-full">
+                                            <div className="flex items-center justify-center gap-2 w-full">
+                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full animate-pulse"></span>
+                                                <span className="text-[10px] md:text-[12px] font-black leading-none whitespace-nowrap block text-center text-white tracking-wide uppercase">
+                                                    {msg}
+                                                </span>
+                                                <span className="w-1 h-1 bg-[#8c1d3b] rounded-full animate-pulse"></span>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
+                        </div>
+
+                        {/* Left: Download App (Premium Pill) */}
+                        <div className="flex items-center gap-3 z-10">
+                            <button
+                                onClick={() => {
+                                    const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
+                                    if (btn) btn.click();
                                 }}
-                                loop={true}
-                                slidesPerView={1}
-                                className="w-full h-full"
+                                className="group relative flex items-center gap-1.5 bg-white/10 hover:bg-[#8c1d3b] px-3 py-1.5 rounded-full border border-white/10 transition-all duration-500"
                             >
-                                {PROMO_MESSAGES.map((msg, idx) => (
-                                    <SwiperSlide key={idx} className="flex justify-center items-center h-full">
-                                        <span className="text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap block text-center w-full text-white/90">
-                                            {msg}
-                                        </span>
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </div>
-
-                        {/* Left: Download App (Visible on all) */}
-                        <div className="flex items-center gap-2 md:gap-6 z-10 shrink-0 text-[10px] md:text-[11px] font-medium transition-opacity cursor-pointer">
-                            <span onClick={() => {
-                                const btn = document.querySelector('.install-pwa-trigger') as HTMLButtonElement;
-                                if (btn) btn.click();
-                            }} className="hover:text-gray-300 flex items-center gap-1 bg-white/10 px-2 md:px-3 py-1 rounded-full border border-white/5 md:bg-transparent md:p-0 md:border-0 md:border-r md:border-white/20 md:pr-6">
-                                <Download size={12} className="text-[#8c1d3b] animate-bounce md:animate-none" />
-                                <span className="whitespace-nowrap">تحميل التطبيق</span>
-                            </span>
-                            <span onClick={() => router.push('/testimonials')} className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">آراء العملاء</span>
-                            <span className="hidden lg:block hover:text-gray-300 border-r border-white/20 pr-6">اتصل بنا</span>
+                                <Download size={13} className="text-[#8c1d3b] group-hover:text-white animate-bounce md:animate-none" />
+                                <span className="text-[10px] md:text-[11px] font-black text-white whitespace-nowrap">تحميل التطبيق</span>
+                                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8c1d3b] opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8c1d3b]"></span>
+                                </span>
+                            </button>
+                            <span onClick={() => router.push('/testimonials')} className="hidden xl:block text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4 ml-4">آراء العملاء</span>
                         </div>
                     </div>
                 </div>
