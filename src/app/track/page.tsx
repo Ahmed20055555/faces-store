@@ -6,6 +6,8 @@ import Footer from '@/components/Footer';
 import { Package, Truck, CheckCircle2, Droplets, MapPin, Search, Clock, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import OrderConfirmation from '@/components/OrderConfirmation';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
 const TRACKING_STEPS = [
     {
@@ -39,6 +41,7 @@ const TRACKING_STEPS = [
 ];
 
 export default function TrackOrderPage() {
+    const { items } = useSelector((state: RootState) => state.cart);
     const [currentStep, setCurrentStep] = useState(1);
     const [showCinematic, setShowCinematic] = useState(false);
     const orderNumber = "BALMY-51732";
@@ -50,12 +53,15 @@ export default function TrackOrderPage() {
         return () => { clearTimeout(timer2); clearTimeout(timer3); };
     }, []);
 
+    // Find if there is an engraved item
+    const engravedItem = items.find(item => item.engravedName);
+
     // Mock data for the cinematic experience
     const orderData = {
-        customerName: "أحمد محمد",
+        customerName: engravedItem?.engravedName || "أحمد محمد",
         orderId: orderNumber,
-        productName: "Balmy Noir",
-        productImage: null,
+        productName: engravedItem?.name || "Balmy Noir",
+        productImage: engravedItem?.image || null,
         collection: "black" as const
     };
 

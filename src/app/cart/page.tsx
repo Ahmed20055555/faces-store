@@ -66,6 +66,11 @@ export default function CartPage() {
                                                     <Link href={`/product/${item.id}`} className="text-right hover:opacity-80 transition-opacity flex-1">
                                                         <span className="text-[15px] font-black text-gray-900 block mb-1">{item.brand}</span>
                                                         <h3 className="text-[17px] font-bold text-gray-600 mb-2 leading-tight">{item.name}</h3>
+                                                        {item.engravedName && (
+                                                            <p className="text-[14px] font-bold text-[#D4AF37] mb-2">
+                                                                نحت مخصص: {item.engravedName}
+                                                            </p>
+                                                        )}
                                                         <p className="text-[13px] text-gray-400">الحجم: 100ml</p>
                                                     </Link>
                                                     <div className="text-left flex flex-col items-end">
@@ -160,41 +165,18 @@ export default function CartPage() {
                                             <span>هل لديك كود خصم؟</span>
                                         </div>
                                     </AccordionTrigger>
-                                    <AccordionContent className="px-6 pb-6 pt-2">
+                                    <AccordionContent className="px-3 pb-3 pt-2">
                                         <div className="flex gap-2">
                                             <input type="text" placeholder="ادخل الكود" className="flex-1 border p-2 rounded-sm outline-none focus:border-black" />
                                             <button className="bg-black text-white px-4 py-2 rounded-sm font-bold">تطبيق</button>
                                         </div>
                                     </AccordionContent>
                                 </AccordionItem>
-
-                                <AccordionItem value="qitaf" className="border-b">
-                                    <AccordionTrigger className="px-6 py-4 hover:no-underline font-black text-gray-900">
-                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[8px] font-bold text-[#8c1d3b]">FACES</div>
-                                            <span>قطاف</span>
-                                        </div>
-                                    </AccordionTrigger>
-                                    <AccordionContent className="px-6 pb-6 pt-2">
-                                        سجل دخولك لاستبدال نقاط قطاف.
-                                    </AccordionContent>
-                                </AccordionItem>
                             </Accordion>
 
                             <div className="p-6">
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-6 h-6 bg-[#8c1d3b] text-white flex items-center justify-center font-bold text-[10px] rounded-sm">M</div>
-                                        <span className="text-[14px] font-black text-gray-900">استبدل نقاط ميوز</span>
-                                    </div>
-                                </div>
-                                <p className="text-[12px] text-gray-500 mb-4 leading-relaxed">
-                                    اكسب 3587 نقاط ( <span className="font-bold text-black font-sans">35.87 ريال</span> ) من هذا الطلب.
-                                    <br />
-                                    <span className="text-[#8c1d3b] font-bold cursor-pointer hover:underline">انضم إلى ميوز أو اربط حسابك</span> لجمع واسترداد النقاط (يستغرق 60 ثانية)
-                                </p>
 
-                                <div className="border-t pt-6 flex flex-col gap-4">
+                                <div className="  flex flex-col gap-4">
                                     <div className="flex justify-between items-center text-[14px] text-gray-500 font-bold">
                                         <span>المجموع الجزئي</span>
                                         <span className="font-sans text-black">{subtotal.toLocaleString()} ريال</span>

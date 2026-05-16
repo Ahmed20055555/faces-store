@@ -120,6 +120,11 @@ export default function CartDrawer() {
                         <div className="text-right">
                           <h3 className="text-[16px] font-black text-gray-900 mb-1">{item.brand}</h3>
                           <h4 className="text-[14px] font-bold text-gray-600 mb-1 leading-tight">{item.name}</h4>
+                          {item.engravedName && (
+                              <p className="text-[12px] font-bold text-[#D4AF37] mb-1">
+                                  نحت مخصص: {item.engravedName}
+                              </p>
+                          )}
                           <p className="text-[13px] text-gray-500 mb-2">الحجم: 100ml</p>
                           <p className="text-[16px] font-black text-gray-900">{item.price} ريال</p>
                         </div>

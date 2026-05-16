@@ -7,6 +7,7 @@ interface CartItem {
   price: string;
   image: string;
   quantity: number;
+  engravedName?: string;
 }
 
 interface CartState {
@@ -24,7 +25,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<Omit<CartItem, 'quantity'>>) => {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      const existingItem = state.items.find(item => item.id === action.payload.id && item.engravedName === action.payload.engravedName);
       if (existingItem) {
         existingItem.quantity += 1;
       } else {

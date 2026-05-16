@@ -9,6 +9,7 @@ import { toggleFavorite } from '@/lib/features/favoritesSlice';
 import { RootState } from '@/lib/store';
 import ProductCard from "@/components/ProductCard";
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -25,6 +26,7 @@ import ImageGalleryModal from "@/components/ImageGalleryModal";
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = React.use(params);
     const id = resolvedParams.id;
+    const router = useRouter();
 
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
@@ -184,49 +186,37 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                             <span className="text-[16px] font-bold text-gray-900">ريال</span>
                         </div>
 
-                        {/* Delivery & Pickup Options */}
-                        <div className="flex flex-col gap-6 mb-8 mt-2">
-                            {/* Delivery Section */}
-                            <div className="flex items-start justify-between gap-4">
-                                <div className="flex flex-col items-start">
-                                    <h4 className="text-[16px] font-bold text-gray-900 underline underline-offset-4 decoration-1">التوصيل للمنازل الرياض</h4>
-                                    <div className="flex items-center gap-2 mt-1">
-                                        <span className="text-[14px] text-gray-600">التوصيل خلال 2 ساعة</span>
-                                        <span className="w-2 h-2 rounded-full bg-[#32a852]"></span>
-                                    </div>
-                                </div>
-                                <Truck className="w-8 h-8 text-black shrink-0" strokeWidth={1} />
-                            </div>
 
-                            {/* Pickup Section */}
-                            <div className="flex items-start justify-between gap-4">
-                                <div className="flex flex-col items-start">
-                                    <h4 className="text-[16px] font-bold text-gray-900 underline underline-offset-4 decoration-1 text-right">الاستلام من FACES - GRANADA MALL - RIYADH</h4>
-                                    <div className="flex items-center gap-2 mt-1">
-                                        <span className="text-[14px] text-gray-600">متوفر للاستلام غداً</span>
-                                        <span className="w-2 h-2 rounded-full bg-[#32a852]"></span>
-                                    </div>
-                                </div>
-                                <MapPin className="w-8 h-8 text-black shrink-0" strokeWidth={1} />
-                            </div>
-                        </div>
 
                         {/* Add to Bag & Favorite */}
-                        <div className="flex gap-3 mb-6">
+                        <div className="flex flex-col gap-3 mb-6">
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="flex-1 bg-[#071424] text-white font-bold text-[14px] md:text-[16px] py-4 rounded-sm hover:bg-black transition-colors"
+                                >
+                                    إضافة للسلة
+                                </button>
+                                <button
+                                    onClick={handleToggleFavorite}
+                                    className="w-14 shrink-0 border border-gray-200 flex items-center justify-center rounded-sm hover:bg-gray-50 transition-colors group"
+                                >
+                                    <Heart
+                                        className={`w-6 h-6 transition-colors ${isFavorite ? 'fill-[#8c1d3b] text-[#8c1d3b]' : 'text-gray-400 group-hover:text-black'}`}
+                                        strokeWidth={1.5}
+                                    />
+                                </button>
+                            </div>
                             <button
-                                onClick={handleAddToCart}
-                                className="flex-1 bg-[#071424] text-white font-bold text-[14px] md:text-[16px] py-4 rounded-sm hover:bg-black transition-colors"
+                                onClick={() => {
+                                    const encodedName = encodeURIComponent("ماسك غرينات إنتينس");
+                                    const encodedBrand = encodeURIComponent("نارسيسو رودريغيز");
+                                    const encodedImage = encodeURIComponent(mainImage);
+                                    router.push(`/engraving?id=${id}&name=${encodedName}&brand=${encodedBrand}&price=1064&image=${encodedImage}`);
+                                }}
+                                className="w-full border-2 border-[#D4AF37] text-black font-black text-[14px] md:text-[16px] py-3 rounded-sm hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center justify-center gap-2"
                             >
-                                إضافة للسلة
-                            </button>
-                            <button
-                                onClick={handleToggleFavorite}
-                                className="w-14 shrink-0 border border-gray-200 flex items-center justify-center rounded-sm hover:bg-gray-50 transition-colors group"
-                            >
-                                <Heart
-                                    className={`w-6 h-6 transition-colors ${isFavorite ? 'fill-[#8c1d3b] text-[#8c1d3b]' : 'text-gray-400 group-hover:text-black'}`}
-                                    strokeWidth={1.5}
-                                />
+                                 إضافة نحت اسم على الزجاجة
                             </button>
                         </div>
 
