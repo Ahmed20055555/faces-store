@@ -1,91 +1,154 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  TrendingUp,
-  Users,
   ShoppingBag,
+  Users,
   DollarSign,
+  BarChart3,
+  TrendingUp,
   ArrowUpRight,
-  ArrowDownRight
+  Clock,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const stats = [
-  { label: "إجمالي المبيعات", value: "45,231 ر.س", icon: DollarSign, trend: "+12.5%", positive: true },
-  { label: "الطلبات النشطة", value: "156", icon: ShoppingBag, trend: "+8.2%", positive: true },
-  { label: "العملاء الجدد", value: "2,345", icon: Users, trend: "-3.1%", positive: false },
-  { label: "معدل التحويل", value: "4.2%", icon: TrendingUp, trend: "+1.4%", positive: true },
+const STATS = [
+  { label: "إجمالي المبيعات", value: "١٢٨,٤٥٠ ر.س", change: "+١٢٪", icon: DollarSign, color: "text-green-600", bg: "bg-green-50" },
+  { label: "الطلبات الجديدة", value: "٤٣٢", change: "+٥٪", icon: ShoppingBag, color: "text-blue-600", bg: "bg-blue-50" },
+  { label: "العملاء النشطون", value: "٢,٨٤٠", change: "+١٨٪", icon: Users, color: "text-purple-600", bg: "bg-purple-50" },
+  { label: "معدل التحويل", value: "٣.٢٪", change: "+٢٪", icon: BarChart3, color: "text-[#5a8a6a]", bg: "bg-[#accfad]/10" },
 ];
 
-export default function AdminDashboard() {
+const RECENT_ORDERS = [
+  { id: "#١٢٩٠٤", customer: "أحمد العتيبي", amount: "١,٢٤٠ ر.س", status: "مكتمل", time: "منذ ٥ دقائق" },
+  { id: "#١٢٩٠٣", customer: "سارة محمد", amount: "٨٥٠ ر.س", status: "قيد التنفيذ", time: "منذ ١٢ دقيقة" },
+  { id: "#١٢٩٠٢", customer: "فهد الحربي", amount: "٢,١٠٠ ر.س", status: "مكتمل", time: "منذ ٣٢ دقيقة" },
+  { id: "#١٢٩٠١", customer: "نورة القحطاني", amount: "٤٥٠ ر.س", status: "بانتظار الدفع", time: "منذ ساعة" },
+];
+
+export default function AdminOverview() {
+  const [liveVisitors, setLiveVisitors] = useState(142);
+
+  // Simulate live visitor changes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveVisitors(prev => prev + (Math.random() > 0.5 ? 1 : -1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="space-y-10">
-      {/* Welcome Section - Removed the Add Button */}
-      <div className="flex justify-between items-end">
+    <div className="max-w-[1600px] mx-auto animate-in fade-in duration-1000 space-y-8 md:space-y-12 pb-20 px-4 md:px-0" dir="rtl">
+
+      {/* Header Section with Live Status */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 mb-2">أهلاً بك يا مدير </h1>
-          <p className="text-gray-500 font-medium">إليك ما يحدث في متجرك اليوم.</p>
+          <h1 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight">نظرة عامة على الأداء</h1>
+          <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 md:mt-2 uppercase tracking-[0.2em]">Balmy Real-time Intelligence</p>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-4 md:gap-6 bg-black text-white p-4 md:p-6 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl shadow-black/20 self-start lg:self-auto"
+        >
+          <div className="relative shrink-0">
+            <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full animate-ping absolute inset-0 opacity-75"></div>
+            <div className="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full relative border-2 md:border-4 border-black"></div>
+          </div>
+          <div className="shrink-0">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-xl md:text-3xl font-black tabular-nums">{liveVisitors}</span>
+              <Users size={16} className="text-[#accfad] md:w-5 md:h-5" />
+            </div>
+            <p className="text-[8px] md:text-[10px] font-black text-gray-400 uppercase tracking-widest mt-0.5">متسوق الآن</p>
+          </div>
+          <div className="h-8 md:h-10 w-[1px] bg-white/10 mx-1 md:mx-2"></div>
+          <div className="block">
+            <p className="text-[10px] md:text-xs font-bold text-[#accfad]">+١٢٪</p>
+            <p className="text-[8px] md:text-[10px] font-medium text-gray-500 uppercase">نشاط مرتفع</p>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, idx) => (
+      {/* Main Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {STATS.map((stat, idx) => (
           <motion.div
             key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: idx * 0.1 }}
-            className="bg-white p-6 rounded-[2.5rem] border border-gray-50 shadow-sm hover:shadow-md transition-shadow"
+            className="bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group relative overflow-hidden"
           >
-            <div className="flex justify-between items-start mb-4">
-              <div className="p-3 bg-gray-50 rounded-2xl text-black">
-                <stat.icon size={24} />
+            <div className={`absolute top-0 right-0 w-24 md:w-32 h-24 md:h-32 ${stat.bg} rounded-full blur-[60px] opacity-0 group-hover:opacity-40 transition-opacity`}></div>
+            <div className="flex items-start justify-between mb-4 md:mb-6 relative">
+              <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform`}>
+                <stat.icon size={20} className="md:w-6 md:h-6" />
               </div>
-              <div className={`flex items-center gap-1 text-xs font-black px-2 py-1 rounded-full ${stat.positive ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}>
-                {stat.positive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                {stat.trend}
+              <div className="flex flex-col items-end">
+                <span className="text-[9px] md:text-[11px] font-black text-green-600 bg-green-50 px-2 md:px-3 py-1 rounded-full">{stat.change}</span>
               </div>
             </div>
-            <p className="text-gray-500 text-sm font-bold mb-1">{stat.label}</p>
-            <h3 className="text-2xl font-black text-gray-900">{stat.value}</h3>
+            <p className="text-[10px] md:text-xs font-black text-gray-400 mb-1 uppercase tracking-tighter relative">{stat.label}</p>
+            <h3 className="text-xl md:text-3xl font-black text-gray-900 relative">{stat.value}</h3>
           </motion.div>
         ))}
       </div>
 
-      {/* Recent Activity Placeholder */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 bg-white p-8 rounded-[3rem] border border-gray-50 shadow-sm h-[400px] flex items-center justify-center relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-white -z-10" />
-          <div className="text-center">
-            <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="text-black" size={32} />
-            </div>
-            <h3 className="text-xl font-black mb-2">رسم بياني للمبيعات</h3>
-            <p className="text-gray-400 text-sm">سيتم ربط البيانات الحقيقية قريباً</p>
+      {/* Recent Activity Table Style */}
+      <div className="bg-white rounded-[2rem] md:rounded-[3rem] border border-gray-100 shadow-sm overflow-hidden">
+        <div className="p-5 md:p-10 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
+          <div>
+            <h3 className="text-[15px] md:text-xl font-black text-gray-900">آخر الطلبات</h3>
+            <p className="text-[10px] md:text-xs font-bold text-gray-400 mt-1 tracking-tighter">سجل العمليات اللحظي</p>
           </div>
-        </div>
-
-        <div className="bg-white p-8 rounded-[3rem] border border-gray-50 shadow-sm">
-          <h3 className="text-xl font-black mb-6">أحدث الطلبات</h3>
-          <div className="space-y-6">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center font-bold text-gray-400">
-                  #{item}
-                </div>
-                <div className="flex-grow">
-                  <p className="text-sm font-black text-gray-900">أحمد محمد</p>
-                  <p className="text-xs text-gray-400">منذ 10 دقائق</p>
-                </div>
-                <div className="text-sm font-black text-green-600">+120 ر.س</div>
-              </div>
-            ))}
-          </div>
-          <button className="w-full mt-8 py-3 bg-gray-50 text-gray-900 rounded-2xl font-black text-xs hover:bg-gray-100 transition-all">
-            عرض كل الطلبات
+          <button className="text-[10px] md:text-xs font-black text-[#5a8a6a] hover:underline flex items-center gap-1 md:gap-2">
+            مشاهدة الكل <ArrowUpRight size={12} className="md:w-3.5 md:h-3.5" />
           </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-right min-w-[600px] md:min-w-full">
+            <thead>
+              <tr className="text-[9px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">
+                <th className="px-6 md:px-10 py-4 md:py-6 text-right">رقم الطلب</th>
+                <th className="px-6 md:px-10 py-4 md:py-6">العميل</th>
+                <th className="px-6 md:px-10 py-4 md:py-6">المبلغ</th>
+                <th className="px-6 md:px-10 py-4 md:py-6">الحالة</th>
+                <th className="px-6 md:px-10 py-4 md:py-6 text-left">التوقيت</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {RECENT_ORDERS.map((order, idx) => (
+                <tr key={idx} className="group hover:bg-gray-50/50 transition-colors">
+                  <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900 text-right">{order.id}</td>
+                  <td className="px-6 md:px-10 py-4 md:py-6">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#accfad]/20 flex items-center justify-center text-[8px] md:text-[10px] font-black text-[#5a8a6a]">
+                        {order.customer[0]}
+                      </div>
+                      <span className="text-xs md:text-sm font-bold text-gray-700 truncate max-w-[100px] md:max-w-none">{order.customer}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900">{order.amount}</td>
+                  <td className="px-6 md:px-10 py-4 md:py-6">
+                    <span className={`px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[10px] font-black ${order.status === "مكتمل" ? "bg-green-50 text-green-600" :
+                        order.status === "بانتظار الدفع" ? "bg-orange-50 text-orange-600" :
+                          "bg-blue-50 text-blue-600"
+                      }`}>
+                      {order.status}
+                    </span>
+                  </td>
+                  <td className="px-6 md:px-10 py-4 md:py-6 text-left">
+                    <div className="flex items-center justify-end gap-1 md:gap-2 text-[8px] md:text-[10px] font-bold text-gray-400">
+                      <Clock size={10} className="md:w-3 md:h-3" />
+                      {order.time}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

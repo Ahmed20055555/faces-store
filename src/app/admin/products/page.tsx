@@ -48,9 +48,9 @@ export default function AdminProducts() {
       <div className="bg-white p-4 rounded-[2rem] border border-gray-50 shadow-sm flex flex-col md:flex-row gap-4 items-center">
         <div className="relative flex-grow w-full">
           <Search className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-          <input 
-            type="text" 
-            placeholder="ابحث باسم المنتج، الماركة، أو الـ SKU..." 
+          <input
+            type="text"
+            placeholder="ابحث باسم المنتج، الماركة، أو الـ SKU..."
             className="w-full bg-gray-50 border-none focus:bg-white focus:ring-4 focus:ring-black/5 rounded-2xl py-4 pr-14 pl-6 text-sm font-bold outline-none transition-all"
           />
         </div>

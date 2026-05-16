@@ -1,0 +1,215 @@
+"use client";
+
+import React, { useState, useRef } from "react";
+import { Save, Plus, Trash2, Image as ImageIcon, Sparkles, GripVertical, UploadCloud } from "lucide-react";
+
+interface ReleaseItem {
+  id: number;
+  title: string;
+  image: string;
+}
+
+const INITIAL_RELEASES: ReleaseItem[] = [
+  { id: 1, title: "YSL Gift Set", image: "/ysl-gwp-ksa.avif" },
+  { id: 2, title: "Prada Collection", image: "/prada-gwp.avif" },
+  { id: 3, title: "Lancôme Exclusive", image: "/lancome-gwp-ksa-2.avif" },
+  { id: 4, title: "Issey Miyake", image: "/issey-gwp-uae2.avif" },
+];
+
+export default function NewReleasesPage() {
+  const [releases, setReleases] = useState<ReleaseItem[]>(INITIAL_RELEASES);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const fileInputRefs = useRef<{ [key: number]: HTMLInputElement | null }>({});
+
+  const handleImageUpload = (id: number, file: File) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setReleases(prev => prev.map(r => r.id === id ? { ...r, image: reader.result as string } : r));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleUpdate = (id: number, value: string) => {
+    setReleases(prev => prev.map(r => r.id === id ? { ...r, title: value } : r));
+  };
+
+  const addRelease = () => {
+    setReleases(prev => [...prev, { id: Date.now(), title: "إصدار جديد", image: "" }]);
+  };
+
+  const removeRelease = (id: number) => {
+    setReleases(prev => prev.filter(r => r.id !== id));
+  };
+
+  const handleDragStart = (index: number) => setDraggedIndex(index);
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === index) return;
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+    setReleases(prev => {
+      const updated = [...prev];
+      const [dragged] = updated.splice(draggedIndex, 1);
+      updated.splice(dropIndex, 0, dragged);
+      return updated;
+    });
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("New Releases Data:", releases);
+    alert("تم حفظ الإصدارات بنجاح!");
+  };
+
+  return (
+    <form onSubmit={onSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-6 md:space-y-10 px-4 py-8 md:pb-20 font-sans" dir="rtl">
+      
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">الإصدارات الجديدة</h1>
+          <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em]">New Arrivals & Drops</p>
+        </div>
+        <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start">
+          <div className="w-2 h-2 rounded-full bg-[#5a8a6a] animate-pulse"></div>
+          <span className="text-[10px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 items-start">
+        
+        {/* Edit Panel */}
+        <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm space-y-6">
+          <div className="flex justify-between items-center border-b border-gray-50 pb-4 gap-4">
+            <h3 className="text-base md:text-lg font-black text-gray-900 tracking-tight flex items-center gap-2">
+              <Sparkles size={20} className="text-[#accfad]" />
+              إدارة الإصدارات
+            </h3>
+            <button
+              type="button"
+              onClick={addRelease}
+              className="bg-black text-white px-4 py-2 rounded-full text-[10px] md:text-xs font-black flex items-center gap-1.5 hover:bg-gray-800 transition-all shrink-0"
+            >
+              <Plus size={14} /> إضافة إصدار
+            </button>
+          </div>
+
+          <div className="space-y-3 max-h-[450px] md:max-h-[600px] overflow-y-auto pr-1 no-scrollbar">
+            {releases.map((release, index) => (
+              <div
+                key={release.id}
+                draggable
+                onDragStart={() => handleDragStart(index)}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDrop={(e) => handleDrop(e, index)}
+                onDragEnd={() => { setDraggedIndex(null); setDragOverIndex(null); }}
+                className={`
+                  flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl border group transition-all duration-300 select-none
+                  ${draggedIndex === index
+                    ? "opacity-40 scale-95 border-dashed border-gray-300 bg-gray-100"
+                    : dragOverIndex === index
+                      ? "border-[#accfad] bg-[#accfad]/10 shadow-lg scale-[1.02]"
+                      : "bg-gray-50/50 border-gray-100 hover:bg-white hover:shadow-md"
+                  }
+                `}
+              >
+                <div className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 transition-colors shrink-0">
+                  <GripVertical size={18} />
+                </div>
+
+                <div
+                  onClick={() => fileInputRefs.current[release.id]?.click()}
+                  className="w-14 h-14 md:w-20 md:h-20 bg-white border border-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0 cursor-pointer relative shadow-sm"
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={(el) => { fileInputRefs.current[release.id] = el; }}
+                    onChange={(e) => { const file = e.target.files?.[0]; if (file) handleImageUpload(release.id, file); }}
+                    className="hidden"
+                  />
+                  {release.image ? (
+                    <>
+                      <img src={release.image} alt={release.title} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <UploadCloud size={14} className="text-white" />
+                      </div>
+                    </>
+                  ) : (
+                    <ImageIcon size={20} className="text-gray-200" />
+                  )}
+                </div>
+
+                <div className="flex-1 space-y-0.5 min-w-0">
+                  <label className="text-[9px] md:text-[10px] font-black text-gray-400 uppercase tracking-widest">Release #{index + 1}</label>
+                  <input
+                    type="text"
+                    value={release.title}
+                    onChange={(e) => handleUpdate(release.id, e.target.value)}
+                    className="w-full bg-white border border-gray-100 rounded-xl text-[13px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 p-2 md:p-2.5 text-gray-900 outline-none transition-all shadow-sm"
+                    placeholder="أدخل اسم الإصدار..."
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => removeRelease(release.id)}
+                  className="text-gray-300 hover:text-red-500 p-2 transition-colors bg-white rounded-full shadow-sm border border-gray-100 shrink-0 sm:opacity-0 sm:group-hover:opacity-100"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
+            <GripVertical size={14} className="text-gray-300" />
+            <p className="text-[10px] font-bold text-gray-400">اسحب للترتيب · اضغط الأيقونة لرفع صورة</p>
+          </div>
+        </div>
+
+        {/* Live Preview */}
+        <div className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm relative overflow-hidden h-fit self-start min-h-[300px] flex flex-col justify-center">
+          <div className="absolute top-4 right-6 text-[9px] font-black text-gray-200 uppercase tracking-widest">Scroller Preview</div>
+          <h4 className="text-base md:text-xl font-black mb-4 tracking-tight mt-4">إصدارات جديدة</h4>
+          <div className="grid grid-cols-2 gap-4">
+            {releases.slice(0, 4).map((release) => (
+              <div key={release.id} className="space-y-2 animate-in fade-in zoom-in duration-500">
+                <div className="aspect-square bg-gray-50 rounded-2xl border border-gray-50 overflow-hidden relative shadow-sm">
+                  {release.image ? (
+                    <img src={release.image} alt={release.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <ImageIcon size={28} className="text-gray-200 opacity-20" />
+                    </div>
+                  )}
+                </div>
+                <p className="text-[10px] md:text-xs font-black text-gray-700 text-center truncate">{release.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* FIXED SAVE BUTTON ON MOBILE */}
+      <div className="fixed md:sticky bottom-6 left-4 right-4 md:bottom-8 md:left-auto md:right-auto z-50 flex justify-center md:justify-end">
+        <button type="submit" className="w-full md:w-auto bg-black text-white px-10 md:px-12 py-4 md:py-5 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-2xl shadow-black/20 hover:scale-105 transition-all">
+          <Save size={20} />
+          حفظ التغييرات
+        </button>
+      </div>
+
+    </form>
+  );
+}

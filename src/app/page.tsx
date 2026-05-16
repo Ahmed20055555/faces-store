@@ -287,7 +287,7 @@ export default function Home() {
       <section className="py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
+            <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
               اصدارات جديدة
             </h2>
           </div>
@@ -332,33 +332,12 @@ export default function Home() {
 
       {/* Brand of the Week – Issey Miyake */}
       <ProductSection
-        title="ماركة الأسبوع - ايسي مياكي"
+        title="ماركة الأسبوع "
         bannerSrc="/IMLDI_BANNER_750x714.avif"
         bannerAlt="Issey Miyake Brand of the Week"
         products={ISSEY_PRODUCTS}
       />
 
-      {/* Gift Card Banner */}
-      <section className="py-6 bg-white" dir="rtl">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          {/* Desktop Image */}
-          <img
-            src="/DK-Promo-EN-1.avif"
-            className="hidden md:block w-full h-auto rounded-[8px]"
-            alt="Gift Card"
-          />
-          {/* Mobile HTML Banner */}
-          <div className="md:hidden w-full bg-[#e6e2df] text-[#0f4531] rounded-[8px] px-4 py-6 flex flex-col justify-center items-center text-center shadow-sm relative overflow-hidden">
-            <h3 className="font-black text-[18px] mb-2 z-10">جمال من اختيارهم</h3>
-            <p className="text-[12px] font-bold mb-4 z-10 opacity-80 leading-relaxed max-w-[280px]">
-              بطاقة هدايا حصرياً من وجوه تمنحهم اختيار ما يأملون الحصول عليه
-            </p>
-            <button className="text-[13px] font-black underline z-10 decoration-2 underline-offset-4">
-              تسوق الآن
-            </button>
-          </div>
-        </div>
-      </section>
 
       {/* Most Popular Products Section */}
       <section className="py-4 bg-white">
@@ -367,7 +346,7 @@ export default function Home() {
             <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
               الأكثر مبيعاً
             </h2>
-            <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black hover:text-accent transition-all">
+            <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black  transition-all">
               عرض الكل
             </button>
           </div>
@@ -410,12 +389,10 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
 
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl md:text-[22px] font-black tracking-tight text-[#153428]">
+            <h2 className="text-xl text-[15px] md:text-[22px] font-black tracking-tight text-right w-full">
               اكتشفوا عالمًا من الخدمه
             </h2>
-            <p className="text-sm md:text-base font-black shrink-0 whitespace-nowrap text-black hover:text-accent transition-all">
-              عرض جميع الخدمات
-            </p>
+
           </div>
 
           <div className="relative">
@@ -456,8 +433,7 @@ export default function Home() {
         </div>
       </section>
 
-      { /* Around the World Section */}
-      <section className="py-6 bg-white" dir="rtl">
+      {/* <section className="py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-end mb-6 w-full">
             <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
@@ -514,7 +490,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* New Arrivals Section */}
       <section className="py-4 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-end mb-6">
@@ -557,11 +532,11 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
 
       {/* Laila AI Advisor Banner */}
-      <section className="py-2 md:py-6 bg-white" dir="rtl">
+      {/* <section className="py-2 md:py-6 bg-white" dir="rtl">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <a href="#" className="block w-full rounded-[8px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-md transition-shadow">
             <img
@@ -571,7 +546,7 @@ export default function Home() {
             />
           </a>
         </div>
-      </section>
+      </section> */}
 
       {/* FAQ Section */}
       <FAQ />

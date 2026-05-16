@@ -175,7 +175,7 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                                 { name: 'تواصل معنا', path: '/contact' },
                             ].map((cat, index) => (
                                 <SwiperSlide key={index} className="!w-auto py-2">
-                                    <span 
+                                    <span
                                         onClick={() => router.push(cat.path)}
                                         className="cursor-pointer whitespace-nowrap text-[12px] md:text-[13.5px] font-bold text-gray-900 hover:text-[#8c1d3b] transition-all duration-300 relative after:absolute after:bottom-[-4px] after:right-0 after:w-0 after:h-[2px] after:bg-[#8c1d3b]  after:transition-all block"
                                     >

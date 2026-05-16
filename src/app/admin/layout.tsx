@@ -11,7 +11,16 @@ import {
   Bell,
   Search,
   Menu,
-  X
+  X,
+  Truck,
+  Sparkles,
+  Gift,
+  CreditCard,
+  MessageCircle,
+  Star,
+  Monitor,
+  CheckCircle2,
+  Wind
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,9 +29,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const sidebarItems = [
   { icon: LayoutDashboard, label: "نظرة عامة", href: "/admin" },
+  { icon: ImageIcon, label: "البانر الرئيسي", href: "/admin/hero" },
+  { icon: CheckCircle2, label: "شريط المميزات", href: "/admin/features" },
+  { icon: Layers, label: "التصنيفات", href: "/admin/categories" },
+  { icon: Truck, label: "بانر التوصيل", href: "/admin/delivery" },
+  { icon: Monitor, label: "البانر الصغير", href: "/admin/mini-banner" },
+  { icon: Wind, label: "صيحات الربيع", href: "/admin/spring-trends" },
+  { icon: Gift, label: "عطر مجاني", href: "/admin/free-perfume" },
+  { icon: Sparkles, label: "إصدارات جديدة", href: "/admin/new-releases" },
+  { icon: Star, label: "ماركة الأسبوع", href: "/admin/brand-of-week" },
   { icon: Package, label: "المنتجات", href: "/admin/products" },
-  { icon: ImageIcon, label: "السلايدر والإعلانات", href: "/admin/slider" },
-  { icon: Layers, label: "الفئات", href: "/admin/categories" },
   { icon: Settings, label: "الإعدادات", href: "/admin/settings" },
 ];
 
@@ -34,7 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <>
       <div className="p-8 border-b border-gray-50 flex items-center justify-between">
         <div className="flex flex-col items-center flex-grow">
-          <img src="/logo.svg" alt="FACES ADMIN" className="h-8 w-auto" />
+          <img src="/logo.svg" alt="BALMY ADMIN" className="h-8 w-auto" />
           <p className="text-[10px] font-black text-gray-400 mt-2 tracking-[0.3em] uppercase">لوحة التحكم</p>
         </div>
         <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 text-gray-400">
@@ -42,22 +58,38 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </button>
       </div>
 
-      <nav className="flex-grow p-4 space-y-2 mt-4">
+      <nav className="flex-grow p-4 space-y-1 mt-4 overflow-y-auto no-scrollbar">
         {sidebarItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            onClick={() => setIsSidebarOpen(false)}
-            className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-bold text-sm",
-              pathname === item.href
-                ? "bg-black text-white shadow-lg shadow-black/10"
-                : "text-gray-500 hover:bg-gray-50 hover:text-black"
+          <div key={item.href} className="space-y-1">
+            <Link
+              href={item.href}
+              onClick={() => !item.subItems && setIsSidebarOpen(false)}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-bold text-sm",
+                pathname === item.href
+                  ? "bg-black text-white shadow-lg shadow-black/10"
+                  : "text-gray-500 hover:bg-gray-50 hover:text-black"
+              )}
+            >
+              <item.icon size={20} strokeWidth={pathname === item.href ? 2.5 : 1.5} />
+              {item.label}
+            </Link>
+            
+            {/* Sub Items Rendering */}
+            {item.subItems && (
+              <div className="mr-9 space-y-1 border-r border-gray-100 pr-4 py-1">
+                {item.subItems.map((sub) => (
+                  <Link
+                    key={sub.href}
+                    href={sub.href}
+                    className="block py-2 text-[11px] font-bold text-gray-400 hover:text-[#5a8a6a] transition-colors"
+                  >
+                    {sub.label}
+                  </Link>
+                ))}
+              </div>
             )}
-          >
-            <item.icon size={20} strokeWidth={pathname === item.href ? 2.5 : 1.5} />
-            {item.label}
-          </Link>
+          </div>
         ))}
       </nav>
 
