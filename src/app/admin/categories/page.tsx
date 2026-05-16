@@ -80,7 +80,7 @@ export default function CategoriesPage() {
               onClick={addCategory} 
               className="bg-[#8c1d3b]/10 text-[#8c1d3b] px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[9px] md:text-xs font-black hover:bg-[#8c1d3b]/20 transition-all flex items-center gap-1.5 md:gap-2 shrink-0"
             >
-              <Plus size={12} md={14} /> إضافة
+              <Plus className="w-3 h-3 md:w-3.5 md:h-3.5" /> إضافة
             </button>
           </div>
 
