@@ -80,16 +80,16 @@ const AROUND_THE_WORLD_BRANDS = [
 ];
 
 const CATEGORIES = [
-  { name: "عطور نسائية", image: "/IMLDI_BANNER_750x714.avif" },
-  { name: "عطور رجالية", image: "/MB-Hero-P4Box-UAE-EN-2.avif" },
-  { name: "عطور النيش", image: "/slider-1.jfif" },
-  { name: "عطور الشعر", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-  { name: "أطقم هدايا", image: "/hero.png" },
-  { name: "عطور العود", image: "/add-1.jfif" },
-  { name: "الأكثر مبيعاً", image: "/product1.png" },
-  { name: "جديدنا", image: "/001717728336_1.jpg" },
-  { name: "الماركات", image: "/add-2.jfif" },
-  { name: "عطور زيتية", image: "/slider-2.png" },
+  { name: "عطور نسائية", image: "/product-12.jpeg" },
+  { name: "عطور رجالية", image: "/product-28.jpeg" },
+  { name: "عطور النيش", image: "/product-26.jpeg" },
+  { name: "عطور الشعر", image: "/product-18.jpeg" },
+  { name: "أطقم هدايا", image: "/product-21.jpeg" },
+  { name: "عطور العود", image: "/product-2.jpeg" },
+  { name: "الأكثر مبيعاً", image: "/product-27.jpeg" },
+  { name: "جديدنا", image: "/product-10.jpeg" },
+  { name: "الماركات", image: "/product-14.jpeg" },
+  { name: "عطور زيتية", image: "/product-25.jpeg" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -331,7 +331,7 @@ export default function Home() {
       {/* Balmy Special Collection */}
       <ProductSection
         title="توليفات بالمي الفاخرة"
-        bannerSrc="/IMLDI_BANNER_750x714.avif"
+        bannerSrc="/product-12.jpeg"
         bannerAlt="Balmy Luxury Collection"
         products={ISSEY_PRODUCTS}
       />

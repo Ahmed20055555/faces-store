@@ -59,7 +59,7 @@ export default function ContactPage() {
               <Link href="/branches" className="block mt-12">
                 <div className="rounded-[2.5rem] overflow-hidden h-64 bg-gray-100 relative group grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer">
                   <img 
-                    src="/IMLDI_BANNER_750x714.avif" 
+                    src="/product-12.jpeg" 
                     className="w-full h-full object-cover" 
                     alt="Our Store" 
                   />
