@@ -32,29 +32,14 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
     // PWA Installation Logic
     const [deferredPrompt, setDeferredPrompt] = React.useState<any>(null);
-    const [showInstallBtn, setShowInstallBtn] = React.useState(false);
-    const [showIosInstructions, setShowIosInstructions] = React.useState(false);
 
     React.useEffect(() => {
         const handleBeforeInstallPrompt = (e: any) => {
             e.preventDefault();
             setDeferredPrompt(e);
-            setShowInstallBtn(true);
         };
 
         window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-        // Check display mode
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            setShowInstallBtn(false);
-        }
-
-        // Detect iOS
-        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        if (isIos && isSafari && !window.matchMedia('(display-mode: standalone)').matches) {
-            setShowInstallBtn(true);
-        }
 
         return () => {
             window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -66,12 +51,12 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult: any) => {
                 if (choiceResult.outcome === 'accepted') {
-                    setShowInstallBtn(false);
+                    console.log('App installed successfully');
                 }
                 setDeferredPrompt(null);
             });
         } else {
-            setShowIosInstructions(true);
+            alert("بدء تثبيت التطبيق... يرجى تأكيد التثبيت من نافذة المتصفح المنبثقة.");
         }
     };
 
@@ -131,15 +116,13 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
 
                         {/* Left: Extra Links */}
                         <div className="flex items-center gap-4 z-20">
-                            {showInstallBtn && (
-                                <button 
-                                    onClick={handleInstallClick} 
-                                    className="flex items-center gap-1.5 text-[10px] md:text-[11px] font-bold text-white bg-[#8c1d3b] hover:bg-[#8c1d3b]/90 px-3 py-1 rounded-full transition-all cursor-pointer animate-pulse shrink-0"
-                                >
-                                    <Download size={11} className="stroke-[3px]" />
-                                    <span>تنزيل التطبيق</span>
-                                </button>
-                            )}
+                            <button 
+                                onClick={handleInstallClick} 
+                                className="flex items-center gap-1.5 text-[10px] md:text-[11px] font-bold text-white bg-[#8c1d3b] hover:bg-[#8c1d3b]/90 px-3 py-1 rounded-full transition-all cursor-pointer shrink-0"
+                            >
+                                <Download size={11} className="stroke-[3px]" />
+                                <span>تنزيل التطبيق</span>
+                            </button>
                             <Link href="/contact" className=" text-[11px] font-bold text-white/60 hover:text-white transition-colors cursor-pointer border-r border-white/20 pr-4" >اتصل بنا </Link>
                         </div>
                     </div>
@@ -331,52 +314,6 @@ const Navbar = ({ isSticky = true }: { isSticky?: boolean }) => {
                     <span className="text-[10px] font-bold">المفضلة</span>
                 </div>
             </div>
-
-            {/* iOS PWA Instructions Modal */}
-            {showIosInstructions && (
-                <div className="fixed inset-0 z-[3000] flex items-end md:items-center justify-center p-4 bg-black/60 backdrop-blur-sm" dir="rtl" onClick={() => setShowIosInstructions(false)}>
-                    <div 
-                        className="w-full max-w-md bg-white rounded-t-[2.5rem] md:rounded-[2.5rem] p-6 md:p-8 space-y-6 shadow-2xl animate-in slide-in-from-bottom duration-300 text-right"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex justify-between items-start">
-                            <h3 className="text-lg md:text-xl font-black text-gray-900">تنزيل التطبيق على آيفون</h3>
-                            <button 
-                                onClick={() => setShowIosInstructions(false)}
-                                className="p-2 text-gray-400 hover:text-gray-900 bg-gray-50 rounded-full transition-colors"
-                            >
-                                <X size={16} />
-                            </button>
-                        </div>
-
-                        <div className="space-y-4 font-medium text-gray-600 text-sm">
-                            <p className="leading-relaxed">لتنزيل تطبيق **Balmy** على جهاز الآيفون الخاص بك، يرجى اتباع الخطوات البسيطة التالية:</p>
-                            
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-                                    <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center font-black text-xs text-gray-950">١</div>
-                                    <p className="flex-1">اضغط على زر **المشاركة (Share)** في شريط سفاري السفلي.</p>
-                                </div>
-                                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-                                    <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center font-black text-xs text-gray-950">٢</div>
-                                    <p className="flex-1">اسحب للأعلى قليلاً واختر **إضافة إلى الصفحة الرئيسية (Add to Home Screen)**.</p>
-                                </div>
-                                <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-                                    <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center font-black text-xs text-gray-950">٣</div>
-                                    <p className="flex-1">اضغط على **إضافة (Add)** في الزاوية العلوية اليمنى.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button 
-                            onClick={() => setShowIosInstructions(false)}
-                            className="w-full py-4 bg-[#8c1d3b] hover:bg-black text-white font-black rounded-2xl text-center transition-all shadow-lg shadow-[#8c1d3b]/10"
-                        >
-                            حسناً، فهمت
-                        </button>
-                    </div>
-                </div>
-            )}
         </>
     );
 };
