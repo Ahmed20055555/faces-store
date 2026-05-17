@@ -9,6 +9,7 @@ import ProductCard from "@/components/ProductCard";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 
 interface Product {
+  id?: string;
   brand: string;
   name: string;
   price: string;
@@ -80,7 +81,7 @@ const ProductSection = ({
               >
                 {products.map((prod, idx) => (
                   <SwiperSlide key={idx}>
-                    <ProductCard id={`prod_${idx}`} {...prod} />
+                    <ProductCard id={prod.id || `prod_${idx}`} {...prod} />
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -97,7 +98,7 @@ const ProductSection = ({
             {/* Desktop Grid */}
             <div className="hidden md:grid md:grid-cols-3 gap-3 md:gap-4">
               {products.map((prod, idx) => (
-                <ProductCard key={idx} id={idx.toString()} {...prod} />
+                <ProductCard key={idx} id={prod.id || idx.toString()} {...prod} />
               ))}
             </div>
           </div>

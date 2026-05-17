@@ -37,15 +37,7 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
     return (
         <div className="group relative flex flex-col bg-white p-4 transition-all duration-300 hover:shadow-[0_4px_25px_rgba(0,0,0,0.07)] h-full border border-gray-100/80 cursor-pointer font-sans">
             <Link 
-                href={{
-                    pathname: `/product/${id}`,
-                    query: {
-                        name: name,
-                        brand: brand,
-                        price: price,
-                        image: image
-                    }
-                }} 
+                href={`/product/${id}`} 
                 className="block"
             >
                 {/* Image Area */}
