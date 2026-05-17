@@ -53,21 +53,21 @@ const GWP_IMAGES = [
 ];
 
 const FREE_GIFT_PRODUCTS = [
-  { id: "gift_0", brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", hasGift: false, hasFrom: true },
-  { id: "gift_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", hasGift: false, hasFrom: true },
-  { id: "gift_2", brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", hasGift: false, hasFrom: false },
-  { id: "gift_3", brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", hasGift: false, hasFrom: true },
-  { id: "gift_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", hasGift: false, hasFrom: true },
-  { id: "gift_5", brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", hasGift: false, hasFrom: false },
+  { brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", hasGift: false, hasFrom: true },
 ];
 
 const ISSEY_PRODUCTS = [
-  { id: "issey_0", brand: "بالمي | Balmy", name: "عطر بالمي إليكسير", price: "444", image: "/product-20.jpeg", hasGift: false, hasFrom: true },
-  { id: "issey_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك الفخامة", price: "460", image: "/product-21.jpeg", hasGift: false, hasFrom: true },
-  { id: "issey_2", brand: "بالمي | Balmy", name: "عطر بالمي كشمير وود", price: "537", image: "/product-22.jpeg", hasGift: false, hasFrom: true },
-  { id: "issey_3", brand: "بالمي | Balmy", name: "عطر بالمي سوليفان", price: "514", image: "/product-23.jpeg", hasGift: false, hasFrom: true },
-  { id: "issey_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "551", image: "/product-24.jpeg", hasGift: false, hasFrom: true },
-  { id: "issey_5", brand: "بالمي | Balmy", name: "عطر بالمي ويسبر", price: "419", image: "/product-25.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي إليكسير", price: "444", image: "/product-20.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي مسك الفخامة", price: "460", image: "/product-21.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي كشمير وود", price: "537", image: "/product-22.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي سوليفان", price: "514", image: "/product-23.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "551", image: "/product-24.jpeg", hasGift: false, hasFrom: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي ويسبر", price: "419", image: "/product-25.jpeg", hasGift: false, hasFrom: true },
 ];
 
 const AROUND_THE_WORLD_BRANDS = [
@@ -222,7 +222,7 @@ export default function Home() {
             <p className="font-bold text-[14px]">عند الطلب قبل 8 مساءً</p>
           </div>
         </div>
-      </section>  
+      </section>
 
       {/* Spring Trends Section */}
       <section className="py-6 bg-white" dir="rtl">

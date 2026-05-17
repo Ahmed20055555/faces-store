@@ -9,7 +9,7 @@ import { toggleFavorite } from '@/lib/features/favoritesSlice';
 import { RootState } from '@/lib/store';
 import ProductCard from "@/components/ProductCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -25,8 +25,8 @@ import ImageGalleryModal from "@/components/ImageGalleryModal";
 import { getProductById } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-    const resolvedParams = React.use(params);
-    const id = resolvedParams.id;
+    const paramsHook = useParams();
+    const id = (paramsHook?.id as string) || "";
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -139,19 +139,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
 
                     {/* Left Side: Images */}
-                    <div className="flex flex-col-reverse md:flex-row gap-4">
+                    <div className="flex flex-col-reverse md:flex-row gap-4 w-full">
                         {/* Thumbnails */}
-                        <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
-                            {thumbnails.map((img, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setMainImage(img)}
-                                    className={`w-20 h-24 shrink-0 border ${mainImage === img ? 'border-black' : 'border-gray-200'} rounded-sm overflow-hidden flex items-center justify-center p-1`}
-                                >
-                                    <img src={img} alt="Thumbnail" className="w-full h-full object-contain mix-blend-multiply" />
-                                </button>
-                            ))}
-                        </div>
+                        {thumbnails.length > 1 && (
+                            <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
+                                {thumbnails.map((img, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setMainImage(img)}
+                                        className={`w-20 h-24 shrink-0 border ${mainImage === img ? 'border-black' : 'border-gray-200'} rounded-sm overflow-hidden flex items-center justify-center p-1`}
+                                    >
+                                        <img src={img} alt="Thumbnail" className="w-full h-full object-contain mix-blend-multiply" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Main Image */}
                         <button
@@ -236,7 +238,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                 }}
                                 className="w-full border-2 border-[#D4AF37] text-black font-black text-[14px] md:text-[16px] py-3 rounded-sm hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center justify-center gap-2"
                             >
-                                 إضافة نحت اسم على الزجاجة
+                                إضافة نحت اسم على الزجاجة
                             </button>
                         </div>
 
@@ -332,7 +334,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent className="text-[14px] text-gray-600 leading-relaxed pb-6 text-right">
-                                    {productName.includes("بالمي") 
+                                    {productName.includes("بالمي")
                                         ? `عطر ${productName} من تشكيلة بالمي (Balmy) الفاخرة هو عطر يجسد النقاء والأناقة العصرية. يفتتح العطر بنوتات منعشة من الفواكه والزهور البرية والتوابل الشرقية الدافئة، ويتميز بقلب عطري غني بالنقاء والنعومة، مع قاعدة دافئة من الأخشاب النادرة والعنبر الفاخر والمسك الأبيض الملكي. عطر يجمع بين الثبات العالي والحضور الجذاب ليمنحك هالة لا تُنسى في كل مناسبة.`
                                         : `عطر ${productName} من ${productBrand} هو عطر زهري خشبي مسكي لكلا الجنسين. يفتتح العطر بنوتات منعشة من الفاكهة والتوابل، ويتميز بقلب من المسك النقي المميز لعلامة نارسيسو، مع قاعدة دافئة من الأخشاب الفاخرة والعنبر. عطر يجمع بين الأناقة والغموض ويترك انطباعاً لا يُنسى.`}
                                     <br /><br />
