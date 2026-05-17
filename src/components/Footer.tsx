@@ -15,7 +15,7 @@ const Footer = () => {
                             <Mail className="w-10 h-10 md:w-8 md:h-8 text-white shrink-0 mb-2 md:mb-0" />
                             <div>
                                 <h3 className="text-xl font-black text-white mb-2 md:mb-1">اشترك في نشرتنا الإخبارية</h3>
-                                <p className="text-sm text-white font-bold">كن أول من يعلم بمنتجاتنا الجديدة، العروض، و فعاليات المتاجر</p>
+                                <p className="text-xs text-white/80 font-medium">كن أول من يعلم بمنتجاتنا الجديدة، العروض، و فعاليات المتاجر</p>
                             </div>
                         </div>
 
