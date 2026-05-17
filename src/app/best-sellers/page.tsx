@@ -14,10 +14,10 @@ import 'swiper/css/pagination';
 
 // سنستخدم بيانات تجريبية لهذه الصفحة
 const BEST_SELLERS = [
-  { id: "1", name: "عطر ديور سوفاج", price: "450", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior", rating: 5 },
-  { id: "2", name: "شانيل بلو", price: "520", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Chanel", rating: 4.8 },
-  { id: "3", name: "توم فورد بلاك أوركيد", price: "680", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford", rating: 4.9 },
-  { id: "4", name: "لانكوم إيدول", price: "390", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancome", rating: 4.7 },
+  { id: "1", name: "عطر بالمي رويال سيجنتشر", price: "720", image: "/product-26.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "2", name: "عطر بالمي عود انتنس", price: "680", image: "/product-27.jpeg", brand: "بالمي | Balmy", rating: 4.9 },
+  { id: "3", name: "عطر بالمي فيلفيت توباز", price: "850", image: "/product-28.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "4", name: "عطر بالمي لافندر سبريت", price: "460", image: "/product-1.jpeg", brand: "بالمي | Balmy", rating: 4.8 },
 ];
 
 export default function BestSellersPage() {

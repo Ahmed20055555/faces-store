@@ -4,10 +4,10 @@ import ProductCard from "@/components/ProductCard";
 import { Gift } from "lucide-react";
 
 const GIFT_SETS = [
-  { id: "g1", name: "طقم كوكو شانيل الفاخر", price: "850", image: "/slider-1.jfif", brand: "Chanel Exclusive", rating: 5 },
-  { id: "g2", name: "مجموعة هدايا عود وبخور ملكي", price: "1200", image: "/add-1.jfif", brand: "Balmy Exclusive", rating: 5 },
-  { id: "g3", name: "طقم ديور سوفاج الرجالي", price: "650", image: "/slider-2.png", brand: "Dior Exclusive", rating: 4.9 },
-  { id: "g4", name: "مجموعة عطر إيسي مياكي الفاخرة", price: "520", image: "/IMLDI_BANNER_750x714.avif", brand: "Issey Miyake", rating: 4.8 },
+  { id: "g1", name: "طقم بالمي مسك الفخامة الفاخر", price: "850", image: "/product-21.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "g2", name: "مجموعة هدايا بالمي عود ملكي", price: "1200", image: "/product-2.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "g3", name: "طقم بالمي كشمير وود الراقي", price: "650", image: "/product-22.jpeg", brand: "بالمي | Balmy", rating: 4.9 },
+  { id: "g4", name: "مجموعة بالمي رويال توباز الفاخرة", price: "720", image: "/product-24.jpeg", brand: "بالمي | Balmy", rating: 4.8 },
 ];
 
 export default function GiftSetsPage() {

@@ -13,10 +13,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const NEW_ARRIVALS = [
-  { id: "5", name: "أرماني كود الجديد", price: "410", image: "/001717728336_1.jpg", brand: "Armani", rating: 5 },
-  { id: "6", name: "عطر ايف سان لوران", price: "480", image: "/product1.png", brand: "YSL", rating: 4.9 },
-  { id: "7", name: "ديور هوم إنتنس", price: "530", image: "/slider-1.jfif", brand: "Dior", rating: 5 },
-  { id: "8", name: "توم فورد أوركيد", price: "620", image: "/add-1.jfif", brand: "Tom Ford", rating: 4.8 },
+  { id: "5", name: "عطر بالمي عود ملكي", price: "537", image: "/product-2.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "6", name: "عطر بالمي روز نوار", price: "572", image: "/product-3.jpeg", brand: "بالمي | Balmy", rating: 4.9 },
+  { id: "7", name: "عطر بالمي فيلفيت صندل", price: "790", image: "/product-4.jpeg", brand: "بالمي | Balmy", rating: 5 },
+  { id: "8", name: "عطر بالمي عود وود", price: "488", image: "/product-5.jpeg", brand: "بالمي | Balmy", rating: 4.8 },
 ];
 
 export default function NewArrivalsPage() {

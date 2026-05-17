@@ -39,27 +39,27 @@ const QUESTIONS = [
 
 const RESULTS: any = {
   fresh: {
-    title: "Fresh & Citrus",
+    title: "Fresh & Citrus | بالمي المنعش",
     desc: "أنت شخصية حيوية تحب الحرية والانطلاق. الروائح المنعشة من الحمضيات ونسيم البحر هي التي تعبر عن روحك.",
     products: [
-      { id: "q1", name: "أكوا دي جيو", price: "380", image: "/product1.png", brand: "Armani", rating: 4.7 },
-      { id: "q2", name: "دولتشي آند غابانا لايت بلو", price: "360", image: "/001717728336_1.jpg", brand: "D&G", rating: 4.8 },
+      { id: "q1", name: "عطر بالمي جولدن نكتار", price: "537", image: "/product-9.jpeg", brand: "بالمي | Balmy", rating: 4.7 },
+      { id: "q2", name: "عطر بالمي لافندر سبريت", price: "460", image: "/product-1.jpeg", brand: "بالمي | Balmy", rating: 4.8 },
     ]
   },
   woody: {
-    title: "Mysterious Woody",
+    title: "Mysterious Woody | بالمي الخشبي الغامض",
     desc: "أنت شخصية عميقة، رصينة وتحب الطبيعة. روائح الخشب والعود والجلود تمنحك الثقة والحضور الطاغي.",
     products: [
-      { id: "q3", name: "توم فورد بلاك أوركيد", price: "680", image: "/add-1.jfif", brand: "Tom Ford", rating: 4.9 },
-      { id: "q4", name: "عطر ديور سوفاج", price: "450", image: "/slider-1.jfif", brand: "Dior", rating: 5 },
+      { id: "q3", name: "عطر بالمي ديب ليذر", price: "690", image: "/product-10.jpeg", brand: "بالمي | Balmy", rating: 4.9 },
+      { id: "q4", name: "عطر بالمي مسك رويال", price: "572", image: "/product-11.jpeg", brand: "بالمي | Balmy", rating: 5 },
     ]
   },
   oriental: {
-    title: "Bold Oriental",
+    title: "Bold Oriental | بالمي الشرقي الجريء",
     desc: "أنت شخصية جريئة، دافئة وتحب لفت الأنظار. العطور الشرقية المليئة بالعنبر والتوابل والمسك هي رفيقك المثالي.",
     products: [
-      { id: "q5", name: "لانكوم لا في إي بيل", price: "430", image: "/slider-2.png", brand: "Lancôme", rating: 4.9 },
-      { id: "q6", name: "واي ايف سان لوران", price: "510", image: "/add-2.jfif", brand: "YSL", rating: 4.8 },
+      { id: "q5", name: "عطر بالمي سافرون سبايس", price: "488", image: "/product-12.jpeg", brand: "بالمي | Balmy", rating: 4.9 },
+      { id: "q6", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", brand: "بالمي | Balmy", rating: 4.8 },
     ]
   }
 };
