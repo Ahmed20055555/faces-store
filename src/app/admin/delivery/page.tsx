@@ -31,8 +31,8 @@ export default function DeliveryBannerPage() {
             DELIVERY SETTINGS
         ========================================= */}
         <div className="space-y-6">
-          <div className="flex items-center gap-3 px-4 border-r-4 border-[#0b412b]">
-            <h2 className="text-xl font-black text-gray-900 flex items-center gap-2"><Truck size={24} className="text-[#0b412b]" /> إدارة بانر التوصيل</h2>
+          <div className="flex items-center gap-3 px-4 border-r-4 border-[#8c1d3b]">
+            <h2 className="text-xl font-black text-gray-900 flex items-center gap-2"><Truck size={24} className="text-[#8c1d3b]" /> إدارة بانر التوصيل</h2>
           </div>
           
           <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm space-y-6">
@@ -44,7 +44,7 @@ export default function DeliveryBannerPage() {
                   <input
                     type="text"
                     {...register("deliveryTitle")}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-black focus:bg-white focus:ring-4 focus:ring-[#0b412b]/10 focus:border-[#0b412b] transition-all outline-none"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-black focus:bg-white focus:ring-4 focus:ring-[#8c1d3b]/10 focus:border-[#8c1d3b] transition-all outline-none"
                   />
                 </div>
                 
@@ -55,7 +55,7 @@ export default function DeliveryBannerPage() {
                   <input
                     type="text"
                     {...register("deliverySubtitle")}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-bold focus:bg-white focus:ring-4 focus:ring-[#0b412b]/10 focus:border-[#0b412b] transition-all outline-none"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-bold focus:bg-white focus:ring-4 focus:ring-[#8c1d3b]/10 focus:border-[#8c1d3b] transition-all outline-none"
                   />
                 </div>
              </div>
@@ -64,7 +64,7 @@ export default function DeliveryBannerPage() {
               <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
                 <ImageIcon size={14} /> بانر الديسكتوب
               </label>
-              <label className="border-2 border-dashed border-gray-200 rounded-[2rem] p-12 flex flex-col items-center justify-center gap-4 bg-gray-50 hover:bg-[#0b412b]/5 hover:border-[#0b412b]/30 transition-all cursor-pointer group relative overflow-hidden">
+              <label className="border-2 border-dashed border-gray-200 rounded-[2rem] p-12 flex flex-col items-center justify-center gap-4 bg-gray-50 hover:bg-[#8c1d3b]/5 hover:border-[#8c1d3b]/30 transition-all cursor-pointer group relative overflow-hidden">
                 <input 
                   type="file" 
                   className="hidden" 
@@ -82,7 +82,7 @@ export default function DeliveryBannerPage() {
                   <img src={deliveryImage} alt="Delivery" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-20 transition-opacity" />
                 )}
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform relative z-10">
-                  <UploadCloud size={28} className="text-[#0b412b]" />
+                  <UploadCloud size={28} className="text-[#8c1d3b]" />
                 </div>
                 <div className="text-center relative z-10">
                   <p className="text-sm font-black text-gray-800">{deliveryImage ? "تغيير الصورة" : "اضغط لرفع بانر الديسكتوب"}</p>
@@ -117,7 +117,7 @@ export default function DeliveryBannerPage() {
             </div>
 
             {/* Mobile Preview */}
-            <div className="bg-[#aed2b4] text-[#0b412b] rounded-[8px] overflow-hidden relative flex items-center justify-center shadow-md border border-[#92bb99] min-h-[100px] w-[350px] mx-auto p-4">
+            <div className="bg-[#8c1d3b] text-white rounded-[8px] overflow-hidden relative flex items-center justify-center shadow-md border border-[#8c1d3b] min-h-[100px] w-[350px] mx-auto p-4">
               <div className="absolute top-2 right-2 bg-white/50 backdrop-blur-md px-2 py-0.5 rounded-sm text-[9px] font-black z-20">جوال</div>
               <div className="w-full text-center relative z-10">
                 <h3 className="font-black text-[17px] mb-1">{deliveryTitle || "العنوان هنا"}</h3>
