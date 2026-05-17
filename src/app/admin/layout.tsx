@@ -27,7 +27,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-const sidebarItems = [
+const sidebarItems: Array<{
+  icon: React.ElementType;
+  label: string;
+  href: string;
+  subItems?: { label: string; href: string }[];
+}> = [
   { icon: LayoutDashboard, label: "نظرة عامة", href: "/admin" },
   { icon: ImageIcon, label: "البانر الرئيسي", href: "/admin/hero" },
   { icon: CheckCircle2, label: "شريط المميزات", href: "/admin/features" },
