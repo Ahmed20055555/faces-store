@@ -115,7 +115,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <button onClick={() => setIsSidebarOpen(true)} className="p-2 text-gray-600">
           <Menu size={24} />
         </button>
-        <img src="/logo.svg" alt="FACES" className="h-6 w-auto" />
+        <img src="/logo.svg" alt="balmy" className="h-6 w-auto" />
         <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center text-white text-[10px] font-bold">AD</div>
       </header>
 

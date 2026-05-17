@@ -46,7 +46,7 @@ const Footer = () => {
 
                         {/* Col 1: Contact Info */}
                         <div className="lg:col-span-1">
-                            <h1 className="text-3xl font-black tracking-widest mb-6">FACES</h1>
+                            <h1 className="text-3xl font-black tracking-widest mb-6">BALMY</h1>
                             <h4 className="font-bold text-[15px] mb-4">بحاجة للمساعدة؟</h4>
 
                             <div className="space-y-4 mb-6">

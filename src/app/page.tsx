@@ -276,7 +276,7 @@ export default function Home() {
       {/* Free Full Size Gift Section */}
       <ProductSection
         title="مجاناً عطر بالحجم الكامل"
-        bannerSrc="/MB-Hero-P4Box-UAE-EN-2.avif"
+        bannerSrc="/product-12.jpeg"
         bannerAlt="Black Opium Offer"
         products={FREE_GIFT_PRODUCTS}
       />
@@ -331,7 +331,7 @@ export default function Home() {
       {/* Balmy Special Collection */}
       <ProductSection
         title="توليفات بالمي الفاخرة"
-        bannerSrc="/product-12.jpeg"
+        bannerSrc="/product-28.jpeg"
         bannerAlt="Balmy Luxury Collection"
         products={ISSEY_PRODUCTS}
       />

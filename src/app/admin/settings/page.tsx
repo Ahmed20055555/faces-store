@@ -75,7 +75,7 @@ export default function AdminSettings() {
                     <label className="text-[11px] font-black text-gray-400 mr-2 uppercase tracking-widest">اسم المتجر</label>
                     <input 
                       type="text" 
-                      defaultValue="وجوه - Faces"
+                      defaultValue="بالمي - BALMY"
                       className="w-full bg-gray-50 border-transparent focus:bg-white focus:ring-4 focus:ring-black/5 rounded-2xl py-4 px-6 text-sm font-bold outline-none transition-all"
                     />
                   </div>
@@ -83,7 +83,7 @@ export default function AdminSettings() {
                     <label className="text-[11px] font-black text-gray-400 mr-2 uppercase tracking-widest">عنوان البريد الإلكتروني</label>
                     <input 
                       type="email" 
-                      defaultValue="admin@faces.com"
+                      defaultValue="[EMAIL_ADDRESS]"
                       className="w-full bg-gray-50 border-transparent focus:bg-white focus:ring-4 focus:ring-black/5 rounded-2xl py-4 px-6 text-sm font-bold outline-none transition-all"
                     />
                   </div>

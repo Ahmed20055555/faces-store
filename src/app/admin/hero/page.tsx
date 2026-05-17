@@ -215,7 +215,7 @@ export default function HeroAndPromoPage() {
                   value={item.link || ""}
                   onChange={(e) => handleLinkUpdate(section, item.id, e.target.value)}
                   className="w-full bg-transparent text-[13px] font-bold focus:ring-0 p-0 outline-none"
-                  placeholder="https://faces.com/..."
+                  placeholder="https://balmy.com/..."
                 />
               </div>
             </div>

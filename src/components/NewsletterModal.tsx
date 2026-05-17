@@ -10,7 +10,7 @@ export default function NewsletterModal() {
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
     useEffect(() => {
-        const hasSeen = localStorage.getItem('faces-newsletter-seen');
+        const hasSeen = localStorage.getItem('balmy-newsletter-seen');
         if (!hasSeen) {
             const timer = setTimeout(() => {
                 setIsOpen(true);
@@ -21,7 +21,7 @@ export default function NewsletterModal() {
 
     const handleClose = () => {
         setIsOpen(false);
-        localStorage.setItem('faces-newsletter-seen', 'true');
+        localStorage.setItem('balmy-newsletter-seen', 'true');
     };
 
     const handleSubmit = (e: React.FormEvent) => {
