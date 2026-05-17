@@ -112,47 +112,43 @@ const Hero = () => {
                 </button>
             </div>
 
-            {/* Main Hero Slider */}
-            <div className="relative w-full group mb-4 md:mb-6">
-                <Swiper
-                    modules={[Navigation, Pagination, Autoplay, EffectFade]}
-                    navigation={{
-                        nextEl: '.hero-next',
-                        prevEl: '.hero-prev',
-                    }}
-                    effect="fade"
-                    pagination={{ clickable: true, el: '.hero-pagination' }}
-                    autoplay={{ delay: 6000, disableOnInteraction: false }}
-                    loop={true}
-                    className="w-full rounded-lg overflow-hidden"
+            {/* Main Hero Luxury Video Banner */}
+            <div className="relative w-full h-[320px] md:h-[550px] rounded-2xl overflow-hidden mb-6 group shadow-xl">
+                {/* Background Video */}
+                <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-1000 group-hover:scale-100"
                 >
-                    {HERO_SLIDES.map((slide) => (
-                        <SwiperSlide key={slide.id}>
-                            <div className="relative w-full h-[250px] md:h-[500px] block cursor-pointer overflow-hidden rounded-lg group/slide">
-                                <img
-                                    src={slide.image}
-                                    alt={slide.title}
-                                    className="w-full h-full object-cover object-center ken-burns-active"
-                                />
-                                {/* Text Overlay */}
-                                <div className="absolute inset-0 flex justify-start items-end p-2 md:pb-4 z-10 pointer-events-none">
-                                    <h2 className="text-[10px] sm:text-xs md:text-2xl lg:text-3xl font-black text-white px-4 py-1.5 md:px-8 md:py-3 bg-black/40 backdrop-blur-md rounded-full shadow-xl">
-                                        {slide.title}
-                                    </h2>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-a-spray-bottle-spritzing-perfume-43141-large.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
 
-                {/* Custom Navigation & Pagination */}
-                <button className="hero-prev absolute right-1 top-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-black transition-all hover:bg-white shadow-lg disabled:hidden  md:flex">
-                    <ChevronRight size={10} />
-                </button>
-                <button className="hero-next absolute left-1 top-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-black transition-all hover:bg-white shadow-lg disabled:hidden md:flex">
-                    <ChevronLeft size={10} />
-                </button>
-                <div className="hero-pagination mt-4 flex justify-center gap-2"></div>
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 flex flex-col justify-end items-start p-6 md:p-16 z-10 text-right text-white space-y-3 md:space-y-6">
+                    <span className="text-[10px] md:text-xs uppercase tracking-widest font-black text-[#e6c17a] bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full">
+                        مجموعة النيش الحصرية
+                    </span>
+                    <h2 className="text-2xl md:text-5xl lg:text-6xl font-black leading-tight max-w-2xl drop-shadow-md">
+                        نفحات ترتقي بالحواس وفخامة تدوم
+                    </h2>
+                    <p className="text-xs md:text-base font-medium text-white/80 max-w-lg leading-relaxed hidden sm:block">
+                        اكتشف تشكيلة حصرية من عطور النيش الفاخرة بإصدارات نادرة وبتركيبة تعبر عن شخصيتك وتدوم طويلاً.
+                    </p>
+                    <div className="pt-2">
+                        <button className="bg-white hover:bg-black hover:text-white text-black font-black text-xs md:text-sm px-6 py-3.5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer">
+                            اكتشف التشكيلة الآن
+                        </button>
+                    </div>
+                </div>
+
+                {/* Elegant gold corner accent */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#e6c17a]/30 to-transparent pointer-events-none rounded-bl-full" />
             </div>
             
         </section>
