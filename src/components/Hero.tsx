@@ -52,6 +52,25 @@ const HERO_SLIDES = [
 const Hero = () => {
     return (
         <section className="max-w-[1400px] mx-auto px-4 md:px-12 font-sans" dir="rtl">
+            {/* Custom CSS Animation for cinematic Ken Burns moving effect */}
+            <style dangerouslySetInnerHTML={{__html: `
+                @keyframes kenburns {
+                    0% {
+                        transform: scale(1.04) translate(0, 0);
+                    }
+                    50% {
+                        transform: scale(1.15) translate(-1%, -0.5%);
+                    }
+                    100% {
+                        transform: scale(1.04) translate(0, 0);
+                    }
+                }
+                .ken-burns-active {
+                    animation: kenburns 28s infinite ease-in-out;
+                    transform-origin: center center;
+                }
+            `}} />
+
             {/* Top Promo Banner Slider */}
             <div className="relative w-full min-h-[100px] h-[130px] sm:h-[160px] md:h-[200px] rounded-lg overflow-hidden mb-4 md:mb-6 group/promo">
                 <Swiper
@@ -61,7 +80,7 @@ const Hero = () => {
                         prevEl: '.promo-prev',
                     }}
                     effect="fade"
-                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    autoplay={{ delay: 4500, disableOnInteraction: false }}
                     loop={true}
                     className="w-full h-full"
                 >
@@ -71,7 +90,7 @@ const Hero = () => {
                                 <img
                                     src={promo.image}
                                     alt={promo.alt}
-                                    className="w-full h-full object-cover object-center absolute inset-0"
+                                    className="w-full h-full object-cover object-center absolute inset-0 ken-burns-active"
                                 />
                                 {/* Text Overlay */}
                                 <div className="absolute inset-0 flex justify-start items-end p-2 md:pb-4 z-10 pointer-events-none">
@@ -96,13 +115,14 @@ const Hero = () => {
             {/* Main Hero Slider */}
             <div className="relative w-full group mb-4 md:mb-6">
                 <Swiper
-                    modules={[Navigation, Pagination, Autoplay]}
+                    modules={[Navigation, Pagination, Autoplay, EffectFade]}
                     navigation={{
                         nextEl: '.hero-next',
                         prevEl: '.hero-prev',
                     }}
+                    effect="fade"
                     pagination={{ clickable: true, el: '.hero-pagination' }}
-                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    autoplay={{ delay: 6000, disableOnInteraction: false }}
                     loop={true}
                     className="w-full rounded-lg overflow-hidden"
                 >
@@ -112,7 +132,7 @@ const Hero = () => {
                                 <img
                                     src={slide.image}
                                     alt={slide.title}
-                                    className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover/slide:scale-105"
+                                    className="w-full h-full object-cover object-center ken-burns-active"
                                 />
                                 {/* Text Overlay */}
                                 <div className="absolute inset-0 flex justify-start items-end p-2 md:pb-4 z-10 pointer-events-none">
@@ -134,6 +154,7 @@ const Hero = () => {
                 </button>
                 <div className="hero-pagination mt-4 flex justify-center gap-2"></div>
             </div>
+            
         </section>
     );
 };
