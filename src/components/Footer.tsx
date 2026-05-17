@@ -12,10 +12,10 @@ const Footer = () => {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
                         <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-right">
-                            <Mail className="w-10 h-10 md:w-8 md:h-8 text-[#153428] shrink-0 mb-2 md:mb-0" />
+                            <Mail className="w-10 h-10 md:w-8 md:h-8 text-white shrink-0 mb-2 md:mb-0" />
                             <div>
-                                <h3 className="text-xl font-black text-[#153428] mb-2 md:mb-1">اشترك في نشرتنا الإخبارية</h3>
-                                <p className="text-sm text-gray-700 font-bold">كن أول من يعلم بمنتجاتنا الجديدة، العروض، و فعاليات المتاجر</p>
+                                <h3 className="text-xl font-black text-white mb-2 md:mb-1">اشترك في نشرتنا الإخبارية</h3>
+                                <p className="text-sm text-white font-bold">كن أول من يعلم بمنتجاتنا الجديدة، العروض، و فعاليات المتاجر</p>
                             </div>
                         </div>
 
@@ -24,7 +24,7 @@ const Footer = () => {
                                 <input
                                     type="email"
                                     placeholder="عنوان البريد الإلكتروني"
-                                    className="flex-1 min-w-0 h-full px-4 border border-black/20 bg-transparent text-right placeholder-gray-600 focus:outline-none focus:border-black rounded-r-[4px]"
+                                    className="flex-1 min-w-0 h-full px-4 border border-white/30 bg-white/10 text-white text-right placeholder-white/70 focus:outline-none focus:border-white focus:bg-white/20 rounded-r-[4px] transition-all"
                                 />
                                 <button
                                     type="submit"
