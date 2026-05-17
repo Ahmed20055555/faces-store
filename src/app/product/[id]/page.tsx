@@ -9,7 +9,7 @@ import { toggleFavorite } from '@/lib/features/favoritesSlice';
 import { RootState } from '@/lib/store';
 import ProductCard from "@/components/ProductCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -27,10 +27,27 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const resolvedParams = React.use(params);
     const id = resolvedParams.id;
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const paramName = searchParams.get('name');
+    const paramBrand = searchParams.get('brand');
+    const paramPrice = searchParams.get('price');
+    const paramImage = searchParams.get('image');
+
+    const productName = paramName || "ماسك غرينات إنتينس";
+    const productBrand = paramBrand || "نارسيسو رودريغيز";
+    const productPrice = paramPrice || "1064";
+    const productImage = paramImage || "/001717728336_1.jpg";
 
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
-    const [mainImage, setMainImage] = useState("/001717728336_1.jpg");
+    const [mainImage, setMainImage] = useState(productImage);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+    React.useEffect(() => {
+        if (paramImage) {
+            setMainImage(paramImage);
+        }
+    }, [paramImage]);
 
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
@@ -39,9 +56,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const handleToggleFavorite = () => {
         dispatch(toggleFavorite({
             id: id as string,
-            name: "ماسك غرينات إنتينس",
-            brand: "نارسيسو رودريغيز",
-            price: "1064",
+            name: productName,
+            brand: productBrand,
+            price: productPrice,
             image: mainImage
         }));
     };
@@ -49,17 +66,17 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const handleAddToCart = () => {
         dispatch(addItem({
             id: id as string,
-            name: "ماسك غرينات إنتينس",
-            brand: "نارسيسو رودريغيز",
-            price: "1064",
+            name: productName,
+            brand: productBrand,
+            price: productPrice,
             image: mainImage
         }));
     };
 
     const thumbnails = [
-        "/001717728336_1.jpg",
-        "/001717728336_2.jpg", // Just a placeholder for visual difference if the user adds actual different images
-        "/001717728336_3.jpg"
+        mainImage,
+        "/product-12.jpeg",
+        "/product-28.jpeg"
     ];
 
     const currentImageIndex = thumbnails.indexOf(mainImage) !== -1 ? thumbnails.indexOf(mainImage) : 0;
@@ -167,10 +184,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         {/* Title Section */}
                         <div className="mb-6">
                             <h1 className="text-[16px] md:text-[18px] font-bold text-[#8c1d3b] uppercase tracking-wide mb-1">
-                                نارسيسو رودريغيز
+                                {productBrand}
                             </h1>
                             <h2 className="text-[22px] md:text-[28px] font-black text-gray-900 mb-1 leading-tight">
-                                ماسك غرينات إنتينس
+                                {productName}
                             </h2>
                             <p className="text-[14px] text-gray-500 mb-3">
                                 عطر لكلا الجنسين
@@ -182,7 +199,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                         {/* Price */}
                         <div className="flex items-center gap-1 mb-8">
-                            <span className="text-[20px] md:text-[24px] font-black text-gray-900">1064</span>
+                            <span className="text-[20px] md:text-[24px] font-black text-gray-900">{productPrice}</span>
                             <span className="text-[16px] font-bold text-gray-900">ريال</span>
                         </div>
 
@@ -209,10 +226,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                             </div>
                             <button
                                 onClick={() => {
-                                    const encodedName = encodeURIComponent("ماسك غرينات إنتينس");
-                                    const encodedBrand = encodeURIComponent("نارسيسو رودريغيز");
+                                    const encodedName = encodeURIComponent(productName);
+                                    const encodedBrand = encodeURIComponent(productBrand);
                                     const encodedImage = encodeURIComponent(mainImage);
-                                    router.push(`/engraving?id=${id}&name=${encodedName}&brand=${encodedBrand}&price=1064&image=${encodedImage}`);
+                                    router.push(`/engraving?id=${id}&name=${encodedName}&brand=${encodedBrand}&price=${productPrice}&image=${encodedImage}`);
                                 }}
                                 className="w-full border-2 border-[#D4AF37] text-black font-black text-[14px] md:text-[16px] py-3 rounded-sm hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center justify-center gap-2"
                             >
@@ -223,7 +240,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         {/* Split Payments Widget */}
                         <div className="bg-[#f5f5f5] p-4 rounded-sm mb-6 flex flex-col gap-3">
                             <p className="text-center text-[12px] text-gray-600">
-                                قسمها على 4 دفعات متساوية بقيمة <span className="font-bold text-black">266.00 ريال</span> مع:
+                                قسمها على 4 دفعات متساوية بقيمة <span className="font-bold text-black">{(parseFloat(productPrice) / 4).toFixed(2)} ريال</span> مع:
                             </p>
                             <div className="flex items-center justify-center gap-4">
                                 <button className="bg-white flex-1 py-2 flex items-center justify-center rounded-sm font-black text-[14px] shadow-sm">
@@ -312,13 +329,15 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent className="text-[14px] text-gray-600 leading-relaxed pb-6 text-right">
-                                    عطر ماسك غرينات إنتينس من نارسيسو رودريغيز هو عطر زهري خشبي مسكي لكلا الجنسين. يفتتح العطر بنوتات منعشة من الفاكهة والتوابل، ويتميز بقلب من المسك النقي المميز لعلامة نارسيسو، مع قاعدة دافئة من الأخشاب الفاخرة والعنبر. عطر يجمع بين الأناقة والغموض ويترك انطباعاً لا يُنسى.
+                                    {productName.includes("بالمي") 
+                                        ? `عطر ${productName} من تشكيلة بالمي (Balmy) الفاخرة هو عطر يجسد النقاء والأناقة العصرية. يفتتح العطر بنوتات منعشة من الفواكه والزهور البرية والتوابل الشرقية الدافئة، ويتميز بقلب عطري غني بالنقاء والنعومة، مع قاعدة دافئة من الأخشاب النادرة والعنبر الفاخر والمسك الأبيض الملكي. عطر يجمع بين الثبات العالي والحضور الجذاب ليمنحك هالة لا تُنسى في كل مناسبة.`
+                                        : `عطر ${productName} من ${productBrand} هو عطر زهري خشبي مسكي لكلا الجنسين. يفتتح العطر بنوتات منعشة من الفاكهة والتوابل، ويتميز بقلب من المسك النقي المميز لعلامة نارسيسو، مع قاعدة دافئة من الأخشاب الفاخرة والعنبر. عطر يجمع بين الأناقة والغموض ويترك انطباعاً لا يُنسى.`}
                                     <br /><br />
                                     <strong className="text-gray-900">مكونات العطر:</strong>
                                     <ul className="list-disc list-inside mt-2 space-y-1 pr-2 text-right">
-                                        <li>مقدمة العطر: التوت الأحمر، البرغموت</li>
-                                        <li>قلب العطر: المسك، الورد، زنبق الوادي</li>
-                                        <li>قاعدة العطر: الباتشولي، العنبر، الأخشاب</li>
+                                        <li>مقدمة العطر: التوت الأحمر، البرغموت المنعش</li>
+                                        <li>قلب العطر: المسك النقي، الورد، زنبق الوادي</li>
+                                        <li>قاعدة العطر: الباتشولي، العنبر الدافئ، الأخشاب الفاخرة</li>
                                     </ul>
                                 </AccordionContent>
                             </AccordionItem>
