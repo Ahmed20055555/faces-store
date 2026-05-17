@@ -12,91 +12,22 @@ import "swiper/css/navigation";
 import { ChevronRight, ChevronLeft, ArrowRight, ArrowLeft, Mail } from "lucide-react";
 import FeaturesBar from "@/components/FeaturesBar";
 import FAQ from "@/components/FAQ";
-
-// ---------------------------------------------------------------------------
-// Data constants
-// ---------------------------------------------------------------------------
-
-const NEW_ARRIVALS = [
-  { brand: " Balmy", name: "عطر بالمي لافندر سبريت", price: "460", image: "/product-1.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي عود ملكي", price: "537", image: "/product-2.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي روز نوار", price: "572", image: "/product-3.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي فيلفيت صندل", price: "790", image: "/product-4.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي عود وود", price: "488", image: "/product-5.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي رويال ياسمين", price: "572", image: "/product-13.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي باتشولي ميست", price: "460", image: "/product-7.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي جولدن نكتار", price: "537", image: "/product-9.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي ديب ليذر", price: "690", image: "/product-10.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي مسك رويال", price: "572", image: "/product-11.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي سافرون سبايس", price: "488", image: "/product-3.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي أمبر نايت", price: "640", image: "/product-13.jpeg", isNew: true, hasGift: true },
-];
-
-const SPRING_IMAGES = [
-  "/product-14.jpeg",
-  "/product-15.jpeg",
-  "/product-16.jpeg",
-  "/product-17.jpeg",
-  "/product-18.jpeg",
-  "/product-19.jpeg",
-];
-
-const GWP_IMAGES = [
-  "/product-20.jpeg",
-  "/product-21.jpeg",
-  "/product-22.jpeg",
-  "/product-23.jpeg",
-  "/product-24.jpeg",
-  "/product-25.jpeg",
-  "/product-26.jpeg",
-  "/product-27.jpeg",
-];
-
-const FREE_GIFT_PRODUCTS = [
-  { brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", hasGift: false, hasFrom: false },
-  { brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", hasGift: false, hasFrom: true },
-];
-
-const ISSEY_PRODUCTS = [
-  { brand: "بالمي | Balmy", name: "عطر بالمي إليكسير", price: "444", image: "/product-20.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي مسك الفخامة", price: "460", image: "/product-21.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي كشمير وود", price: "537", image: "/product-22.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي سوليفان", price: "514", image: "/product-23.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "551", image: "/product-24.jpeg", hasGift: false, hasFrom: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي ويسبر", price: "419", image: "/product-25.jpeg", hasGift: false, hasFrom: true },
-];
-
-const AROUND_THE_WORLD_BRANDS = [
-  { name: "بالمي سيجنتشر", image: "/product-26.jpeg" },
-  { name: "بالمي كلاسيك", image: "/product-27.jpeg" },
-  { name: "بالمي عود", image: "/product-28.jpeg" },
-  { name: "بالمي رويال", image: "/product-1.jpeg" },
-  { name: "بالمي أوركيد", image: "/product-2.jpeg" },
-  { name: "بالمي إليت", image: "/product-3.jpeg" },
-];
-
-const CATEGORIES = [
-  { name: "عطور نسائية", image: "/product-12.jpeg" },
-  { name: "عطور رجالية", image: "/product-28.jpeg" },
-  { name: "عطور النيش", image: "/product-26.jpeg" },
-  { name: "عطور الشعر", image: "/product-18.jpeg" },
-  { name: "أطقم هدايا", image: "/product-21.jpeg" },
-  { name: "عطور العود", image: "/product-2.jpeg" },
-  { name: "الأكثر مبيعاً", image: "/product-27.jpeg" },
-  { name: "جديدنا", image: "/product-10.jpeg" },
-  { name: "الماركات", image: "/product-14.jpeg" },
-  { name: "عطور زيتية", image: "/product-25.jpeg" },
-];
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
 // ---------------------------------------------------------------------------
 // Page
 // ---------------------------------------------------------------------------
 
 export default function Home() {
+  const newArrivals = useSelector((state: RootState) => state.products.newArrivals);
+  const springImages = useSelector((state: RootState) => state.products.springImages);
+  const gwpImages = useSelector((state: RootState) => state.products.gwpImages);
+  const freeGiftProducts = useSelector((state: RootState) => state.products.freeGiftProducts);
+  const isseyProducts = useSelector((state: RootState) => state.products.isseyProducts);
+  const aroundTheWorldBrands = useSelector((state: RootState) => state.products.aroundTheWorldBrands);
+  const categories = useSelector((state: RootState) => state.products.categories);
+
   return (
     <main className="min-h-screen bg-white">
 
@@ -139,7 +70,7 @@ export default function Home() {
                 1240: { slidesPerView: 8, spaceBetween: 25 },
               }}
             >
-              {CATEGORIES.map((cat, i) => (
+              {categories.map((cat, i) => (
                 <SwiperSlide key={i}>
                   <div className="flex flex-col items-center gap-2 cursor-pointer group/cat">
                     <div className="transition-transform duration-300 ease-out group-hover/cat:scale-110">
@@ -191,7 +122,7 @@ export default function Home() {
               }}
               className="!px-1"
             >
-              {NEW_ARRIVALS.map((product, index) => (
+              {newArrivals.map((product, index) => (
                 <SwiperSlide key={index}>
                   <ProductCard id={`prod_${index}`} {...product} />
                 </SwiperSlide>
@@ -251,7 +182,7 @@ export default function Home() {
               }}
               className="!px-2"
             >
-              {SPRING_IMAGES.map((imgSrc, index) => (
+              {springImages.map((imgSrc, index) => (
                 <SwiperSlide key={index}>
                   <div className="aspect-[4/3] md:aspect-[3/2] rounded-[4px] overflow-hidden relative group cursor-pointer bg-gray-50">
                     <img
@@ -278,7 +209,7 @@ export default function Home() {
         title="مجاناً عطر بالحجم الكامل"
         bannerSrc="/product-12.jpeg"
         bannerAlt="Black Opium Offer"
-        products={FREE_GIFT_PRODUCTS}
+        products={freeGiftProducts}
       />
 
       {/* Gifts With Purchase Section */}
@@ -306,7 +237,7 @@ export default function Home() {
               }}
               className="!px-1"
             >
-              {GWP_IMAGES.map((imgSrc, index) => (
+              {gwpImages.map((imgSrc, index) => (
                 <SwiperSlide key={index}>
                   <div className="aspect-[4/5] md:aspect-square rounded-[4px] overflow-hidden relative group cursor-pointer bg-gray-50 border border-gray-100">
                     <img
@@ -333,7 +264,7 @@ export default function Home() {
         title="توليفات بالمي الفاخرة"
         bannerSrc="/product-28.jpeg"
         bannerAlt="Balmy Luxury Collection"
-        products={ISSEY_PRODUCTS}
+        products={isseyProducts}
       />
 
 
@@ -366,7 +297,7 @@ export default function Home() {
               }}
               className="!px-1"
             >
-              {NEW_ARRIVALS.map((product, index) => (
+              {newArrivals.map((product, index) => (
                 <SwiperSlide key={index}>
                   <ProductCard id={`prod_${index}`} {...product} />
                 </SwiperSlide>
@@ -409,7 +340,7 @@ export default function Home() {
               }}
               className="!px-1"
             >
-              {GWP_IMAGES.map((imgSrc, index) => (
+              {gwpImages.map((imgSrc, index) => (
                 <SwiperSlide key={index}>
                   <div className="aspect-[4/5] md:aspect-square rounded-[4px] overflow-hidden relative group cursor-pointer bg-gray-50 border border-gray-100">
                     <img
@@ -461,7 +392,7 @@ export default function Home() {
               }}
               className="!px-1"
             >
-              {AROUND_THE_WORLD_BRANDS.map((brand, index) => (
+              {aroundTheWorldBrands.map((brand, index) => (
                 <SwiperSlide key={index}>
                   <div className="flex flex-col items-center group cursor-pointer">
                     <div className="aspect-square w-full rounded-[4px] overflow-hidden relative bg-gray-50 mb-3 border border-gray-100">
