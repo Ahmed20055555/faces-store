@@ -18,7 +18,7 @@ import FAQ from "@/components/FAQ";
 // ---------------------------------------------------------------------------
 
 const NEW_ARRIVALS = [
-  { brand: "بالمي | Balmy", name: "عطر بالمي لافندر سبريت", price: "460", image: "/product-1.jpeg", isNew: true, hasGift: true },
+  { brand: " Balmy", name: "عطر بالمي لافندر سبريت", price: "460", image: "/product-1.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي عود ملكي", price: "537", image: "/product-2.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي روز نوار", price: "572", image: "/product-3.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي فيلفيت صندل", price: "790", image: "/product-4.jpeg", isNew: true, hasGift: true },
