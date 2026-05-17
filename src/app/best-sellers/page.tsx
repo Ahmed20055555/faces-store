@@ -48,7 +48,7 @@ export default function BestSellersPage() {
           >
             {BEST_SELLERS.map(product => (
               <SwiperSlide key={product.id}>
-                <ProductCard {...product} />
+                <ProductCard {...product} imageFit="cover" />
               </SwiperSlide>
             ))}
           </Swiper>

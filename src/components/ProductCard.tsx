@@ -20,9 +20,10 @@ interface ProductCardProps {
     hasFrom?: boolean;
     oldPrice?: string;
     discountBadge?: string;
+    imageFit?: 'cover' | 'contain';
 }
 
-const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true, oldPrice, discountBadge }: ProductCardProps) => {
+const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true, oldPrice, discountBadge, imageFit = 'cover' }: ProductCardProps) => {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some(item => item.id === id);
@@ -37,7 +38,7 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
         <div className="group relative flex flex-col bg-white p-4 transition-all duration-300 hover:shadow-[0_4px_25px_rgba(0,0,0,0.07)] h-full border border-gray-100/80 cursor-pointer font-sans">
             <Link href={`/product/${id}`} className="block">
                 {/* Image Area */}
-                <div className="relative aspect-[4/5] w-full flex items-center justify-center mb-4">
+                <div className="relative aspect-[4/5] w-full flex items-center justify-center mb-4 overflow-hidden rounded-md">
                     {/* Favorite Button */}
                     <button
                         onClick={handleToggleFavorite}
@@ -69,7 +70,10 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                     <img
                         src={image}
                         alt={name}
-                        className="w-full h-full object-contain p-2 mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                        className={cn(
+                            "w-full h-full transition-transform duration-500 group-hover:scale-105",
+                            imageFit === 'cover' ? "object-cover" : "object-contain p-2 mix-blend-multiply"
+                        )}
                     />
                 </div>
 

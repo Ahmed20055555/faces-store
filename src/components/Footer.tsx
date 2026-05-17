@@ -88,7 +88,7 @@ const Footer = () => {
                                 <li className="hover:text-white cursor-pointer transition-colors">الأكثر مبيعاً</li>
                                 <li className="hover:text-white cursor-pointer transition-colors">اشتر بطاقة هدية</li>
                                 <li className="hover:text-white cursor-pointer transition-colors">عطور</li>
-                                <li className="hover:text-white cursor-pointer transition-colors">المكياج</li>
+                                <li className="hover:text-white cursor-pointer transition-colors">عطور الشعر</li>
                                 <li className="hover:text-white cursor-pointer transition-colors">العناية بالبشرة</li>
                                 <li className="hover:text-white cursor-pointer transition-colors">للإستحمام والجسم</li>
                                 <li className="hover:text-white cursor-pointer transition-colors">العناية بالشعر</li>

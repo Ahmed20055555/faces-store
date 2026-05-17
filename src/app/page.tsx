@@ -33,25 +33,23 @@ const NEW_ARRIVALS = [
 ];
 
 const SPRING_IMAGES = [
-  "/DK-SUB.avif",
-  "/DK-SUB-Skincare_UAE-1.avif",
   "/DK-SUB-Fragrance_KSA-1.avif",
-  "/DK-SUB-Fragrance_KSA-1.avif",
-  "/DK-SUB.avif",
-  "/DK-SUB-Skincare_UAE-1.avif",
-  "/DK-SUB-Fragrance_KSA-1.avif",
-  "/DK-SUB-Fragrance_KSA-1.avif",
+  "/add-1.jfif",
+  "/add-2.jfif",
+  "/slider-1.jfif",
+  "/slider-2.png",
+  "/MB-Hero-P4Box-UAE-EN-2.avif",
 ];
 
 const GWP_IMAGES = [
-  "/ysl-gwp-ksa.avif",
-  "/prada-gwp.avif",
-  "/lancome-gwp-ksa-2.avif",
-  "/issey-gwp-uae2.avif",
-  "/ysl-gwp-ksa.avif",
-  "/prada-gwp.avif",
-  "/lancome-gwp-ksa-2.avif",
-  "/issey-gwp-uae2.avif",
+  "/slider-1.jfif",
+  "/slider-2.png",
+  "/add-1.jfif",
+  "/add-2.jfif",
+  "/slider-1.jfif",
+  "/slider-2.png",
+  "/add-1.jfif",
+  "/add-2.jfif",
 ];
 
 const FREE_GIFT_PRODUCTS = [
@@ -82,16 +80,16 @@ const AROUND_THE_WORLD_BRANDS = [
 ];
 
 const CATEGORIES = [
-  { name: "عطور نسائية", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-  { name: "عطور رجالية", image: "/DK-SUB.avif" },
-  { name: "عطور النيش", image: "/DK-SUB-Skincare_UAE-1.avif" },
-  { name: "عطور الشعر", image: "/DK-SUB.avif" },
-  { name: "أطقم هدايا", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-  { name: "عطور العود", image: "/DK-SUB-Skincare_UAE-1.avif" },
-  { name: "الأكثر مبيعاً", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-  { name: "جديدنا", image: "/DK-SUB.avif" },
-  { name: "الماركات", image: "/DK-SUB-Fragrance_KSA-1.avif" },
-  { name: "عطور زيتية", image: "/DK-SUB-Skincare_UAE-1.avif" },
+  { name: "عطور نسائية", image: "/IMLDI_BANNER_750x714.avif" },
+  { name: "عطور رجالية", image: "/MB-Hero-P4Box-UAE-EN-2.avif" },
+  { name: "عطور النيش", image: "/slider-1.jfif" },
+  { name: "عطور الشعر", image: "/DK-SUB-Fragrance_KSA-1.avif" },
+  { name: "أطقم هدايا", image: "/hero.png" },
+  { name: "عطور العود", image: "/add-1.jfif" },
+  { name: "الأكثر مبيعاً", image: "/product1.png" },
+  { name: "جديدنا", image: "/001717728336_1.jpg" },
+  { name: "الماركات", image: "/add-2.jfif" },
+  { name: "عطور زيتية", image: "/slider-2.png" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -558,7 +556,7 @@ export default function Home() {
             تسوق من المعرض المثالي لمستحضرات الجمال و العناية في السعودية
           </h2>
           <p className="text-[13px] md:text-[14px] text-gray-700 leading-relaxed mb-4">
-            وجوه (FACES) هي شركة البيع بالتجزئة الرائدة في مجال الجمال و العناية بالبشرة في جميع أنحاء العالم مع تشكيلة متنوعة من أحدث العطور والعناية بالبشرة والجسم والمكياج والعناية بالشعر والاكسسوارات في المنطقة.
+            بالمي هي الوجهة الرائدة في عالم العطور الفاخرة، نقدم تشكيلة متنوعة من أحدث عطور النيش والعطور العالمية لتناسب جميع الأذواق في المنطقة.
           </p>
           <p className="text-[13px] md:text-[14px] text-gray-700 leading-relaxed mb-4">
             مع خبرة 20 عاماً في الشرق الأوسط وسوق الخليج، لدينا 85 متجراً في 9 دول (الإمارات العربية المتحدة و الكويت و المملكة العربية السعودية و مصر و لبنان و قطر و المزيد) عدا عن تواجدنا الدائم على الموقع الإلكتروني.

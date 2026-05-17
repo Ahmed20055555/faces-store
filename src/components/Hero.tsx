@@ -14,15 +14,15 @@ import 'swiper/css/effect-fade';
 const TOP_PROMOS = [
     {
         id: 1,
-        image: "/DK-Promo.avif",
+        image: "/add-1.jfif",
         alt: "Promo 1",
         title: "موسم يزهر بالجمال",
-        subtitle: "عطور ومكياج وعناية بالبشرة",
+        subtitle: "عطور نيش وفاخرة",
         buttonText: "اكتشف التشكيلة"
     },
     {
         id: 2,
-        image: "/DK-Promo-EN-1.avif",
+        image: "/add-2.jfif",
         alt: "Promo 2",
         title: "عروض حصرية",
         subtitle: "تسوق الآن واكتشف أحدث صيحات العطور",
@@ -33,7 +33,7 @@ const TOP_PROMOS = [
 const HERO_SLIDES = [
     {
         id: 1,
-        image: "/IMLDI_BANNER_750x714.avif",
+        image: "/slider-1.jfif",
         title: "نفحات ترتقي بالحواس",
         description: "اكتشف تشكيلة حصرية من عطور النيش الفاخرة بإصدارات نادرة تعبر عن شخصيتك وتدوم طويلاً.",
         buttonText: "اكتشف التشكيلة",
@@ -41,7 +41,7 @@ const HERO_SLIDES = [
     },
     {
         id: 2,
-        image: "/hero.png",
+        image: "/slider-2.png",
         title: "أيقونات عطرية",
         description: "مجموعة مختارة بعناية لأصحاب الذوق الرفيع. توليفات عطرية تأخذك في رحلة لا تُنسى.",
         buttonText: "تسوق الفخامة",
@@ -94,7 +94,7 @@ const Hero = () => {
             </div>
 
             {/* Main Hero Slider */}
-            <div className="relative w-full group mb-16 md:mb-20">
+            <div className="relative w-full group mb-4 md:mb-6">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     navigation={{

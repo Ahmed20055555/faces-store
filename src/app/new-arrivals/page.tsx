@@ -13,8 +13,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const NEW_ARRIVALS = [
-  { id: "5", name: "أرماني كود الجديد", price: "410", image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani", rating: 5 },
-  { id: "6", name: "عطر ايف سان لوران", price: "480", image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL", rating: 4.9 },
+  { id: "5", name: "أرماني كود الجديد", price: "410", image: "/001717728336_1.jpg", brand: "Armani", rating: 5 },
+  { id: "6", name: "عطر ايف سان لوران", price: "480", image: "/product1.png", brand: "YSL", rating: 4.9 },
+  { id: "7", name: "ديور هوم إنتنس", price: "530", image: "/slider-1.jfif", brand: "Dior", rating: 5 },
+  { id: "8", name: "توم فورد أوركيد", price: "620", image: "/add-1.jfif", brand: "Tom Ford", rating: 4.8 },
 ];
 
 export default function NewArrivalsPage() {
@@ -45,7 +47,7 @@ export default function NewArrivalsPage() {
           >
             {NEW_ARRIVALS.map(product => (
               <SwiperSlide key={product.id}>
-                <ProductCard {...product} />
+                <ProductCard {...product} imageFit="cover" />
               </SwiperSlide>
             ))}
           </Swiper>

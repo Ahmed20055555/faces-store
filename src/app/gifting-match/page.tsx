@@ -14,8 +14,8 @@ const RECIPIENTS = [
     icon: Heart,
     desc: "لمن هي أغلى من الروح",
     products: [
-      { id: "gm1", name: "ديور جادور", price: "540", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&q=80&w=400", brand: "Dior" },
-      { id: "gm2", name: "لانكوم لا في إي بيل", price: "430", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=400", brand: "Lancôme" }
+      { id: "gm1", name: "ديور جادور", price: "540", image: "/product1.png", brand: "Dior" },
+      { id: "gm2", name: "لانكوم لا في إي بيل", price: "430", image: "/001717728336_1.jpg", brand: "Lancôme" }
     ]
   },
   {
@@ -24,8 +24,8 @@ const RECIPIENTS = [
     icon: Stars,
     desc: "لشريكة الدرب والروح",
     products: [
-      { id: "gm3", name: "إيف سان لوران ليبر", price: "480", image: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=400", brand: "YSL" },
-      { id: "gm4", name: "توم فورد بلاك أوركيد", price: "680", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford" }
+      { id: "gm3", name: "إيف سان لوران ليبر", price: "480", image: "/slider-2.png", brand: "YSL" },
+      { id: "gm4", name: "توم فورد بلاك أوركيد", price: "680", image: "/add-1.jfif", brand: "Tom Ford" }
     ]
   },
   {
@@ -34,8 +34,8 @@ const RECIPIENTS = [
     icon: Users,
     desc: "لرفيق الأيام والمواقف",
     products: [
-      { id: "gm5", name: "ديور سوفاج", price: "450", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=400", brand: "Dior" },
-      { id: "gm6", name: "شانيل بلو", price: "520", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=400", brand: "Chanel" }
+      { id: "gm5", name: "ديور سوفاج", price: "450", image: "/slider-1.jfif", brand: "Dior" },
+      { id: "gm6", name: "شانيل بلو", price: "520", image: "/add-2.jfif", brand: "Chanel" }
     ]
   },
   {
@@ -44,8 +44,8 @@ const RECIPIENTS = [
     icon: Coffee,
     desc: "للقدوة وفخر العائلة",
     products: [
-      { id: "gm7", name: "توم فورد عود وود", price: "920", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&q=80&w=400", brand: "Tom Ford" },
-      { id: "gm8", name: "أرماني كود", price: "410", image: "https://images.unsplash.com/photo-1595475241949-0f02b288d61a?auto=format&fit=crop&q=80&w=400", brand: "Armani" }
+      { id: "gm7", name: "توم فورد عود وود", price: "920", image: "/DK-SUB-Fragrance_KSA-1.avif", brand: "Tom Ford" },
+      { id: "gm8", name: "أرماني كود", price: "410", image: "/MB-Hero-P4Box-UAE-EN-2.avif", brand: "Armani" }
     ]
   }
 ];

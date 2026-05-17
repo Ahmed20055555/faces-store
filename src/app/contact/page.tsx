@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Phone, Mail, MapPin, Send, MessageSquare } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactPage() {
   return (
@@ -37,34 +38,38 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-black text-gray-900 mb-1">البريد الإلكتروني</h4>
-                    <p className="text-gray-500 font-bold">support@faces-store.com</p>
+                    <p className="text-gray-500 font-bold">support@balmy-perfumes.com</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-6 p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-[#8c1d3b] transition-all group">
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-[#8c1d3b] group-hover:bg-[#8c1d3b] group-hover:text-white transition-all">
-                    <MapPin className="w-6 h-6" />
+                <Link href="/branches" className="block">
+                  <div className="flex items-center gap-6 p-6 rounded-3xl bg-gray-50 border border-gray-100 hover:border-[#8c1d3b] transition-all group cursor-pointer">
+                    <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-[#8c1d3b] group-hover:bg-[#8c1d3b] group-hover:text-white transition-all">
+                      <MapPin className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 mb-1">الموقع</h4>
+                      <p className="text-gray-500 font-bold">الرياض، المملكة العربية السعودية (اضغط لعرض الفروع)</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-black text-gray-900 mb-1">الموقع</h4>
-                    <p className="text-gray-500 font-bold">الرياض، المملكة العربية السعودية</p>
-                  </div>
-                </div>
+                </Link>
               </div>
 
               {/* Social or Map Placeholder */}
-              <div className="mt-12 rounded-[2.5rem] overflow-hidden h-64 bg-gray-100 relative group grayscale hover:grayscale-0 transition-all duration-700">
-                <img 
-                  src="/IMLDI_BANNER_750x714.avif" 
-                  className="w-full h-full object-cover" 
-                  alt="Our Store" 
-                />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full font-black text-sm text-gray-900 shadow-xl">
-                    عرض الخريطة التفاعلية
+              <Link href="/branches" className="block mt-12">
+                <div className="rounded-[2.5rem] overflow-hidden h-64 bg-gray-100 relative group grayscale hover:grayscale-0 transition-all duration-700 cursor-pointer">
+                  <img 
+                    src="/IMLDI_BANNER_750x714.avif" 
+                    className="w-full h-full object-cover" 
+                    alt="Our Store" 
+                  />
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <div className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full font-black text-sm text-gray-900 shadow-xl group-hover:bg-[#8c1d3b] group-hover:text-white transition-all">
+                      عرض الخريطة التفاعلية
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* Contact Form */}

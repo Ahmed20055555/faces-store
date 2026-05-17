@@ -139,7 +139,7 @@ export default function ProductFormModal({ isOpen, onClose }: ProductFormModalPr
                         <label className="text-[11px] font-black text-gray-400 mr-2 uppercase tracking-wider">الفئة</label>
                         <select className="w-full bg-gray-50 border-none rounded-xl py-4 px-6 text-sm font-bold outline-none">
                           <option>العطور</option>
-                          <option>المكياج</option>
+                          <option>عطور الشعر</option>
                         </select>
                       </div>
                       <div className="space-y-2">
