@@ -217,7 +217,7 @@ export default function Home() {
             alt="Delivery Banner"
           /> */}
           {/* Mobile HTML Banner */}
-          <div className=" w-full bg-[#DAABA3] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
+          <div className=" w-full bg-[#BE9D72] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
             <h3 className="font-black text-[17px] mb-1">توصيل مجاني خلال ساعتين في الرياض</h3>
             <p className="font-bold text-[14px]">عند الطلب قبل 8 مساءً</p>
           </div>
