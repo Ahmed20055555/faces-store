@@ -217,12 +217,12 @@ export default function Home() {
             alt="Delivery Banner"
           /> */}
           {/* Mobile HTML Banner */}
-          <div className=" w-full bg-[#D4AF37] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
+          <div className=" w-full bg-[#DAABA3] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
             <h3 className="font-black text-[17px] mb-1">توصيل مجاني خلال ساعتين في الرياض</h3>
-            <p className="font-bold text-[14px] ">عند الطلب قبل 8 مساءً</p>
+            <p className="font-bold text-[14px]">عند الطلب قبل 8 مساءً</p>
           </div>
         </div>
-      </section>
+      </section>  
 
       {/* Spring Trends Section */}
       <section className="py-6 bg-white" dir="rtl">
