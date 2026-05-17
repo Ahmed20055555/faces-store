@@ -9,7 +9,7 @@ import { toggleFavorite } from '@/lib/features/favoritesSlice';
 import { RootState } from '@/lib/store';
 import ProductCard from "@/components/ProductCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -24,30 +24,42 @@ import ReviewModal from "@/components/ReviewModal";
 import ImageGalleryModal from "@/components/ImageGalleryModal";
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-    const resolvedParams = React.use(params);
-    const id = resolvedParams.id;
+    const paramsHook = useParams();
+    const id = (paramsHook?.id as string) || "";
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    // Query our Redux products slice for all the items
+    const newArrivals = useSelector((state: RootState) => state.products.newArrivals);
+    const freeGiftProducts = useSelector((state: RootState) => state.products.freeGiftProducts);
+    const isseyProducts = useSelector((state: RootState) => state.products.isseyProducts);
+
+    // Find the product by ID across all Redux product lists!
+    const dbProduct = 
+        newArrivals.find(p => p.id === id) ||
+        freeGiftProducts.find(p => p.id === id) ||
+        isseyProducts.find(p => p.id === id);
 
     const paramName = searchParams.get('name');
     const paramBrand = searchParams.get('brand');
     const paramPrice = searchParams.get('price');
     const paramImage = searchParams.get('image');
 
-    const productName = paramName || "ماسك غرينات إنتينس";
-    const productBrand = paramBrand || "نارسيسو رودريغيز";
-    const productPrice = paramPrice || "1064";
-    const productImage = paramImage || "/001717728336_1.jpg";
+    const productName = dbProduct ? dbProduct.name : (paramName || "ماسك غرينات إنتينس");
+    const productBrand = dbProduct ? dbProduct.brand : (paramBrand || "نارسيسو رودريغيز");
+    const productPrice = dbProduct ? dbProduct.price : (paramPrice || "1064");
+    const productImage = dbProduct ? dbProduct.image : (paramImage || "/001717728336_1.jpg");
 
     const [activeTab, setActiveTab] = useState<'may-like' | 'similar' | 'recently-viewed'>('may-like');
     const [mainImage, setMainImage] = useState(productImage);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
     React.useEffect(() => {
-        if (paramImage) {
-            setMainImage(paramImage);
+        const activeImg = dbProduct ? dbProduct.image : paramImage;
+        if (activeImg) {
+            setMainImage(activeImg);
         }
-    }, [paramImage]);
+    }, [dbProduct, paramImage]);
 
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
@@ -74,12 +86,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     };
 
     const thumbnails = [
-        mainImage,
-        "/product-12.jpeg",
-        "/product-28.jpeg"
+        mainImage
     ];
 
-    const currentImageIndex = thumbnails.indexOf(mainImage) !== -1 ? thumbnails.indexOf(mainImage) : 0;
+    const currentImageIndex = 0;
 
     const SIMILAR_PRODUCTS = [
         { brand: "إيسي مياكي", name: "لوميير ديسي", price: "537", image: "/001717728336_1.jpg", isNew: true, hasGift: true },
@@ -136,19 +146,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
 
                     {/* Left Side: Images */}
-                    <div className="flex flex-col-reverse md:flex-row gap-4">
+                    <div className="flex flex-col-reverse md:flex-row gap-4 w-full">
                         {/* Thumbnails */}
-                        <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
-                            {thumbnails.map((img, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setMainImage(img)}
-                                    className={`w-20 h-24 shrink-0 border ${mainImage === img ? 'border-black' : 'border-gray-200'} rounded-sm overflow-hidden flex items-center justify-center p-1`}
-                                >
-                                    <img src={img} alt="Thumbnail" className="w-full h-full object-contain mix-blend-multiply" />
-                                </button>
-                            ))}
-                        </div>
+                        {thumbnails.length > 1 && (
+                            <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible shrink-0 pb-2 md:pb-0">
+                                {thumbnails.map((img, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setMainImage(img)}
+                                        className={`w-20 h-24 shrink-0 border ${mainImage === img ? 'border-black' : 'border-gray-200'} rounded-sm overflow-hidden flex items-center justify-center p-1`}
+                                    >
+                                        <img src={img} alt="Thumbnail" className="w-full h-full object-contain mix-blend-multiply" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
 
                         {/* Main Image */}
                         <button

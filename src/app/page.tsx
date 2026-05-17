@@ -124,7 +124,7 @@ export default function Home() {
             >
               {newArrivals.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductCard id={`prod_${index}`} {...product} />
+                  <ProductCard {...product} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -299,7 +299,7 @@ export default function Home() {
             >
               {newArrivals.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <ProductCard id={`prod_${index}`} {...product} />
+                  <ProductCard {...product} />
                 </SwiperSlide>
               ))}
             </Swiper>
