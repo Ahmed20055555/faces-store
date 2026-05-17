@@ -211,13 +211,13 @@ export default function Home() {
       <section className="pb-4 pt-4 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           {/* Desktop Image */}
-          <img
+          {/* <img
             src="/DK-Hero-Loreal-EN-3.avif"
             className="hidden md:block w-full h-auto rounded-[8px]"
             alt="Delivery Banner"
-          />
+          /> */}
           {/* Mobile HTML Banner */}
-          <div className="md:hidden w-full bg-[#8c1d3b] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
+          <div className=" w-full bg-[#121212] text-white rounded-[8px] p-4 text-center flex flex-col justify-center items-center min-h-[100px] shadow-sm">
             <h3 className="font-black text-[17px] mb-1">توصيل مجاني خلال ساعتين في الرياض</h3>
             <p className="font-bold text-[14px] text-white/90">عند الطلب قبل 8 مساءً</p>
           </div>

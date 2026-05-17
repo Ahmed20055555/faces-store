@@ -117,7 +117,7 @@ export default function DeliveryBannerPage() {
             </div>
 
             {/* Mobile Preview */}
-            <div className="bg-[#8c1d3b] text-white rounded-[8px] overflow-hidden relative flex items-center justify-center shadow-md border border-[#8c1d3b] min-h-[100px] w-[350px] mx-auto p-4">
+            <div className="bg-[#121212] text-white rounded-[8px] overflow-hidden relative flex items-center justify-center shadow-md border border-[#121212] min-h-[100px] w-[350px] mx-auto p-4">
               <div className="absolute top-2 right-2 bg-white/50 backdrop-blur-md px-2 py-0.5 rounded-sm text-[9px] font-black z-20">جوال</div>
               <div className="w-full text-center relative z-10">
                 <h3 className="font-black text-[17px] mb-1">{deliveryTitle || "العنوان هنا"}</h3>
