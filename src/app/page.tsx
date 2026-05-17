@@ -23,12 +23,12 @@ const NEW_ARRIVALS = [
   { brand: "بالمي | Balmy", name: "عطر بالمي روز نوار", price: "572", image: "/product-3.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي فيلفيت صندل", price: "790", image: "/product-4.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي عود وود", price: "488", image: "/product-5.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي رويال ياسمين", price: "572", image: "/product-6.jpeg", isNew: true, hasGift: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي رويال ياسمين", price: "572", image: "/product-13.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي باتشولي ميست", price: "460", image: "/product-7.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي جولدن نكتار", price: "537", image: "/product-9.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي ديب ليذر", price: "690", image: "/product-10.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي مسك رويال", price: "572", image: "/product-11.jpeg", isNew: true, hasGift: true },
-  { brand: "بالمي | Balmy", name: "عطر بالمي سافرون سبايس", price: "488", image: "/product-12.jpeg", isNew: true, hasGift: true },
+  { brand: "بالمي | Balmy", name: "عطر بالمي سافرون سبايس", price: "488", image: "/product-3.jpeg", isNew: true, hasGift: true },
   { brand: "بالمي | Balmy", name: "عطر بالمي أمبر نايت", price: "640", image: "/product-13.jpeg", isNew: true, hasGift: true },
 ];
 
