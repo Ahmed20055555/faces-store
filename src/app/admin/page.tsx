@@ -33,7 +33,7 @@ export default function AdminOverview() {
         id: o.id.replace("BALMY-", "#"),
         customer: o.customerName,
         amount: `${o.amount.toLocaleString()} ر.س`,
-        status: o.status === 'delivered' ? 'مكتمل' : o.status === 'shipping' ? 'في الطريق' : o.status === 'preparing' ? 'قيد التجهيز' : 'تم الاستلام',
+        status: o.status === 'delivered' ? 'مكتمل' : o.status === 'shipping' ? 'في الطريق' : o.status === 'preparing' ? 'جاري التجهيز' : 'تم الاستلام',
         time: o.time
       }));
       
@@ -161,7 +161,7 @@ export default function AdminOverview() {
                     <span className={`px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[10px] font-black ${
                       order.status === "مكتمل" ? "bg-green-50 text-green-600 border border-green-100" :
                       order.status === "في الطريق" ? "bg-orange-50 text-orange-600 border border-orange-100" :
-                      order.status === "قيد التجهيز" ? "bg-purple-50 text-purple-600 border border-purple-100" :
+                      order.status === "جاري التجهيز" ? "bg-purple-50 text-purple-600 border border-purple-100" :
                       order.status === "بانتظار الدفع" ? "bg-amber-50 text-amber-600 border border-amber-100" :
                       "bg-blue-50 text-blue-600 border border-blue-100"
                     }`}>

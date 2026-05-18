@@ -48,6 +48,7 @@ export default function TrackOrderPage() {
     const [paymentStatus, setPaymentStatus] = useState<string>('cod');
     const [orderTotal, setOrderTotal] = useState<string>('598');
     const [orderNumber, setOrderNumber] = useState<string>("BALMY-51732");
+    const [estimatedDelivery, setEstimatedDelivery] = useState<string>("");
 
     useEffect(() => {
         const savedMethod = localStorage.getItem('selectedPaymentMethod');
@@ -55,14 +56,43 @@ export default function TrackOrderPage() {
             setPaymentMethod(savedMethod);
         }
 
+        const savedOrderId = localStorage.getItem('activeOrderId');
+        let orderIdToLookup = savedOrderId || "BALMY-51732";
+        if (savedOrderId) {
+            setOrderNumber(savedOrderId);
+        }
+
+        // Look up this order in adminOrders to check status & estimated delivery set by admin!
+        const savedOrders = localStorage.getItem("adminOrders");
+        if (savedOrders) {
+            const parsed = JSON.parse(savedOrders) as any[];
+            const foundOrder = parsed.find(o => o.id === orderIdToLookup);
+            if (foundOrder) {
+                const statusMap: Record<string, number> = {
+                    received: 1,
+                    preparing: 2,
+                    shipping: 3,
+                    delivered: 4
+                };
+                if (foundOrder.status) {
+                    setCurrentStep(statusMap[foundOrder.status] || 1);
+                }
+                if (foundOrder.paymentStatus) {
+                    setPaymentStatus(foundOrder.paymentStatus === 'collected' || foundOrder.paymentStatus === 'paid' ? 'paid' : 'cod');
+                }
+                if (foundOrder.estimatedDelivery) {
+                    setEstimatedDelivery(foundOrder.estimatedDelivery);
+                }
+                if (foundOrder.amount) {
+                    setOrderTotal(foundOrder.amount.toLocaleString());
+                }
+                return; // skip simulated timers if order is active
+            }
+        }
+
         const savedStatus = localStorage.getItem('paymentStatus');
         if (savedStatus) {
             setPaymentStatus(savedStatus);
-        }
-
-        const savedOrderId = localStorage.getItem('activeOrderId');
-        if (savedOrderId) {
-            setOrderNumber(savedOrderId);
         }
 
         const savedTotal = localStorage.getItem('selectedOrderTotal');
@@ -70,10 +100,26 @@ export default function TrackOrderPage() {
             setOrderTotal(parseFloat(savedTotal).toLocaleString());
         }
 
-        // Auto-progress for demo
-        const timer2 = setTimeout(() => setCurrentStep(2), 2000);
-        const timer3 = setTimeout(() => setCurrentStep(3), 5000);
-        return () => { clearTimeout(timer2); clearTimeout(timer3); };
+        const savedFulfillmentStatus = localStorage.getItem('activeOrderFulfillmentStatus');
+        if (savedFulfillmentStatus) {
+            const statusMap: Record<string, number> = {
+                received: 1,
+                preparing: 2,
+                shipping: 3,
+                delivered: 4
+            };
+            setCurrentStep(statusMap[savedFulfillmentStatus] || 1);
+        } else {
+            // Auto-progress for fallback demo
+            const timer2 = setTimeout(() => setCurrentStep(2), 2000);
+            const timer3 = setTimeout(() => setCurrentStep(3), 5000);
+            return () => { clearTimeout(timer2); clearTimeout(timer3); };
+        }
+
+        const savedDeliveryTime = localStorage.getItem('estimatedDeliveryTime');
+        if (savedDeliveryTime) {
+            setEstimatedDelivery(savedDeliveryTime);
+        }
     }, []);
 
     // Find if there is an engraved item
@@ -204,8 +250,8 @@ export default function TrackOrderPage() {
                                         <h3 className={cn("font-black text-lg mb-1", isActive ? "text-[#8c1d3b]" : "text-gray-800")}>
                                             {step.title}
                                         </h3>
-                                        <span className={cn("text-[12px] font-bold", isActive ? "text-[#8c1d3b]/70" : "text-gray-400")}>
-                                            {step.time}
+                                        <span className={cn("text-[12px] font-black transition-colors duration-300", isActive ? "text-[#8c1d3b]/70" : "text-gray-400")}>
+                                            {step.id === 3 && estimatedDelivery ? estimatedDelivery : step.time}
                                         </span>
                                         {isActive && (
                                             <p className="text-sm font-bold text-gray-500 animate-in fade-in duration-500 max-w-[200px] mt-1">
@@ -220,16 +266,26 @@ export default function TrackOrderPage() {
 
                     {/* Current Status Detail */}
                     {currentStep === 3 && (
-                        <div className="mt-16 bg-[#fcf8f9] rounded-2xl p-6 flex items-start gap-4 border border-[#8c1d3b]/10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div className="bg-[#8c1d3b]/10 p-3 rounded-full text-[#8c1d3b] shrink-0">
-                                <MapPin size={24} />
+                        <div className="mt-16 bg-[#fcf8f9] rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-5 border border-[#8c1d3b]/10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div className="flex items-center gap-4 flex-1">
+                                <div className="bg-[#8c1d3b]/10 p-3.5 rounded-full text-[#8c1d3b] shrink-0">
+                                    <Truck size={24} className="animate-bounce text-[#8c1d3b]" />
+                                </div>
+                                <div className="text-right">
+                                    <h4 className="font-black text-[#2B3440] text-md">المندوب في الطريق للعنوان</h4>
+                                    <p className="text-xs text-gray-500 leading-relaxed mt-1">
+                                        عطرك الفاخر مع المندوب الآن وفي طريقه للتسليم. يُرجى إبقاء الجوال متاحاً.
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 className="font-bold text-[#2B3440] mb-1">المندوب في الطريق</h4>
-                                <p className="text-sm text-gray-600 leading-relaxed">
-                                    عطرك دلوقتي مع المندوب وفي طريقه لعنوانك. هيتم التواصل معاك قريباً على رقم الموبايل المسجل.
-                                </p>
-                            </div>
+                            
+                            {/* Glowing estimated time badge */}
+                            {estimatedDelivery && (
+                                <div className="w-full md:w-auto bg-[#8c1d3b] text-white px-6 py-4 rounded-2xl shadow-xl shadow-[#8c1d3b]/10 border border-white/10 flex flex-col items-center justify-center shrink-0">
+                                    <span className="text-[10px] font-black uppercase text-white/60 tracking-wider">موعد التوصيل المتوقع</span>
+                                    <span className="text-md font-black mt-1 text-yellow-300 font-tajawal">{estimatedDelivery}</span>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
