@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
-import { Save, Image as ImageIcon, Plus, Trash2, GripVertical, Upload, X } from "lucide-react";
+import React, { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { Save, Image as ImageIcon, Plus, Trash2, GripVertical, Upload } from "lucide-react";
+import { LableInput } from "@/components/lable-input";
 
 interface TrendItem {
   id: number;
   title: string;
   image: string;
+}
+
+interface FormData {
+  trends: TrendItem[];
 }
 
 const INITIAL_TRENDS: TrendItem[] = [
@@ -16,7 +22,6 @@ const INITIAL_TRENDS: TrendItem[] = [
 ];
 
 export default function SpringTrendsPage() {
-  const [trends, setTrends] = useState<TrendItem[]>(INITIAL_TRENDS);
   const [isActive, setIsActive] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("springTrends_isActive");
@@ -24,40 +29,45 @@ export default function SpringTrendsPage() {
     }
     return true;
   });
+
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
-  const fileInputRefs = useRef<{ [key: number]: HTMLInputElement | null }>({});
 
-  const handleImageUpload = useCallback((id: number, file: File) => {
+  // Initialize React Hook Form
+  const { register, control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
+    defaultValues: {
+      trends: INITIAL_TRENDS,
+    }
+  });
+
+  // Manage field arrays for dynamic items and drag reordering
+  const { fields, append, remove, move } = useFieldArray({
+    control,
+    name: "trends"
+  });
+
+  // Watch the trends array to update Live Preview instantly
+  const watchedTrends = watch("trends");
+
+  const handleImageUpload = (id: number, file: File, index: number) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const result = e.target?.result as string;
-      setTrends(prev => prev.map(t => t.id === id ? { ...t, image: result } : t));
+      setValue(`trends.${index}.image`, result);
     };
     reader.readAsDataURL(file);
-  }, []);
-
-  const triggerFileInput = (id: number) => {
-    fileInputRefs.current[id]?.click();
-  };
-
-  const removeImage = (id: number) => {
-    setTrends(prev => prev.map(t => t.id === id ? { ...t, image: "" } : t));
-  };
-
-  const handleUpdate = (id: number, value: string) => {
-    setTrends(prev => prev.map(t => t.id === id ? { ...t, title: value } : t));
   };
 
   const addTrend = () => {
-    setTrends(prev => [...prev, { id: Date.now(), title: "صيحة جديدة", image: "" }]);
+    append({ id: Date.now(), title: "صيحة جديدة", image: "" });
   };
 
-  const removeTrend = (id: number) => {
-    setTrends(prev => prev.filter(t => t.id !== id));
+  const removeTrend = (index: number) => {
+    remove(index);
   };
 
   const handleDragStart = (index: number) => setDraggedIndex(index);
+  
   const handleDragOver = (e: React.DragEvent, index: number) => {
     e.preventDefault();
     if (draggedIndex === null || draggedIndex === index) return;
@@ -71,24 +81,18 @@ export default function SpringTrendsPage() {
       setDragOverIndex(null);
       return;
     }
-    setTrends(prev => {
-      const updated = [...prev];
-      const [dragged] = updated.splice(draggedIndex, 1);
-      updated.splice(dropIndex, 0, dragged);
-      return updated;
-    });
+    move(draggedIndex, dropIndex);
     setDraggedIndex(null);
     setDragOverIndex(null);
   };
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Spring Trends Data:", trends);
+  const onSubmit = (data: FormData) => {
+    console.log("Spring Trends Data:", data);
     alert("تم حفظ الصيحات!");
   };
 
   return (
-    <form onSubmit={onSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-8 md:space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-8 md:space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
 
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -140,69 +144,75 @@ export default function SpringTrendsPage() {
           </div>
 
           <div className="space-y-3 max-h-[450px] md:max-h-[600px] overflow-y-auto pr-1 no-scrollbar">
-            {trends.map((trend, index) => (
-              <div
-                key={trend.id}
-                draggable
-                onDragStart={() => handleDragStart(index)}
-                onDragOver={(e) => handleDragOver(e, index)}
-                onDrop={(e) => handleDrop(e, index)}
-                onDragEnd={() => { setDraggedIndex(null); setDragOverIndex(null); }}
-                className={`
-                  p-3 md:p-4 rounded-2xl md:rounded-[1.5rem] border flex items-center gap-3 md:gap-4 group transition-all duration-300 select-none
-                  ${draggedIndex === index
-                    ? "opacity-40 scale-95 border-dashed border-gray-300 bg-gray-100"
-                    : dragOverIndex === index
-                      ? "border-[#accfad] bg-[#accfad]/10 shadow-lg scale-[1.02]"
-                      : "bg-gray-50/50 border-gray-100 hover:bg-white hover:shadow-md"
-                  }
-                `}
-              >
-                <div className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 transition-colors shrink-0">
-                  <GripVertical size={18} />
-                </div>
+            {fields.map((field, index) => {
+              const currentTrend = watchedTrends[index] || field;
+              const currentImage = currentTrend.image;
 
+              return (
                 <div
-                  onClick={() => triggerFileInput(trend.id)}
-                  className="w-14 h-14 md:w-20 md:h-20 bg-white border border-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0 cursor-pointer relative shadow-sm"
+                  key={field.id}
+                  draggable
+                  onDragStart={() => handleDragStart(index)}
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDrop={(e) => handleDrop(e, index)}
+                  onDragEnd={() => { setDraggedIndex(null); setDragOverIndex(null); }}
+                  className={`
+                    p-3 md:p-4 rounded-2xl md:rounded-[1.5rem] border flex items-center gap-3 md:gap-4 group transition-all duration-300 select-none
+                    ${draggedIndex === index
+                      ? "opacity-40 scale-95 border-dashed border-gray-300 bg-gray-100"
+                      : dragOverIndex === index
+                        ? "border-[#accfad] bg-[#accfad]/10 shadow-lg scale-[1.02]"
+                        : "bg-gray-50/50 border-gray-100 hover:bg-white hover:shadow-md"
+                    }
+                  `}
                 >
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={(el) => { fileInputRefs.current[trend.id] = el; }}
-                    onChange={(e) => { const file = e.target.files?.[0]; if (file) handleImageUpload(trend.id, file); }}
-                    className="hidden"
-                  />
-                  {trend.image ? (
-                    <>
-                      <img src={trend.image} alt={trend.title} className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <Upload size={14} className="text-white" />
-                      </div>
-                    </>
-                  ) : (
-                    <ImageIcon size={20} className="text-gray-200" />
-                  )}
-                </div>
+                  {/* Drag Handle */}
+                  <div className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 transition-colors shrink-0">
+                    <GripVertical size={18} />
+                  </div>
 
-                <div className="flex-1 space-y-1.5 min-w-0">
-                  <label className="text-[8px] md:text-[10px] font-black text-gray-400 uppercase tracking-widest">Trend #{index + 1}</label>
-                  <input
-                    type="text"
-                    value={trend.title}
-                    onChange={(e) => handleUpdate(trend.id, e.target.value)}
-                    className="w-full bg-white border border-gray-100 rounded-xl text-[12px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 p-2 md:p-2.5 text-gray-900 outline-none transition-all shadow-sm"
-                    placeholder="عنوان الصيحة..."
-                  />
-                </div>
+                  {/* Rounded Image Upload (using LableInput type="file") */}
+                  <label className="w-14 h-14 md:w-20 md:h-20 bg-white border border-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0 cursor-pointer relative shadow-sm group/img">
+                    <LableInput
+                      type="file"
+                      accept="image/*"
+                      containerClassName="hidden"
+                      onChange={(e) => { 
+                        const file = e.target.files?.[0]; 
+                        if (file) handleImageUpload(currentTrend.id, file, index); 
+                      }}
+                    />
+                    {currentImage ? (
+                      <>
+                        <img src={currentImage} alt={currentTrend.title} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                          <Upload size={14} className="text-white" />
+                        </div>
+                      </>
+                    ) : (
+                      <ImageIcon size={20} className="text-gray-200" />
+                    )}
+                  </label>
 
-                <div className="flex items-center gap-1 shrink-0 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-                  <button type="button" onClick={() => removeTrend(trend.id)} className="text-gray-300 hover:text-red-500 p-2 transition-colors">
-                    <Trash2 size={16} />
-                  </button>
+                  {/* Trend Name Input Component Integration */}
+                  <div className="flex-1 min-w-0">
+                    <LableInput
+                      label={`عنوان الصيحة #${index + 1}`}
+                      error={errors.trends?.[index]?.title?.message}
+                      placeholder="أدخل عنوان الصيحة..."
+                      {...register(`trends.${index}.title` as const, { required: "حقل عنوان الصيحة إجباري" })}
+                    />
+                  </div>
+
+                  {/* Remove Button */}
+                  <div className="flex items-center gap-1 shrink-0 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                    <button type="button" onClick={() => removeTrend(index)} className="text-gray-300 hover:text-red-500 p-2 transition-colors">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
@@ -215,20 +225,23 @@ export default function SpringTrendsPage() {
         <div className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm relative overflow-hidden h-fit self-start">
           <div className="absolute top-4 right-6 text-[9px] font-black text-gray-200 uppercase tracking-widest">Live Preview</div>
           <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6">
-            {trends.slice(0, 3).map((trend) => (
-              <div key={trend.id} className="space-y-2 md:space-y-3">
-                <div className="aspect-[3/4] bg-gray-50 rounded-xl md:rounded-2xl border border-gray-50 overflow-hidden relative shadow-sm">
-                  {trend.image ? (
-                    <img src={trend.image} alt={trend.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center"><ImageIcon size={20} className="text-gray-200" /></div>
-                  )}
+            {watchedTrends.slice(0, 3).map((trend, idx) => {
+              if (!trend) return null;
+              return (
+                <div key={trend.id || idx} className="space-y-2 md:space-y-3">
+                  <div className="aspect-[3/4] bg-gray-50 rounded-xl md:rounded-2xl border border-gray-50 overflow-hidden relative shadow-sm">
+                    {trend.image ? (
+                      <img src={trend.image} alt={trend.title} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center"><ImageIcon size={20} className="text-gray-200" /></div>
+                    )}
+                  </div>
+                  <h5 className="text-[8px] md:text-[11px] font-black text-gray-900 text-center leading-tight uppercase tracking-tighter">
+                    {trend.title}
+                  </h5>
                 </div>
-                <h5 className="text-[8px] md:text-[11px] font-black text-gray-900 text-center leading-tight uppercase tracking-tighter">
-                  {trend.title}
-                </h5>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

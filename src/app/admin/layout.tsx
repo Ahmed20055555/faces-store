@@ -20,7 +20,8 @@ import {
   Star,
   Monitor,
   CheckCircle2,
-  Wind
+  Wind,
+  RotateCcw
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,6 +36,7 @@ const sidebarItems: Array<{
 }> = [
     { icon: LayoutDashboard, label: "نظرة عامة", href: "/admin" },
     { icon: CreditCard, label: "الطلبات والمبيعات", href: "/admin/orders" },
+    { icon: RotateCcw, label: "طلبات المرتجعات", href: "/admin/returns" },
     { icon: ImageIcon, label: "البانر الرئيسي", href: "/admin/hero" },
     { icon: CheckCircle2, label: "شريط المميزات", href: "/admin/features" },
     { icon: Layers, label: "التصنيفات", href: "/admin/categories" },

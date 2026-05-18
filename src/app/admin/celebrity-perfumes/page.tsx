@@ -1,104 +1,122 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { Save, Sparkles, UploadCloud, Image as ImageIcon, Trash2, Star, Plus } from "lucide-react";
+import React, { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { Save, Sparkles, UploadCloud, Image as ImageIcon, Trash2, Star, Plus, GripVertical } from "lucide-react";
+import { LableInput } from "@/components/lable-input";
+
+interface CelebrityProduct {
+  id: string;
+  brand: string;
+  name: string;
+  price: string;
+  image: string;
+  celebrity: string;
+}
+
+interface FormData {
+  title: string;
+  bannerAlt: string;
+  bannerImage: string;
+  products: CelebrityProduct[];
+}
+
+const INITIAL_PRODUCTS: CelebrityProduct[] = [
+  { id: "gift_0", brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", celebrity: "عمرو دياب" },
+  { id: "gift_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", celebrity: "أنجلينا جولي" },
+  { id: "gift_2", brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", celebrity: "جوني ديب" },
+  { id: "gift_3", brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", celebrity: "أحمد عز" },
+  { id: "gift_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", celebrity: "جورجينا" },
+  { id: "gift_5", brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", celebrity: "نادين نجيم" },
+];
 
 export default function CelebrityPerfumesPage() {
-  const [data, setData] = useState({
-    title: "عطور المشاهيرر",
-    bannerAlt: "Dior Sauvage - Celebrities' Choice",
-    bannerImage: "/product-12.jpeg",
-    isActive: true,
-    products: [
-      { id: "gift_0", brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", celebrity: "عمرو دياب" },
-      { id: "gift_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", celebrity: "أنجلينا جولي" },
-      { id: "gift_2", brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", celebrity: "جوني ديب" },
-      { id: "gift_3", brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", celebrity: "أحمد عز" },
-      { id: "gift_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", celebrity: "جورجينا" },
-      { id: "gift_5", brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", celebrity: "نادين نجيم" },
-    ]
+  const [isActive, setIsActive] = useState(true);
+
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+
+  // Initialize React Hook Form with stored data or defaults
+  const { register, control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
+    defaultValues: {
+      title: "عطور المشاهير",
+      bannerAlt: "Dior Sauvage - Celebrities' Choice",
+      bannerImage: "/product-12.jpeg",
+      products: INITIAL_PRODUCTS,
+    }
   });
 
-  const [activeProductTab, setActiveProductTab] = useState(0);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // Manage field arrays for dynamic items and drag reordering
+  const { fields, append, remove, move } = useFieldArray({
+    control,
+    name: "products"
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
-  };
+  // Watch values for real-time live preview synchronization
+  const watchedTitle = watch("title");
+  const watchedBannerAlt = watch("bannerAlt");
+  const watchedBannerImage = watch("bannerImage");
+  const watchedProducts = watch("products") || [];
 
-  const handleImageUpload = (file: File) => {
+  // Handle Banner Image File Upload via FileReader
+  const handleBannerImageUpload = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      setData((prev) => ({ ...prev, bannerImage: reader.result as string }));
+      setValue("bannerImage", reader.result as string);
     };
     reader.readAsDataURL(file);
   };
 
-  const handleProductChange = (index: number, field: string, value: string) => {
-    setData((prev) => {
-      const updatedProducts = [...prev.products];
-      updatedProducts[index] = { ...updatedProducts[index], [field]: value };
-      return { ...prev, products: updatedProducts };
-    });
-  };
-
+  // Handle individual product image upload
   const handleProductImageUpload = (index: number, file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
-      setData((prev) => {
-        const updatedProducts = [...prev.products];
-        updatedProducts[index] = { ...updatedProducts[index], image: reader.result as string };
-        return { ...prev, products: updatedProducts };
-      });
+      setValue(`products.${index}.image`, reader.result as string);
     };
     reader.readAsDataURL(file);
   };
 
+  // Add new celebrity perfume product
   const addProduct = () => {
-    const newId = `gift_${Date.now()}`;
-    setData((prev) => ({
-      ...prev,
-      products: [
-        ...prev.products,
-        { id: newId, brand: "بالمي | Balmy", name: "عطر جديد", price: "0", image: "", celebrity: "اسم المشهور" }
-      ]
-    }));
-    setActiveProductTab(data.products.length);
-  };
-
-  const removeProduct = (index: number) => {
-    setData((prev) => {
-      const updated = prev.products.filter((_, i) => i !== index);
-      return { ...prev, products: updated };
+    append({
+      id: `gift_${Date.now()}`,
+      brand: "بالمي | Balmy",
+      name: "عطر جديد",
+      price: "0",
+      image: "",
+      celebrity: "اسم المشهور"
     });
-    setActiveProductTab((prev) => Math.max(0, prev - 1));
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  // Drag and drop handlers
+  const handleDragStart = (index: number) => setDraggedIndex(index);
+  
+  const handleDragOver = (e: React.DragEvent, index: number) => {
     e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      handleImageUpload(file);
+    if (draggedIndex === null || draggedIndex === index) return;
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
     }
+    move(draggedIndex, dropIndex);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
   };
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const removeImage = () => {
-    setData((prev) => ({ ...prev, bannerImage: "" }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Celebrity Perfumes Data:", data);
+  // Form submit handler
+  const onSubmit = (data: FormData) => {
+    console.log("Celebrity Perfumes Submitted Data:", data);
     alert("تم حفظ إعدادات عطور المشاهير والمنتجات بنجاح!");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-6 md:space-y-10 px-4 py-8 md:pb-20 font-sans" dir="rtl">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-6 md:space-y-10 px-4 py-8 md:pb-20 font-sans" dir="rtl">
 
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -114,21 +132,20 @@ export default function CelebrityPerfumesPage() {
             <button
               type="button"
               onClick={() => {
-                const nextVal = !data.isActive;
-                setData(prev => ({ ...prev, isActive: nextVal }));
+                const nextVal = !isActive;
+                setIsActive(nextVal);
                 if (typeof window !== "undefined") {
-                  localStorage.setItem("celebrityPerfumes_isActive", String(nextVal));
                   window.dispatchEvent(new Event("sectionActiveChanged"));
                 }
               }}
-              className={`w-11 h-6 rounded-full transition-all relative ${data.isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
+              className={`w-11 h-6 rounded-full transition-all relative ${isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
             >
-              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${data.isActive ? "right-[2px]" : "right-[22px]"}`} />
+              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${isActive ? "right-[2px]" : "right-[22px]"}`} />
             </button>
           </div>
 
           <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start sm:self-auto min-w-[220px] sm:min-w-0">
-            <div className={`w-2 h-2 rounded-full ${data.isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
+            <div className={`w-2 h-2 rounded-full ${isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
             <span className="text-[11px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
           </div>
         </div>
@@ -141,36 +158,56 @@ export default function CelebrityPerfumesPage() {
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
             <h3 className="text-base md:text-lg font-black text-gray-900 tracking-tight flex items-center gap-2">
               <Sparkles size={20} className="text-[#BE9D72]" />
-              إعدادات قسم عطور المشاهير
+              إعدادات البانر والقسم
             </h3>
           </div>
 
           <div className="space-y-4">
+            {/* Title & Banner Alt Inputs */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <LableInput
+                label="عنوان القسم"
+                error={errors.title?.message}
+                placeholder="أدخل عنوان القسم... مثال: عطور المشاهير"
+                {...register("title", { required: "عنوان القسم إجباري" })}
+              />
 
+              <LableInput
+                label="الوصف البديل للبانر (Alt Text)"
+                error={errors.bannerAlt?.message}
+                placeholder="أدخل الوصف البديل للبانر..."
+                {...register("bannerAlt")}
+              />
+            </div>
 
+            {/* Banner Image Uploader */}
             <div className="space-y-1">
               <label className="text-[10px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">صورة البانر الرئيسي</label>
               <div
-                onClick={() => fileInputRef.current?.click()}
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
+                onClick={() => {
+                  const input = document.getElementById("banner-upload-input");
+                  input?.click();
+                }}
                 className="border-2 border-dashed border-gray-200 rounded-2xl md:rounded-[2rem] p-6 md:p-8 flex flex-col items-center justify-center gap-3 bg-gray-50 hover:bg-white hover:border-[#BE9D72] transition-all cursor-pointer group relative overflow-hidden min-h-[160px] md:min-h-[200px]"
               >
                 <input
                   type="file"
-                  ref={fileInputRef}
+                  id="banner-upload-input"
                   accept="image/*"
                   className="hidden"
-                  onChange={(e) => { const file = e.target.files?.[0]; if (file) handleImageUpload(file); }}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleBannerImageUpload(file);
+                  }}
                 />
 
-                {data.bannerImage ? (
+                {watchedBannerImage ? (
                   <>
-                    <img src={data.bannerImage} alt="Banner" className="w-full h-full object-cover absolute inset-0" />
+                    <img src={watchedBannerImage} alt="Banner Preview" className="w-full h-full object-cover absolute inset-0" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
                       <div className="bg-white/90 backdrop-blur-md rounded-full px-4 py-1.5 flex items-center gap-2">
                         <UploadCloud size={14} className="text-[#BE9D72]" />
-                        <span className="text-[10px] font-black text-gray-800">تغيير الصورة</span>
+                        <span className="text-[10px] font-black text-gray-800">تغيير صورة البانر</span>
                       </div>
                     </div>
                   </>
@@ -178,7 +215,7 @@ export default function CelebrityPerfumesPage() {
                   <>
                     <UploadCloud size={32} className="text-gray-300 group-hover:text-[#BE9D72] transition-colors" />
                     <p className="text-[11px] font-black text-gray-600 tracking-tighter text-center">
-                      اضغط أو اسحب صورة هنا
+                      اضغط لرفع صورة البانر
                       <br />
                       <span className="text-[9px] text-gray-400">المقاس المثالي: 1200x800px</span>
                     </p>
@@ -186,10 +223,10 @@ export default function CelebrityPerfumesPage() {
                 )}
               </div>
 
-              {data.bannerImage && (
+              {watchedBannerImage && (
                 <button
                   type="button"
-                  onClick={removeImage}
+                  onClick={() => setValue("bannerImage", "")}
                   className="flex items-center gap-1.5 text-[11px] font-bold text-red-400 hover:text-red-600 transition-colors mt-2"
                 >
                   <Trash2 size={13} />
@@ -198,12 +235,12 @@ export default function CelebrityPerfumesPage() {
               )}
             </div>
 
-            {/* Products Management */}
+            {/* Products Drag and Drop List */}
             <div className="space-y-4 pt-6 border-t border-gray-100">
               <div className="flex justify-between items-center">
                 <h4 className="text-xs md:text-sm font-black text-gray-800 flex items-center gap-1.5">
                   <Star size={16} className="text-[#BE9D72]" />
-                  منتجات عطور المشاهير ({data.products.length})
+                  منتجات عطور المشاهير ({fields.length})
                 </h4>
                 <button
                   type="button"
@@ -215,122 +252,114 @@ export default function CelebrityPerfumesPage() {
                 </button>
               </div>
 
-              {/* Product Selector Tabs */}
-              <div className="flex gap-1.5 overflow-x-auto pb-2 no-scrollbar scroll-smooth">
-                {data.products.map((prod, idx) => (
-                  <button
-                    key={prod.id}
-                    type="button"
-                    onClick={() => setActiveProductTab(idx)}
-                    className={`px-3.5 py-2 rounded-xl text-[11px] font-black shrink-0 transition-all ${activeProductTab === idx
-                      ? "bg-black text-white shadow-md shadow-black/10"
-                      : "bg-gray-50 text-gray-500 hover:bg-gray-100"
-                      }`}
-                  >
-                    العطر {idx + 1}
-                  </button>
-                ))}
-              </div>
+              {/* Drag and Drop Product Cards List */}
+              <div className="space-y-3 max-h-[550px] overflow-y-auto pr-1 no-scrollbar">
+                {fields.map((field, index) => {
+                  const currentProd = watchedProducts[index] || field;
+                  const currentImage = currentProd.image;
 
-              {/* Active Product Form Fields */}
-              {data.products.map((prod, idx) => {
-                if (activeProductTab !== idx) return null;
-                return (
-                  <div key={prod.id} className="bg-gray-50/50 p-4 rounded-2xl border border-gray-100/50 space-y-4 animate-in fade-in duration-300">
-                    <div className="flex justify-between items-center pb-2 border-b border-gray-100/50">
-                      <span className="text-[10px] font-black text-[#BE9D72]">تعديل بيانات العطر #{idx + 1}</span>
-                      {data.products.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeProduct(idx)}
-                          className="text-red-400 hover:text-red-600 text-[10px] font-bold flex items-center gap-1 transition-colors"
-                        >
-                          <Trash2 size={12} />
-                          حذف هذا العطر
-                        </button>
-                      )}
-                    </div>
+                  return (
+                    <div
+                      key={field.id}
+                      draggable
+                      onDragStart={() => handleDragStart(index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDrop={(e) => handleDrop(e, index)}
+                      onDragEnd={() => { setDraggedIndex(null); setDragOverIndex(null); }}
+                      className={`
+                        p-4 rounded-2xl border flex flex-col sm:flex-row gap-4 group transition-all duration-300 select-none relative
+                        ${draggedIndex === index
+                          ? "opacity-40 scale-95 border-dashed border-gray-300 bg-gray-100"
+                          : dragOverIndex === index
+                            ? "border-[#BE9D72]/50 bg-[#BE9D72]/5 shadow-lg scale-[1.01]"
+                            : "bg-gray-50/50 border-gray-100 hover:bg-white hover:shadow-md"
+                        }
+                      `}
+                    >
+                      {/* Left/Right controls container */}
+                      <div className="flex items-center justify-between sm:flex-col sm:justify-center gap-2 shrink-0">
+                        {/* Drag Handle */}
+                        <div className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 p-1 transition-colors">
+                          <GripVertical size={18} />
+                        </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-black text-gray-400 uppercase">ماركة المنتج</label>
-                        <input
-                          type="text"
-                          value={prod.brand}
-                          onChange={(e) => handleProductChange(idx, "brand", e.target.value)}
-                          className="w-full bg-white border border-gray-100 rounded-xl px-3.5 py-2.5 text-xs font-black focus:ring-4 focus:ring-[#BE9D72]/10 outline-none transition-all"
-                        />
+                        {/* Remove Button */}
+                        {fields.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => remove(index)}
+                            className="text-gray-300 hover:text-red-500 p-1.5 transition-colors bg-white rounded-full shadow-sm border border-gray-100"
+                            title="حذف المنتج"
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        )}
                       </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-black text-gray-400 uppercase">اسم المنتج</label>
-                        <input
-                          type="text"
-                          value={prod.name}
-                          onChange={(e) => handleProductChange(idx, "name", e.target.value)}
-                          className="w-full bg-white border border-gray-100 rounded-xl px-3.5 py-2.5 text-xs font-black focus:ring-4 focus:ring-[#BE9D72]/10 outline-none transition-all"
-                        />
-                      </div>
-                    </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-black text-gray-400 uppercase">السعر (ريال)</label>
-                        <input
-                          type="text"
-                          value={prod.price}
-                          onChange={(e) => handleProductChange(idx, "price", e.target.value)}
-                          className="w-full bg-white border border-gray-100 rounded-xl px-3.5 py-2.5 text-xs font-black focus:ring-4 focus:ring-[#BE9D72]/10 outline-none transition-all"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-black text-gray-400 uppercase text-[#A37F55]">اسم المشهور المفضل لديه</label>
-                        <input
-                          type="text"
-                          value={prod.celebrity || ""}
-                          onChange={(e) => handleProductChange(idx, "celebrity", e.target.value)}
-                          placeholder="مثال: عمرو دياب"
-                          className="w-full bg-white border border-[#BE9D72]/30 focus:border-[#BE9D72] rounded-xl px-3.5 py-2.5 text-xs font-black focus:ring-4 focus:ring-[#BE9D72]/10 outline-none transition-all text-[#A37F55]"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Product Image Upload */}
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-black text-gray-400 uppercase">صورة المنتج</label>
-                      <div
-                        onClick={() => {
-                          const fileInput = document.getElementById(`prod-file-${idx}`);
-                          fileInput?.click();
-                        }}
-                        className="border border-dashed border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center gap-2 bg-white hover:border-[#BE9D72] transition-all cursor-pointer relative overflow-hidden min-h-[100px]"
-                      >
+                      {/* Product Image Uploader */}
+                      <label className="w-20 h-20 bg-white border border-gray-100 rounded-xl flex items-center justify-center overflow-hidden shrink-0 cursor-pointer relative shadow-sm group/img mx-auto sm:mx-0">
                         <input
                           type="file"
-                          id={`prod-file-${idx}`}
                           accept="image/*"
                           className="hidden"
                           onChange={(e) => {
                             const file = e.target.files?.[0];
-                            if (file) handleProductImageUpload(idx, file);
+                            if (file) handleProductImageUpload(index, file);
                           }}
                         />
-
-                        {prod.image ? (
+                        {currentImage ? (
                           <>
-                            <img src={prod.image} alt={prod.name} className="w-16 h-16 object-contain" />
-                            <p className="text-[9px] font-black text-gray-500 mt-1">تغيير صورة المنتج</p>
+                            <img src={currentImage} alt={currentProd.name || "Product Image"} className="w-full h-full object-cover" />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                              <UploadCloud size={14} className="text-white" />
+                            </div>
                           </>
                         ) : (
-                          <>
-                            <UploadCloud size={20} className="text-gray-300" />
-                            <p className="text-[9px] font-black text-gray-500">اضغط لرفع صورة المنتج</p>
-                          </>
+                          <ImageIcon size={20} className="text-gray-200" />
                         )}
+                      </label>
+
+                      {/* Form inputs grid */}
+                      <div className="flex-1 grid grid-cols-2 gap-3">
+                        <LableInput
+                          label="الماركة"
+                          error={errors.products?.[index]?.brand?.message}
+                          placeholder="مثال: بالمي | Balmy"
+                          {...register(`products.${index}.brand` as const, { required: "حقل الماركة إجباري" })}
+                        />
+
+                        <LableInput
+                          label="اسم المنتج"
+                          error={errors.products?.[index]?.name?.message}
+                          placeholder="أدخل اسم العطر..."
+                          {...register(`products.${index}.name` as const, { required: "حقل الاسم إجباري" })}
+                        />
+
+                        <LableInput
+                          label="السعر (ريال)"
+                          error={errors.products?.[index]?.price?.message}
+                          placeholder="أدخل السعر..."
+                          {...register(`products.${index}.price` as const, { required: "السعر إجباري" })}
+                        />
+
+                        <LableInput
+                          label="اسم المشهور"
+                          error={errors.products?.[index]?.celebrity?.message}
+                          placeholder="مثال: عمرو دياب"
+                          {...register(`products.${index}.celebrity` as const, { required: "اسم المشهور إجباري" })}
+                          inputClassName="text-[#A37F55] border-[#BE9D72]/20 focus:border-[#BE9D72]"
+                          labelClassName="text-[#A37F55]"
+                        />
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
+                <GripVertical size={14} className="text-gray-300" />
+                <p className="text-[10px] font-bold text-gray-400">اسحب لترتيب المنتجات · اضغط الأيقونة لرفع صورة المنتج</p>
+              </div>
             </div>
           </div>
         </div>
@@ -347,7 +376,7 @@ export default function CelebrityPerfumesPage() {
           <div className="border border-gray-100 rounded-2xl p-4 md:p-6 bg-gray-50/50 space-y-4">
             {/* Header */}
             <div className="flex justify-between items-center w-full pb-2">
-              <h2 className="text-[12px] md:text-sm font-black text-gray-900">{data.title}</h2>
+              <h2 className="text-[12px] md:text-sm font-black text-gray-900">{watchedTitle || "عطور المشاهير"}</h2>
               <span className="text-[9px] font-bold text-gray-400 underline cursor-pointer">عرض الكل</span>
             </div>
 
@@ -355,8 +384,8 @@ export default function CelebrityPerfumesPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
               {/* Right Side: Main Banner */}
               <div className="relative w-full aspect-[16/10] sm:h-[220px] rounded-xl overflow-hidden shadow-sm bg-gray-100 group">
-                {data.bannerImage ? (
-                  <img src={data.bannerImage} alt="Preview" className="w-full h-full object-cover" />
+                {watchedBannerImage ? (
+                  <img src={watchedBannerImage} alt={watchedBannerAlt || "Banner Preview"} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center text-gray-400">
                     <ImageIcon size={32} />
@@ -370,11 +399,11 @@ export default function CelebrityPerfumesPage() {
 
               {/* Left Side: Mock Products Grid */}
               <div className="grid grid-cols-2 gap-2 max-h-[350px] overflow-y-auto pr-1 no-scrollbar">
-                {data.products.map((prod) => (
+                {watchedProducts.map((prod) => (
                   <div key={prod.id} className="bg-white p-2 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between">
                     <div className="aspect-[4/5] bg-gray-50 rounded-lg overflow-hidden relative mb-1.5 flex items-center justify-center">
                       {prod.image ? (
-                        <img src={prod.image} alt="Product" className="w-full h-full object-contain" />
+                        <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center"><ImageIcon size={18} className="text-gray-200" /></div>
                       )}
@@ -395,8 +424,8 @@ export default function CelebrityPerfumesPage() {
               </div>
             </div>
 
-            <div className={`text-center text-[10px] font-black uppercase tracking-wider ${data.isActive ? "text-[#5a8a6a]" : "text-red-500"} pt-2`}>
-              {data.isActive ? "● القسم معروض حالياً في الصفحة الرئيسية" : "● القسم مخفي حالياً في الصفحة الرئيسية"}
+            <div className={`text-center text-[10px] font-black uppercase tracking-wider ${isActive ? "text-[#5a8a6a]" : "text-red-500"} pt-2`}>
+              {isActive ? "● القسم معروض حالياً في الصفحة الرئيسية" : "● القسم مخفي حالياً في الصفحة الرئيسية"}
             </div>
           </div>
         </div>

@@ -24,7 +24,6 @@ export default function AdminOverview() {
   const [liveVisitors, setLiveVisitors] = useState(142);
   const [recentOrders, setRecentOrders] = useState<any[]>([]);
 
-  // Load live visitor changes and dynamic orders
   useEffect(() => {
     const saved = localStorage.getItem("adminOrders");
     if (saved) {
@@ -119,67 +118,7 @@ export default function AdminOverview() {
         ))}
       </div>
 
-      {/* Recent Activity Table Style */}
-      <div className="bg-white rounded-[2rem] md:rounded-[3rem] border border-gray-100 shadow-sm overflow-hidden">
-        <div className="p-5 md:p-10 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
-          <div>
-            <h3 className="text-[15px] md:text-xl font-black text-gray-900">آخر الطلبات</h3>
-            <p className="text-[10px] md:text-xs font-bold text-gray-400 mt-1 tracking-tighter">سجل العمليات اللحظي</p>
-          </div>
-          <Link 
-            href="/admin/orders" 
-            className="text-[10px] md:text-xs font-black text-[#8c1d3b] hover:underline flex items-center gap-1 md:gap-2"
-          >
-            مشاهدة الكل <ArrowUpRight size={12} className="md:w-3.5 md:h-3.5" />
-          </Link>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-right min-w-[600px] md:min-w-full">
-            <thead>
-              <tr className="text-[9px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">
-                <th className="px-6 md:px-10 py-4 md:py-6 text-right">رقم الطلب</th>
-                <th className="px-6 md:px-10 py-4 md:py-6">العميل</th>
-                <th className="px-6 md:px-10 py-4 md:py-6">المبلغ</th>
-                <th className="px-6 md:px-10 py-4 md:py-6">الحالة</th>
-                <th className="px-6 md:px-10 py-4 md:py-6 text-left">التوقيت</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              {recentOrders.map((order, idx) => (
-                <tr key={idx} className="group hover:bg-gray-50/50 transition-colors">
-                  <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900 text-right">{order.id}</td>
-                  <td className="px-6 md:px-10 py-4 md:py-6">
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#8c1d3b]/5 flex items-center justify-center text-[8px] md:text-[10px] font-black text-[#8c1d3b] border border-[#8c1d3b]/10">
-                        {order.customer[0]}
-                      </div>
-                      <span className="text-xs md:text-sm font-bold text-gray-700 truncate max-w-[100px] md:max-w-none">{order.customer}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900">{order.amount}</td>
-                  <td className="px-6 md:px-10 py-4 md:py-6">
-                    <span className={`px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[10px] font-black ${
-                      order.status === "مكتمل" ? "bg-green-50 text-green-600 border border-green-100" :
-                      order.status === "في الطريق" ? "bg-orange-50 text-orange-600 border border-orange-100" :
-                      order.status === "جاري التجهيز" ? "bg-purple-50 text-purple-600 border border-purple-100" :
-                      order.status === "بانتظار الدفع" ? "bg-amber-50 text-amber-600 border border-amber-100" :
-                      "bg-blue-50 text-blue-600 border border-blue-100"
-                    }`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 md:px-10 py-4 md:py-6 text-left">
-                    <div className="flex items-center justify-end gap-1 md:gap-2 text-[8px] md:text-[10px] font-bold text-gray-400">
-                      <Clock size={10} className="md:w-3 md:h-3" />
-                      {order.time}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+
     </div>
   );
 }

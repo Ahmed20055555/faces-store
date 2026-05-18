@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Save, Image as ImageIcon, Plus, Trash2, GripVertical, UploadCloud, Link as LinkIcon } from "lucide-react";
+import { LableInput } from "@/components/lable-input";
 
 interface SlideItem {
   id: number;
@@ -167,7 +168,7 @@ export default function HeroAndPromoPage() {
               onClick={() => fileRefs.current[item.id]?.click()}
               className="w-20 h-20 bg-white border-2 border-dashed border-gray-200 rounded-2xl flex items-center justify-center overflow-hidden shrink-0 cursor-pointer group/img hover:border-gray-400 transition-all relative"
             >
-              <input
+              <LableInput
                 type="file"
                 accept="image/*"
                 ref={(el) => { fileRefs.current[item.id] = el; }}
@@ -175,7 +176,7 @@ export default function HeroAndPromoPage() {
                   const file = e.target.files?.[0];
                   if (file) handleImageUpload(section, item.id, file);
                 }}
-                className="hidden"
+                containerClassName="hidden"
               />
               {item.image ? (
                 <>
@@ -204,29 +205,22 @@ export default function HeroAndPromoPage() {
           </div>
 
           <div className="flex-1 space-y-4 w-full min-w-0">
-            <div className="space-y-1">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">العنوان</label>
-              <input
-                type="text"
-                value={item.title}
-                onChange={(e) => handleTitleUpdate(section, item.id, e.target.value)}
-                className="w-full bg-transparent border-b border-gray-100 focus:border-black text-[15px] font-black focus:ring-0 p-1 text-gray-900 outline-none transition-colors"
-                placeholder="أدخل العنوان..."
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">الرابط (URL)</label>
-              <div className="flex items-center gap-2 bg-white px-3 py-2.5 rounded-xl border border-gray-100 focus-within:border-gray-300 transition-colors">
-                <LinkIcon size={14} className="text-gray-400 shrink-0" />
-                <input
-                  type="text"
-                  value={item.link || ""}
-                  onChange={(e) => handleLinkUpdate(section, item.id, e.target.value)}
-                  className="w-full bg-transparent text-[13px] font-bold focus:ring-0 p-0 outline-none"
-                  placeholder="https://balmy.com/..."
-                />
-              </div>
-            </div>
+            
+            <LableInput
+              label="العنوان"
+              value={item.title}
+              onChange={(e) => handleTitleUpdate(section, item.id, e.target.value)}
+              placeholder="أدخل العنوان..."
+            />
+
+            <LableInput
+              label="الرابط (URL)"
+              value={item.link || ""}
+              onChange={(e) => handleLinkUpdate(section, item.id, e.target.value)}
+              placeholder="https://balmy.com/..."
+              icon={LinkIcon}
+              iconPosition="start"
+            />
           </div>
 
           <button

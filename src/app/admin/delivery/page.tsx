@@ -3,6 +3,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Save, Type, Truck } from "lucide-react";
+import { LableInput } from "@/components/lable-input";
+
+interface FormData {
+  deliveryTitle: string;
+  deliverySubtitle: string;
+}
 
 export default function DeliveryBannerPage() {
   const [isActive, setIsActive] = useState(() => {
@@ -13,7 +19,7 @@ export default function DeliveryBannerPage() {
     return true;
   });
 
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
     defaultValues: {
       deliveryTitle: "توصيل مجاني خلال ساعتين في الرياض",
       deliverySubtitle: "عند الطلب قبل 8 مساءً",
@@ -23,13 +29,13 @@ export default function DeliveryBannerPage() {
   const deliveryTitle = watch("deliveryTitle");
   const deliverySubtitle = watch("deliverySubtitle");
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: FormData) => {
     console.log("Delivery Data to backend:", data);
     alert("تم حفظ البيانات وجاهزة للإرسال!");
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-12 pb-20 font-sans" dir="rtl">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
 
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -79,27 +85,23 @@ export default function DeliveryBannerPage() {
 
           <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm space-y-6">
             <div className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
-                  <Type size={14} /> الرسالة الرئيسية
-                </label>
-                <input
-                  type="text"
-                  {...register("deliveryTitle")}
-                  className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-black focus:bg-white focus:ring-4 focus:ring-[#0b412b]/10 focus:border-[#0b412b] transition-all outline-none"
-                />
-              </div>
+              <LableInput
+                label="الرسالة الرئيسية"
+                error={errors.deliveryTitle?.message}
+                placeholder="أدخل الرسالة الرئيسية..."
+                icon={Type}
+                iconPosition="start"
+                {...register("deliveryTitle", { required: "حقل الرسالة الرئيسية إجباري" })}
+              />
 
-              <div className="space-y-2">
-                <label className="text-xs font-black text-gray-500 uppercase tracking-widest flex items-center gap-2">
-                  <Type size={14} /> الوصف الفرعي
-                </label>
-                <input
-                  type="text"
-                  {...register("deliverySubtitle")}
-                  className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-sm font-bold focus:bg-white focus:ring-4 focus:ring-[#0b412b]/10 focus:border-[#0b412b] transition-all outline-none"
-                />
-              </div>
+              <LableInput
+                label="الوصف الفرعي"
+                error={errors.deliverySubtitle?.message}
+                placeholder="أدخل الوصف الفرعي..."
+                icon={Type}
+                iconPosition="start"
+                {...register("deliverySubtitle", { required: "حقل الوصف الفرعي إجباري" })}
+              />
             </div>
           </div>
         </div>
