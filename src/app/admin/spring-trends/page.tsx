@@ -17,6 +17,13 @@ const INITIAL_TRENDS: TrendItem[] = [
 
 export default function SpringTrendsPage() {
   const [trends, setTrends] = useState<TrendItem[]>(INITIAL_TRENDS);
+  const [isActive, setIsActive] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("springTrends_isActive");
+      return saved === null ? true : saved === "true";
+    }
+    return true;
+  });
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const fileInputRefs = useRef<{ [key: number]: HTMLInputElement | null }>({});
@@ -82,21 +89,43 @@ export default function SpringTrendsPage() {
 
   return (
     <form onSubmit={onSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-8 md:space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
-      
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">صيحات الربيع</h1>
+          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">عطور اموج </h1>
           <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em]">Seasonal Trends & Curations</p>
         </div>
-        <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start">
-          <div className="w-2 h-2 rounded-full bg-[#5a8a6a] animate-pulse"></div>
-          <span className="text-[10px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+        
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto self-start sm:self-auto">
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-between gap-4 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm min-w-[220px]">
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">تفعيل القسم في المتجر</span>
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !isActive;
+                setIsActive(nextVal);
+                if (typeof window !== "undefined") {
+                  localStorage.setItem("springTrends_isActive", String(nextVal));
+                  window.dispatchEvent(new Event("sectionActiveChanged"));
+                }
+              }}
+              className={`w-11 h-6 rounded-full transition-all relative ${isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
+            >
+              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${isActive ? "right-[2px]" : "right-[22px]"}`} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start sm:self-auto min-w-[220px] sm:min-w-0">
+            <div className={`w-2 h-2 rounded-full ${isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-start">
-        
+
         {/* EDIT PANEL */}
         <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm space-y-6">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4 md:pb-6 gap-4">
@@ -156,13 +185,14 @@ export default function SpringTrendsPage() {
                   )}
                 </div>
 
-                <div className="flex-1 space-y-0.5 min-w-0">
+                <div className="flex-1 space-y-1.5 min-w-0">
                   <label className="text-[8px] md:text-[10px] font-black text-gray-400 uppercase tracking-widest">Trend #{index + 1}</label>
                   <input
                     type="text"
                     value={trend.title}
                     onChange={(e) => handleUpdate(trend.id, e.target.value)}
-                    className="w-full bg-transparent border-none text-[13px] md:text-sm font-black focus:ring-0 p-0 text-gray-900 outline-none"
+                    className="w-full bg-white border border-gray-100 rounded-xl text-[12px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 p-2 md:p-2.5 text-gray-900 outline-none transition-all shadow-sm"
+                    placeholder="عنوان الصيحة..."
                   />
                 </div>
 
@@ -205,7 +235,7 @@ export default function SpringTrendsPage() {
       </div>
 
       {/* FIXED SAVE BUTTON */}
-      <div className="fixed md:sticky bottom-6 left-4 right-4 md:bottom-8 md:left-auto md:right-auto z-50 flex justify-center md:justify-end">
+      <div className="fixed md:sticky bottom-6 left-4 right-4 md:bottom-8 md:left-auto md:right-auto z-50 flex justify-center md:justify-start">
         <button type="submit" className="w-full md:w-auto bg-black text-white px-10 md:px-12 py-4 md:py-5 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-2xl shadow-black/20 hover:scale-105 transition-all">
           <Save size={20} />
           حفظ الصيحات

@@ -33,7 +33,6 @@ export default function Home() {
 
       <Navbar />
 
-
       {/* Hero Section */}
       <Hero />
 
@@ -160,7 +159,7 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center mb-6 md:mb-8">
             <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
-              صيحات الربيع
+              عطور اموج
             </h2>
             <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black hover:opacity-80 transition-all underline">
               عرض الكل
@@ -206,7 +205,7 @@ export default function Home() {
 
       {/* Free Full Size Gift Section */}
       <ProductSection
-        title="مجاناً عطر بالحجم الكامل"
+        title="عطور المشاهير"
         bannerSrc="/product-12.jpeg"
         bannerAlt="Black Opium Offer"
         products={freeGiftProducts}
@@ -261,7 +260,7 @@ export default function Home() {
 
       {/* Balmy Special Collection */}
       <ProductSection
-        title="توليفات بالمي الفاخرة"
+        title="اكتشف عطور بوووص"
         bannerSrc="/product-28.jpeg"
         bannerAlt="Balmy Luxury Collection"
         products={isseyProducts}
@@ -319,7 +318,7 @@ export default function Home() {
 
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl text-[15px] md:text-[22px] font-black tracking-tight text-right w-full">
-              اكتشفوا عالمًا من الخدمه
+              عطور السهرات
             </h2>
 
           </div>
@@ -362,141 +361,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <section className="py-6 bg-white" dir="rtl">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          <div className="flex justify-between items-end mb-6 w-full">
-            <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
-              من حول العالم
-            </h2>
-
-            <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black hover:text-accent transition-all">
-              عرض جميع الماركات
-            </button>
-          </div>
-
-          <div className="relative">
-            <Swiper
-              modules={[Navigation]}
-              navigation={{
-                nextEl: ".around-next",
-                prevEl: ".around-prev",
-              }}
-              loop={true}
-              spaceBetween={12}
-              slidesPerView={2}
-              breakpoints={{
-                480: { slidesPerView: 2.5, spaceBetween: 15 },
-                768: { slidesPerView: 4, spaceBetween: 20 },
-                1024: { slidesPerView: 5, spaceBetween: 20 },
-                1280: { slidesPerView: 6, spaceBetween: 20 },
-              }}
-              className="!px-1"
-            >
-              {aroundTheWorldBrands.map((brand, index) => (
-                <SwiperSlide key={index}>
-                  <div className="flex flex-col items-center group cursor-pointer">
-                    <div className="aspect-square w-full rounded-[4px] overflow-hidden relative bg-gray-50 mb-3 border border-gray-100">
-                      <img
-                        src={brand.image}
-                        alt={brand.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                    <p className="text-[13px] md:text-[15px] font-bold text-center text-[#153428]">
-                      {brand.name}
-                    </p>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button className="around-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-            <button className="around-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
-              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-4 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          <div className="flex justify-between items-end mb-6">
-            <h2 className="text-xl md:text-2xl font-black tracking-tight text-right w-full">
-              مختارات عالمية
-            </h2>
-            <button className="text-sm font-bold shrink-0 whitespace-nowrap text-black hover:opacity-80 transition-all underline">
-              عرض الكل
-            </button>
-          </div>
-
-          <div className="relative">
-            <Swiper
-              modules={[Navigation]}
-              navigation={{
-                nextEl: ".global-next",
-                prevEl: ".global-prev",
-              }}
-              spaceBetween={12}
-              slidesPerView={2}
-              breakpoints={{
-                480: { slidesPerView: 2.5, spaceBetween: 15 },
-                768: { slidesPerView: 3, spaceBetween: 20 },
-                1024: { slidesPerView: 4, spaceBetween: 20 },
-                1280: { slidesPerView: 5, spaceBetween: 20 },
-              }}
-              className="!px-1"
-            >
-              {NEW_ARRIVALS.map((product, index) => (
-                <SwiperSlide key={index}>
-                  <ProductCard id={`prod_${index}`} {...product} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button className="global-prev absolute -right-2 md:right-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-            <button className="global-next absolute -left-2 md:left-[-25px] top-[40%] -translate-y-1/2 z-10 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-gray-800 hover:bg-[#8c1d3b] hover:text-white transition-all shadow-lg border border-white/30 disabled:hidden">
-              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-          </div>
-        </div>
-      </section> */}
-
-
-      {/* Laila AI Advisor Banner */}
-      {/* <section className="py-2 md:py-6 bg-white" dir="rtl">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-          <a href="#" className="block w-full rounded-[8px] overflow-hidden group cursor-pointer shadow-sm hover:shadow-md transition-shadow">
-            <img
-              src="/download.jpeg"
-              alt="مرحباً أنا ليلى مستشارتكم الجمالية الذكية"
-              className="w-full h-[180px] md:h-auto object-cover object-left md:object-center transition-transform duration-700 group-hover:scale-[1.02]"
-            />
-          </a>
-        </div>
-      </section> */}
-
-      {/* FAQ Section */}
-      <FAQ />
-
-      {/* SEO Text Block */}
-      {/* <section className="py-12 bg-[#f9f9f9]" dir="rtl">
-        <div className="max-w-[1000px] mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-xl md:text-2xl font-black mb-4 text-[#153428]">
-            تسوق من المعرض المثالي لمستحضرات الجمال و العناية في السعودية
-          </h2>
-          <p className="text-[13px] md:text-[14px] text-gray-700 leading-relaxed mb-4">
-            بالمي هي الوجهة الرائدة في عالم العطور الفاخرة، نقدم تشكيلة متنوعة من أحدث عطور النيش والعطور العالمية لتناسب جميع الأذواق في المنطقة.
-          </p>
-          <p className="text-[13px] md:text-[14px] text-gray-700 leading-relaxed mb-4">
-            مع خبرة 20 عاماً في الشرق الأوسط وسوق الخليج، لدينا 85 متجراً في 9 دول (الإمارات العربية المتحدة و الكويت و المملكة العربية السعودية و مصر و لبنان و قطر و المزيد) عدا عن تواجدنا الدائم على الموقع الإلكتروني.
-          </p>
-          <a href="#" className="text-[14px] font-black underline text-[#153428] hover:opacity-80 transition-opacity">
-            اكتشفوا عالم الجمال
-          </a>
-        </div>
-      </section> */}
 
       <Footer />
     </main>

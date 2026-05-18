@@ -33,19 +33,19 @@ const sidebarItems: Array<{
   href: string;
   subItems?: { label: string; href: string }[];
 }> = [
-  { icon: LayoutDashboard, label: "نظرة عامة", href: "/admin" },
-  { icon: ImageIcon, label: "البانر الرئيسي", href: "/admin/hero" },
-  { icon: CheckCircle2, label: "شريط المميزات", href: "/admin/features" },
-  { icon: Layers, label: "التصنيفات", href: "/admin/categories" },
-  { icon: Truck, label: "بانر التوصيل", href: "/admin/delivery" },
-  { icon: Monitor, label: "البانر الصغير", href: "/admin/mini-banner" },
-  { icon: Wind, label: "صيحات الربيع", href: "/admin/spring-trends" },
-  { icon: Gift, label: "عطر مجاني", href: "/admin/free-perfume" },
-  { icon: Sparkles, label: "إصدارات جديدة", href: "/admin/new-releases" },
-  { icon: Star, label: "ماركة الأسبوع", href: "/admin/brand-of-week" },
-  { icon: Package, label: "المنتجات", href: "/admin/products" },
-  { icon: Settings, label: "الإعدادات", href: "/admin/settings" },
-];
+    { icon: LayoutDashboard, label: "نظرة عامة", href: "/admin" },
+    { icon: CreditCard, label: "الطلبات والمبيعات", href: "/admin/orders" },
+    { icon: ImageIcon, label: "البانر الرئيسي", href: "/admin/hero" },
+    { icon: CheckCircle2, label: "شريط المميزات", href: "/admin/features" },
+    { icon: Layers, label: "التصنيفات", href: "/admin/categories" },
+    { icon: Truck, label: "بانر التوصيل", href: "/admin/delivery" },
+    { icon: Wind, label: "عطور اموج", href: "/admin/spring-trends" },
+    { icon: Gift, label: "عطور مشاهير", href: "/admin/celebrity-perfumes" },
+    { icon: Sparkles, label: "إصدارات جديدة", href: "/admin/new-releases" },
+    { icon: Star, label: "عطور بوص", href: "/admin/brand-of-week" },
+    { icon: Package, label: "المنتجات", href: "/admin/products" },
+    { icon: Settings, label: "الإعدادات", href: "/admin/settings" },
+  ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <>
       <div className="p-8 border-b border-gray-50 flex items-center justify-between">
         <div className="flex flex-col items-center flex-grow">
-          <img src="/logo.svg" alt="BALMY ADMIN" className="h-8 w-auto" />
+          <Link href="/"><img src="/logo.svg" alt="BALMY ADMIN" className="h-8 w-auto" /></Link>
           <p className="text-[10px] font-black text-gray-400 mt-2 tracking-[0.3em] uppercase">لوحة التحكم</p>
         </div>
         <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2 text-gray-400">
@@ -79,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <item.icon size={20} strokeWidth={pathname === item.href ? 2.5 : 1.5} />
               {item.label}
             </Link>
-            
+
             {/* Sub Items Rendering */}
             {item.subItems && (
               <div className="mr-9 space-y-1 border-r border-gray-100 pr-4 py-1">

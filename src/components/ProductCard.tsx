@@ -21,9 +21,10 @@ interface ProductCardProps {
     oldPrice?: string;
     discountBadge?: string;
     imageFit?: 'cover' | 'contain';
+    celebrity?: string;
 }
 
-const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true, oldPrice, discountBadge, imageFit = 'cover' }: ProductCardProps) => {
+const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = true, oldPrice, discountBadge, imageFit = 'cover', celebrity }: ProductCardProps) => {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.items);
     const isFavorite = favorites.some(item => item.id === id);
@@ -87,9 +88,17 @@ const ProductCard = ({ id, brand, name, price, image, isNew, hasGift, hasFrom = 
                     <h3 className="text-[14px] md:text-[15px] font-bold text-[#0f172a] uppercase tracking-wide truncate w-full">
                         {brand}
                     </h3>
-                    <p className="text-[13px] text-[#475569] leading-snug truncate w-full mb-2">
+                    <p className="text-[13px] text-[#475569] leading-snug truncate w-full mb-1">
                         {name}
                     </p>
+
+                    {celebrity && (
+                        <div className="inline-flex items-center gap-1.5 bg-[#BE9D72]/10 border border-[#BE9D72]/20 rounded-[4px] px-2.5 py-1 text-[11px] font-bold text-[#A37F55] mb-2 self-start w-fit transition-all duration-300 hover:bg-[#BE9D72]/15">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#BE9D72] animate-pulse"></span>
+                            <span>عطر يفضله: {celebrity}</span>
+                        </div>
+                    )}
+
                     <div className="flex items-center justify-start gap-1 mt-auto">
                         <span className={cn("font-bold text-[14px] md:text-[16px] tracking-tight", oldPrice ? "text-[#8c1d3b]" : "text-[#0f172a]")}>
                             {price}

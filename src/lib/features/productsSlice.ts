@@ -10,6 +10,7 @@ export interface Product {
   hasGift?: boolean;
   hasFrom?: boolean;
   rating?: number;
+  celebrity?: string;
 }
 
 export interface Category {
@@ -66,12 +67,12 @@ const initialState: ProductsState = {
     "/product-27.jpeg",
   ],
   freeGiftProducts: [
-    { id: "gift_0", brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", hasGift: false, hasFrom: true },
-    { id: "gift_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", hasGift: false, hasFrom: true },
-    { id: "gift_2", brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", hasGift: false, hasFrom: false },
-    { id: "gift_3", brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", hasGift: false, hasFrom: true },
-    { id: "gift_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", hasGift: false, hasFrom: true },
-    { id: "gift_5", brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", hasGift: false, hasFrom: true },
+    { id: "gift_0", brand: "بالمي | Balmy", name: "عطر بالمي أوبالين", price: "531", image: "/product-14.jpeg", hasGift: false, hasFrom: true, celebrity: "عمرو دياب" },
+    { id: "gift_1", brand: "بالمي | Balmy", name: "عطر بالمي مسك روز", price: "489", image: "/product-15.jpeg", hasGift: false, hasFrom: true, celebrity: " جولي" },
+    { id: "gift_2", brand: "بالمي | Balmy", name: "عطر بالمي سفاري عود", price: "621", image: "/product-16.jpeg", hasGift: false, hasFrom: false, celebrity: "جوني ديب" },
+    { id: "gift_3", brand: "بالمي | Balmy", name: "عطر بالمي هيريتج", price: "477", image: "/product-17.jpeg", hasGift: false, hasFrom: true, celebrity: "أحمد عز" },
+    { id: "gift_4", brand: "بالمي | Balmy", name: "عطر بالمي رويال توباز", price: "587", image: "/product-18.jpeg", hasGift: false, hasFrom: true, celebrity: "جورجينا" },
+    { id: "gift_5", brand: "بالمي | Balmy", name: "عطر بالمي لورين", price: "518", image: "/product-19.jpeg", hasGift: false, hasFrom: true, celebrity: "نادين نجيم" },
   ],
   isseyProducts: [
     { id: "issey_0", brand: "بالمي | Balmy", name: "عطر بالمي إليكسير", price: "444", image: "/product-20.jpeg", hasGift: false, hasFrom: true },
@@ -95,7 +96,7 @@ const initialState: ProductsState = {
     { name: "عطور النيش", image: "/product-26.jpeg" },
     { name: "عطور الشعر", image: "/product-18.jpeg" },
     { name: "أطقم هدايا", image: "/product-21.jpeg" },
-    { name: "عطور العود", image: "/product-2.jpeg" },
+    { name: "عطور الصيف", image: "/product-2.jpeg" },
     { name: "الأكثر مبيعاً", image: "/product-27.jpeg" },
     { name: "جديدنا", image: "/product-10.jpeg" },
     { name: "الماركات", image: "/product-14.jpeg" },

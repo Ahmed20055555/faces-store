@@ -6,16 +6,25 @@ import { Save, Star, UploadCloud, Image as ImageIcon, Plus, Trash2, GripVertical
 interface BrandProduct {
   id: number;
   title: string;
+  description: string;
+  price: string;
   image: string;
 }
 
 const INITIAL_PRODUCTS: BrandProduct[] = [
-  { id: 1, title: "L'Eau d'Issey", image: "" },
-  { id: 2, title: "Nuit d'Issey", image: "" },
-  { id: 3, title: "A Drop d'Issey", image: "" },
+  { id: 1, title: "", description: "", price: "", image: "" },
+  { id: 2, title: "", description: "", price: "", image: "" },
+  { id: 3, title: "", description: "", price: "", image: "" },
 ];
 
 export default function BrandOfWeekPage() {
+  const [isActive, setIsActive] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("brandOfWeek_isActive");
+      return saved === null ? true : saved === "true";
+    }
+    return true;
+  });
   const [brandName, setBrandName] = useState("ايسي مياكي");
   const [bannerImage, setBannerImage] = useState("");
   const [products, setProducts] = useState<BrandProduct[]>(INITIAL_PRODUCTS);
@@ -43,8 +52,16 @@ export default function BrandOfWeekPage() {
     setProducts(prev => prev.map(p => p.id === id ? { ...p, title: value } : p));
   };
 
+  const handleProductDescription = (id: number, value: string) => {
+    setProducts(prev => prev.map(p => p.id === id ? { ...p, description: value } : p));
+  };
+
+  const handleProductPrice = (id: number, value: string) => {
+    setProducts(prev => prev.map(p => p.id === id ? { ...p, price: value } : p));
+  };
+
   const addProduct = () => {
-    setProducts(prev => [...prev, { id: Date.now(), title: "منتج جديد", image: "" }]);
+    setProducts(prev => [...prev, { id: Date.now(), title: "", description: "", price: "", image: "" }]);
   };
 
   const removeProduct = (id: number) => {
@@ -78,26 +95,48 @@ export default function BrandOfWeekPage() {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Brand of Week Data:", { brandName, bannerImage, products });
-    alert("تم حفظ حملة ماركة الأسبوع!");
+    alert("تم حفظ حملة عطور بوص!");
   };
 
   return (
     <form onSubmit={onSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-8 md:space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
-      
+
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">ماركة الأسبوع</h1>
+          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">عطور بوص</h1>
           <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em]">Featured Brand Spotlight</p>
         </div>
-        <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start">
-          <div className="w-2 h-2 rounded-full bg-[#5a8a6a] animate-pulse"></div>
-          <span className="text-[10px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto self-start sm:self-auto">
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-between gap-4 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm min-w-[220px]">
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">تفعيل القسم في المتجر</span>
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !isActive;
+                setIsActive(nextVal);
+                if (typeof window !== "undefined") {
+                  localStorage.setItem("brandOfWeek_isActive", String(nextVal));
+                  window.dispatchEvent(new Event("sectionActiveChanged"));
+                }
+              }}
+              className={`w-11 h-6 rounded-full transition-all relative ${isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
+            >
+              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${isActive ? "right-[2px]" : "right-[22px]"}`} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start sm:self-auto min-w-[220px] sm:min-w-0">
+            <div className={`w-2 h-2 rounded-full ${isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-start">
-        
+
         {/* Edit Panel */}
         <div className="bg-white p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm space-y-6 md:space-y-8">
           <div className="flex justify-between items-center border-b border-gray-50 pb-4">
@@ -107,16 +146,6 @@ export default function BrandOfWeekPage() {
             </h3>
           </div>
 
-          {/* Brand Name */}
-          <div className="space-y-1">
-            <label className="text-[10px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">اسم الماركة</label>
-            <input
-              type="text"
-              value={brandName}
-              onChange={(e) => setBrandName(e.target.value)}
-              className="w-full bg-white border border-gray-100 rounded-xl md:rounded-2xl px-4 py-3 md:px-5 md:py-3.5 text-[13px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 transition-all outline-none"
-            />
-          </div>
 
           {/* Campaign Banner Upload */}
           <div className="space-y-1">
@@ -151,7 +180,7 @@ export default function BrandOfWeekPage() {
           {/* Products List */}
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <label className="text-[10px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">منتجات الماركة</label>
+              <label className="text-[10px] md:text-[11px] font-black text-gray-400 uppercase tracking-widest">عطور بوص</label>
               <button type="button" onClick={addProduct} className="bg-black text-white px-4 py-2 rounded-full text-[10px] md:text-xs font-black flex items-center gap-1.5 hover:bg-gray-800 transition-all shrink-0">
                 <Plus size={14} /> إضافة
               </button>
@@ -197,14 +226,36 @@ export default function BrandOfWeekPage() {
                     )}
                   </div>
 
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 space-y-2">
+                    {/* Title Input */}
                     <input
                       type="text"
                       value={product.title}
                       onChange={(e) => handleProductTitle(product.id, e.target.value)}
                       className="w-full bg-white border border-gray-100 rounded-xl text-[12px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 p-2 md:p-2.5 text-gray-900 outline-none transition-all shadow-sm"
-                      placeholder="اسم المنتج..."
+                      placeholder="اسم العطر..."
                     />
+
+                    {/* Description Input */}
+                    <input
+                      type="text"
+                      value={product.description}
+                      onChange={(e) => handleProductDescription(product.id, e.target.value)}
+                      className="w-full bg-white border border-gray-100 rounded-xl text-[12px] md:text-sm font-bold focus:border-black focus:ring-4 focus:ring-black/5 p-2 md:p-2.5 text-gray-500 outline-none transition-all shadow-sm"
+                      placeholder="وصف العطر (مثال: عطر بالمي إليكسير)..."
+                    />
+
+                    {/* Price Input */}
+                    <div className="relative max-w-[150px]">
+                      <input
+                        type="text"
+                        value={product.price}
+                        onChange={(e) => handleProductPrice(product.id, e.target.value)}
+                        className="w-full bg-white border border-gray-100 rounded-xl text-[12px] md:text-sm font-black focus:border-black focus:ring-4 focus:ring-black/5 pl-10 pr-3 py-2 md:py-2.5 text-gray-900 outline-none transition-all shadow-sm text-right"
+                        placeholder="السعر..."
+                      />
+                      <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[9px] font-black text-gray-400">ريال</span>
+                    </div>
                   </div>
 
                   <button type="button" onClick={() => removeProduct(product.id)} className="text-gray-300 hover:text-red-500 p-2 transition-colors sm:opacity-0 sm:group-hover:opacity-100">
@@ -222,14 +273,14 @@ export default function BrandOfWeekPage() {
 
           <button type="submit" className="w-full bg-black text-white py-4 rounded-xl md:rounded-2xl font-black text-sm flex items-center justify-center gap-2 hover:bg-gray-800 transition-all shadow-xl shadow-black/10">
             <Save size={18} />
-            تأكيد ماركة الأسبوع
+            تأكيد عطور بوص
           </button>
         </div>
 
         {/* Live Preview */}
         <div className="bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-gray-200 shadow-sm flex flex-col justify-center items-center group relative overflow-hidden h-fit self-start min-h-[300px]">
           <div className="absolute top-4 right-6 text-[9px] font-black text-gray-200 uppercase tracking-widest">Mockup Preview</div>
-          <h4 className="text-base md:text-2xl font-black text-gray-900 tracking-tight text-center mb-6 md:mb-8 mt-4">ماركة الأسبوع - {brandName}</h4>
+          <h4 className="text-base md:text-2xl font-black text-gray-900 tracking-tight text-center mb-6 md:mb-8 mt-4">عطور بوص - {brandName}</h4>
 
           <div className="aspect-square bg-gray-50 rounded-3xl overflow-hidden border border-gray-50 max-w-[250px] md:max-w-sm mx-auto w-full relative mb-6 md:mb-8">
             {bannerImage ? (
@@ -242,7 +293,7 @@ export default function BrandOfWeekPage() {
 
           <div className="w-full grid grid-cols-3 gap-3 md:gap-4">
             {products.slice(0, 3).map((product) => (
-              <div key={product.id} className="space-y-2">
+              <div key={product.id} className="space-y-1">
                 <div className="aspect-square bg-gray-50 rounded-xl border border-gray-50 overflow-hidden shadow-sm">
                   {product.image ? (
                     <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
@@ -250,7 +301,9 @@ export default function BrandOfWeekPage() {
                     <div className="w-full h-full flex items-center justify-center"><ImageIcon size={20} className="text-gray-200 opacity-20" /></div>
                   )}
                 </div>
-                <p className="text-[8px] md:text-[10px] font-black text-gray-700 text-center truncate">{product.title}</p>
+                <p className="text-[8px] md:text-[10px] font-black text-gray-900 text-center truncate">{product.title || "اسم العطر"}</p>
+                <p className="text-[7px] md:text-[8px] font-bold text-gray-400 text-center truncate">{product.description || "الوصف"}</p>
+                <p className="text-[7px] md:text-[9px] font-black text-[#BE9D72] text-center">{product.price ? `${product.price} ريال` : "السعر"}</p>
               </div>
             ))}
           </div>

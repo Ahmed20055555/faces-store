@@ -44,9 +44,32 @@ export default function TrackOrderPage() {
     const { items } = useSelector((state: RootState) => state.cart);
     const [currentStep, setCurrentStep] = useState(1);
     const [showCinematic, setShowCinematic] = useState(false);
-    const orderNumber = "BALMY-51732";
+    const [paymentMethod, setPaymentMethod] = useState<'online' | 'cod'>('cod');
+    const [paymentStatus, setPaymentStatus] = useState<string>('cod');
+    const [orderTotal, setOrderTotal] = useState<string>('598');
+    const [orderNumber, setOrderNumber] = useState<string>("BALMY-51732");
 
     useEffect(() => {
+        const savedMethod = localStorage.getItem('selectedPaymentMethod');
+        if (savedMethod === 'online' || savedMethod === 'cod') {
+            setPaymentMethod(savedMethod);
+        }
+
+        const savedStatus = localStorage.getItem('paymentStatus');
+        if (savedStatus) {
+            setPaymentStatus(savedStatus);
+        }
+
+        const savedOrderId = localStorage.getItem('activeOrderId');
+        if (savedOrderId) {
+            setOrderNumber(savedOrderId);
+        }
+
+        const savedTotal = localStorage.getItem('selectedOrderTotal');
+        if (savedTotal && parseFloat(savedTotal) > 0) {
+            setOrderTotal(parseFloat(savedTotal).toLocaleString());
+        }
+
         // Auto-progress for demo
         const timer2 = setTimeout(() => setCurrentStep(2), 2000);
         const timer3 = setTimeout(() => setCurrentStep(3), 5000);
@@ -224,11 +247,24 @@ export default function TrackOrderPage() {
                             <span className="text-gray-500 font-bold">طريقة التوصيل</span>
                         </div>
                         <div className="flex justify-between items-center text-[14px] py-2 border-b border-gray-50">
-                            <span className="text-gray-800 font-bold">الدفع عند الاستلام</span>
+                            <span className="text-gray-800 font-bold">
+                                {paymentMethod === 'cod' ? 'الدفع عند الاستلام' : 'دفع إلكتروني (بطاقة مدى/Visa)'}
+                            </span>
                             <span className="text-gray-500 font-bold">طريقة الدفع</span>
                         </div>
+                        <div className="flex justify-between items-center text-[14px] py-2 border-b border-gray-50">
+                            <span className={cn(
+                                "font-black px-3 py-1 rounded-full text-[11px]",
+                                paymentStatus === 'paid' 
+                                    ? "bg-[#12b76a]/10 text-[#12b76a] border border-[#12b76a]/20" 
+                                    : "bg-amber-500/10 text-amber-600 border border-amber-500/20"
+                            )}>
+                                {paymentStatus === 'paid' ? 'تم الدفع إلكترونياً بنجاح ✅' : 'بانتظار التحصيل عند الاستلام 💵'}
+                            </span>
+                            <span className="text-gray-500 font-bold">حالة الدفع</span>
+                        </div>
                         <div className="flex justify-between items-center text-[14px] py-2">
-                            <span className="text-[#8c1d3b] font-black text-[16px]">598 ريال</span>
+                            <span className="text-[#8c1d3b] font-black text-[16px]">{orderTotal} ريال</span>
                             <span className="text-gray-500 font-bold">الإجمالي</span>
                         </div>
                     </div>

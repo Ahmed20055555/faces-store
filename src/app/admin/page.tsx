@@ -11,6 +11,7 @@ import {
   Clock,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const STATS = [
   { label: "إجمالي المبيعات", value: "١٢٨,٤٥٠ ر.س", change: "+١٢٪", icon: DollarSign, color: "text-green-600", bg: "bg-green-50" },
@@ -19,18 +20,40 @@ const STATS = [
   { label: "معدل التحويل", value: "٣.٢٪", change: "+٢٪", icon: BarChart3, color: "text-[#5a8a6a]", bg: "bg-[#accfad]/10" },
 ];
 
-const RECENT_ORDERS = [
-  { id: "#١٢٩٠٤", customer: "أحمد العتيبي", amount: "١,٢٤٠ ر.س", status: "مكتمل", time: "منذ ٥ دقائق" },
-  { id: "#١٢٩٠٣", customer: "سارة محمد", amount: "٨٥٠ ر.س", status: "قيد التنفيذ", time: "منذ ١٢ دقيقة" },
-  { id: "#١٢٩٠٢", customer: "فهد الحربي", amount: "٢,١٠٠ ر.س", status: "مكتمل", time: "منذ ٣٢ دقيقة" },
-  { id: "#١٢٩٠١", customer: "نورة القحطاني", amount: "٤٥٠ ر.س", status: "بانتظار الدفع", time: "منذ ساعة" },
-];
-
 export default function AdminOverview() {
   const [liveVisitors, setLiveVisitors] = useState(142);
+  const [recentOrders, setRecentOrders] = useState<any[]>([]);
 
-  // Simulate live visitor changes
+  // Load live visitor changes and dynamic orders
   useEffect(() => {
+    const saved = localStorage.getItem("adminOrders");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      const mapped = parsed.slice(0, 4).map((o: any) => ({
+        id: o.id.replace("BALMY-", "#"),
+        customer: o.customerName,
+        amount: `${o.amount.toLocaleString()} ر.س`,
+        status: o.status === 'delivered' ? 'مكتمل' : o.status === 'shipping' ? 'في الطريق' : o.status === 'preparing' ? 'قيد التجهيز' : 'تم الاستلام',
+        time: o.time
+      }));
+      
+      const defaults = [
+        { id: "#١٢٩٠٤", customer: "أحمد العتيبي", amount: "١,٢٤٠ ر.س", status: "مكتمل", time: "منذ ٥ دقائق" },
+        { id: "#١٢٩٠٣", customer: "سارة محمد", amount: "٨٥٠ ر.س", status: "قيد التنفيذ", time: "منذ ١٢ دقيقة" },
+        { id: "#١٢٩٠٢", customer: "فهد الحربي", amount: "٢,١٠٠ ر.س", status: "مكتمل", time: "منذ ٣٢ دقيقة" },
+        { id: "#١٢٩٠١", customer: "نورة القحطاني", amount: "٤٥٠ ر.س", status: "بانتظار الدفع", time: "منذ ساعة" }
+      ];
+      const merged = [...mapped, ...defaults.filter(d => !mapped.some((m: any) => m.id === d.id))].slice(0, 4);
+      setRecentOrders(merged);
+    } else {
+      setRecentOrders([
+        { id: "#١٢٩٠٤", customer: "أحمد العتيبي", amount: "١,٢٤٠ ر.س", status: "مكتمل", time: "منذ ٥ دقائق" },
+        { id: "#١٢٩٠٣", customer: "سارة محمد", amount: "٨٥٠ ر.س", status: "قيد التنفيذ", time: "منذ ١٢ دقيقة" },
+        { id: "#١٢٩٠٢", customer: "فهد الحربي", amount: "٢,١٠٠ ر.س", status: "مكتمل", time: "منذ ٣٢ دقيقة" },
+        { id: "#١٢٩٠١", customer: "نورة القحطاني", amount: "٤٥٠ ر.س", status: "بانتظار الدفع", time: "منذ ساعة" }
+      ]);
+    }
+
     const interval = setInterval(() => {
       setLiveVisitors(prev => prev + (Math.random() > 0.5 ? 1 : -1));
     }, 5000);
@@ -103,9 +126,12 @@ export default function AdminOverview() {
             <h3 className="text-[15px] md:text-xl font-black text-gray-900">آخر الطلبات</h3>
             <p className="text-[10px] md:text-xs font-bold text-gray-400 mt-1 tracking-tighter">سجل العمليات اللحظي</p>
           </div>
-          <button className="text-[10px] md:text-xs font-black text-[#5a8a6a] hover:underline flex items-center gap-1 md:gap-2">
+          <Link 
+            href="/admin/orders" 
+            className="text-[10px] md:text-xs font-black text-[#8c1d3b] hover:underline flex items-center gap-1 md:gap-2"
+          >
             مشاهدة الكل <ArrowUpRight size={12} className="md:w-3.5 md:h-3.5" />
-          </button>
+          </Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-right min-w-[600px] md:min-w-full">
@@ -119,12 +145,12 @@ export default function AdminOverview() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
-              {RECENT_ORDERS.map((order, idx) => (
+              {recentOrders.map((order, idx) => (
                 <tr key={idx} className="group hover:bg-gray-50/50 transition-colors">
                   <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900 text-right">{order.id}</td>
                   <td className="px-6 md:px-10 py-4 md:py-6">
                     <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#accfad]/20 flex items-center justify-center text-[8px] md:text-[10px] font-black text-[#5a8a6a]">
+                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#8c1d3b]/5 flex items-center justify-center text-[8px] md:text-[10px] font-black text-[#8c1d3b] border border-[#8c1d3b]/10">
                         {order.customer[0]}
                       </div>
                       <span className="text-xs md:text-sm font-bold text-gray-700 truncate max-w-[100px] md:max-w-none">{order.customer}</span>
@@ -132,10 +158,13 @@ export default function AdminOverview() {
                   </td>
                   <td className="px-6 md:px-10 py-4 md:py-6 text-xs md:text-sm font-black text-gray-900">{order.amount}</td>
                   <td className="px-6 md:px-10 py-4 md:py-6">
-                    <span className={`px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[10px] font-black ${order.status === "مكتمل" ? "bg-green-50 text-green-600" :
-                        order.status === "بانتظار الدفع" ? "bg-orange-50 text-orange-600" :
-                          "bg-blue-50 text-blue-600"
-                      }`}>
+                    <span className={`px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[8px] md:text-[10px] font-black ${
+                      order.status === "مكتمل" ? "bg-green-50 text-green-600 border border-green-100" :
+                      order.status === "في الطريق" ? "bg-orange-50 text-orange-600 border border-orange-100" :
+                      order.status === "قيد التجهيز" ? "bg-purple-50 text-purple-600 border border-purple-100" :
+                      order.status === "بانتظار الدفع" ? "bg-amber-50 text-amber-600 border border-amber-100" :
+                      "bg-blue-50 text-blue-600 border border-blue-100"
+                    }`}>
                       {order.status}
                     </span>
                   </td>

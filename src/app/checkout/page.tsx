@@ -5,9 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { CheckCircle2, Lock, X, HelpCircle, MapPin, Navigation, Store } from 'lucide-react';
+import { CheckCircle2, Lock, X, HelpCircle, MapPin, Navigation, Store, CreditCard, Banknote } from 'lucide-react';
 import MapWrapper from '@/components/MapWrapper';
 import { useRouter } from 'next/navigation';
+import { cn } from "@/lib/utils";
 import {
     Accordion,
     AccordionContent,
@@ -41,6 +42,14 @@ export default function CheckoutPage() {
     const { items } = useSelector((state: RootState) => state.cart);
     const subtotal = items.reduce((sum, item) => sum + parseFloat(item.price) * item.quantity, 0);
     const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
+    const [paymentMethod, setPaymentMethod] = useState<'online' | 'cod'>('online');
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [cardName, setCardName] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardExpiry, setCardExpiry] = useState('');
+    const [cardCvv, setCardCvv] = useState('');
+    const [isPaying, setIsPaying] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [selectedBranch, setSelectedBranch] = useState<number | null>(null);
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [pickupStep, setPickupStep] = useState<'buttons' | 'list' | 'confirmed'>('buttons');
@@ -63,8 +72,47 @@ export default function CheckoutPage() {
         }
     }, []);
 
+    const saveOrderToAdmin = (method: 'online' | 'cod', status: 'paid' | 'cod') => {
+        const orderId = "BALMY-" + Math.floor(10000 + Math.random() * 90000);
+        const newOrder = {
+            id: orderId,
+            customerName: formData.firstName + " " + formData.lastName,
+            phone: formData.phone,
+            address: deliveryMethod === 'delivery'
+                ? `${formData.city}، حي ${formData.district}، شارع ${formData.street}، مبنى ${formData.buildingNo}`
+                : `استلام من فرع: ${selectedBranchData?.name || 'الفرع الرئيسي'}`,
+            items: items.map(item => ({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                image: item.image,
+                engravedName: item.engravedName || null
+            })),
+            amount: subtotal,
+            paymentMethod: method,
+            paymentStatus: status,
+            status: 'received', // 'received', 'preparing', 'shipping', 'delivered'
+            time: 'الآن'
+        };
+
+        const existingOrders = JSON.parse(localStorage.getItem('adminOrders') || '[]');
+        existingOrders.unshift(newOrder);
+        localStorage.setItem('adminOrders', JSON.stringify(existingOrders));
+
+        localStorage.setItem('activeOrderId', orderId);
+        localStorage.setItem('selectedPaymentMethod', method);
+        localStorage.setItem('selectedOrderTotal', subtotal.toString());
+        localStorage.setItem('paymentStatus', status);
+    };
+
     const handleCheckout = () => {
-        router.push('/track');
+        if (paymentMethod === 'online') {
+            setIsPaymentModalOpen(true);
+        } else {
+            saveOrderToAdmin('cod', 'cod');
+            router.push('/track');
+        }
     };
 
     const selectedBranchData = PICKUP_BRANCHES.find(b => b.id === selectedBranch);
@@ -368,11 +416,47 @@ export default function CheckoutPage() {
                                     </div>
                                 </div>
 
+                                {/* Payment Method Selector */}
+                                <div className="mt-6 pt-6 border-t border-gray-100 flex flex-col gap-3">
+                                    <span className="text-[12px] font-black text-gray-900 text-right">طريقة الدفع</span>
+                                    <div className="grid grid-cols-2 gap-2.5">
+                                        {/* Card / Apple Pay / Online */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPaymentMethod('online')}
+                                            className={cn(
+                                                "p-3 rounded-sm border text-center font-black text-[11px] md:text-[12px] transition-all flex flex-col items-center justify-center gap-2",
+                                                paymentMethod === 'online'
+                                                    ? 'border-[#8c1d3b] bg-[#8c1d3b]/5 text-[#8c1d3b] shadow-sm'
+                                                    : 'border-gray-200 hover:border-gray-300 text-gray-500 bg-white'
+                                            )}
+                                        >
+                                            <CreditCard className="w-4 h-4" />
+                                            <span>دفع إلكتروني</span>
+                                        </button>
+
+                                        {/* Cash on Delivery (COD) */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setPaymentMethod('cod')}
+                                            className={cn(
+                                                "p-3 rounded-sm border text-center font-black text-[11px] md:text-[12px] transition-all flex flex-col items-center justify-center gap-2",
+                                                paymentMethod === 'cod'
+                                                    ? 'border-[#8c1d3b] bg-[#8c1d3b]/5 text-[#8c1d3b] shadow-sm'
+                                                    : 'border-gray-200 hover:border-gray-300 text-gray-500 bg-white'
+                                            )}
+                                        >
+                                            <Banknote className="w-4 h-4" />
+                                            <span>الدفع عند الاستلام</span>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <button
                                     onClick={handleCheckout}
-                                    className="w-full bg-[#3d3d3b] text-white py-2.5 md:py-3 mt-4 md:mt-6 rounded-sm font-black text-[14px] md:text-[16px] flex items-center justify-center gap-2 hover:bg-black transition-all"
+                                    className="w-full bg-[#3d3d3b] text-white py-2.5 md:py-3 mt-5 rounded-sm font-black text-[14px] md:text-[16px] flex items-center justify-center gap-2 hover:bg-black transition-all"
                                 >
-                                    الدفع الآمن
+                                    {paymentMethod === 'cod' ? 'تأكيد طلب الدفع عند الاستلام' : 'الدفع الآمن'}
                                     <Lock className="w-4 h-4" />
                                 </button>
                             </div>
@@ -425,6 +509,156 @@ export default function CheckoutPage() {
                                     إلغاء
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Premium Credit Card Payment Modal */}
+            {isPaymentModalOpen && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+                    <div className="bg-white rounded-[2.5rem] p-6 md:p-8 max-w-md w-full shadow-2xl border border-gray-100 animate-in zoom-in-95 duration-300 relative overflow-hidden">
+                        
+                        {/* Close button */}
+                        <button 
+                            type="button" 
+                            onClick={() => {
+                                if (!isPaying) {
+                                    setIsPaymentModalOpen(false);
+                                }
+                            }}
+                            className="absolute top-6 left-6 text-gray-400 hover:text-black transition-colors"
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <div className="text-right">
+                            <h3 className="text-xl font-black text-gray-900 mb-1 flex items-center gap-2">
+                                <Lock size={18} className="text-[#8c1d3b]" />
+                                الدفع الآمن المشفر
+                            </h3>
+                            <p className="text-[11px] font-bold text-gray-400 mb-6 uppercase tracking-wider">Secure Payment Gateway</p>
+
+                            {isPaying ? (
+                                <div className="py-12 flex flex-col items-center justify-center text-center">
+                                    {paymentSuccess ? (
+                                        <div className="animate-in zoom-in duration-500 flex flex-col items-center">
+                                            <div className="w-16 h-16 bg-[#12b76a]/10 rounded-full flex items-center justify-center text-[#12b76a] mb-4">
+                                                <CheckCircle2 size={36} strokeWidth={2.5} />
+                                            </div>
+                                            <h4 className="text-lg font-black text-gray-900 mb-1">تمت العملية بنجاح!</h4>
+                                            <p className="text-xs text-gray-400 font-bold">جاري تحويلك لصفحة التتبع...</p>
+                                        </div>
+                                    ) : (
+                                        <div className="flex flex-col items-center">
+                                            {/* Luxury golden custom spinner */}
+                                            <div className="w-12 h-12 border-4 border-gray-200 border-t-[#8c1d3b] rounded-full animate-spin mb-4" />
+                                            <h4 className="text-sm font-black text-gray-900 mb-1">جاري معالجة عملية الدفع...</h4>
+                                            <p className="text-[11px] text-gray-400 font-bold max-w-[200px] leading-relaxed text-center">
+                                                برجاء عدم إغلاق الصفحة أو تحديث المتصفح لحين اكتمال المعاملة.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    {/* Mada / Visa logo bar */}
+                                    <div className="flex justify-between items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                                        <span className="text-[11px] font-black text-gray-400">البطاقات المقبولة</span>
+                                        <div className="flex gap-1.5 items-center">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Mada_Logo.svg" alt="Mada" className="h-4 object-contain" />
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4 object-contain" />
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-4 object-contain" />
+                                        </div>
+                                    </div>
+
+                                    {/* Cardholder name */}
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-black text-gray-400 mr-1 uppercase">اسم صاحب البطاقة</label>
+                                        <input 
+                                            type="text" 
+                                            required
+                                            value={cardName}
+                                            onChange={(e) => setCardName(e.target.value)}
+                                            className="w-full bg-gray-50 border border-gray-100 focus:bg-white focus:border-black focus:ring-4 focus:ring-black/5 rounded-xl py-3 px-4 text-xs md:text-sm font-bold outline-none transition-all"
+                                            placeholder="John Doe"
+                                        />
+                                    </div>
+
+                                    {/* Card Number */}
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] font-black text-gray-400 mr-1 uppercase">رقم البطاقة</label>
+                                        <input 
+                                            type="text" 
+                                            required
+                                            value={cardNumber}
+                                            onChange={(e) => {
+                                                const val = e.target.value.replace(/\D/g, '').substring(0, 16);
+                                                const formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+                                                setCardNumber(formatted);
+                                            }}
+                                            className="w-full bg-gray-50 border border-gray-100 focus:bg-white focus:border-black focus:ring-4 focus:ring-black/5 rounded-xl py-3 px-4 text-xs md:text-sm font-bold outline-none transition-all text-left dir-ltr"
+                                            placeholder="4000 1234 5678 9010"
+                                        />
+                                    </div>
+
+                                    {/* Expiry & CVV */}
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-1 text-right">
+                                            <label className="text-[10px] font-black text-gray-400 mr-1 uppercase">تاريخ الانتهاء</label>
+                                            <input 
+                                                type="text" 
+                                                required
+                                                value={cardExpiry}
+                                                onChange={(e) => {
+                                                    let val = e.target.value.replace(/\D/g, '').substring(0, 4);
+                                                    if (val.length >= 2) {
+                                                        val = val.substring(0, 2) + '/' + val.substring(2);
+                                                    }
+                                                    setCardExpiry(val);
+                                                }}
+                                                className="w-full bg-gray-50 border border-gray-100 focus:bg-white focus:border-black focus:ring-4 focus:ring-black/5 rounded-xl py-3 px-4 text-xs md:text-sm font-bold outline-none transition-all text-center dir-ltr"
+                                                placeholder="MM/YY"
+                                            />
+                                        </div>
+                                        <div className="space-y-1 text-right">
+                                            <label className="text-[10px] font-black text-gray-400 mr-1 uppercase">رمز الأمان (CVV)</label>
+                                            <input 
+                                                type="password" 
+                                                required
+                                                value={cardCvv}
+                                                onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, '').substring(0, 3))}
+                                                className="w-full bg-gray-50 border border-gray-100 focus:bg-white focus:border-black focus:ring-4 focus:ring-black/5 rounded-xl py-3 px-4 text-xs md:text-sm font-bold outline-none transition-all text-center dir-ltr animate-none"
+                                                placeholder="•••"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Pay button */}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            if (!cardName || cardNumber.length < 19 || cardExpiry.length < 5 || cardCvv.length < 3) {
+                                                alert("برجاء ملء كافة بيانات البطاقة بشكل صحيح لتأمين المعاملة.");
+                                                return;
+                                            }
+                                            setIsPaying(true);
+                                            // Process fake secure payment
+                                            setTimeout(() => {
+                                                setPaymentSuccess(true);
+                                                setTimeout(() => {
+                                                    saveOrderToAdmin('online', 'paid');
+                                                    setIsPaymentModalOpen(false);
+                                                    router.push('/track');
+                                                }, 1500);
+                                            }, 2500);
+                                        }}
+                                        className="w-full bg-[#8c1d3b] text-white py-4 rounded-xl font-black text-sm hover:bg-[#7a1934] transition-all shadow-lg mt-6"
+                                    >
+                                        دفع آمن بقيمة {subtotal.toLocaleString()} ريال
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

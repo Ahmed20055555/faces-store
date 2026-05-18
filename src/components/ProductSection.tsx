@@ -16,6 +16,7 @@ interface Product {
   isNew?: boolean;
   hasGift?: boolean;
   hasFrom?: boolean;
+  celebrity?: string;
 }
 
 interface ProductSectionProps {

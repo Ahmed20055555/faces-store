@@ -12,6 +12,13 @@ const INITIAL_CATEGORIES = [
 ];
 
 export default function CategoriesPage() {
+  const [isActive, setIsActive] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("categories_isActive");
+      return saved === null ? true : saved === "true";
+    }
+    return true;
+  });
   const [categories, setCategories] = useState(INITIAL_CATEGORIES);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
@@ -68,6 +75,40 @@ export default function CategoriesPage() {
 
   return (
     <form onSubmit={onSubmit} className="max-w-[1600px] mx-auto animate-in fade-in duration-700 space-y-8 md:space-y-12 pb-20 font-sans px-4 md:px-0" dir="rtl">
+      
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">التصنيفات</h1>
+          <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em]">Product Category Stories Slider</p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto self-start sm:self-auto">
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-between gap-4 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm min-w-[220px]">
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">تفعيل القسم في المتجر</span>
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !isActive;
+                setIsActive(nextVal);
+                if (typeof window !== "undefined") {
+                  localStorage.setItem("categories_isActive", String(nextVal));
+                  window.dispatchEvent(new Event("sectionActiveChanged"));
+                }
+              }}
+              className={`w-11 h-6 rounded-full transition-all relative ${isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
+            >
+              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${isActive ? "right-[2px]" : "right-[22px]"}`} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start sm:self-auto min-w-[220px] sm:min-w-0">
+            <div className={`w-2 h-2 rounded-full ${isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+          </div>
+        </div>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-start">
         
@@ -174,7 +215,7 @@ export default function CategoriesPage() {
       </div>
 
       {/* FIXED SAVE BUTTON ON MOBILE */}
-      <div className="fixed md:sticky bottom-6 left-4 right-4 md:bottom-8 md:left-auto md:right-auto z-50 flex justify-center md:justify-end">
+      <div className="fixed md:sticky bottom-6 left-4 right-4 md:bottom-8 md:left-auto md:right-auto z-50 flex justify-center md:justify-start">
         <button type="submit" className="w-full md:w-auto bg-black text-white px-10 md:px-12 py-4 md:py-5 rounded-full font-black text-sm flex items-center justify-center gap-3 shadow-2xl shadow-black/20 hover:scale-105 transition-all">
           <Save size={20} />
           حفظ التصنيفات

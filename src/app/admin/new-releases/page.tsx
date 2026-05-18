@@ -17,6 +17,13 @@ const INITIAL_RELEASES: ReleaseItem[] = [
 ];
 
 export default function NewReleasesPage() {
+  const [isActive, setIsActive] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("newReleases_isActive");
+      return saved === null ? true : saved === "true";
+    }
+    return true;
+  });
   const [releases, setReleases] = useState<ReleaseItem[]>(INITIAL_RELEASES);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
@@ -81,9 +88,31 @@ export default function NewReleasesPage() {
           <h1 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">الإصدارات الجديدة</h1>
           <p className="text-[10px] md:text-sm font-bold text-gray-400 mt-1 uppercase tracking-[0.2em]">New Arrivals & Drops</p>
         </div>
-        <div className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start">
-          <div className="w-2 h-2 rounded-full bg-[#5a8a6a] animate-pulse"></div>
-          <span className="text-[10px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+        
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto self-start sm:self-auto">
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-between gap-4 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm min-w-[220px]">
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">تفعيل القسم في المتجر</span>
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !isActive;
+                setIsActive(nextVal);
+                if (typeof window !== "undefined") {
+                  localStorage.setItem("newReleases_isActive", String(nextVal));
+                  window.dispatchEvent(new Event("sectionActiveChanged"));
+                }
+              }}
+              className={`w-11 h-6 rounded-full transition-all relative ${isActive ? "bg-[#BE9D72]" : "bg-gray-200"} shrink-0`}
+            >
+              <div className={`absolute top-[2px] w-5 h-5 bg-white rounded-full transition-all ${isActive ? "right-[2px]" : "right-[22px]"}`} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 bg-white px-4 py-2.5 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm self-start sm:self-auto min-w-[220px] sm:min-w-0">
+            <div className={`w-2 h-2 rounded-full ${isActive ? "bg-[#BE9D72]" : "bg-red-500"} animate-pulse`}></div>
+            <span className="text-[11px] md:text-[12px] font-black text-gray-700">وضع التحرير المباشر</span>
+          </div>
         </div>
       </div>
 
